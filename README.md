@@ -1,2 +1,2 @@
 ﻿# Tienda-Transernaga
-# Teinda con Realidad Aumentada
+# Tienda con Realidad Aumentada
