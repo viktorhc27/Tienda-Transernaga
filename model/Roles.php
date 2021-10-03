@@ -24,11 +24,11 @@ class Roles{
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("insert into usuarios ("
-                . "us_id,"
-                . "us_nombre, "
+            $sql = $con->prepare("insert into roles ("
+                . "ro_id,"
+                . "rol_nombre, "
                 . "create_time, update_time"
-                . "roles_ro_id)"
+                . ")"
                 . "values("
                 . ":id, "
                 . ":nombre, "
@@ -46,7 +46,7 @@ class Roles{
     public function modificar(){
         try{
             $con =(new Conexion())->Conectar();
-            $sql= $con->prepare("update Roles set ro_id=:id, rol_nombre=:nombre, create_time=:create_time, update_time=:update_time,");
+            $sql= $con->prepare("update roles set ro_id=:id, rol_nombre=:nombre, create_time=:create_time, update_time=:update_time,");
            
             $sql->bindparam("id",$this->ro_id);
             $sql->bindparam("nombre",$this->rol_nombre);
@@ -69,7 +69,7 @@ class Roles{
     public function buscar(){
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM Roles WHERE ro_id = :id");
+            $sql = $con->prepare("SELECT * FROM roles WHERE ro_id = :id");
             $sql->bindParam(':id', $id);
             $sql->execute();
             $res = $sql->fetch();
@@ -83,7 +83,7 @@ class Roles{
 
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("select * from Roles");
+            $sql = $con->prepare("select * from roles");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
@@ -95,7 +95,7 @@ class Roles{
 
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM Roles where ro_id = :id");
+            $sql = $con->prepare("SELECT * FROM roles where ro_id = :id");
             $sql->bindParam(':id', $this->ro_id);
             $sql->execute();
             $res = $sql->fetch();

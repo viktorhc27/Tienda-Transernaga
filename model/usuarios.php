@@ -57,7 +57,7 @@ class Usuarios{
        $sql->bindParam("us_direccion",$this->us_direccion);
        $sql->bindParam("us_sexo",$this->us_sexo);
        $sql->bindParam("create_time",$this->create_time);
-       $sql->bindParam("update_time",$this->create_time);
+       $sql->bindParam("update_time",$this->update_time);
        $sql->bindParam("roles_ro_id",$this->roles_ro_id);
             $res = $sql->execute();
             return $res;
@@ -98,7 +98,7 @@ class Usuarios{
 
     public function buscar(){
         try {
-            $con = (new Conexion())->Conectar();
+            $con = (new Conexion())->Conectar(); 
             $sql = $con->prepare("SELECT * FROM usuarios WHERE us_id = :id");
             $sql->bindParam(':id', $id);
             $sql->execute();

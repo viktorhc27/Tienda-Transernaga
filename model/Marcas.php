@@ -94,21 +94,8 @@ class Marcas{
             return $ex->getMessage();
         }
     }
-    public function Login(){
+   
 
-        try {
-            $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM Roles where mar_id = :id");
-            $sql->bindParam(':id', $this->ro_id);
-            $sql->execute();
-            $res = $sql->fetch();
-
-            return $res;
-        } catch (PDOException $e) {
-            return $e->getMessage();
-        }
-    }
-    public function cerrar(){}
 
 }
 ?>
