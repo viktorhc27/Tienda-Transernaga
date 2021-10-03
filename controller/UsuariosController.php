@@ -21,25 +21,10 @@ switch ($accion) {
         );
 
         break;
+
+    case 'register':
+        $usuarios = new Usuarios();
+
+        
+    break;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
