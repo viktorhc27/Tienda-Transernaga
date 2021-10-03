@@ -121,7 +121,7 @@ class Usuarios{
             return $ex->getMessage();
         }
     }
-    public function Login(){
+    public function login(){
 
         try {
             $con = (new Conexion())->Conectar();
