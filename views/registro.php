@@ -6,33 +6,33 @@
             <header class="mb-4">
                 <h4 class="card-title">Sign up</h4>
             </header>
-            <form method="post" action="../controller/UsuariosController.php?accion=register_user">
+            <form method="post" action="./controller/UsuariosController.php?accion=register_user">
                 <div class="form-row">
                     <div class="col form-group">
                         <label>Nombre</label>
-                        <input type="text" class="form-control" placeholder="">
+                        <input name="nombre"type="text" class="form-control" placeholder="">
                     </div> <!-- form-group end.// -->
                     <div class="col form-group">
                         <label>Apellido Paterno</label>
-                        <input type="text" class="form-control" placeholder="">
+                        <input name="app" type="text" class="form-control" placeholder="">
                     </div> <!-- form-group end.// -->
                     <div class="col form-group">
                         <label>Apellido Materno</label>
-                        <input type="text" class="form-control" placeholder="">
+                        <input name="apm" type="text" class="form-control" placeholder="">
                     </div> <!-- form-group end.// -->
                 </div> <!-- form-row end.// -->
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" placeholder="">
+                    <input name="correo" type="email" class="form-control" placeholder="">
                     <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
                 </div> <!-- form-group end.// -->
                 <div class="form-group">
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" checked="" type="radio" name="gender" value="option1">
+                        <input class="custom-control-input" checked="" type="radio" name="sexo" value="hombre">
                         <span class="custom-control-label"> Masculino </span>
                     </label>
                     <label class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" name="gender" value="option2">
+                        <input class="custom-control-input" type="radio" name="sexo" value="mujer">
                         <span class="custom-control-label"> Femenino </span>
                     </label>
                 </div> <!-- form-group end.// -->
@@ -49,7 +49,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Contraseña</label>
-                        <input class="form-control" type="password">
+                        <input name="password" type="password" class="form-control" type="password">
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-6">
                         <label>Repetir contraseña</label>

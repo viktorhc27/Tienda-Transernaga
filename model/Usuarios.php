@@ -32,9 +32,12 @@ class Usuarios{
                 . "us_telefono, "
                 . "us_correo, "
                 . "us_password, "
-                . "us_direccion, us_sexo, "
-                . "create_time, update_time"
+                . "us_direccion,"
+                . "us_sexo, "
+                . "create_time,"
+                . " update_time,"
                 . "roles_ro_id)"
+
                 . "values("
                 . ":id, "
                 . ":nombre, "
@@ -45,17 +48,18 @@ class Usuarios{
                 . ":password, "
                 . ":direccion,"
                 . ":sexo,"
-                . ":create_time, update_time"
+                . ":create_time, "
+                . ":update_time,"
                 . ":roles_ro_id)");
-       $sql->bindParam("us_id",$this->us_id);
-       $sql->bindParam("us_nombre",$this->us_nombre);
-       $sql->bindParam("us_apellApp",$this->us_apellApp);
-       $sql->bindParam("us_apellApm",$this->us_apellApm);
-       $sql->bindParam("us_telefono",$this->us_telefono);
-       $sql->bindParam("us_correo",$this->us_correo);
-       $sql->bindParam("us_password",$this->us_password);
-       $sql->bindParam("us_direccion",$this->us_direccion);
-       $sql->bindParam("us_sexo",$this->us_sexo);
+       $sql->bindParam("id",$this->us_id);
+       $sql->bindParam("nombre",$this->us_nombre);
+       $sql->bindParam("apellApp",$this->us_apellApp);
+       $sql->bindParam("apellApm",$this->us_apellApm);
+       $sql->bindParam("telefono",$this->us_telefono);
+       $sql->bindParam("correo",$this->us_correo);
+       $sql->bindParam("password",$this->us_password);
+       $sql->bindParam("direccion",$this->us_direccion);
+       $sql->bindParam("sexo",$this->us_sexo);
        $sql->bindParam("create_time",$this->create_time);
        $sql->bindParam("update_time",$this->update_time);
        $sql->bindParam("roles_ro_id",$this->roles_ro_id);
@@ -138,4 +142,3 @@ class Usuarios{
     public function cerrar(){}
 
 }
-?>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE HTML>
 <html>
 
@@ -126,35 +130,114 @@
                                     <span class="notify">0</span>
                                 </div>
                             </a>
-                            <div class="widget-header dropdown">
-                                <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
-                                    <div class="icontext">
-                                        <div class="icon">
-                                            <i class="icon-sm rounded-circle border fa fa-user"></i>
+
+
+                            <?php
+
+                            if (!empty($_SESSION['user'])) {
+
+                                if ($_SESSION['user']['role'] == "1" || $_SESSION['user']['role'] == 1) {
+
+                            ?>
+
+                                    <div class="widget-header dropdown">
+                                        <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
+                                            <div class="icontext">
+                                                <div class="icon">
+                                                    <i class="icon-sm rounded-circle border fa fa-user"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <small class="text-muted">Nombre</small>
+                                                    <div><?= $_SESSION['user']['nombre'] ?> </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
+                                            <a class="dropdown-item" href="#">Mi Cuenta</a>
+                                            <a class="dropdown-item" href="#">Usuarios</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Cerrar Sesion</a>
                                         </div>
-                                        <div class="text">
-                                            <small class="text-muted">iniciar sesión</small>
-                                            <div>Mi cuenta <i class="fa fa-caret-down"></i> </div>
-                                        </div>
+
                                     </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(154px, 42px, 0px);">
-                                    <form method="post" action="./controller/UsuariosController.php?accion=login" class="px-4 py-3">
-                                        <div class="form-group">
-                                            <label>Email address</label>
-                                            <input name="correo" type="email" class="form-control" placeholder="email@example.com">
+
+
+
+                                <?php
+
+                                }
+                                if ($_SESSION['user']['role'] == "2" || $_SESSION['user']['role'] == 2) {
+                                ?>
+
+                                    <div class="widget-header dropdown">
+                                        <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
+                                            <div class="icontext">
+                                                <div class="icon">
+                                                    <i class="icon-sm rounded-circle border fa fa-user"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <small class="text-muted">Nombre</small>
+                                                    <div><?= $_SESSION['user']['nombre'] ?> </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
+                                            <a class="dropdown-item" href="#">Mi Cuenta</a>
+                                            <a class="dropdown-item" href="#">Administrador</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Cerrar Sesion</a>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Password</label>
-                                            <input name="password" type="password" class="form-control" placeholder="Password">
+
+                                    </div>
+
+
+
+                                <?php
+                                }
+                            } else {
+
+                                ?>
+                                <div class="widget-header dropdown">
+                                    <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
+                                        <div class="icontext">
+                                            <div class="icon">
+                                                <i class="icon-sm rounded-circle border fa fa-user"></i>
+                                            </div>
+                                            <div class="text">
+                                                <small class="text-muted">iniciar sesión</small>
+                                                <div>Mi cuenta <i class="fa fa-caret-down"></i> </div>
+                                            </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Entrar</button>
-                                    </form>
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="?param=register">¿Tienes cuenta? Inscribirse</a>
-                                    <a class="dropdown-item" href="#">¿Se te olvidó tu contraseña?</a>
-                                </div> <!--  dropdown-menu .// -->
-                            </div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(154px, 42px, 0px);">
+                                        <form method="post" action="./controller/UsuariosController.php?accion=login" class="px-4 py-3">
+                                            <div class="form-group">
+                                                <label>Email address</label>
+                                                <input name="correo" type="email" class="form-control" placeholder="email@example.com">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input name="password" type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Entrar</button>
+                                        </form>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item" href="?param=register">¿Tienes cuenta? Inscribirse</a>
+                                        <a class="dropdown-item" href="#">¿Se te olvidó tu contraseña?</a>
+                                    </div> <!--  dropdown-menu .// -->
+                                </div>
+
+
+
+                            <?php
+                            }
+                            ?>
+
+
+
+
+
+
                         </div> <!-- widgets-wrap.// -->
 
                     </div> <!-- collapse .// -->
