@@ -6,7 +6,7 @@
             <header class="mb-4">
                 <h4 class="card-title">Sign up</h4>
             </header>
-            <form method="post" action="../controller/UsuariosController.php">">
+            <form method="post" action="../controller/UsuariosController.php?accion=register_user">
                 <div class="form-row">
                     <div class="col form-group">
                         <label>Nombre</label>
