@@ -42,11 +42,9 @@ session_start();
         });
         // jquery end
     </script>
-
 </head>
 
 <body>
-
     <header class="section-header">
         <nav style="background-color: black; " class="navbar navbar-black p-0 navbar-expand border-bottom">
             <div class="container">
@@ -73,7 +71,6 @@ session_start();
                 </ul>
             </div> <!-- container //  -->
         </nav>
-
         <section class="border-bottom">
             <nav class="navbar navbar-main navbar-expand-lg navbar-light">
                 <div class="container">
@@ -86,7 +83,6 @@ session_start();
                             <span class="notify">0</span>
                         </div>
                     </a>
-
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav1" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -113,11 +109,7 @@ session_start();
                             <li class="nav-item">
                                 <a class="nav-link" href="#">About</a>
                             </li>
-
-
                         </ul>
-
-
                         <div class="widgets-wrap d-none d-md-block">
                             <a href="#" class="widget-header">
                                 <div class="icon">
@@ -156,7 +148,7 @@ session_start();
                                             <a class="dropdown-item" href="#">Mi Cuenta</a>
                                             <a class="dropdown-item" href="#">Usuarios</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Cerrar Sesion</a>
+                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
                                         </div>
 
                                     </div>
@@ -164,7 +156,7 @@ session_start();
 
 
                                 <?php
-
+                                    //administrador
                                 }
                                 if ($_SESSION['user']['role'] == "2" || $_SESSION['user']['role'] == 2) {
                                 ?>
@@ -183,9 +175,9 @@ session_start();
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
                                             <a class="dropdown-item" href="#">Mi Cuenta</a>
-                                            <a class="dropdown-item" href="#">Administrador</a>
+                                            <a class="dropdown-item" href="?param Administrador">Administrador</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Cerrar Sesion</a>
+                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
                                         </div>
 
                                     </div>
@@ -262,6 +254,9 @@ session_start();
             break;
         case "login":
             include_once './views/login.php';
+            break;
+        case "administrador":
+            include_once './views/admin/index.php';
             break;
     }
     ?>
