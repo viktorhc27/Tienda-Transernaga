@@ -48,11 +48,11 @@ class Marcas{
     public function modificar(){
         try{
             $con =(new Conexion())->Conectar();
-            $sql= $con->prepare("update Marcas set mar_id=:id, mar_nombre=:nombre,mar_imagen=:imagen, create_time=:create_time, update_time=:update_time,");
+            $sql= $con->prepare("update Marcas set mar_id=:id, mar_nombre=:nombre,mar_imagen=:imagen, create_time=:create_time, update_time=:update_time where mar_id=:id");
            
             $sql->bindparam("id",$this->mar_id);
             $sql->bindparam("nombre",$this->mar_nombre);
-            $sql->bindparam("nombre",$this->mar_imagen);
+            $sql->bindparam("imagen",$this->mar_imagen);
             $sql->bindparam("create_time",$this->create_time);
             $sql->bindparam("update_time",$this->update_time);
 
@@ -72,7 +72,7 @@ class Marcas{
     public function buscar(){
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM Marcas WHERE mar_id = :id");
+            $sql = $con->prepare("SELECT * FROM marcas WHERE mar_id = :id");
             $sql->bindParam(':id', $id);
             $sql->execute();
             $res = $sql->fetch();

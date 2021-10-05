@@ -22,6 +22,7 @@ switch ($accion) {
                     'correo' => $res['us_correo'],
                     'role' => $res['roles_ro_id']
                 );
+                echo "<script type='text/javascript'>window.location.href = '../index.php';</script>";
             }
         }else{
             echo 'error';
@@ -52,7 +53,7 @@ switch ($accion) {
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
         $res = $usuarios->agregar();
 
-        echo $res;
+        echo "<script type='text/javascript'>window.location.href = '../../index.php';</script>";
         break;
 
     case 'register_employees':
@@ -66,9 +67,11 @@ switch ($accion) {
         $usuarios->__set('us_telefono', $_REQUEST['telefono']);
         $usuarios->__set('us_direccion', $_REQUEST['direccion']);
         $usuarios->__set('us_sexo', $_REQUEST['sexo']);
-        $usuarios->__set('roles_ro_id', '2');
+        $usuarios->__set('roles_ro_id', $_REQUEST['rol']);
         $usuarios->__set('create_time', date("Y-m-d H:i:s"));
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
-        $usuarios->agregar();
+        $res=$usuarios->agregar();
+        
+        echo "<script type='text/javascript'>window.location.href = '../views/admin/index.php?param=registrar';</script>";
         break;
 }

@@ -14,7 +14,7 @@ if (empty($_REQUEST["param"])) {
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="cache-control" content="max-age=604800" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" href="https://muebleslagos.cl/wp-content/uploads/2018/02/cropped-logo-Horizontal-32x32.png" sizes="32x32">
     <title>Transernaga</title>
 
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">

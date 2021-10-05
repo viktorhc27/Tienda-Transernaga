@@ -1,3 +1,12 @@
+<?php
+include_once '../../model/Roles.php';
+include_once '../../model/Usuarios.php';
+$roles = new Roles();
+$usuarios = new Usuarios();
+$listas_usuarios = $usuarios->leer();
+$lista_roles = $roles->leer();
+
+?>
 <div class="container">
     <section class="section-conten padding-y" style="min-height:84vh">
 
@@ -14,8 +23,78 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- left column -->
+                <div class="col-md-9">
+                    <!-- general form elements -->
 
-                <div class="col-md-4">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title ">Lista de Funcionarios</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+
+                                        <th>Nombre</th>
+                                        <th>Telefono</th>
+                                        <th>Correo</th>
+                                        <th>Direccion</th>
+                                        <th>Genero</th>
+                                        <th>Rol</th>
+                                        <th>Acciones</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <?php
+                                    foreach ($listas_usuarios as $s) :
+                                    ?> <tr>
+
+                                            <td><?= $s['us_nombre'] ?></td>
+                                            <td><?= $s['us_telefono'] ?></td>
+                                            <td><?= $s['us_correo'] ?></td>
+                                            <td><?= $s['us_direccion'] ?></td>
+                                            <td><?= $s['us_sexo'] ?></td>
+                                            <td><?= $s['roles_ro_id'] ?></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Acciones
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                        <button class="dropdown-item" type="button">Modificar</button>
+                                                        <button class="dropdown-item" type="button">Ver</button>
+                                                        <button class="dropdown-item" type="button">Desabilitar</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    endforeach;
+
+                                    ?>
+
+
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- form start -->
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (right) -->
+                </div>
+                <div class="col-md-3">
                     <!-- general form elements -->
 
                     <div class="card card-default">
@@ -26,34 +105,39 @@
                         <div class="card-body">
 
 
-                            <form method="post" action="./controller/UsuariosController.php?accion=register_user">
-                                <div class="form-row">
-                                    <div class="col form-group">
-                                        <label>Nombre</label>
-                                        <input name="nombre" type="text" class="form-control" placeholder="">
-                                    </div> <!-- form-group end.// -->
-                                    <div class="col form-group">
-                                        <label>Ap Paterno</label>
-                                        <input name="app" type="text" class="form-control" placeholder="">
-                                    </div> <!-- form-group end.// -->
-                                    <div class="col form-group">
-                                        <label>Ap Materno</label>
-                                        <input name="apm" type="text" class="form-control" placeholder="">
-                                    </div> <!-- form-group end.// -->
-                                </div> <!-- form-row end.// -->
+                            <form method="post" action="../../controller/UsuariosController.php?accion=register_employees">
+
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input name="nombre" type="text" class="form-control" placeholder="">
+                                    <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
+                                </div> <!-- form-group end.// -->
+                                <div class="form-group">
+                                    <label>Apellido Paterno</label>
+                                    <input name="app" type="text" class="form-control" placeholder="">
+                                </div> <!-- form-group end.// -->
+                                <div class="form-group">
+                                    <label>Apellido Materno</label>
+                                    <input name="apm" type="text" class="form-control" placeholder="">
+                                </div> <!-- form-group end.// -->
+
+
+
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input name="correo" type="email" class="form-control" placeholder="">
                                     <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
                                 </div> <!-- form-group end.// -->
+
+
                                 <div class="form-group">
                                     <label class="custom-control custom-radio custom-control-inline">
                                         <input class="custom-control-input" checked="" type="radio" name="sexo" value="hombre">
-                                        <span class="custom-control-label"> Masculino </span>
+                                        <span class="custom-control-label"> Hombre </span>
                                     </label>
                                     <label class="custom-control custom-radio custom-control-inline">
                                         <input class="custom-control-input" type="radio" name="sexo" value="mujer">
-                                        <span class="custom-control-label"> Femenino </span>
+                                        <span class="custom-control-label"> Mujer </span>
                                     </label>
                                 </div> <!-- form-group end.// -->
                                 <div class="form-row">
@@ -79,13 +163,20 @@
 
                                 <div class="form-group ">
                                     <label>Rol</label>
-                                    <select id="inputState" class="form-control">
-                                        <option> Choose...</option>
-                                        <option>Uzbekistan</option>
-                                        <option>Russia</option>
-                                        <option selected="">United States</option>
-                                        <option>India</option>
-                                        <option>Afganistan</option>
+                                    <select name="rol" class="form-control">
+                                        <option>Seleccione...</option>
+                                        <?php
+
+                                        foreach ($lista_roles as $r) :
+                                        ?>
+
+                                            <option value="<?= $r['ro_id'] ?>"><?= $r['rol_nombre'] ?></option>
+
+                                        <?php
+                                        endforeach;
+
+                                        ?>
+
                                     </select>
                                 </div>
 
@@ -106,59 +197,7 @@
                     </div>
                     <!--/.col (right) -->
                 </div>
-                <div class="col-md-8">
-                    <!-- general form elements -->
-
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title ">Lista de Funcionarios</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>id</th>
-                                        <th>Nombre</th>
-                                        <th>Telefono</th>
-                                        <th>Correo</th>
-                                        <th>Direccion</th>
-                                        <th>Genero</th>
-                                        <th>Rol</th>  
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>Nombre</td>
-                                        <td>id</td>
-                                        <td>Nombre</td>
-                                        <td>id</td>
-                                        <td>Nombre</td>
-                                        <td>id</td>
-                                        
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-
-                        </div>
-                        <!-- form start -->
-                        <div class="row">
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!--/.col (right) -->
-                </div>
+               
                 <!-- /.row -->
             </div>
         </div>
-        
-
-        
-         
