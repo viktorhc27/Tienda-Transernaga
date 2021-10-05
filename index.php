@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (empty($_REQUEST["param"])) {
+    $_REQUEST['param'] ="inicio";
+}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -46,7 +50,7 @@ session_start();
 
 <body>
     <header class="section-header">
-        <nav style="background-color: black; " class="navbar navbar-black p-0 navbar-expand border-bottom">
+        <nav style="background-color: #9a7200; " class="navbar navbar-black p-0 navbar-expand border-bottom">
             <div class="container">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
@@ -175,7 +179,7 @@ session_start();
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
                                             <a class="dropdown-item" href="#">Mi Cuenta</a>
-                                            <a class="dropdown-item" href="?param Administrador">Administrador</a>
+                                            <a class="dropdown-item" href="?param=administrador">Administrador</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
                                         </div>
@@ -248,15 +252,22 @@ session_start();
      * 
      *          */
     //error_reporting(0);
+    
     switch ($_REQUEST["param"]) {
+        case "inicio":
+            include_once './views/index.php';
+            break;
         case "register":
             include_once './views/registro.php';
             break;
         case "login":
             include_once './views/login.php';
             break;
-        case "administrador":
-            include_once './views/admin/index.php';
+        case "administrador": ?>
+            <script type="text/javascript">
+                window.location.href = "./views/admin/index.php?param=inicio";
+            </script>
+    <?php
             break;
     }
     ?>
