@@ -16,7 +16,7 @@ Class Armados_Tipos {
         try {
 
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("insert into categorias (arm_id, arm_nombre, create_time, update_time) values(:id,:nombre,:create_time,:update_time)");
+            $sql = $con->prepare("insert into armados_tipos (arm_id, arm_nombre, create_time, update_time) values(:id,:nombre,:create_time,:update_time)");
             $sql->bindParam(':id', $this->arm_id);
             $sql->bindParam(':nombre', $this->arm_nombre);
             $sql->bindParam(':create_time', $this->create_time);
@@ -32,7 +32,7 @@ Class Armados_Tipos {
     public function modificar(){
         try{
             $con =(new Conexion())->Conectar();
-            $sql= $con->prepare("update productos set arm_id=:id, arm_nombre =:nombre,create_time=:create_time, update_time=:update_time  WHERE arm_id = :id");
+            $sql= $con->prepare("update armados_tipos set arm_id=:id, arm_nombre =:nombre,create_time=:create_time, update_time=:update_time  WHERE arm_id = :id");
             
             $sql->bindParam(':id', $this->cat_id);
             $sql->bindParam(':nombre', $this->cat_nombre);
