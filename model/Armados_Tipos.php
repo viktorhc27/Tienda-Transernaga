@@ -1,6 +1,6 @@
 <?php 
 Class Armados_Tipos {
-    private $cat_id, $cat_nombre, $cat_estado, $create_time, $update_time;
+    private $arm_id, $arm_nombre,  $create_time, $update_time;
     
     public function __get($key){
         return $this->$key;
@@ -32,11 +32,10 @@ Class Armados_Tipos {
     public function modificar(){
         try{
             $con =(new Conexion())->Conectar();
-            $sql= $con->prepare("update armados_tipos set arm_id=:id, arm_nombre =:nombre,create_time=:create_time, update_time=:update_time  WHERE arm_id = :id");
+            $sql= $con->prepare("update armados_tipos set arm_id=:id, arm_nombre =:nombre,  create_time=:create_time, update_time=:update_time  WHERE arm_id = :id");
             
-            $sql->bindParam(':id', $this->cat_id);
-            $sql->bindParam(':nombre', $this->cat_nombre);
-            $sql->bindParam(':estado', $this->cat_estado);
+            $sql->bindParam(':id', $this->arm_id);
+            $sql->bindParam(':nombre', $this->arm_nombre);
             $sql->bindParam(':create_time', $this->create_time);
             $sql->bindParam(':update_time', $this->update_time);
 
