@@ -82,7 +82,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                                 <a class="nav-link " href="../../index.php" tabindex="-1" aria-disabled="true">Tienda</a>
                             </li>
                         </ul>
-                        
+
                     </div>
                 </div>
             </nav>
@@ -108,6 +108,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                 break;
             case "productos":
                 include_once 'productos.php';
+                break;
+            case "agregar-muebles":
+                include_once 'agregar_muebles.php';
                 break;
         }
         ?>

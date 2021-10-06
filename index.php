@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (empty($_REQUEST["param"])) {
-    $_REQUEST['param'] ="inicio";
+    $_REQUEST['param'] = "inicio";
 }
 
 ?>
@@ -115,17 +115,15 @@ if (empty($_REQUEST["param"])) {
                             </li>
                         </ul>
                         <div class="widgets-wrap d-none d-md-block">
-                            <a href="#" class="widget-header">
-                                <div class="icon">
-                                    <i class="icon-sm rounded-circle border fa fa-heart"></i>
-                                </div>
-                            </a>
-                            <a href="#" class="widget-header">
+                            
+                        <a href="#" class="widget-header">
                                 <div class="icon">
                                     <i class="icon-sm rounded-circle border fa fa-shopping-cart"></i>
                                     <span class="notify">0</span>
                                 </div>
                             </a>
+                            
+
 
 
                             <?php
@@ -205,7 +203,7 @@ if (empty($_REQUEST["param"])) {
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(154px, 42px, 0px);">
+                                    <div class="dropdown-menu dropdown-menu-height" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-154px, 42px, 0px);">
                                         <form method="post" action="./controller/UsuariosController.php?accion=login" class="px-4 py-3">
                                             <div class="form-group">
                                                 <label>Email address</label>
@@ -252,7 +250,7 @@ if (empty($_REQUEST["param"])) {
      * 
      *          */
     //error_reporting(0);
-    
+
     switch ($_REQUEST["param"]) {
         case "inicio":
             include_once './views/index.php';

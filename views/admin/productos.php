@@ -18,7 +18,7 @@
 
                     <div class="card card-default">
                         <ul class="nav bg-white border">
-                            <li><button type="button" class="btn btn-primary">Agregar Muebles</button></li>
+                            <li><a href="?param=agregar-muebles" type="button" class="btn btn-primary">Agregar Muebles</a></li>
                             <!-- <li><a class="nav-link" href="">Menu item 2</a></li>
                             <li><a class="nav-link" href="">Menu item 3</a></li>
                             <li><a class="nav-link" href="">Menu item 4</a></li> -->
