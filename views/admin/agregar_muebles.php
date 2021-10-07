@@ -8,49 +8,78 @@
                 <div class="card-body">
                     <form>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 <label for="inputEmail4">Codigo</label>
                                 <input type="text" class="form-control" id="inputEmail4">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 <label for="inputPassword4">Nombre</label>
                                 <input type="text" class="form-control" id="inputPassword4">
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">precio compra</label>
+                                <input type="text" class="form-control" id="inputEmail4">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputPassword4">precio venta</label>
+                                <input type="text" class="form-control" id="inputPassword4">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <div class="form-row">
+                           
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">Altura</label>
+                                <input type="text" class="form-control" id="inputEmail4">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputPassword4">Ancho</label>
+                                <input type="text" class="form-control" id="inputPassword4">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputPassword4">profundidad</label>
+                                <input type="text" class="form-control" id="inputPassword4">
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
+                                <label for="inputEmail4">Modelo</label>
+                                <input type="file" class="form-control" id="inputEmail4">
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">imagenes</label>
+                                <input type="file" class="form-control" id="inputPassword4">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Check me out
-                                </label>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">Peso</label>
+                                <input type="text" class="form-control" id="inputEmail4">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputPassword4">Stock</label>
+                                <input type="text" class="form-control" id="inputPassword4">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputPassword4">Color</label>
+                                <input type="text" class="form-control" id="inputPassword4">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputPassword4">estado</label>
+                                <input type="text" class="form-control" id="inputPassword4">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Categorias</label>
+                                <input type="text" class="form-control" id="inputEmail4">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Marcas</label>
+                                <input type="text" class="form-control" id="inputPassword4">
+                            </div>
+                        </div>
+                       
+                        <button type="submit" class="btn btn-primary">Agregar</button>
                     </form>
                 </div>
             </div>
