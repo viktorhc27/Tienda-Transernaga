@@ -1,5 +1,5 @@
 <?php 
-class Imagenes{
+class Imagenes {
 private $img_id, $ruta, $create_time, $update_time;
 
 public function __get($key){
