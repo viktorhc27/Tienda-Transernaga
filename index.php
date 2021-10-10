@@ -252,6 +252,9 @@ if (empty($_REQUEST["param"])) {
     //error_reporting(0);
 
     switch ($_REQUEST["param"]) {
+        case "productos":
+            include_once './views/productos.php';
+            break;
         case "inicio":
             include_once './views/index.php';
             break;

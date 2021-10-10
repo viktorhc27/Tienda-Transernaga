@@ -31,10 +31,10 @@ class Productos{
                 . "pro_descripcion, "
                 . "pro_peso, "
                 . "pro_stock, "
-                . "pro_img"
+                . "pro_img,"
                 . "pro_color, "
                 . "pro_estado, "
-                . "create_time, update_time,categoria_cat_id,marcas_mar_id)"
+                . "create_time, update_time,categorias_cat_id,marcas_mar_id)"
 
                 . "values("
                 . ":pro_id,"
@@ -48,7 +48,7 @@ class Productos{
                 . ":pro_descripcion, "
                 . ":pro_peso, "
                 . ":pro_stock, "
-                . ":pro_img"
+                . ":pro_img,"
                 . ":pro_color, "
                 . ":pro_estado, "
                 . ":create_time, :update_time, :categoria_cat_id, :marcas_mar_id)");
@@ -76,7 +76,8 @@ class Productos{
             $sql->bindParam("marcas_mar_id",$this->marcas_mar_id);
 
      
-            $res = $sql->execute();
+             $sql->execute();
+             $res= $con->lastInsertId();
             return $res;
         } catch (PDOException $e) {
             return $e->getMessage();

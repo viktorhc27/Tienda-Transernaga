@@ -1,3 +1,15 @@
+<?php 
+include_once '../../model/Categorias.php';
+include_once '../../model/Marcas.php';
+
+$ca =new Categorias();
+$ma =new Marcas();
+$categoria = $ca->listar();
+$marcas = $ma->listar();
+
+
+?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -6,79 +18,95 @@
                     <h3 class="card-title">Agregar Muebles</h3>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form method="post" action="../../controller/ProductosController.php?accion=agregar_producto"  enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="inputEmail4">Codigo</label>
-                                <input type="text" class="form-control" id="inputEmail4">
+                                <label>Codigo</label>
+                                <input name="codigo" type="text" class="form-control" id="inputEmail4">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="inputPassword4">Nombre</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                                <label>Nombre</label>
+                                <input type="text" name="nombre" class="form-control">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="inputEmail4">precio compra</label>
-                                <input type="text" class="form-control" id="inputEmail4">
+                                <label>precio compra</label>
+                                <input type="text" name="precio_compra" class="form-control">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="inputPassword4">precio venta</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                                <label">precio venta</label>
+                                    <input type="text" name="precio_venta" class="form-control">
                             </div>
                         </div>
                         <div class="form-row">
-                           
+
                             <div class="form-group col-md-4">
-                                <label for="inputEmail4">Altura</label>
-                                <input type="text" class="form-control" id="inputEmail4">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputPassword4">Ancho</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                                <label>Altura</label>
+                                <input type="text" name="altura" class="form-control">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputPassword4">profundidad</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                                <label">Ancho</label>
+                                    <input type="text" name="ancho" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label">profundidad</label>
+                                    <input type="text" class="form-control" name="profundidad">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputEmail4">Modelo</label>
-                                <input type="file" class="form-control" id="inputEmail4">
+                                <label>Modelo</label>
+                                <input type="file" class="form-control" name="modelo">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">imagenes</label>
-                                <input type="file" class="form-control" id="inputPassword4">
+                                <label>imagenes</label>
+                                <input type="file" class="form-control"  id="archivo[]" name="archivo[]" multiple="">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="inputEmail4">Peso</label>
-                                <input type="text" class="form-control" id="inputEmail4">
+                                <label>Peso</label>
+                                <input type="text" class="form-control" name="peso">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="inputPassword4">Stock</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                                <label>Stock</label>
+                                <input type="text" class="form-control" name="stock">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="inputPassword4">Color</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                                <label>Color</label>
+                                <input type="text" class="form-control" name="color">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="inputPassword4">estado</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                                <label>estado</label>
+                                <input type="text" class="form-control" name="estado">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputEmail4">Categorias</label>
-                                <input type="text" class="form-control" id="inputEmail4">
+                                <label>Categorias</label>
+                                <select class="form-control" name="categoria">
+                                <option>Seleccione</option>
+                                    <?php foreach ($categoria as $cat) :
+                                    ?>
+                                        <option value="<?=$cat['cat_id']?>" ><?=$cat['cat_nombre']?></option>
+                                    <?php
+                                    endforeach; ?>
+                                </select>
+                                
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Marcas</label>
-                                <input type="text" class="form-control" id="inputPassword4">
+                            <div class=" form-group col-md-6">
+                                <label>Marcas</label>
+                                <select class="form-control" name="marcas">
+                                    
+                                <option>Seleccione</option>
+                                    <?php foreach ($marcas as $m) :
+                                    ?>
+                                        <option value="<?=$m['0']?>" ><?=$m['1']?></option>
+                                    <?php
+                                    endforeach; ?>
+                                </select>
                             </div>
                         </div>
-                       
+
                         <button type="submit" class="btn btn-primary">Agregar</button>
                     </form>
                 </div>

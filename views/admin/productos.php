@@ -1,3 +1,9 @@
+<?php 
+include_once '../../model/Productos.php';
+$p = new Productos();
+
+$productos = $p->leer();
+?>
 <div class="container">
     <section class="section-conten padding-y" style="min-height:84vh">
 
@@ -61,6 +67,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                    foreach ($productos as $p) :
+                                    ?>
+                                        <tr>
+                                            <td><?=$p['pro_id']?></td>
+                                            <td><?=$p['pro_codigo']?></td>
+                                            <td><?=$p['pro_nombre']?></td>
+                                            <td><?=$p['pro_precio_venta']?></td>
+                                            <td><?=$p['pro_stock']?></td>
+                                            <td><?=$p['pro_modelo']?></td>
+                                            <td><?=$p['categorias_cat_id']?></td>
+                                            <td><?=$p['marcas_mar_id']?></td>
+                                            <td><?=$p['pro_estado']?></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Acciones
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                        <button class="dropdown-item" type="button">Modificar</button>
+                                                        <button class="dropdown-item" type="button">Ver</button>
+                                                        <button class="dropdown-item" type="button">Desabilitar</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    <?php
+                                    endforeach;
+                                    ?>
 
 
 

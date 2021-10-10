@@ -82,11 +82,11 @@ class Marcas{
         }
 
     }
-    public function leer(){
+    public function listar(){
 
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("select * from Marcas");
+            $sql = $con->prepare("select * from marcas");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
