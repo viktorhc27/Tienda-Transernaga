@@ -29,6 +29,9 @@ switch ($accion) {
         $producto->__set('pro_estado',            $_REQUEST['estado']);
         $producto->__set('categoria_cat_id',      $_REQUEST['categoria']);
         $producto->__set('marcas_mar_id',         $_REQUEST['marcas']);
+        $producto->__set('create_time',           date("Y-m-d H:i:s"));
+        $producto->__set('update_time',           date("Y-m-d H:i:s"));
+          
 
 
         $id_producto =  $producto->agregar();
@@ -63,7 +66,7 @@ switch ($accion) {
 
                 $id_imagenes = $imagenes->agregar();
 
-                $proImagen->__set('productos_imagenes_id',0);
+                $proImagen->__set('productos_imagenes_id', 0);
                 $proImagen->__set('imagenes_id', $id_imagenes);
                 $proImagen->__set('producto_id', $id_producto);
 

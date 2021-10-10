@@ -1,8 +1,11 @@
 <?php
 include_once './model/Productos.php';
+include_once './model/ProductosImagenes.php';
 include_once './model/Conexion.php';
 
 $productos = new Productos();
+
+$pro = new ProductosImagenes();
 
 $lista = $productos->leer();
 
@@ -10,16 +13,17 @@ $lista = $productos->leer();
 
 
 ?>
+<!-- <pre><?php /* print_r( $imagenes = $pro->buscar(33) ); */ ?></pre> -->
 
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 	<div class="container">
-		<h2 class="title-page">Category products</h2>
+		<h2 class="title-page">Productos</h2>
 		<nav>
 			<ol class="breadcrumb text-white">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item"><a href="#">Best category</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Great articles</li>
+				<li class="breadcrumb-item"><a href="#">Inicio</a></li>
+
+				<li class="breadcrumb-item active" aria-current="page">Productos</li>
 			</ol>
 		</nav>
 	</div> <!-- container //  -->
@@ -200,7 +204,7 @@ $lista = $productos->leer();
 
 				<header class="border-bottom mb-4 pb-3">
 					<div class="form-inline">
-						<span class="mr-md-auto">32 Items found </span>
+						<span class="mr-md-auto"><?= count($lista) . " Producto(s)" ?> </span>
 						<select class="mr-2 form-control">
 							<option>Latest items</option>
 							<option>Trending</option>
@@ -215,14 +219,20 @@ $lista = $productos->leer();
 						</div>
 					</div>
 				</header><!-- sect-heading -->
-
+				
 				<div class="row">
 					<?php
-					foreach ($lista as  $p) : ?>
+					foreach ($lista as  $p) :
+					
+						
+					?>
+
+					
 						<div class="col-md-4">
 
 
 							<figure class="card card-product-grid">
+								
 								<div class="img-wrap">
 									<!-- <span class="badge badge-danger"> NEW </span> -->
 									<img src="./resources/images/items/1.jpg">
@@ -230,13 +240,13 @@ $lista = $productos->leer();
 								</div> <!-- img-wrap.// -->
 								<figcaption class="info-wrap">
 									<div class="fix-height">
-										<a href="#" class="title"><?=$p['pro_nombre']?></a>
+										<a href="?param=detalles_productos&id=<?=$p['pro_id']?>" class="title"><?= $p['pro_nombre'] ?></a>
 										<div class="price-wrap mt-2">
-											<span class="price">$<?=$p['pro_precio_compra']?></span>
-											<del class="price-old">$1980</del>
+											<span class="price">$<?= $p['pro_precio_compra'] ?></span>
+											<!-- <del class="price-old">$1980</del> -->
 										</div> <!-- price-wrap.// -->
 									</div>
-									<a href="#" class="btn btn-block btn-primary">agregar al carro </a>
+									<a href="?param=carrito" class="btn btn-block btn-primary">agregar al carro </a>
 								</figcaption>
 							</figure>
 
@@ -244,9 +254,6 @@ $lista = $productos->leer();
 					<?php
 					endforeach;
 					?>
-
-
-
 				</div> <!-- row end.// -->
 
 

@@ -125,7 +125,7 @@ class Productos{
         }
     }
 
-    public function buscar(){
+    public function buscar($id){
         try {
             $con = (new Conexion())->Conectar(); 
             $sql = $con->prepare("SELECT * FROM productos WHERE pro_id = :id");

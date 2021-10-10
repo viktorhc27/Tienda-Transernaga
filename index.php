@@ -115,14 +115,14 @@ if (empty($_REQUEST["param"])) {
                             </li>
                         </ul>
                         <div class="widgets-wrap d-none d-md-block">
-                            
-                        <a href="#" class="widget-header">
+
+                            <a href="#" class="widget-header">
                                 <div class="icon">
                                     <i class="icon-sm rounded-circle border fa fa-shopping-cart"></i>
                                     <span class="notify">0</span>
                                 </div>
                             </a>
-                            
+
 
 
 
@@ -254,6 +254,9 @@ if (empty($_REQUEST["param"])) {
     switch ($_REQUEST["param"]) {
         case "productos":
             include_once './views/productos.php';
+            break;
+        case "detalles_productos":
+            include_once './views/detalles_productos.php';
             break;
         case "inicio":
             include_once './views/index.php';

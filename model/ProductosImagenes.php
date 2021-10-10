@@ -50,14 +50,14 @@ class ProductosImagenes
         }
     }
 
-    public function buscar()
+    public function buscar($id)
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM productos_has_imagen WHERE productos_img_id = :id");
+            $sql = $con->prepare("SELECT * FROM productos_has_imagen WHERE productos_pro_id = :id");
             $sql->bindParam(':id', $id);
             $sql->execute();
-            $res = $sql->fetch();
+            $res = $sql->fetchAll();
             return $res;
         } catch (PDOException $e) {
             return $e->getMessage();
