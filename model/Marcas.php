@@ -1,5 +1,6 @@
 <?php
-class Marcas{
+class Marcas
+{
     private $mar_id, $mar_nombre, $create_time, $update_time;
 
     //GET Y SET
@@ -12,11 +13,13 @@ class Marcas{
      * @return      Se devuelve el valor del atributo.
      */
 
-    public function __get($key){
+    public function __get($key)
+    {
         return $this->$key;
     }
 
-    public function __set($key, $value){
+    public function __set($key, $value)
+    {
         return $this->$key = $value;
     }
 
@@ -24,37 +27,29 @@ class Marcas{
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("insert into Marcas ("
-                . "mar_id,"
-                . "mar_nombre, "
-                . "mar_imagen, "
-                . "create_time, update_time)"
-                . "values("
-                . ":id, "
-                . ":nombre, "
-                . ":imagen, "
-                . ":create_time, update_time");
-       $sql->bindParam("mar_id",$this->ro_id);
-       $sql->bindParam("mar_nombre",$this->rol_nombre);
-       $sql->bindParam("mar_imagen",$this->rol_nombre);
-       $sql->bindParam("create_time",$this->create_time);
-       $sql->bindParam("update_time",$this->create_time);
+            $sql = $con->prepare("insert into marcas (mar_id,mar_nombre, mar_imagen, create_time, update_time)values(:id, :nombre, :imagen, :create_time, :update_time)");
+            $sql->bindParam("id", $this->mar_id);
+            $sql->bindParam("nombre", $this->mar_nombre);
+            $sql->bindParam("imagen", $this->mar_imagen);
+            $sql->bindParam("create_time", $this->create_time);
+            $sql->bindParam("update_time", $this->update_time);
             $res = $sql->execute();
             return $res;
         } catch (PDOException $e) {
             return $e->getMessage();
         }
     }
-    public function modificar(){
-        try{
-            $con =(new Conexion())->Conectar();
-            $sql= $con->prepare("update Marcas set mar_id=:id, mar_nombre=:nombre,mar_imagen=:imagen, create_time=:create_time, update_time=:update_time where mar_id=:id");
-           
-            $sql->bindparam("id",$this->mar_id);
-            $sql->bindparam("nombre",$this->mar_nombre);
-            $sql->bindparam("imagen",$this->mar_imagen);
-            $sql->bindparam("create_time",$this->create_time);
-            $sql->bindparam("update_time",$this->update_time);
+    public function modificar()
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("update Marcas set mar_id=:id, mar_nombre=:nombre,mar_imagen=:imagen, create_time=:create_time, update_time=:update_time where mar_id=:id");
+
+            $sql->bindparam("id", $this->mar_id);
+            $sql->bindparam("nombre", $this->mar_nombre);
+            $sql->bindparam("imagen", $this->mar_imagen);
+            $sql->bindparam("create_time", $this->create_time);
+            $sql->bindparam("update_time", $this->update_time);
 
             $res = $sql->execute();
             if ($sql->rowCount() == 1) {
@@ -63,13 +58,13 @@ class Marcas{
             } else {
                 return $res;
             }
-
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             return $e->getMessage();
         }
     }
 
-    public function buscar(){
+    public function buscar()
+    {
         try {
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("SELECT * FROM marcas WHERE mar_id = :id");
@@ -80,9 +75,9 @@ class Marcas{
         } catch (PDOException $e) {
             return $e->getMessage();
         }
-
     }
-    public function listar(){
+    public function listar()
+    {
 
         try {
             $con = (new Conexion())->Conectar();
@@ -94,8 +89,4 @@ class Marcas{
             return $ex->getMessage();
         }
     }
-   
-
-
 }
-?>

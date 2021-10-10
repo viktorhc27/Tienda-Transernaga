@@ -73,7 +73,8 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="?param=productos">Productos</a>
-                                    <a class="dropdown-item" href="#">Categorias</a>
+                                    <a class="dropdown-item" href="?param=categorias">Categorias</a>
+                                    <a class="dropdown-item" href="?param=marcas">Marcas</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
@@ -100,6 +101,12 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
          *          */
         //error_reporting(0);
         switch ($_REQUEST["param"]) {
+            case "marcas":
+                include_once 'agregar_marcas.php';
+                break;
+            case "categorias":
+                include_once 'agregar_categorias.php';
+                break;
             case "registrar":
                 include_once 'registrar.php';
                 break;
