@@ -5,7 +5,7 @@ include_once './model/Conexion.php';
 
 $productos = new Productos();
 
-$pro = new ProductosImagenes();
+
 
 $lista = $productos->leer();
 
@@ -13,7 +13,6 @@ $lista = $productos->leer();
 
 
 ?>
-<!-- <pre><?php /* print_r( $imagenes = $pro->buscar(33) ); */ ?></pre> -->
 
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
@@ -45,7 +44,7 @@ $lista = $productos->leer();
 								<h6 class="title">Product type</h6>
 							</a>
 						</header>
-						<div class="filter-content collapse show" id="collapse_1" style="">
+						<div class="filter-content collapse show" id="collapse_1">
 							<div class="card-body">
 								<form class="pb-3">
 									<div class="input-group">
@@ -76,7 +75,7 @@ $lista = $productos->leer();
 								<h6 class="title">Brands </h6>
 							</a>
 						</header>
-						<div class="filter-content collapse show" id="collapse_2" style="">
+						<div class="filter-content collapse show" id="collapse_2">
 							<div class="card-body">
 								<label class="custom-control custom-checkbox">
 									<input type="checkbox" checked="" class="custom-control-input">
@@ -118,7 +117,7 @@ $lista = $productos->leer();
 								<h6 class="title">Price range </h6>
 							</a>
 						</header>
-						<div class="filter-content collapse show" id="collapse_3" style="">
+						<div class="filter-content collapse show" id="collapse_3">
 							<div class="card-body">
 								<input type="range" class="custom-range" min="0" max="100" name="">
 								<div class="form-row">
@@ -142,7 +141,7 @@ $lista = $productos->leer();
 								<h6 class="title">Sizes </h6>
 							</a>
 						</header>
-						<div class="filter-content collapse show" id="collapse_4" style="">
+						<div class="filter-content collapse show" id="collapse_4">
 							<div class="card-body">
 								<label class="checkbox-btn">
 									<input type="checkbox">
@@ -173,7 +172,7 @@ $lista = $productos->leer();
 								<h6 class="title">More filter </h6>
 							</a>
 						</header>
-						<div class="filter-content collapse in" id="collapse_5" style="">
+						<div class="filter-content collapse in" id="collapse_5">
 							<div class="card-body">
 								<label class="custom-control custom-radio">
 									<input type="radio" name="myfilter_radio" checked="" class="custom-control-input">
@@ -219,20 +218,19 @@ $lista = $productos->leer();
 						</div>
 					</div>
 				</header><!-- sect-heading -->
-				
+
 				<div class="row">
 					<?php
 					foreach ($lista as  $p) :
-					
 						
 					?>
 
-					
+
 						<div class="col-md-4">
 
 
 							<figure class="card card-product-grid">
-								
+
 								<div class="img-wrap">
 									<!-- <span class="badge badge-danger"> NEW </span> -->
 									<img src="./resources/images/items/1.jpg">
@@ -240,7 +238,7 @@ $lista = $productos->leer();
 								</div> <!-- img-wrap.// -->
 								<figcaption class="info-wrap">
 									<div class="fix-height">
-										<a href="?param=detalles_productos&id=<?=$p['pro_id']?>" class="title"><?= $p['pro_nombre'] ?></a>
+										<a href="?param=detalles_productos&id=<?= $p['pro_id'] ?>" class="title"><?= $p['pro_nombre'] ?></a>
 										<div class="price-wrap mt-2">
 											<span class="price">$<?= $p['pro_precio_compra'] ?></span>
 											<!-- <del class="price-old">$1980</del> -->

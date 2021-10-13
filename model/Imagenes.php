@@ -1,5 +1,5 @@
 <?php
-class Imagenes
+class Imagenes 
 {
     private $img_id,$nombre, $ruta, $create_time, $update_time;
 
@@ -54,7 +54,7 @@ class Imagenes
         }
     }
 
-    public function buscar()
+    public function buscar($id)
     {
         try {
             $con = (new Conexion())->Conectar();

@@ -76,4 +76,19 @@ class ProductosImagenes
             return $ex->getMessage();
         }
     }
+    public function leerImagenesproductos($idp,$id)
+    {
+
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM productos_has_imagen INNER JOIN imagen ON :idp = :id");
+            $sql->bindParam('idp',$idp);
+            $sql->bindParam('id',$id);
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
 }

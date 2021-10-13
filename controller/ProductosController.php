@@ -56,9 +56,11 @@ switch ($accion) {
                 $target_path = $directorio . '/' . $filename; //Indicamos la ruta de destino, así como el nombre del archivo
 
 
+                $ruta_sinpuntos= str_replace('..','', $directorio); 
+
                 $imagenes->__set('img_id', 0);
                 $imagenes->__set('nombre', $filename);
-                $imagenes->__set('ruta', $directorio);
+                $imagenes->__set('ruta', $ruta_sinpuntos);
                 $imagenes->__set('create_time', date("Y-m-d H:i:s"));
                 $imagenes->__set('update_time', date("Y-m-d H:i:s"));
 

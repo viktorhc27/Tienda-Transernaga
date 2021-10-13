@@ -33,6 +33,9 @@ if (empty($_REQUEST["param"])) {
     <link href="resources/css/ui.css" rel="stylesheet" type="text/css" />
     <link href="resources/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
+    <!-- Flexslider -->
+    <link href="./resources/FlexSlider/flexslider.css" type="text/css" rel="stylesheet">
+    
     <!-- custom javascript -->
     <script src="js/script.js" type="text/javascript"></script>
 
@@ -46,6 +49,9 @@ if (empty($_REQUEST["param"])) {
         });
         // jquery end
     </script>
+   
+    <!-- script Flexslider -->
+    <script src="./resources/FlexSlider/jquery.flexslider-min.js"></script>
 </head>
 
 <body>
@@ -78,7 +84,7 @@ if (empty($_REQUEST["param"])) {
         <section class="border-bottom">
             <nav class="navbar navbar-main navbar-expand-lg navbar-light">
                 <div class="container">
-                    <a class="navbar-brand" href="http://bootstrap-ecommerce.com"><img src="resources/images/logo-muebles.png" class="logo"></a>
+                    <a class="navbar-brand" href="#"><img src="resources/images/logo-muebles.png" class="logo"></a>
 
 
                     <a href="#" class="widget-header d-md-none">

@@ -3,73 +3,85 @@ include_once './model/conexion.php';
 include_once './model/ProductosImagenes.php';
 include_once './model/Productos.php';
 include_once './model/Imagenes.php';
+
+
+$id = $_REQUEST['id'];
 $productos = new Productos();
+$pro = new ProductosImagenes();
+$imagen = new Imagenes();
 
-$id=$_REQUEST['id'];
 
+
+$imagenes_productos = $pro->buscar($id);
 
 $lista = $productos->buscar($id);
 
 
-print_r($lista);
+/* echo "<pre>";
+print_r($imagenes_productos);
+echo "</pre>"; */
+
+
 ?>
+<?php
+/* for ($i = 0; $i < count($imagenes_productos); $i++) {
+
+	$img = $imagen->buscar($imagenes_productos[$i]['1']);
+	print_r($img['ruta'] . "/" . $img['nombre']);
+}
 
 
+ */
+?>
 <br>
 
-<div class="card">
+<div class="card container">
 	<div class="row no-gutters">
+
 		<aside class="col-md-6">
-			<article class="gallery-wrap">
-				<div class="img-big-wrap">
-					<div> <a href="#"><img src="bootstrap-ecommerce-html/images/items/12.jpg"></a></div>
-				</div> <!-- slider-product.// -->
-				<div class="thumbs-wrap">
-					<a href="#" class="item-thumb"> <img src="bootstrap-ecommerce-html/images/items/12.jpg"></a>
-					<a href="#" class="item-thumb"> <img src="bootstrap-ecommerce-html/images/items/12-1.jpg"></a>
-					<a href="#" class="item-thumb"> <img src="bootstrap-ecommerce-html/images/items/12-2.jpg"></a>
-				</div> <!-- slider-nav.// -->
-			</article> <!-- gallery-wrap .end// -->
+			<!-- Place somewhere in the <body> of your page -->
+			<div class="flexslider">
+				<ul class="slides">
+
+					<?php
+					for ($i = 0; $i < count($imagenes_productos); $i++) {
+
+						$img = $imagen->buscar($imagenes_productos[$i]['1']);
+						
+					?>
+
+						<li data-thumb="./<?=$img['ruta'] . "/" . $img['nombre']?>">
+							<img src="./<?=$img['ruta'] . "/" . $img['nombre']?>" />
+						</li>
+
+
+					<?php
+					} ?>
+				</ul>
+			</div>
 		</aside>
 		<main class="col-md-6 border-left">
 			<article class="content-body">
 
-				<h2 class="title"><?=$lista['pro_nombre']?></h2>
-
-				<!-- <div class="rating-wrap my-3">
-					<ul class="rating-stars">
-						<li style="width:80%" class="stars-active">
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-						</li>
-						<li>
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-						</li>
-					</ul>
-					<small class="label-rating text-muted">132 reviews</small>
-					<small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 orders </small>
-				</div>  --><!-- rating-wrap.// -->
+				<h2 class="title"><?= $lista['pro_nombre'] ?></h2>
 
 				<div class="mb-3">
-					<var class="price h4">$<?=$lista['pro_precio_venta']?></var>
+					<var class="price h4">$<?= $lista['pro_precio_venta'] ?></var>
 					<span class="text-muted">CPL</span>
 				</div> <!-- price-detail-wrap .// -->
 
-				<p><?=$lista['pro_descripcion']?></p>
+				<p><?= $lista['pro_descripcion'] ?></p>
 
 
 				<dl class="row">
 					<dt class="col-sm-3">Altura#</dt>
-					<dd class="col-sm-9"><?=$lista['pro_altura']?></dd>
+					<dd class="col-sm-9"><?= $lista['pro_altura'] ?></dd>
 
 					<dt class="col-sm-3">Anchura</dt>
-					<dd class="col-sm-9"><?=$lista['pro_ancho']?></dd>
+					<dd class="col-sm-9"><?= $lista['pro_ancho'] ?></dd>
 
 					<dt class="col-sm-3">Peso</dt>
-					<dd class="col-sm-9"><?=$lista['pro_peso']?> </dd>
+					<dd class="col-sm-9"><?= $lista['pro_peso'] ?> </dd>
 				</dl>
 
 				<hr>
@@ -114,3 +126,13 @@ print_r($lista);
 		</main> <!-- col.// -->
 	</div> <!-- row.// -->
 </div> <!-- card.// -->
+<br>
+<script type="text/javascript">
+	// Can also be used with $(document).ready()
+	$(window).load(function() {
+		$('.flexslider').flexslider({
+			animation: "slide",
+			controlNav: "thumbnails"
+		});
+	});
+</script>
