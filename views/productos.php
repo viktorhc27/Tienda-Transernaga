@@ -10,8 +10,6 @@ $productos = new Productos();
 $lista = $productos->leer();
 
 
-
-
 ?>
 
 <!-- ========================= SECTION PAGETOP ========================= -->
@@ -222,7 +220,7 @@ $lista = $productos->leer();
 				<div class="row">
 					<?php
 					foreach ($lista as  $p) :
-						
+
 					?>
 
 
@@ -230,10 +228,9 @@ $lista = $productos->leer();
 
 
 							<figure class="card card-product-grid">
-
 								<div class="img-wrap">
 									<!-- <span class="badge badge-danger"> NEW </span> -->
-									<img src="./resources/images/items/1.jpg">
+									<img src="./resources/images/productos/<?= $p['pro_id'] ?>/<?= $p['pro_img'] ?>">
 									<a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
 								</div> <!-- img-wrap.// -->
 								<figcaption class="info-wrap">

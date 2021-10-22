@@ -119,6 +119,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
             case "agregar-muebles":
                 include_once 'agregar_muebles.php';
                 break;
+            case "ver_product":
+                include_once 'ver_productos.php';
+                break;
         }
         ?>
 

@@ -87,8 +87,8 @@ $productos = $p->leer();
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                                         <button class="dropdown-item" type="button">Modificar</button>
-                                                        <button class="dropdown-item" type="button">Ver</button>
-                                                        <button class="dropdown-item" type="button">Desabilitar</button>
+                                                        <a href="?param=ver_product&id=<?=$p['pro_id']?>" class="dropdown-item" type="button">Ver</a>
+                                                        <button class="dropdown-item" type="button">Deshabilitar</button>
                                                     </div>
                                                 </div>
                                             </td>
