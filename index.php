@@ -79,7 +79,7 @@ if (empty($_REQUEST["param"])) {
                 <ul class="navbar-nav">
                     <li class="nav-item"><a href="#" class="nav-link"> <i class="fa fa-comment"></i> Customer care </a></li>
                 </ul>
-            </div> <!-- container //  -->
+            </div> <!-- container //  --><!-- container .l.//  -->
         </nav>
         <section class="border-bottom">
             <nav class="navbar navbar-main navbar-expand-lg navbar-light">
