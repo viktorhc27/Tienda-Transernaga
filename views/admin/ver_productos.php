@@ -1,8 +1,13 @@
 <?php
 include_once '../../model/Productos.php';
+include_once '../../model/ProductosImagenes.php';
+include_once '../../model/imagenes.php';
 $p = new Productos();
+$imagenes = new ProductosImagenes();
 $id = $_REQUEST['id'];
 $productos = $p->buscar($id);
+$productos_imagenes = $imagenes->buscar($id);
+$imagen = new Imagenes();
 
 ?>
 <div class="container">
@@ -33,7 +38,7 @@ $productos = $p->buscar($id);
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    Codigo: <input type="text" class="form-control" value='<?= $productos['pro_codigo'] ?>' disabled>
+                                    Codigo: <input type="text" class="form-control" value='C' disabled>
                                     <br>
                                     Nombre de Producto:<input type="text" class="form-control" value='<?= $productos['pro_nombre'] ?>' disabled>
                                     <br>
@@ -64,15 +69,37 @@ $productos = $p->buscar($id);
                                     <br>
                                     Modelo:<?= $productos['pro_modelo'] ?>
                                     <br>
-                                    Imagen Principal
-                                    <img src="resources/images/<?=$productos['pro_imagen']?>">
+                                    Imagen Principal<br>
+                                    <img width="50%" src="../../resources/images/productos/<?= $productos['pro_id'] ?>/<?= $productos['pro_img'] ?>">
                                     <br>
-                                    Imagenes 
-                                   
+                                    Imagenes
+                                    <br>
+                                    <!-- Place somewhere in the <body> of your page -->
+                                    <div class="flexslider">
+                                        <ul class="slides">
+                                            <?php
+                                            for ($i = 0; $i < count($productos_imagenes); $i++) {
+                                                $img = $imagen->buscar($productos_imagenes[$i]['1']);
+                                            ?>
+                                                <li>
+                                                <img src="../..<?= $img['ruta'] . "/" . $img['nombre'] ?>">
+                                                </li>
+                                               
+                                            <?php
+                                            }
+
+                                            ?>
+                                        </ul>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
                         <!-- /.card -->
+                        <div class="card-footer">
+                        <a href="?param=editar_productos&id=<?=$id?>"type="button " class="btn btn-primary" data-toggle="tooltip" data-placement >Ir a Modificar</a>
+                        </div>
                     </div>
                     <!--/.col (right) -->
                 </div>
@@ -80,3 +107,12 @@ $productos = $p->buscar($id);
                 <!-- /.row -->
             </div>
         </div>
+        <script type="text/javascript">
+	// Can also be used with $(document).ready()
+	$(window).load(function() {
+		$('.flexslider').flexslider({
+			animation: "slide",
+			controlNav: "thumbnails"
+		});
+	});
+</script>

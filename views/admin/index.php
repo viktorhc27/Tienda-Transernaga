@@ -32,6 +32,11 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
         <!-- custom javascript -->
         <script src="js/script.js" type="text/javascript"></script>
 
+        <!-- Flexslider -->
+        <link href="../../resources/FlexSlider/flexslider.css" type="text/css" rel="stylesheet">
+        <!-- script Flexslider -->
+        <script src="../../resources/FlexSlider/jquery.flexslider-min.js"></script>
+
         <script type="text/javascript">
             /// some script
 
@@ -121,6 +126,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                 break;
             case "ver_product":
                 include_once 'ver_productos.php';
+                break;
+            case "editar_productos":
+                include_once 'editar_muebles.php';
                 break;
         }
         ?>

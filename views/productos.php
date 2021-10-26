@@ -241,7 +241,7 @@ $lista = $productos->leer();
 											<!-- <del class="price-old">$1980</del> -->
 										</div> <!-- price-wrap.// -->
 									</div>
-									<a href="?param=carrito" class="btn btn-block btn-primary">agregar al carro </a>
+									<!-- <a href="?param=carrito" class="btn btn-block btn-primary">agregar al carro </a> -->
 								</figcaption>
 							</figure>
 

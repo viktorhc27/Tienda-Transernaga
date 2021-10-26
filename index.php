@@ -35,7 +35,7 @@ if (empty($_REQUEST["param"])) {
 
     <!-- Flexslider -->
     <link href="./resources/FlexSlider/flexslider.css" type="text/css" rel="stylesheet">
-    
+
     <!-- custom javascript -->
     <script src="js/script.js" type="text/javascript"></script>
 
@@ -49,7 +49,7 @@ if (empty($_REQUEST["param"])) {
         });
         // jquery end
     </script>
-   
+
     <!-- script Flexslider -->
     <script src="./resources/FlexSlider/jquery.flexslider-min.js"></script>
 </head>
@@ -79,7 +79,8 @@ if (empty($_REQUEST["param"])) {
                 <ul class="navbar-nav">
                     <li class="nav-item"><a href="#" class="nav-link"> <i class="fa fa-comment"></i> Customer care </a></li>
                 </ul>
-            </div> <!-- container //  --><!-- container .l.//  -->
+            </div> <!-- container //  -->
+            <!-- container .l.//  -->
         </nav>
         <section class="border-bottom">
             <nav class="navbar navbar-main navbar-expand-lg navbar-light">
@@ -122,7 +123,7 @@ if (empty($_REQUEST["param"])) {
                         </ul>
                         <div class="widgets-wrap d-none d-md-block">
 
-                            <a href="#" class="widget-header">
+                            <a href="?param=cart" class="widget-header">
                                 <div class="icon">
                                     <i class="icon-sm rounded-circle border fa fa-shopping-cart"></i>
                                     <span class="notify">0</span>
@@ -279,7 +280,11 @@ if (empty($_REQUEST["param"])) {
             </script>
     <?php
             break;
+        case "cart":
+            include_once './views/cart.php';
+            break;
     }
+
     ?>
 
 
