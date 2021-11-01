@@ -3,7 +3,7 @@ session_start();
 if (empty($_REQUEST["param"])) {
     $_REQUEST['param'] = "inicio";
 }
-
+//cacquitasdasda
 ?>
 
 <!DOCTYPE HTML>
