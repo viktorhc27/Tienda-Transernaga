@@ -47,11 +47,11 @@ echo "</pre>"; */
 					for ($i = 0; $i < count($imagenes_productos); $i++) {
 
 						$img = $imagen->buscar($imagenes_productos[$i]['1']);
-						
+
 					?>
 
-						<li data-thumb="./<?=$img['ruta'] . "/" . $img['nombre']?>">
-							<img src="./<?=$img['ruta'] . "/" . $img['nombre']?>" />
+						<li data-thumb="./<?= $img['ruta'] . "/" . $img['nombre'] ?>">
+							<img src="./<?= $img['ruta'] . "/" . $img['nombre'] ?>" />
 						</li>
 
 
@@ -82,47 +82,43 @@ echo "</pre>"; */
 
 					<dt class="col-sm-3">Peso</dt>
 					<dd class="col-sm-9"><?= $lista['pro_peso'] ?> </dd>
+					<dt class="col-sm-3">Stock</dt>
+					<dd class="col-sm-9"><?= $lista['pro_stock'] ?> </dd>
+
 				</dl>
 
 				<hr>
-				<div class="form-row">
-					<div class="form-group col-md flex-grow-0">
-						<label>Quantity</label>
-						<div class="input-group mb-3 input-spinner">
-							<div class="input-group-prepend">
-								<button class="btn btn-light" type="button" id="button-plus"> + </button>
-							</div>
-							<input type="text" class="form-control" value="1">
-							<div class="input-group-append">
-								<button class="btn btn-light" type="button" id="button-minus"> − </button>
+				<form method="post" action="./controller/CarritoController.php?accion=agregar">
+					<div class="form-row">
+						<div class="form-group col-md flex-grow-0">
+							<label>Cantidad</label>
+							<div class="input-group mb-3 input-spinner">
+								<select class="form-control" name="cantidad">
+									<?php
+									for ($i = 1; $i <= $lista['pro_stock']; $i++) {
+									?>
+										<option   value="<?= $i ?>"><?= $i ?></option>
+
+									<?php
+									}
+									?>
+
+								</select>
+								<!-- 	<input type="text" id="contador" class="form-control" value="1"> -->
+
 							</div>
 						</div>
-					</div> <!-- col.// -->
-					<div class="form-group col-md">
-						<label>Select size</label>
-						<div class="mt-1">
-							<label class="custom-control custom-radio custom-control-inline">
-								<input type="radio" name="select_size" checked="" class="custom-control-input">
-								<div class="custom-control-label">Small</div>
-							</label>
+					</div>
+					<br>
+					<input type="hidden" name="id_producto" id="id_producto" value="<?= $lista['pro_id'] ?>">
 
-							<label class="custom-control custom-radio custom-control-inline">
-								<input type="radio" name="select_size" class="custom-control-input">
-								<div class="custom-control-label">Medium</div>
-							</label>
 
-							<label class="custom-control custom-radio custom-control-inline">
-								<input type="radio" name="select_size" class="custom-control-input">
-								<div class="custom-control-label">Large</div>
-							</label>
+					<button class="btn  btn-outline-warning"> <span class="text">Agregar al Carro</span> <i class="fas fa-shopping-cart"></i> </button>
+				</form>
+			</article>
 
-						</div>
-					</div> <!-- col.// -->
-				</div> <!-- row.// -->
 
-				<a href="#" class="btn  btn-primary"> Buy now </a>
-				<a href="#" class="btn  btn-outline-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i> </a>
-			</article> <!-- product-info-aside .// -->
+
 		</main> <!-- col.// -->
 	</div> <!-- row.// -->
 </div> <!-- card.// -->
@@ -134,5 +130,6 @@ echo "</pre>"; */
 			animation: "slide",
 			controlNav: "thumbnails"
 		});
+
 	});
 </script>

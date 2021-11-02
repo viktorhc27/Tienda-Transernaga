@@ -9,7 +9,7 @@ switch ($accion) {
         $cantidad = $_REQUEST["cantidad"];
         
 
-        $_SESSION["carrito"][$id_producto] = array(
+        $_SESSION["cart"][$id_producto] = array(
             'id_producto' => $id_producto,
             'id_usuario' => '',
             'cantidad' => $cantidad,
@@ -19,7 +19,7 @@ switch ($accion) {
 
 
         echo "<script>";
-        echo "location.href='../index.php?param=carro'";
+        echo "location.href='../index.php?param=cart'";
         echo "</script>";
 
         /* header('Content-Type:apllication/json');
@@ -37,9 +37,9 @@ switch ($accion) {
     case "quitar":
         $id = $_REQUEST["id"];
 
-        unset($_SESSION["carrito"][$id]);
+        unset($_SESSION["cart"][$id]);
         echo "<script>";
-        echo "location.href='../index.php?param=carro'";
+        echo "location.href='../index.php?param=cart'";
         echo "</script>";
 
 
@@ -50,7 +50,7 @@ switch ($accion) {
 
         echo $cantidad;
         echo $id;
-        $_SESSION['carrito'][$id]['cantidad'] = $cantidad;
+        $_SESSION['cart'][$id]['cantidad'] = $cantidad;
 
         echo "<script>";
         echo "location.href='../index.php?param=carro'";

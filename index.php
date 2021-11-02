@@ -88,10 +88,21 @@ if (empty($_REQUEST["param"])) {
                     <a class="navbar-brand" href="#"><img src="resources/images/logo-muebles.png" class="logo"></a>
 
 
-                    <a href="#" class="widget-header d-md-none">
+                    <a href="?param=cart" class="widget-header d-md-none">
                         <div class="icon">
                             <i class="icon-sm rounded-circle border fa fa-shopping-cart"></i>
-                            <span class="notify">0</span>
+                            <span class="notify">
+                                        <?php
+
+                                        if(!empty($_SESSION['carrito'])){
+
+                                            echo count($_SESSION['carrito']);
+
+                                        }else{
+                                            echo "0";
+                                        }
+                                         ?>
+</span>
                         </div>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav1" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,7 +137,19 @@ if (empty($_REQUEST["param"])) {
                             <a href="?param=cart" class="widget-header">
                                 <div class="icon">
                                     <i class="icon-sm rounded-circle border fa fa-shopping-cart"></i>
-                                    <span class="notify">0</span>
+                                    <span class="notify">
+                                        <?php
+
+                                        if(!empty($_SESSION['cart'])){
+
+                                            echo count($_SESSION['cart']);
+
+                                        }else{
+                                            echo "0";
+                                        }
+                                         ?>
+
+                                    </span>
                                 </div>
                             </a>
 
@@ -283,6 +306,10 @@ if (empty($_REQUEST["param"])) {
         case "cart":
             include_once './views/cart.php';
             break;
+
+            case"ve":
+                include_once './views/proceso_venta.php';
+                break;
     }
 
     ?>

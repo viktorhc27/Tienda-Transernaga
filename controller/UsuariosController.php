@@ -18,6 +18,7 @@ switch ($accion) {
             if (password_verify($_REQUEST['password'], $res['us_password'])) {
 
                 $_SESSION['user'] = array(
+                    'id' => $res['us_id'],
                     'nombre' => $res['us_nombre'],
                     'correo' => $res['us_correo'],
                     'role' => $res['roles_ro_id']
