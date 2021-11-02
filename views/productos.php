@@ -4,12 +4,19 @@ include_once './model/ProductosImagenes.php';
 include_once './model/Conexion.php';
 
 $productos = new Productos();
-
-
-
 $lista = $productos->leer();
 
+$por_pagina = 4;
 
+if (isset($_REQUEST['pagina'])) {
+	$pagina = $_REQUEST['pagina'];
+} else {
+	$pagina = 1;
+}
+
+$empieza = ($pagina - 1) * $por_pagina;
+
+$pag = (new Productos())->paginacion($empieza, $por_pagina);
 ?>
 
 <!-- ========================= SECTION PAGETOP ========================= -->
@@ -217,48 +224,63 @@ $lista = $productos->leer();
 					</div>
 				</header><!-- sect-heading -->
 
+
 				<div class="row">
 					<?php
-					foreach ($lista as  $p) :
+					if (count($pag) > 0) {
+
+
+						foreach ($pag as  $p) :
 
 					?>
 
 
-						<div class="col-md-4">
+							<div class="col-md-4">
 
 
-							<figure class="card card-product-grid">
-								<div class="img-wrap">
-									<!-- <span class="badge badge-danger"> NEW </span> -->
-									<img src="./resources/images/productos/<?= $p['pro_id'] ?>/<?= $p['pro_img'] ?>">
-									<a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
-								</div> <!-- img-wrap.// -->
-								<figcaption class="info-wrap">
-									<div class="fix-height">
-										<a href="?param=detalles_productos&id=<?= $p['pro_id'] ?>" class="title"><?= $p['pro_nombre'] ?></a>
-										<div class="price-wrap mt-2">
-											<span class="price">$<?= $p['pro_precio_compra'] ?></span>
-											<!-- <del class="price-old">$1980</del> -->
-										</div> <!-- price-wrap.// -->
-									</div>
-									<!-- <a href="?param=carrito" class="btn btn-block btn-primary">agregar al carro </a> -->
-								</figcaption>
-							</figure>
+								<figure class="card card-product-grid">
+									<div class="img-wrap">
+										<!-- <span class="badge badge-danger"> NEW </span> -->
+										<img src="./resources/images/productos/<?= $p['pro_id'] ?>/<?= $p['pro_img'] ?>">
+										<a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
+									</div> <!-- img-wrap.// -->
+									<figcaption class="info-wrap">
+										<div class="fix-height">
+											<a href="?param=detalles_productos&id=<?= $p['pro_id'] ?>" class="title"><?= $p['pro_nombre'] ?></a>
+											<div class="price-wrap mt-2">
+												<span class="price">$<?= $p['pro_precio_compra'] ?></span>
+												<!-- <del class="price-old">$1980</del> -->
+											</div> <!-- price-wrap.// -->
+										</div>
+										<!-- <a href="?param=carrito" class="btn btn-block btn-primary">agregar al carro </a> -->
+									</figcaption>
+								</figure>
 
-						</div> <!-- col.// -->
+							</div> <!-- col.// -->
 					<?php
-					endforeach;
+						endforeach;
+					} else {
+						echo "NO HAY PRODUCTOS";
+					}
 					?>
 				</div> <!-- row end.// -->
 
 
 				<nav class="mt-4" aria-label="Page navigation sample">
+					<?php
+					$resultado = (new Productos())->leer();
+
+					$total_registros = count($resultado);
+					$total_de_paginas = ceil($total_registros / $por_pagina);
+					?>
 					<ul class="pagination">
 						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+						<?php for ($i = 1; $i <= $total_de_paginas; $i++) { ?>
+							<li class="page-item"><a class="page-link" href="?param=productos&pagina=<?= $i; ?>"><?= $i; ?></a></li>
+						<?php
+						}
+						?>
+						<li class="page-item"><a class="page-link" href="?param=productos&pagina=<?= $total_de_paginas ?>">Next</a></li>
 					</ul>
 				</nav>
 
