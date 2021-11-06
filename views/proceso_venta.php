@@ -7,6 +7,7 @@ include_once './model/Usuarios.php';
 $productos = new Productos();
 $usuarios = new Usuarios();
 
+$impuestos = 18;
 
 ?>
 
@@ -241,7 +242,11 @@ $usuarios = new Usuarios();
                     <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Armado</dt>
-                            <dd class="armado text-right">15.000</dd>
+                            <dd class="armado text-right">15000</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Impuestos</dt>
+                            <dd class="armado text-right">15000</dd>
                         </dl>
 
                         <dl class="dlist-align">
@@ -249,7 +254,7 @@ $usuarios = new Usuarios();
                             <dd id="preciototal" class="countable text-right text-dark b"></dd>
                         </dl>
                         <hr>
-                        <a href="#" class="btn btn-warning btn-block"> Pagar</a>
+                        <a href="./views/boleta.php" class="btn btn-warning btn-block"> Pagar</a>
 
                     </div>
                 </div>
