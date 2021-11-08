@@ -1,9 +1,13 @@
 <?php
 include_once './model/Productos.php';
+include_once './model/Categorias.php';
 include_once './model/ProductosImagenes.php';
 include_once './model/Conexion.php';
 
 $productos = new Productos();
+
+$categorias = new Categorias();
+$cat = $categorias->listar();
 $lista = $productos->leer();
 
 $por_pagina = 4;
@@ -46,29 +50,19 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 						<header class="card-header">
 							<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
 								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Product type</h6>
+								<h6 class="title">Productos</h6>
 							</a>
 						</header>
 						<div class="filter-content collapse show" id="collapse_1">
 							<div class="card-body">
-								<form class="pb-3">
+								<form class="pb-3" method="post" action="./controller/BusquedaController.php">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search">
+										<input name="busqueda" type="text" class="form-control" placeholder="Buscador">
 										<div class="input-group-append">
-											<button class="btn btn-light" type="button"><i class="fa fa-search"></i></button>
+											<button class="btn btn-light"><i class="fa fa-search"></i></button>
 										</div>
 									</div>
 								</form>
-
-								<ul class="list-menu">
-									<li><a href="#">People </a></li>
-									<li><a href="#">Watches </a></li>
-									<li><a href="#">Cinema </a></li>
-									<li><a href="#">Clothes </a></li>
-									<li><a href="#">Home items </a></li>
-									<li><a href="#">Animals</a></li>
-									<li><a href="#">People </a></li>
-								</ul>
 
 							</div> <!-- card-body.// -->
 						</div>
@@ -77,41 +71,28 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 						<header class="card-header">
 							<a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
 								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Brands </h6>
+								<h6 class="title">Categorias </h6>
 							</a>
 						</header>
 						<div class="filter-content collapse show" id="collapse_2">
 							<div class="card-body">
-								<label class="custom-control custom-checkbox">
-									<input type="checkbox" checked="" class="custom-control-input">
-									<div class="custom-control-label">Mercedes
-										<b class="badge badge-pill badge-light float-right">120</b>
-									</div>
-								</label>
-								<label class="custom-control custom-checkbox">
-									<input type="checkbox" checked="" class="custom-control-input">
-									<div class="custom-control-label">Toyota
-										<b class="badge badge-pill badge-light float-right">15</b>
-									</div>
-								</label>
-								<label class="custom-control custom-checkbox">
-									<input type="checkbox" checked="" class="custom-control-input">
-									<div class="custom-control-label">Mitsubishi
-										<b class="badge badge-pill badge-light float-right">35</b>
-									</div>
-								</label>
-								<label class="custom-control custom-checkbox">
-									<input type="checkbox" checked="" class="custom-control-input">
-									<div class="custom-control-label">Nissan
-										<b class="badge badge-pill badge-light float-right">89</b>
-									</div>
-								</label>
-								<label class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input">
-									<div class="custom-control-label">Honda
-										<b class="badge badge-pill badge-light float-right">30</b>
-									</div>
-								</label>
+								<?php
+								
+								foreach ($cat as $c) :
+								?>
+
+									<label class="custom-control custom-checkbox">
+										<input type="checkbox" checked="" class="custom-control-input">
+										<div class="custom-control-label"><?=$c['cat_nombre']?>
+											<b class="badge badge-pill badge-light float-right">120</b>
+										</div>
+									</label>
+
+								<?php
+								endforeach;
+								?>
+
+
 							</div> <!-- card-body.// -->
 						</div>
 					</article> <!-- filter-group .// -->
@@ -139,37 +120,7 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 							</div><!-- card-body.// -->
 						</div>
 					</article> <!-- filter-group .// -->
-					<article class="filter-group">
-						<header class="card-header">
-							<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
-								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Sizes </h6>
-							</a>
-						</header>
-						<div class="filter-content collapse show" id="collapse_4">
-							<div class="card-body">
-								<label class="checkbox-btn">
-									<input type="checkbox">
-									<span class="btn btn-light"> XS </span>
-								</label>
-
-								<label class="checkbox-btn">
-									<input type="checkbox">
-									<span class="btn btn-light"> SM </span>
-								</label>
-
-								<label class="checkbox-btn">
-									<input type="checkbox">
-									<span class="btn btn-light"> LG </span>
-								</label>
-
-								<label class="checkbox-btn">
-									<input type="checkbox">
-									<span class="btn btn-light"> XXL </span>
-								</label>
-							</div><!-- card-body.// -->
-						</div>
-					</article> <!-- filter-group .// -->
+				
 					<article class="filter-group">
 						<header class="card-header">
 							<a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" class="">
@@ -248,15 +199,16 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 										<div class="fix-height">
 											<a href="?param=detalles_productos&id=<?= $p['pro_id'] ?>" class="title"><?= $p['pro_nombre'] ?></a>
 											<div class="price-wrap mt-2">
-												<span class="price">$<?= $p['pro_precio_compra'] ?></span>
+												<span class="price">$<?= number_format($p['pro_precio_compra'],0) ?></span>
 												<!-- <del class="price-old">$1980</del> -->
 											</div> <!-- price-wrap.// -->
 										</div>
-										<!-- <a href="?param=carrito" class="btn btn-block btn-primary">agregar al carro </a> -->
+										
 									</figcaption>
 								</figure>
 
 							</div> <!-- col.// -->
+							
 					<?php
 						endforeach;
 					} else {

@@ -92,17 +92,16 @@ if (empty($_REQUEST["param"])) {
                         <div class="icon">
                             <i class="icon-sm rounded-circle border fa fa-shopping-cart"></i>
                             <span class="notify">
-                                        <?php
+                                <?php
 
-                                        if(!empty($_SESSION['carrito'])){
+                                if (!empty($_SESSION['carrito'])) {
 
-                                            echo count($_SESSION['carrito']);
-
-                                        }else{
-                                            echo "0";
-                                        }
-                                         ?>
-</span>
+                                    echo count($_SESSION['carrito']);
+                                } else {
+                                    echo "0";
+                                }
+                                ?>
+                            </span>
                         </div>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav1" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,14 +139,13 @@ if (empty($_REQUEST["param"])) {
                                     <span class="notify">
                                         <?php
 
-                                        if(!empty($_SESSION['cart'])){
+                                        if (!empty($_SESSION['cart'])) {
 
                                             echo count($_SESSION['cart']);
-
-                                        }else{
+                                        } else {
                                             echo "0";
                                         }
-                                         ?>
+                                        ?>
 
                                     </span>
                                 </div>
@@ -297,6 +295,9 @@ if (empty($_REQUEST["param"])) {
         case "login":
             include_once './views/login.php';
             break;
+        case "resultado":
+            include_once './views/busqueda.php';
+            break;
         case "administrador": ?>
             <script type="text/javascript">
                 window.location.href = "./views/admin/index.php?param=inicio";
@@ -307,9 +308,9 @@ if (empty($_REQUEST["param"])) {
             include_once './views/cart.php';
             break;
 
-            case"ve":
-                include_once './views/proceso_venta.php';
-                break;
+        case "ve":
+            include_once './views/proceso_venta.php';
+            break;
     }
 
     ?>
@@ -391,5 +392,6 @@ if (empty($_REQUEST["param"])) {
     <!-- ========================= FOOTER END // ========================= -->
 
 </body>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 </html>

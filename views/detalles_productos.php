@@ -97,7 +97,7 @@ echo "</pre>"; */
 									<?php
 									for ($i = 1; $i <= $lista['pro_stock']; $i++) {
 									?>
-										<option   value="<?= $i ?>"><?= $i ?></option>
+										<option value="<?= $i ?>"><?= $i ?></option>
 
 									<?php
 									}
@@ -119,7 +119,22 @@ echo "</pre>"; */
 
 
 
+
 		</main> <!-- col.// -->
+		<div>
+			
+
+			<model-viewer class="w-screen" src="./resources/images/modelos/33/cama.glb" camera-controls auto-rotate ar>
+
+				<div class="progress-bar hide" slot="progress-bar">
+					<div class="update-bar"></div>
+				</div>
+				<button slot="ar-button" id="ar-button">
+					Ver en tu Espacio
+				</button>
+
+			</model-viewer>
+		</div>
 	</div> <!-- row.// -->
 </div> <!-- card.// -->
 <br>

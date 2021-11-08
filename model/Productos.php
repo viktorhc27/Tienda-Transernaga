@@ -141,6 +141,21 @@ class Productos
             return $e->getMessage();
         }
     }
+
+    public function buscar_palabras($nombre,$empieza, $por_pagina)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM productos WHERE pro_nombre LIKE :nombre LIMIT $empieza, $por_pagina");
+            $keyword = "%".$nombre."%";
+            $sql->bindParam(':nombre', $keyword);
+            $sql->execute();
+            $res = $sql->fetchall();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
     public function leer()
     {
 
@@ -154,7 +169,7 @@ class Productos
             return $ex->getMessage();
         }
     }
-   
+
     public function paginacion($empieza, $por_pagina)
     {
         try {
