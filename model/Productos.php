@@ -182,4 +182,17 @@ class Productos
             return $ex->getMessage();
         }
     }
+
+    public function listar_categorias($cat,$empieza, $por_pagina)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM productos where categorias_cat_id = $cat LIMIT $empieza, $por_pagina");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
 }

@@ -75,23 +75,21 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 							</a>
 						</header>
 						<div class="filter-content collapse show" id="collapse_2">
-							<div class="card-body">
-								<?php
-								
-								foreach ($cat as $c) :
-								?>
+							<div class="card-body"><label class="filter-group">
+									<?php
 
-									<label class="custom-control custom-checkbox">
-										<input type="checkbox" checked="" class="custom-control-input">
-										<div class="custom-control-label"><?=$c['cat_nombre']?>
-											<b class="badge badge-pill badge-light float-right">120</b>
-										</div>
-									</label>
+									foreach ($cat as $c) :
+									?>
 
-								<?php
-								endforeach;
-								?>
 
+										<a href="./controller/BusquedaController.php?categorias=<?= $c['cat_id'] ?>"><?= $c['cat_nombre'] ?></a><br>
+
+
+
+									<?php
+									endforeach;
+									?>
+								</label>
 
 							</div> <!-- card-body.// -->
 						</div>
@@ -120,38 +118,8 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 							</div><!-- card-body.// -->
 						</div>
 					</article> <!-- filter-group .// -->
-				
-					<article class="filter-group">
-						<header class="card-header">
-							<a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" class="">
-								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">More filter </h6>
-							</a>
-						</header>
-						<div class="filter-content collapse in" id="collapse_5">
-							<div class="card-body">
-								<label class="custom-control custom-radio">
-									<input type="radio" name="myfilter_radio" checked="" class="custom-control-input">
-									<div class="custom-control-label">Any condition</div>
-								</label>
 
-								<label class="custom-control custom-radio">
-									<input type="radio" name="myfilter_radio" class="custom-control-input">
-									<div class="custom-control-label">Brand new </div>
-								</label>
 
-								<label class="custom-control custom-radio">
-									<input type="radio" name="myfilter_radio" class="custom-control-input">
-									<div class="custom-control-label">Used items</div>
-								</label>
-
-								<label class="custom-control custom-radio">
-									<input type="radio" name="myfilter_radio" class="custom-control-input">
-									<div class="custom-control-label">Very old</div>
-								</label>
-							</div><!-- card-body.// -->
-						</div>
-					</article> <!-- filter-group .// -->
 				</div> <!-- card.// -->
 
 			</aside> <!-- col.// -->
@@ -160,12 +128,7 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 				<header class="border-bottom mb-4 pb-3">
 					<div class="form-inline">
 						<span class="mr-md-auto"><?= count($lista) . " Producto(s)" ?> </span>
-						<select class="mr-2 form-control">
-							<option>Latest items</option>
-							<option>Trending</option>
-							<option>Most Popular</option>
-							<option>Cheapest</option>
-						</select>
+
 						<div class="btn-group">
 							<a href="#" class="btn btn-outline-secondary" data-toggle="tooltip" title="List view">
 								<i class="fa fa-bars"></i></a>
@@ -199,16 +162,16 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 										<div class="fix-height">
 											<a href="?param=detalles_productos&id=<?= $p['pro_id'] ?>" class="title"><?= $p['pro_nombre'] ?></a>
 											<div class="price-wrap mt-2">
-												<span class="price">$<?= number_format($p['pro_precio_compra'],0) ?></span>
+												<span class="price">$<?= number_format($p['pro_precio_compra'], 0) ?></span>
 												<!-- <del class="price-old">$1980</del> -->
 											</div> <!-- price-wrap.// -->
 										</div>
-										
+
 									</figcaption>
 								</figure>
 
 							</div> <!-- col.// -->
-							
+
 					<?php
 						endforeach;
 					} else {

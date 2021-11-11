@@ -6,14 +6,14 @@ $accion = $_REQUEST['accion'];
 
 switch ($accion) {
     case 'login':
-        echo "login";
+       
         session_start();
         $usuarios = new Usuarios();
 
         $usuarios->__set('us_correo', $_REQUEST['correo']);
 
         $res = $usuarios->login();
-
+        print_r($res);
         if (!empty($res)) {
             if (password_verify($_REQUEST['password'], $res['us_password'])) {
 
@@ -24,9 +24,12 @@ switch ($accion) {
                     'role' => $res['roles_ro_id']
                 );
                 echo "<script type='text/javascript'>window.location.href = '../index.php';</script>";
+            }else{
+                echo "<script type='text/javascript'>window.location.href = '../index.php?error=password';</script>";
             }
         }else{
-            echo 'error';
+            
+            echo "<script type='text/javascript'>window.location.href = '../index.php?error=datos';</script>";
         }
 
 
@@ -54,7 +57,7 @@ switch ($accion) {
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
         $res = $usuarios->agregar();
 
-        echo "<script type='text/javascript'>window.location.href = '../../index.php';</script>";
+        echo "<script type='text/javascript'>window.location.href = '../index.php';</script>";
         break;
 
     case 'register_employees':

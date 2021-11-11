@@ -16,7 +16,7 @@ if (isset($_REQUEST['pagina'])) {
 
 $empieza = ($pagina - 1) * $por_pagina;
 
-$pag = (new Productos())->buscar_palabras($busqueda,$empieza, $por_pagina);
+$pag = (new Productos())->buscar_palabras($busqueda, $empieza, $por_pagina);
 ?>
 
 <!-- ========================= SECTION PAGETOP ========================= -->
@@ -39,17 +39,17 @@ $pag = (new Productos())->buscar_palabras($busqueda,$empieza, $por_pagina);
 	<div class="container">
 
 		<div class="row">
-        <div class="card-body">
-								<form class="pb-3" method="post" action="./controller/BusquedaController.php">
-									<div class="input-group">
-										<input name="busqueda" type="text" class="form-control" placeholder="Buscador">
-										<div class="input-group-append">
-											<button class="btn btn-light"><i class="fa fa-search"></i></button>
-										</div>
-									</div>
-								</form>
+			<div class="card-body">
+				<form class="pb-3" method="post" action="./controller/BusquedaController.php">
+					<div class="input-group">
+						<input name="busqueda" type="text" class="form-control" placeholder="Buscador">
+						<div class="input-group-append">
+							<button class="btn btn-light"><i class="fa fa-search"></i></button>
+						</div>
+					</div>
+				</form>
 
-							</div> 
+			</div>
 			<main class="col-md-12">
 
 
@@ -77,16 +77,16 @@ $pag = (new Productos())->buscar_palabras($busqueda,$empieza, $por_pagina);
 										<div class="fix-height">
 											<a href="?param=detalles_productos&id=<?= $p['pro_id'] ?>" class="title"><?= $p['pro_nombre'] ?></a>
 											<div class="price-wrap mt-2">
-												<span class="price">$<?= number_format($p['pro_precio_compra'],0) ?></span>
+												<span class="price">$<?= number_format($p['pro_precio_compra'], 0) ?></span>
 												<!-- <del class="price-old">$1980</del> -->
 											</div> <!-- price-wrap.// -->
 										</div>
-										
+
 									</figcaption>
 								</figure>
 
 							</div> <!-- col.// -->
-							
+
 					<?php
 						endforeach;
 					} else {

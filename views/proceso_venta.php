@@ -35,21 +35,12 @@ $impuestos = 18;
                     <?php
                     if (!empty($_SESSION['user'])) {
                         $us = $usuarios->buscar($_SESSION['user']['id']);
-
-
                     ?>
-
-
-
-
-
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Perfil de Entrega</h4>
-
                                 <div class="form-group">
                                     <i style="font-size:80px" class="far fa-user "></i>
-
                                 </div>
                                 <div class="form-row">
                                     <div class="col form-group">
@@ -80,80 +71,70 @@ $impuestos = 18;
                                     </div> <!-- form-group end.// -->
 
                                 </div> <!-- form-row.// -->
-
-
                             </div> <!-- card-body.// -->
                         </div> <!-- card .// -->
-
-
-
                     <?php
-
-
-
                     } else { ?>
 
                         <article class="card-body">
                             <header class="mb-4">
                                 <h4 class="card-title">Direccion de entrega</h4>
                             </header>
-
-
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label>Nombre</label>
-                                    <input name="nombre" type="text" class="form-control" placeholder="">
+                            <form method="post" action="controller/PagosController.php?accion=agregar">
+                                <div class="form-row">
+                                    <div class="col form-group">
+                                        <label>Nombre</label>
+                                        <input name="nombre" type="text" class="form-control" placeholder="">
+                                    </div> <!-- form-group end.// -->
+                                    <div class="col form-group">
+                                        <label>Apellido Paterno</label>
+                                        <input name="app" type="text" class="form-control" placeholder="">
+                                    </div> <!-- form-group end.// -->
+                                    <div class="col form-group">
+                                        <label>Apellido Materno</label>
+                                        <input name="apm" type="text" class="form-control" placeholder="">
+                                    </div> <!-- form-group end.// -->
+                                </div> <!-- form-row end.// -->
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input name="correo" type="email" class="form-control" placeholder="">
+                                    <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
                                 </div> <!-- form-group end.// -->
-                                <div class="col form-group">
-                                    <label>Apellido Paterno</label>
-                                    <input name="app" type="text" class="form-control" placeholder="">
+                                <div class="form-group">
+                                    <label class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" id="radio1" type="radio" name="sexo" value="hombre">
+                                        <span class="custom-control-label"> Masculino </span>
+                                    </label>
+                                    <label class="custom-control custom-radio custom-control-inline">
+                                        <input class="custom-control-input" id="radio1" type="radio" name="sexo" value="mujer">
+                                        <span class="custom-control-label"> Femenino </span>
+                                    </label>
                                 </div> <!-- form-group end.// -->
-                                <div class="col form-group">
-                                    <label>Apellido Materno</label>
-                                    <input name="apm" type="text" class="form-control" placeholder="">
-                                </div> <!-- form-group end.// -->
-                            </div> <!-- form-row end.// -->
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input name="correo" type="email" class="form-control" placeholder="">
-                                <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
-                            </div> <!-- form-group end.// -->
-                            <div class="form-group">
-                                <label class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" checked="" type="radio" name="sexo" value="hombre">
-                                    <span class="custom-control-label"> Masculino </span>
-                                </label>
-                                <label class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" type="radio" name="sexo" value="mujer">
-                                    <span class="custom-control-label"> Femenino </span>
-                                </label>
-                            </div> <!-- form-group end.// -->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Telefono</label>
-                                    <input name="telefono" type="text" class="form-control">
-                                </div> <!-- form-group end.// -->
-                                <div class="form-group col-md-6">
-                                    <label>Direccion</label>
-                                    <input name="direccion" type="text" class="form-control">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Telefono</label>
+                                        <input name="telefono" id="telefono" type="text" class="form-control">
+                                    </div> <!-- form-group end.// -->
+                                    <div class="form-group col-md-6">
+                                        <label>Direccion</label>
+                                        <input name="direccion" id="direccion" type="text" class="form-control">
 
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Departamento</label>
-                                    <input name="direccion" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Departamento</label>
+                                        <input name="departamento" id="departamento" type="text" class="form-control">
 
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Block</label>
-                                    <input name="direccion" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Block</label>
+                                        <input name="block" id="block" type="text" class="form-control">
 
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Numero</label>
-                                    <input name="direccion" type="text" class="form-control">
-
-                                </div>
-                            </div> <!-- form-row.// -->
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Numero</label>
+                                        <input name="numero" id="numero" type="text" class="form-control">
+                                    </div>
+                                </div> <!-- form-row.// -->
 
                         </article><!-- card-body.// -->
 
@@ -174,22 +155,24 @@ $impuestos = 18;
                             <div class="row">
                                 <div class="form-group col-sm-6">
                                     <label class="js-check box ">
-                                        <input type="radio" name="dostavka" value="option1" checked="">
+                                        <input type="radio" name="tipo_armado" value="domicilio" checked="">
                                         <h6 class="title">Armar en Domicilio</h6>
                                         <p class="text-muted">El producto sera transportado hacia su domicio, para posteriormente realizar el ensamblaje del producto </p>
                                     </label> <!-- js-check.// -->
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label class="js-check box">
-                                        <input type="radio" name="dostavka" value="option1">
+                                        <input type="radio" name="tipo_armado" value="empresa">
                                         <h6 class="title">Armar en empresa</h6>
                                         <p class="text-muted">El producto sera ensamblado en la empresa y porteriormente realizar la entrega en su domicilio </p>
                                     </label> <!-- js-check.// -->
                                 </div>
                             </div> <!-- row.// -->
 
-                        </form>
+
                     </div> <!-- card-body.// -->
+                    <button class="btn btn-warning btn-block"> Pagar</a>
+                        </form>
                 </article>
             </div> <!-- card .// -->
         </div>
@@ -246,7 +229,8 @@ $impuestos = 18;
                         </dl>
                         <dl class="dlist-align">
                             <dt>Impuestos</dt>
-                            <dd class="armado text-right">15000</dd>
+
+                            <dd id="impuesto" class="text-right"></dd>
                         </dl>
 
                         <dl class="dlist-align">
@@ -254,16 +238,16 @@ $impuestos = 18;
                             <dd id="preciototal" class="countable text-right text-dark b"></dd>
                         </dl>
                         <hr>
-                        <a href="./views/boleta.php" class="btn btn-warning btn-block"> Pagar</a>
+                        <!-- <a href="./views/boleta.php" class="btn btn-warning btn-block"> Pagar</a> -->
 
+                        < </div>
                     </div>
                 </div>
+
             </div>
 
+
         </div>
-
-
-    </div>
 
 
 </section>
@@ -272,9 +256,11 @@ $impuestos = 18;
     var table = document.getElementById("res");
     var ths = table.getElementsByTagName('th');
     var tds = table.getElementsByClassName('countable');
+    var impuestos = 18
+
 
     const armado = Array.from(document.getElementsByClassName("armado"));
-    var n_armado= parseInt(armado[0].innerText);
+    var n_armado = parseInt(armado[0].innerText);
 
     for (var i = 0; i < tds.length; i++) {
         sum += isNaN(tds[i].innerText) ? 0 : parseInt(tds[i].innerText);
@@ -283,12 +269,19 @@ $impuestos = 18;
     var row = table.insertRow(table.rows.length);
     var cell = row.insertCell(0);
     cell.setAttribute('colspan', ths.length);
-    var total =  sum + n_armado;
+    var stotal = sum + n_armado;
+    var impuesto = stotal * (impuestos / 100)
+    var total = stotal + impuesto;
+    console.log(impuesto);
+    console.log(stotal);
+    console.log(total);
+
 
     var totalBalance = document.createTextNode('$  ' + total);
 
     var decimales = "0"
-    console.log(n_armado)
+
+    document.getElementById("impuesto").innerHTML = "$ " + number_format(impuesto, decimales);
 
     document.getElementById("preciototal").innerHTML = "$ " + number_format(totalBalance.textContent, decimales);
 
@@ -316,4 +309,6 @@ $impuestos = 18;
 
         return amount_parts.join('.');
     }
+
+   
 </script>

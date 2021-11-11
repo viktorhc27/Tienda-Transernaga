@@ -5,21 +5,27 @@ session_start();
 include_once "../model/Conexion.php";
 include_once "../model/Usuarios.php";
 include_once "../model/Productos.php";
+// Cargamos la librería dompdf que hemos instalado en la carpeta dompdf
+require_once('../resources/Dompdf/autoload.inc.php');
 $us = new Usuarios();
-$pro= new Productos();
-$dato_cliente = $us->buscar($_SESSION['user']['id']);
+$pro = new Productos();
 
+if (isset($_SESSION['user'])) {
+    $dato_cliente = $us->buscar($_SESSION['user']['id']);
+    $cliente = $dato_cliente['us_nombre'] . " " . $dato_cliente['us_apellApp'] . " " . $dato_cliente['us_apellApm'];
+} else {
+    $dato_cliente = $us->buscar($_REQUEST['id_us']);
+    $cliente=$dato_cliente['us_nombre'] . " " . $dato_cliente['us_apellApp'] . " " . $dato_cliente['us_apellApm'];
+    $numero = $_REQUEST['cod'];
+}
 
-//================================================================================================
-$cliente = $dato_cliente['us_nombre'] . " " . $dato_cliente['us_apellApp'] . " " . $dato_cliente['us_apellApm'];
 $remitente = "Jefe";
 $web = "Tienda-Muebles transernaga";
 $mensajePie = "Gracias por su compra";
-$numero = 1;
+
 $descuento = 0;
 $porcentajeImpuestos = 18;
 $productos = $_SESSION['cart'];
-
 
 $fecha = date("Y-m-d");
 ob_start();
@@ -29,51 +35,60 @@ ob_start();
 
 <head>
     <!-- Bootstrap4 files-->
-    <script src="http://<?php echo $_SERVER['HTTP_HOST'];?>/tienda-transernaga/resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    <link href="http://<?php echo $_SERVER['HTTP_HOST'];?>/tienda-transernaga/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <meta charset="UTF-8">
-  
-    <title>Factura</title>
+
+    <title>Boleta</title>
 </head>
 <style>
-	@page {
-		margin-left: 0;
-		margin-right: 0;
-	}
+    @page {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    #codigo{
+        padding-right: -20px;
+    }
 </style>
+
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-10 ">
-                <img width="250px" class="img-fluid" src="http://<?php echo $_SERVER['HTTP_HOST'];?>/tienda-transernaga/resources/images/logo-muebles.png" alt="Logotipo">
+            <div class="col-md-8 ">
+                <img width="250px" class="img-fluid" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/resources/images/logo-muebles.png" alt="Logotipo">
             </div>
-            <div style="float: right;" class="col-md-2">
-               
+            <div  style="float: right;" class="col-md-4">
+                <strong>Factura No.</strong>
+                <br>
+                <br>                
+                <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/views/barcode.php?text=<?php echo $numero ?>&size=50&orientation=horizontal&codetype=Code39&print=true&sizefactor=1" />
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        
         <hr>
-        <div class="row"> 
+        <div class="row">
             <div class="col-md-10">
                 <h1 class="h6"><?php echo $remitente ?></h1>
                 <h1 class="h6"><?php echo $web ?></h1>
             </div>
-            <div  style="float: right;" class="col-md-2 text-center">
+            <div style="float: right;" class="col-md-2 text-center">
                 <strong>Fecha</strong>
                 <br>
                 <?php echo $fecha ?>
                 <br>
-                <strong>Factura No.</strong>
-                <br>
-                <?php echo $numero ?>
+
             </div>
         </div>
-        <hr>
-        <div class="row " >
+    
+        <div class="row ">
             <div class="col-md-6 text-center">
                 <h1 class="h2">Cliente</h1>
                 <p><?php echo $cliente ?></p>
             </div>
-            <div  style="float: right;" class="col-md-6 text-center">
+            <div style="float: right;" class="col-md-6 text-center">
                 <h1 class="h2">Remitente</h1>
                 <p><?php echo $remitente ?></p>
             </div>
@@ -94,14 +109,14 @@ ob_start();
                         <?php
                         $subtotal = 0;
                         foreach ($productos as $p) {
-                            $dato_producto = $pro->buscar( $p["id_producto"]); 
+                            $dato_producto = $pro->buscar($p["id_producto"]);
                             $totalProducto = $p["cantidad"] * $dato_producto['pro_precio_venta'];
-                            $subtotal += $totalProducto; 
+                            $subtotal += $totalProducto;
                         ?>
                             <tr>
                                 <td>#</td>
                                 <td><?= $dato_producto['pro_nombre'] ?></td>
-                                <td><?= $p["cantidad"]?></td>
+                                <td><?= $p["cantidad"] ?></td>
                                 <td>$<?= $dato_producto['pro_precio_venta']  ?></td>
                                 <td>$<?= number_format($totalProducto, 0) ?></td>
                             </tr>
@@ -116,8 +131,8 @@ ob_start();
                             <td colspan="4" class="text-right">Subtotal</td>
                             <td>$<?php echo number_format($subtotal, 0) ?></td>
                         </tr>
-                      
-                    
+
+
                         <tr>
                             <td colspan="4" class="text-right">Impuestos</td>
                             <td>$<?php echo number_format($impuestos, 0) ?></td>
@@ -146,24 +161,17 @@ ob_start();
 
 <?php
 
-$html= ob_get_clean();
-
-/* echo $html; */
-
-// Cargamos la librería dompdf que hemos instalado en la carpeta dompdf
-require_once ('../resources/Dompdf/autoload.inc.php');
+$html = ob_get_clean();
 
 use Dompdf\Dompdf;
 
 $dompdf = new Dompdf();
 $options = $dompdf->getOptions();
-$options->set(array('isRemoteEnabled'=>true));
+$options->set(array('isRemoteEnabled' => true));
 $dompdf->setOptions($options);
-
 $dompdf->loadHtml($html);
-
 $dompdf->setPaper('A4');
-
 $dompdf->render();
-$dompdf->stream("archivo.pdf",array("Attachment"=>false));
+$dompdf->stream("archivo.pdf", array("Attachment" => false));
+
 ?>

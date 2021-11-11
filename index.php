@@ -2,6 +2,8 @@
 session_start();
 if (empty($_REQUEST["param"])) {
     $_REQUEST['param'] = "inicio";
+
+  
 }
 //cacquitasdasda
 ?>
@@ -297,6 +299,9 @@ if (empty($_REQUEST["param"])) {
             break;
         case "resultado":
             include_once './views/busqueda.php';
+            break;
+        case "categorias":
+            include_once './views/filtro.php';
             break;
         case "administrador": ?>
             <script type="text/javascript">
