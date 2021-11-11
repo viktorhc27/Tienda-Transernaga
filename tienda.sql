@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2021 a las 18:29:23
+-- Tiempo de generación: 11-11-2021 a las 19:25:05
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.14
 
@@ -53,7 +53,32 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`cat_id`, `cat_nombre`, `cat_estado`, `create_time`, `update_time`) VALUES
-(1, 'categoria1', 1, '2021-10-09 23:11:57', '2021-10-09 23:11:57');
+(1, 'categoria1', 1, '2021-10-09 23:11:57', '2021-10-09 23:11:57'),
+(2, 'categoria2', 1, '2021-11-08 21:18:40', '2021-11-08 21:18:40');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `direcciones`
+--
+
+CREATE TABLE `direcciones` (
+  `dir_id` int(11) NOT NULL,
+  `dir_nombre` varchar(50) NOT NULL,
+  `dir_numero` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `direcciones_usuarios`
+--
+
+CREATE TABLE `direcciones_usuarios` (
+  `dir_id` int(11) NOT NULL,
+  `us_id` int(11) NOT NULL,
+  `dirus_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -140,8 +165,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`pro_id`, `pro_codigo`, `pro_nombre`, `pro_precio_compra`, `pro_precio_venta`, `pro_modelo`, `pro_altura`, `pro_ancho`, `pro_profundidad`, `pro_descripcion`, `pro_peso`, `pro_stock`, `pro_img`, `pro_color`, `pro_estado`, `create_time`, `update_time`, `categorias_cat_id`, `marcas_mar_id`) VALUES
-(33, '213213', 'Mesa', 10000, 20000, NULL, '123', '231', '321', NULL, '21', 231, '1.jpg', '32', 127, '2021-10-19 14:56:21', '2021-10-19 14:56:26', 1, 1),
-(34, '123', 'sila', 324, 432, NULL, '234', '234', '234', NULL, '23', 324, NULL, '324', 127, '2021-10-11 07:03:36', '2021-10-11 07:03:36', 1, 1),
+(33, '213213', 'Mesa', 10000, 20000, 'cama.glb', '123', '231', '321', NULL, '21', 3, '1.jpg', '32', 127, '2021-10-19 14:56:21', '2021-10-19 14:56:26', 1, 1),
+(34, '123', 'sila', 324, 432, NULL, '234', '234', '234', NULL, '23', 324, NULL, '324', 127, '2021-10-11 07:03:36', '2021-10-11 07:03:36', 2, 1),
 (35, '3244', 'silla', 30000, 40000, NULL, '231', '321', '321', NULL, '32', 23, NULL, '32', 127, '2021-10-11 18:19:46', '2021-10-11 18:19:46', 1, 1),
 (36, '123', '213', 321, 231, NULL, '231', '312', '321', NULL, '321', 231, NULL, '321', 127, '2021-10-11 20:01:41', '2021-10-11 20:01:41', 1, 1);
 
@@ -250,7 +275,9 @@ CREATE TABLE `ventas` (
   `ven_total` double NOT NULL,
   `ven_cantidad` int(11) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT NULL,
-  `update_time` timestamp NULL DEFAULT NULL
+  `update_time` timestamp NULL DEFAULT NULL,
+  `tipo_armado` varchar(25) DEFAULT NULL,
+  `ven_codigo` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -268,6 +295,18 @@ ALTER TABLE `armados_tipo`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`cat_id`);
+
+--
+-- Indices de la tabla `direcciones`
+--
+ALTER TABLE `direcciones`
+  ADD PRIMARY KEY (`dir_id`);
+
+--
+-- Indices de la tabla `direcciones_usuarios`
+--
+ALTER TABLE `direcciones_usuarios`
+  ADD PRIMARY KEY (`dirus_id`);
 
 --
 -- Indices de la tabla `imagen`
@@ -340,7 +379,19 @@ ALTER TABLE `armados_tipo`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `direcciones`
+--
+ALTER TABLE `direcciones`
+  MODIFY `dir_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `direcciones_usuarios`
+--
+ALTER TABLE `direcciones_usuarios`
+  MODIFY `dirus_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `imagen`
@@ -370,11 +421,17 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `us_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `us_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `direcciones_usuarios`
+--
+ALTER TABLE `direcciones_usuarios`
+  ADD CONSTRAINT `direcciones_usuarios_ibfk_1` FOREIGN KEY (`dirus_id`) REFERENCES `direcciones` (`dir_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `productos`
