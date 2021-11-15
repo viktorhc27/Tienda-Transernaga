@@ -1,3 +1,17 @@
+<?php
+
+include '../../model/Ventas.php';
+include '../../model/Usuarios.php';
+include '../../model/Productos.php';
+$ventas = new Ventas();
+$usuarios = new Usuarios();
+$productos = new Productos();
+$ventas = $ventas->leer();
+$usuarios = $usuarios->leer();
+$productos = $productos->leer();
+
+?>
+
 <div class="container">
     <section class="section-conten padding-y" style="min-height:84vh">
 
@@ -5,8 +19,8 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href="#">Inicio  </a></li>
-                <li class="breadcrumb-item " aria-current="page"></li> 
+                <li class="breadcrumb-item active"><a href="#">Inicio </a></li>
+                <li class="breadcrumb-item " aria-current="page">Panel Principal</li>
             </ol>
         </nav>
         <br>
@@ -36,7 +50,7 @@
                                         </div>
                                         <figcaption class="info">
                                             <h5 class="title">Productos</h5>
-                                            <p>2% </p>
+                                            <p><?= count($productos) ?></p>
                                         </figcaption>
                                     </figure> <!-- iconbox // -->
                                 </article> <!-- panel-lg.// -->
@@ -51,7 +65,7 @@
                                         </div>
                                         <figcaption class="info">
                                             <h5 class="title">Ventas</h5>
-                                            <p>2% </p>
+                                            <p><?= count($ventas) ?></p>
                                         </figcaption>
                                     </figure> <!-- iconbox // -->
                                 </article> <!-- panel-lg.// -->
@@ -66,7 +80,7 @@
                                         </div>
                                         <figcaption class="info">
                                             <h5 class="title">Clientes Registrados</h5>
-                                            <p>2#</p>
+                                            <p><?= count($usuarios) ?></p>
                                         </figcaption>
                                     </figure> <!-- iconbox // -->
                                 </article> <!-- panel-lg.// -->
@@ -92,15 +106,56 @@
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title "></h3>
+                            <h3 class="card-title ">Productos Agregados</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="card-body">
+                            
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                
+                                                
+                                                <th>Nombre</th>
+                                                <th>Precio</th>
+                                                <th>Stock</th>
+                                          
+                                                <th>Estado</th>
 
-                            </div>
+
+                                                
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach ($productos as $p) :
+                                            ?>
+                                                <tr>
+                                                    
+                                                   
+                                                    <td><?= $p['pro_nombre'] ?></td>
+                                                    <td><?= $p['pro_precio_venta'] ?></td>
+                                                    <td><?= $p['pro_stock'] ?></td>
+                                                    
+                                                   
+                                                    <td><?= $p['pro_estado'] ?></td>
+                                                   
+                                                </tr>
+
+                                            <?php
+                                            endforeach;
+                                            ?>
+
+
+
+                                        </tbody>
+                                    </table>
+
+                           
                         </div>
+
                         <!-- /.card -->
                     </div>
                     <!--/.col (right) -->

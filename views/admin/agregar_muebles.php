@@ -77,7 +77,11 @@ $marcas = $ma->listar();
                             </div>
                             <div class="form-group col-md-3">
                                 <label>estado</label>
-                                <input type="text" class="form-control" name="estado">
+                                <select>
+                                    <option value="">Seleccionar</option>
+                                    <option value="">Habilitado</option>
+                                    <option value="">Deshabilitado</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-row">

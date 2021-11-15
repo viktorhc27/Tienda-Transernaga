@@ -3,7 +3,7 @@ include_once '../../model/Roles.php';
 include_once '../../model/Usuarios.php';
 $roles = new Roles();
 $usuarios = new Usuarios();
-$listas_usuarios = $usuarios->leer();
+$listas_usuarios = $usuarios->listar_funcionarios();
 $lista_roles = $roles->leer();
 
 ?>

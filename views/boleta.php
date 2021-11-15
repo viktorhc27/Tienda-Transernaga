@@ -13,10 +13,15 @@ $pro = new Productos();
 if (isset($_SESSION['user'])) {
     $dato_cliente = $us->buscar($_SESSION['user']['id']);
     $cliente = $dato_cliente['us_nombre'] . " " . $dato_cliente['us_apellApp'] . " " . $dato_cliente['us_apellApm'];
+    $numero = $_REQUEST['cod'];
+    $tipo_armado = $_REQUEST['arm'];
+    $valor_armado = 15000;
 } else {
     $dato_cliente = $us->buscar($_REQUEST['id_us']);
-    $cliente=$dato_cliente['us_nombre'] . " " . $dato_cliente['us_apellApp'] . " " . $dato_cliente['us_apellApm'];
+    $cliente = $dato_cliente['us_nombre'] . " " . $dato_cliente['us_apellApp'] . " " . $dato_cliente['us_apellApm'];
     $numero = $_REQUEST['cod'];
+    $tipo_armado = $_REQUEST['arm'];
+    $valor_armado = 15000;
 }
 
 $remitente = "Jefe";
@@ -46,7 +51,8 @@ ob_start();
         margin-left: 0;
         margin-right: 0;
     }
-    #codigo{
+
+    #codigo {
         padding-right: -20px;
     }
 </style>
@@ -57,17 +63,17 @@ ob_start();
             <div class="col-md-8 ">
                 <img width="250px" class="img-fluid" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/resources/images/logo-muebles.png" alt="Logotipo">
             </div>
-            <div  style="float: right;" class="col-md-4">
+            <div style="float: right;" class="col-md-4">
                 <strong>Factura No.</strong>
                 <br>
-                <br>                
+                <br>
                 <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/views/barcode.php?text=<?php echo $numero ?>&size=50&orientation=horizontal&codetype=Code39&print=true&sizefactor=1" />
             </div>
         </div>
         <br>
         <br>
         <br>
-        
+
         <hr>
         <div class="row">
             <div class="col-md-10">
@@ -82,7 +88,7 @@ ob_start();
 
             </div>
         </div>
-    
+
         <div class="row ">
             <div class="col-md-6 text-center">
                 <h1 class="h2">Cliente</h1>
@@ -120,10 +126,22 @@ ob_start();
                                 <td>$<?= $dato_producto['pro_precio_venta']  ?></td>
                                 <td>$<?= number_format($totalProducto, 0) ?></td>
                             </tr>
+
                         <?php }
+
+                        ?>
+                        <tr>
+                            <td>#</td>
+                            <td><?="Armado ". $tipo_armado?></td>
+                            <td>1</td>
+                            <td>$<?=number_format($valor_armado,0) ?></td>
+                            <td>$<?=number_format($valor_armado,0)?></td>
+                        </tr>
+                        <?php
+
                         $subtotalConDescuento = $subtotal - $descuento;
                         $impuestos = $subtotalConDescuento * ($porcentajeImpuestos / 100);
-                        $total = $subtotalConDescuento + $impuestos;
+                        $total = $subtotalConDescuento + $impuestos+ $valor_armado;
                         ?>
                     </tbody>
                     <tfoot>
@@ -173,5 +191,5 @@ $dompdf->loadHtml($html);
 $dompdf->setPaper('A4');
 $dompdf->render();
 $dompdf->stream("archivo.pdf", array("Attachment" => false));
-
+unset( $_SESSION["cart"] ); 
 ?>

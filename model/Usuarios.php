@@ -131,6 +131,19 @@ class Usuarios
             return $ex->getMessage();
         }
     }
+    public function listar_funcionarios()
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("select * from usuarios where roles_ro_id = 2");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
     public function login()
     {
 

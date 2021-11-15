@@ -7,13 +7,13 @@ switch ($accion) {
 
         $id_producto = $_REQUEST["id_producto"];
         $cantidad = $_REQUEST["cantidad"];
-        
+
 
         $_SESSION["cart"][$id_producto] = array(
             'id_producto' => $id_producto,
             'id_usuario' => '',
             'cantidad' => $cantidad,
-            
+
 
         );
 
@@ -59,9 +59,9 @@ switch ($accion) {
 
 
         break;
-        case "finalizar_compra":
-            
-    
-    
-            break;
+    case "finalizar_compra":
+
+        unset( $_SESSION["cart"] ); 
+
+        break;
 }

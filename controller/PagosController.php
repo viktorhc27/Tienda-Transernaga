@@ -31,7 +31,7 @@ switch ($accion) {
         $usuarios->__set('create_time', date("Y-m-d H:i:s"));
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
         $usuarios->__set('roles_ro_id', 1);
-
+        $number = mt_Rand(1000000000, 9999999999);
         $res = $usuarios->agregar();
         $codigo = "TR" . strtoupper(uniqid());
         $tipo_armado = $_REQUEST['tipo_armado'];
@@ -43,7 +43,7 @@ switch ($accion) {
             $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
             $ventas->__set('usuarios_id', $res);
             $ventas->__set('productos_pro_id', $i['id_producto']);
-            $ventas->__set('ven_id', $codigo);
+            $ventas->__set('ven_id', $number);
             $ventas->__set('ven_codigo', $codigo);
             $ventas->__set('ven_total', $calculo);
             $ventas->__set('tipo_armado', $tipo_armado);
@@ -54,10 +54,10 @@ switch ($accion) {
 
             if ($r == 1) {
                 echo "<script type='text/javascript'>";
-                echo " window.location.href = '../views/boleta.php?id_us=$res&cod=$codigo'";
+                echo " window.location.href = '../views/boleta.php?id_us=$res&cod=$codigo&arm=$tipo_armado'";
                 echo "</script>";
             } else {
-                echo $r;
+                
                 echo "<br>";
             }
 
@@ -80,4 +80,62 @@ switch ($accion) {
         }
        */
         break;
+        case 'registrado':
+            session_start();
+    
+            $usuarios = new Usuarios();
+            $ventas = new Ventas();
+            $productos = new Productos();
+    
+
+            $id= $_REQUEST['id'];
+
+            $codigo = "TR" . strtoupper(uniqid());
+            $tipo_armado = $_REQUEST['tipo_armado'];
+            $hora = date("Y-m-d H:i:s");
+            $number = mt_Rand(1000000000, 9999999999); // better than Rand()
+            foreach ($_SESSION['cart'] as $i) :
+                $data_product = $productos->buscar($i['id_producto']);
+    
+                $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
+                $ventas->__set('usuarios_id', $id);
+                $ventas->__set('productos_pro_id', $i['id_producto']);
+                $ventas->__set('ven_id', $codigo);
+                $ventas->__set('ven_codigo', $codigo);
+                $ventas->__set('ven_total', $calculo);
+                $ventas->__set('tipo_armado', $tipo_armado);
+                $ventas->__set('ven_cantidad', $i['cantidad']);
+                $ventas->__set('create_time', $hora);
+                $ventas->__set('update_time', $hora);
+                $r = $ventas->agregar();
+    
+                if ($r == 1) {
+                  
+                    echo "<script type='text/javascript'>";
+                    echo " window.location.href = '../views/boleta.php?id_us=$id&cod=$codigo&arm=$tipo_armado'";
+                    echo "</script>";
+                } else {
+                   
+                    echo "<br>";
+                }
+    
+    
+            endforeach;
+    
+    
+    
+    
+            /* if ($res == 1) {
+                array para convertir a JSON
+                 $datos = array(
+                    'estado' => 'agregado'
+                ); *
+                echo "agregado";
+            } else {
+                $datos = array(
+                    'estado' => 'error'
+                ); 
+            }
+           */
+            break;
 }

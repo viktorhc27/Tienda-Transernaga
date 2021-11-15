@@ -73,7 +73,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                                 <a class="nav-link" href="?param=registrar">funcionarios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="?param=registrar">Ventas</a>
+                                <a class="nav-link" href="?param=ventas">Ventas</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -132,6 +132,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                 break;
             case "editar_productos":
                 include_once 'editar_muebles.php';
+                break;
+            case "ventas":
+                include_once 'ventas.php';
                 break;
         }
         ?>
