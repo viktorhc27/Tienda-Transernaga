@@ -2,7 +2,7 @@
 class Conexion{
     public $host = "localhost";
     public $port = "3306";
-    public $dbname = "tienda"; //nombre de la Base Datos
+    public $dbname = "mydb"; //nombre de la Base Datos
     public $username = "root";
     public $password = "";
     

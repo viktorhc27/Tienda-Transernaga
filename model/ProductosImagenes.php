@@ -19,10 +19,10 @@ class ProductosImagenes
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("insert into productos_has_imagen (productos_pro_id,imagen_img_id, productos_imagenes_id)values(:productos,:imagenes,:id)");
+            $sql = $con->prepare("insert into productos_has_imagen (productos_pro_id,imagen_img_id )values(:productos,:imagenes)");
             $sql->bindParam("productos", $this->producto_id);
             $sql->bindParam("imagenes", $this->imagenes_id);
-            $sql->bindParam("id", $this->productos_imagenes_id);
+          
             $res = $sql->execute();
             return $res;
         } catch (PDOException $e) {

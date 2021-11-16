@@ -68,7 +68,7 @@ switch ($accion) {
 
                 $id_imagenes = $imagenes->agregar();
 
-                $proImagen->__set('productos_imagenes_id', 0);
+     
                 $proImagen->__set('imagenes_id', $id_imagenes);
                 $proImagen->__set('producto_id', $id_producto);
 
