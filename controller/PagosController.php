@@ -52,6 +52,7 @@ switch ($accion) {
             $ventas->__set('update_time', $hora);
             $r = $ventas->agregar();
 
+            echo $r;
             if ($r == 1) {
                 echo "<script type='text/javascript'>";
                 echo " window.location.href = '../views/boleta.php?id_us=$res&cod=$codigo&arm=$tipo_armado'";
@@ -108,7 +109,7 @@ switch ($accion) {
                 $ventas->__set('create_time', $hora);
                 $ventas->__set('update_time', $hora);
                 $r = $ventas->agregar();
-    
+    echo $r;
                 if ($r == 1) {
                   
                     echo "<script type='text/javascript'>";
