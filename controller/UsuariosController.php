@@ -61,6 +61,7 @@ switch ($accion) {
         break;
 
     case 'register_employees':
+        header('Content-Type:apllication/json');
         $password_hash = password_hash($_REQUEST['password'], PASSWORD_BCRYPT);
         $usuarios = new Usuarios();
         $usuarios->__set('us_nombre', $_REQUEST['nombre']);
@@ -83,7 +84,7 @@ switch ($accion) {
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
         $res = $usuarios->agregar_();
 
-        header('Content-Type:apllication/json');
+       
         if ($res == 1) {
             //array para convertir a JSON
             $datos = array(

@@ -228,10 +228,10 @@ $lista_roles = $roles->leer();
                 var departamento = $("#departamento").val();
                 var block = $("#block").val();
                 var numero = $("#numero").val();
-                var direccion_full = $("#direccion_full").val();
+                var direccion_full = direccion + ", " + departamento + ", " + block + ", N° " + numero;
                 var sexo = $("#sexo").val()
                 var rol = $("#rol").val()
-
+               
 
                 if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && departamento != "" && block != "" && numero != "" && sexo != "" && rol != "") {
 
@@ -253,15 +253,10 @@ $lista_roles = $roles->leer();
                         url: '../../controller/UsuariosController.php?accion=register_employees',
                         type: 'POST',
                         data: datos,
-                        success: function(response) {
-                            alert("funciona bien");
-                        },
-                        error: function(error) {
-                            alert("No funciona");
-                        }
+
                     }).done(function(respuesta) {
-                        console.log("hola")
-                        console.log(JSON.stringify(respuesta));
+
+
                         if (respuesta.estado === "agregado") {
 
                             Swal.fire({
