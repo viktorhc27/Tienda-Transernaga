@@ -10,7 +10,7 @@ $categorias = new Categorias();
 $cat = $categorias->listar();
 $lista = $productos->leer();
 
-$por_pagina = 4;
+$por_pagina = 9;
 
 if (isset($_REQUEST['pagina'])) {
 	$pagina = $_REQUEST['pagina'];

@@ -1,7 +1,7 @@
 <?php
 class Ventas
 {
-    private  $tipo_armado, $ven_codigo, $usuarios_id, $productos_pro_id, $ven_id, $ven_total, $ven_cantidad, $create_time, $update_time;
+    private  $tipo_armado, $ven_codigo, $usuarios_id, $productos_pro_id, $ven_id, $ven_total, $ven_cantidad, $create_time, $update_time, $estados_id;
     //GET Y SET
 
     /**
@@ -36,7 +36,9 @@ class Ventas
                 . "ven_codigo,"
                 . "tipo_armado,"
                 . "ven_cantidad, "
-                . "create_time, update_time"
+                . "create_time,"
+                . "update_time,"
+                . "estados_id"
                 . ")"
                 . "values("
                 . ":usuarios_id, "
@@ -46,8 +48,9 @@ class Ventas
                 . ":ven_codigo,"
                 . ":tipo_armado,"
                 . ":ven_cantidad, "
-                . ":create_time, :update_time"
-                . ")");
+                . ":create_time, "
+                . ":update_time,"
+                . ":estados_id)");
             $sql->bindParam("usuarios_id", $this->usuarios_id);
             $sql->bindParam("productos_id", $this->productos_pro_id);
             $sql->bindParam("ven_id", $this->ven_id);
@@ -57,6 +60,8 @@ class Ventas
             $sql->bindParam("ven_cantidad", $this->ven_cantidad);
             $sql->bindParam("create_time", $this->create_time);
             $sql->bindParam("update_time", $this->update_time);
+            $sql->bindParam("estados_id", $this->estados_id);
+
 
             $res = $sql->execute();
             return $res;

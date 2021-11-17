@@ -22,7 +22,7 @@ if (empty($_REQUEST["param"])) {
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
     <!-- jQuery -->
-    <script src="resources/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Bootstrap4 files-->
     <script src="resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -35,12 +35,16 @@ if (empty($_REQUEST["param"])) {
     <link href="resources/css/ui.css" rel="stylesheet" type="text/css" />
     <link href="resources/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
+    <link href="resources/sweetalert2/dist/sweetalert2.min.css"rel="stylesheet" type="text/css"/>
+    <script src="resources/sweetalert2/dist/sweetalert2.all.min.js" type="text/javascript"></script>
+
+
     <!-- Flexslider -->
     <link href="./resources/FlexSlider/flexslider.css" type="text/css" rel="stylesheet">
 
     <!-- custom javascript -->
     <script src="js/script.js" type="text/javascript"></script>
-
+   
     <script type="text/javascript">
         /// some script
 

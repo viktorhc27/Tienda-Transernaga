@@ -104,88 +104,101 @@ $lista_roles = $roles->leer();
 
                         <div class="card-body">
 
+                            <!-- 
+                            <form method="post" action="../../controller/UsuariosController.php?accion=register_employees"> -->
 
-                            <form method="post" action="../../controller/UsuariosController.php?accion=register_employees">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input id="nombre" name="nombre" type="text" class="form-control" placeholder="">
+                                <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
+                            </div> <!-- form-group end.// -->
+                            <div class="form-group">
+                                <label>Apellido Paterno</label>
+                                <input id="app" name="app" type="text" class="form-control" placeholder="">
+                            </div> <!-- form-group end.// -->
+                            <div class="form-group">
+                                <label>Apellido Materno</label>
+                                <input id="apm" name="apm" type="text" class="form-control" placeholder="">
+                            </div> <!-- form-group end.// -->
 
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input name="nombre" type="text" class="form-control" placeholder="">
-                                    <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
+
+
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input id="correo" name="correo" type="email" class="form-control" placeholder="">
+                                <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
+                            </div> <!-- form-group end.// -->
+
+
+                            <div class="form-group">
+                                <select id="sexo" class="form-control">
+                                    <option value="">Select</option>
+                                    <option value="hombre">Hombre</option>
+                                    <option value="mujer">Mujer</option>
+                                </select>
+                            </div> <!-- form-group end.// -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Telefono</label>
+                                    <input id="telefono" name="telefono" type="text" class="form-control">
                                 </div> <!-- form-group end.// -->
-                                <div class="form-group">
-                                    <label>Apellido Paterno</label>
-                                    <input name="app" type="text" class="form-control" placeholder="">
-                                </div> <!-- form-group end.// -->
-                                <div class="form-group">
-                                    <label>Apellido Materno</label>
-                                    <input name="apm" type="text" class="form-control" placeholder="">
-                                </div> <!-- form-group end.// -->
+                                <div class="form-group col-md-6">
+                                    <label>Direccion</label>
+                                    <input id="direccion" name="direccion" type="" id="direccion" type="text" class="form-control">
 
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Departamento</label>
+                                    <input id="departamento" name="departamento" id="departamento" type="text" class="form-control">
 
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Block</label>
+                                    <input id="block" name="block" id="block" type="text" class="form-control">
 
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input name="correo" type="email" class="form-control" placeholder="">
-                                    <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
-                                </div> <!-- form-group end.// -->
-
-
-                                <div class="form-group">
-                                    <label class="custom-control custom-radio custom-control-inline">
-                                        <input class="custom-control-input" checked="" type="radio" name="sexo" value="hombre">
-                                        <span class="custom-control-label"> Hombre </span>
-                                    </label>
-                                    <label class="custom-control custom-radio custom-control-inline">
-                                        <input class="custom-control-input" type="radio" name="sexo" value="mujer">
-                                        <span class="custom-control-label"> Mujer </span>
-                                    </label>
-                                </div> <!-- form-group end.// -->
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Telefono</label>
-                                        <input name="telefono" type="text" class="form-control">
-                                    </div> <!-- form-group end.// -->
-                                    <div class="form-group col-md-6">
-                                        <label>Direccion</label>
-                                        <input name="direccion" type="text" class="form-control">
-                                    </div>
-                                </div> <!-- form-row.// -->
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label>Contraseña</label>
-                                        <input name="password" type="password" class="form-control" type="password">
-                                    </div> <!-- form-group end.// -->
-                                    <div class="form-group col-md-6">
-                                        <label>Repetir contraseña</label>
-                                        <input class="form-control" type="password">
-                                    </div> <!-- form-group end.// -->
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Numero</label>
+                                    <input id="numero" name="numero" id="numero" type="text" class="form-control">
                                 </div>
 
-                                <div class="form-group ">
-                                    <label>Rol</label>
-                                    <select name="rol" class="form-control">
-                                        <option>Seleccione...</option>
-                                        <?php
+                            </div> <!-- form-row.// -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Contraseña</label>
+                                    <input id="password" name="password" type="password" class="form-control" type="password">
+                                </div> <!-- form-group end.// -->
+                                <div class="form-group col-md-6">
+                                    <label>Repetir contraseña</label>
+                                    <input class="form-control" type="password">
+                                </div> <!-- form-group end.// -->
+                            </div>
 
-                                        foreach ($lista_roles as $r) :
-                                        ?>
+                            <div class="form-group ">
+                                <label>Rol</label>
+                                <select id="rol" name="rol" class="form-control">
+                                    <option>Seleccione...</option>
+                                    <?php
 
-                                            <option value="<?= $r['ro_id'] ?>"><?= $r['rol_nombre'] ?></option>
+                                    foreach ($lista_roles as $r) :
+                                    ?>
 
-                                        <?php
-                                        endforeach;
+                                        <option value="<?= $r['ro_id'] ?>"><?= $r['rol_nombre'] ?></option>
 
-                                        ?>
+                                    <?php
+                                    endforeach;
 
-                                    </select>
-                                </div>
+                                    ?>
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block"> Registrar </button>
-                                </div> <!-- form-group// -->
+                                </select>
+                            </div>
 
-                            </form>
+                            <div class="form-group">
+                                <button id="btnGuardar" type="submit" class="btn btn-primary btn-block"> Registrar </button>
+                            </div> <!-- form-group// -->
 
+                            <!-- </form>
+ -->
 
                         </div>
                         <!-- /.card-header -->
@@ -197,7 +210,188 @@ $lista_roles = $roles->leer();
                     </div>
                     <!--/.col (right) -->
                 </div>
-               
+
                 <!-- /.row -->
             </div>
         </div>
+
+        <script type="text/javascript">
+            $("#btnGuardar").click(function(e) {
+                e.preventDefault();
+                var nombre = $("#nombre").val();
+                var app = $("#app").val();
+                var apm = $("#apm").val();
+                var correo = $("#correo").val();
+                var password = $("#password").val();
+                var telefono = $("#telefono").val();
+                var direccion = $("#direccion").val();
+                var departamento = $("#departamento").val();
+                var block = $("#block").val();
+                var numero = $("#numero").val();
+                var direccion_full = $("#direccion_full").val();
+                var sexo = $("#sexo").val()
+                var rol = $("#rol").val()
+
+
+                if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && departamento != "" && block != "" && numero != "" && sexo != "" && rol != "") {
+
+                    datos = {
+                        "nombre": nombre,
+                        "app": app,
+                        "apm": apm,
+                        "correo": correo,
+                        "password": password,
+                        "telefono": telefono,
+                        "direccion": direccion_full,
+                        "sexo": sexo,
+                        "rol": rol,
+
+                    };
+                    console.log(datos)
+
+                    $.ajax({
+                        url: '../../controller/UsuariosController.php?accion=register_employees',
+                        type: 'POST',
+                        data: datos,
+                        success: function(response) {
+                            alert("funciona bien");
+                        },
+                        error: function(error) {
+                            alert("No funciona");
+                        }
+                    }).done(function(respuesta) {
+                        console.log("hola")
+                        console.log(JSON.stringify(respuesta));
+                        if (respuesta.estado === "agregado") {
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Agregado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+                            $('#modal-sm').modal('hide');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000)
+                        }
+                    })
+
+                } else {
+                    $('#nombre').removeClass('is-valid');
+                    $('#nombre').addClass('is-invalid');
+                    $('#app').removeClass('is-valid');
+                    $('#app').addClass('is-invalid');
+                    $('#apm').removeClass('is-valid');
+                    $('#apm').addClass('is-invalid');
+                    $('#correo').removeClass('is-valid');
+                    $('#correo').addClass('is-invalid');
+                    $('#password').removeClass('is-valid');
+                    $('#password').addClass('is-invalid');
+                    $('#telefono').removeClass('is-valid');
+                    $('#telefono').addClass('is-invalid');
+                    $('#sexo').removeClass('is-valid');
+                    $('#sexo').addClass('is-invalid');
+                    $('#rol').removeClass('is-valid');
+                    $('#rol').addClass('is-invalid');
+                    $('#direccion').removeClass('is-valid');
+                    $('#direccion').addClass('is-invalid');
+                    $('#numero').removeClass('is-valid');
+                    $('#numero').addClass('is-invalid');
+
+
+
+                }
+            })
+
+            $("#nombre").blur(function() {
+                var nombre = $("#nombre").val();
+                if (nombre.trim() != '') {
+                    $('#nombre').removeClass('is-invalid');
+                    $('#nombre').addClass('is-valid');
+                } else {
+                    $('#nombre').removeClass('is-valid');
+                    $('#nombre').addClass('is-invalid');
+                }
+
+            });
+            $("#app").blur(function() {
+                var apellidos = $("#app").val();
+                if (apellidos.trim() != '') {
+                    $('#app').removeClass('is-invalid');
+                    $('#app').addClass('is-valid');
+                } else {
+                    $('#app').removeClass('is-valid');
+                    $('#app').addClass('is-invalid');
+                }
+
+            });
+            $("#apm").blur(function() {
+                var apellidos = $("#apm").val();
+                if (apellidos.trim() != '') {
+                    $('#apm').removeClass('is-invalid');
+                    $('#apm').addClass('is-valid');
+                } else {
+                    $('#apm').removeClass('is-valid');
+                    $('#apm').addClass('is-invalid');
+                }
+
+            });
+            $("#password").blur(function() {
+                var dato = $("#password").val();
+                if (dato.trim() != '') {
+                    $('#password').removeClass('is-invalid');
+                    $('#password').addClass('is-valid');
+                } else {
+                    $('#password').removeClass('is-valid');
+                    $('#password').addClass('is-invalid');
+                }
+
+            });
+            $("#telefono").blur(function() {
+                var dato = $("#telefono").val();
+                if (dato.trim() != '') {
+                    $('#telefono').removeClass('is-invalid');
+                    $('#telefono').addClass('is-valid');
+                } else {
+                    $('#telefono').removeClass('is-valid');
+                    $('#telefono').addClass('is-invalid');
+                }
+
+            });
+            $("#sexo").blur(function() {
+                var dato = $("#sexo").val();
+                if (dato.trim() != '') {
+                    $('#sexo').removeClass('is-invalid');
+                    $('#sexo').addClass('is-valid');
+                } else {
+                    $('#sexo').removeClass('is-valid');
+                    $('#sexo').addClass('is-invalid');
+                }
+
+            });
+            $("#rol").blur(function() {
+                var dato = $("#rol").val();
+                if (dato.trim() != '') {
+                    $('#rol').removeClass('is-invalid');
+                    $('#rol').addClass('is-valid');
+                } else {
+                    $('#rol').removeClass('is-valid');
+                    $('#rol').addClass('is-invalid');
+                }
+
+            });
+            $("#estado").blur(function() {
+                var dato = $("#estado").val();
+                if (dato.trim() != '') {
+                    $('#estado').removeClass('is-invalid');
+                    $('#estado').addClass('is-valid');
+                } else {
+                    $('#estado').removeClass('is-valid');
+                    $('#estado').addClass('is-invalid');
+                }
+
+            });
+        </script>

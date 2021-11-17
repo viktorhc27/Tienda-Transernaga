@@ -1,7 +1,10 @@
 <?php
 include_once '../../model/Ventas.php';
+include_once '../../model/Usuarios.php';
+
 
 $ventas = new Ventas();
+$usuarios = new Usuarios();
 
 $lista_ventas = $ventas->leer();
 
@@ -37,13 +40,13 @@ $lista_ventas = $ventas->leer();
                                     <tr>
 
                                         <th>Codigo Venta</th>
-                                        <th>Comprador</th>
+                                        
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                         <th>Tipo armado</th>
                                         <th>Fecha de la compra</th>
                                         <th>Estado</th>
-                                        <th>Acciones</th>
+                                        <th>Opciones</th>
 
                                     </tr>
                                 </thead>
@@ -51,36 +54,37 @@ $lista_ventas = $ventas->leer();
 
                                     <?php
                                     foreach ($lista_ventas as $s) :
+                                        
                                     ?> <tr>
 
                                             <td><?= $s['ven_codigo'] ?></td>
-                                            <td><?= $s['usuarios_us_id'] ?></td>
+                                         
                                             <td><?= $s['productos_pro_id'] ?></td>
                                             <td><?= $s['ven_cantidad'] ?></td>
                                             <td><?= $s['tipo_armado'] ?></td>
                                             <td><?= $s['create_time'] ?></td>
 
-                                            <!--0 esperando confirmacion 1 pedido confirmado 2 en preparacion 3 En reparto 4 recibido  5 solicitud de cancelacion, 6 cancelado-->
+                                            <!--1 esperando confirmacion 2 pedido confirmado 3 en preparacion 4 En reparto 5 recibido  6 solicitud de cancelacion, 7 cancelado-->
                                             <td> <?php
-                                                    if ($s['estado'] == 0) {
+                                                    if ($s['estados_id'] == 1) {
                                                         echo "<i style='color: orange;' class='fas fa-concierge-bell'> Esperando confirmacion</i>";
                                                     }
-                                                    if ($s['estado'] == 1) {
+                                                    if ($s['estados_id'] == 2) {
                                                         echo "<i style='color: green;' class='fas fa-check-circle'> Confirmado</i>";
                                                     }
-                                                    if ($s['estado'] == 2) {
+                                                    if ($s['estados_id'] == 3) {
                                                         echo "<i style='color: chocolate;' class='fas fa-truck-loading'> En Preparación</i>";
                                                     }
-                                                    if ($s['estado'] == 3) {
+                                                    if ($s['estados_id'] == 4) {
                                                         echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
                                                     }
-                                                    if ($s['estado'] == 4) {
+                                                    if ($s['estados_id'] == 5) {
                                                         echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
                                                     }
-                                                    if ($s['estado'] == 5) {
+                                                    if ($s['estados_id'] == 6) {
                                                         echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
                                                     }
-                                                    if ($s['estado'] == 6) {
+                                                    if ($s['estados_id'] == 7) {
                                                         echo "<i style='color: red;' class='fas fa-check-circle'> Cancelado</i>";
                                                     }  ?>
 
@@ -90,12 +94,12 @@ $lista_ventas = $ventas->leer();
                                             <td>
                                                 <div class="dropdown">
                                                     <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Acciones
+                                                        Opciones
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                        <button class="dropdown-item" type="button">Modificar</button>
                                                         <button class="dropdown-item" type="button">Ver</button>
-                                                        <button class="dropdown-item" type="button">Desabilitar</button>
+                                                       <!--  <button class="dropdown-item" type="button">Ver</button>
+                                                        <button class="dropdown-item" type="button">Desabilitar</button> -->
                                                     </div>
                                                 </div>
                                             </td>

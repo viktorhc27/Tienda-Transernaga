@@ -14,7 +14,7 @@ switch ($accion) {
         $proImagen = new ProductosImagenes;
 
         $producto->__set('id',                    0);
-        $producto->__set('pro_codigo',            $_REQUEST['codigo']);
+        $producto->__set('pro_codigo',            "TR".$_REQUEST['codigo']);
         $producto->__set('pro_nombre',            $_REQUEST['nombre']);
         $producto->__set('pro_precio_compra',     $_REQUEST['precio_compra']);
         $producto->__set('pro_precio_venta',      $_REQUEST['precio_venta']);

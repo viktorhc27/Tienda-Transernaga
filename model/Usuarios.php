@@ -22,7 +22,57 @@ class Usuarios
     {
         return $this->$key = $value;
     }
+    public function agregar_()
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("insert into usuarios ("
+                . "us_id,"
+                . "us_nombre, "
+                . "us_apellApp, "
+                . "us_apellApm, "
+                . "us_telefono, "
+                . "us_correo, "
+                . "us_password, "
+                . "us_direccion,"
+                . "us_sexo, "
+                . "create_time,"
+                . " update_time,"
+                . "roles_ro_id)"
 
+                . "values("
+                . ":id, "
+                . ":nombre, "
+                . ":apellApp, "
+                . ":apellApm, "
+                . ":telefono, "
+                . ":correo, "
+                . ":password, "
+                . ":direccion,"
+                . ":sexo,"
+                . ":create_time, "
+                . ":update_time,"
+                . ":roles_ro_id)");
+            $sql->bindParam("id", $this->us_id);
+            $sql->bindParam("nombre", $this->us_nombre);
+            $sql->bindParam("apellApp", $this->us_apellApp);
+            $sql->bindParam("apellApm", $this->us_apellApm);
+            $sql->bindParam("telefono", $this->us_telefono);
+            $sql->bindParam("correo", $this->us_correo);
+            $sql->bindParam("password", $this->us_password);
+            $sql->bindParam("direccion", $this->us_direccion);
+            $sql->bindParam("sexo", $this->us_sexo);
+            $sql->bindParam("create_time", $this->create_time);
+            $sql->bindParam("update_time", $this->update_time);
+            $sql->bindParam("roles_ro_id", $this->roles_ro_id);
+            $res = $sql->execute();
+
+            
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
     public function agregar()
     {
         try {
@@ -135,7 +185,7 @@ class Usuarios
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("select * from usuarios where roles_ro_id = 2");
+            $sql = $con->prepare("select * from usuarios where roles_ro_id >= 2 ");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
