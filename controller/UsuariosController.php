@@ -70,7 +70,7 @@ switch ($accion) {
         $usuarios->__set('us_correo', $_REQUEST['correo']);
         $usuarios->__set('us_password', $password_hash);
         $usuarios->__set('us_telefono', $_REQUEST['telefono']);
-     
+
         $usuarios->__set('us_direccion', $_REQUEST['direccion']);
         $usuarios->__set('us_sexo', $_REQUEST['sexo']);
         $usuarios->__set('roles_ro_id', $_REQUEST['rol']);
@@ -78,7 +78,7 @@ switch ($accion) {
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
         $res = $usuarios->agregar_();
 
-       
+
         if ($res == 1) {
             //array para convertir a JSON
             $datos = array(
@@ -91,28 +91,55 @@ switch ($accion) {
         }
         //enviar JSON al servidor para recibirlo en ajax
         echo json_encode($datos, JSON_FORCE_OBJECT);
-        
-        
+
+
         break;
-        case 'verificar':
-            $employees = new Usuarios();
-            $employees->__set('us_correo',$_REQUEST['correo']);
-            $res = $employees->verificar_correo();
-            header('Content-Type:apllication/json');
-            if ($res == true) {
-                $datos = array(
-                    'datos' => 'existe'
-                );
-            } else {
-                $datos = array(
-                    'datos' => 'no existe'
-                );
-            }
-            echo json_encode($datos, JSON_FORCE_OBJECT);
-    
-            break;
-    
-            /* case 'verificar_modificar':
+    case 'verificar':
+        $employees = new Usuarios();
+        $employees->__set('us_correo', $_REQUEST['correo']);
+        $res = $employees->verificar_correo();
+        header('Content-Type:apllication/json');
+        if ($res == true) {
+            $datos = array(
+                'datos' => 'existe'
+            );
+        } else {
+            $datos = array(
+                'datos' => 'no existe'
+            );
+        }
+        echo json_encode($datos, JSON_FORCE_OBJECT);
+
+        break;
+
+    case "modificar":
+        $usuarios = new Usuarios();
+        $usuarios->__set('us_id', $_REQUEST['id']);
+        $usuarios->__set('us_nombre', $_REQUEST['nombre']);
+        $usuarios->__set('us_apellApp', $_REQUEST['app']);
+        $usuarios->__set('us_apellApm', $_REQUEST['apm']);
+        $usuarios->__set('us_correo', $_REQUEST['correo']);
+        $usuarios->__set('us_telefono', $_REQUEST['telefono']);
+        $usuarios->__set('us_direccion', $_REQUEST['direccion']);
+        $usuarios->__set('us_correo', $_REQUEST['correo']);
+        $res =$usuarios->modificar();
+
+        echo $res;
+        header('Content-Type:apllication/json');
+        if ($res == true) {
+            $datos = array(
+                'datos' => 'modificado'
+            );
+        } else {
+            $datos = array(
+                'datos' => 'error'
+            );
+        }
+        echo json_encode($datos, JSON_FORCE_OBJECT);
+
+        break;
+
+        /* case 'verificar_modificar':
                 $employees = new Employees();
                 $employees->setEm_correo($_REQUEST['correo']);
                 $res = $employees->verificar_correo();

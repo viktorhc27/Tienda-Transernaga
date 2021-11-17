@@ -120,7 +120,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                 include_once 'agregar_categorias.php';
                 break;
             case "registrar":
-                include_once 'registrar.php';
+                include_once 'agregar_funcionarios.php';
                 break;
             case "inicio":
                 include_once 'panel.php';
@@ -136,6 +136,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                 break;
             case "editar_productos":
                 include_once 'editar_muebles.php';
+                break;
+            case "editar_funcionarios":
+                include_once 'editar_funcionarios.php';
                 break;
             case "ventas":
                 include_once 'ventas.php';
@@ -156,7 +159,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
 
 
         </div>
-
+     
         <script type="text/javascript" src="../../resources/DataTables/datatables.min.js"></script>
         <script type="text/javascript" src="../../resources/DataTables/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
         <script>

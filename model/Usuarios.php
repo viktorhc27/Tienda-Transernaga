@@ -67,7 +67,7 @@ class Usuarios
             $sql->bindParam("roles_ro_id", $this->roles_ro_id);
             $res = $sql->execute();
 
-            
+
             return $res;
         } catch (PDOException $e) {
             return $e->getMessage();
@@ -128,7 +128,14 @@ class Usuarios
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("update usuarios set us_nombre=:nombre, us_apellApp=:app, us_apellapm=:apm, us_telefono=:telefono , us_correo:= correo, us_password:= password , us_direccion=:direccion us_sexo=:sexo, create_time=:create_time, update_time=:update_time, roles_ro_id=: roles WHERE us_id = :id");
+            $sql = $con->prepare("update usuarios set "
+                . " us_nombre=:nombre,"
+                . " us_apellApp=:app,"
+                . " us_apellapm=:apm,"
+                . " us_telefono=:telefono , "
+                . " us_correo=:correo,"
+                . " us_direccion=:direccion,"
+                . " roles_ro_id=:roles WHERE us_id = :id");
 
             $sql->bindparam("id", $this->us_id);
             $sql->bindparam("nombre", $this->us_nombre);
@@ -136,11 +143,7 @@ class Usuarios
             $sql->bindparam("apm", $this->us_apellApm);
             $sql->bindparam("telefono", $this->us_telefono);
             $sql->bindparam("correo", $this->us_correo);
-            $sql->bindparam("password", $this->us_password);
             $sql->bindparam("direccion", $this->us_direccion);
-            $sql->bindparam("sexo", $this->us_sexo);
-            $sql->bindparam("create_time", $this->create_time);
-            $sql->bindparam("update_time", $this->update_time);
             $sql->bindparam("roles", $this->roles_ro_id);
 
             $res = $sql->execute();
@@ -214,7 +217,7 @@ class Usuarios
         try {
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("SELECT * FROM usuario WHERE us_correo = :correo");
-            $sql->bindParam(':correo', $this->em_correo);
+            $sql->bindParam(':correo', $this->us_correo);
             $sql->execute();
             if ($sql->rowCount() == 1) {
                 return true;
@@ -225,5 +228,4 @@ class Usuarios
             return $ex->getMessage();
         }
     }
-
 }
