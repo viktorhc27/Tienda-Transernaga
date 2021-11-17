@@ -209,7 +209,21 @@ class Usuarios
             return $e->getMessage();
         }
     }
-    public function cerrar()
+    public function verificar_correo()
     {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM usuario WHERE us_correo = :correo");
+            $sql->bindParam(':correo', $this->em_correo);
+            $sql->execute();
+            if ($sql->rowCount() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
     }
+
 }

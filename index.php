@@ -2,8 +2,6 @@
 session_start();
 if (empty($_REQUEST["param"])) {
     $_REQUEST['param'] = "inicio";
-
-  
 }
 //cacquitasdasda
 ?>
@@ -35,23 +33,22 @@ if (empty($_REQUEST["param"])) {
     <link href="resources/css/ui.css" rel="stylesheet" type="text/css" />
     <link href="resources/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
-    <link href="resources/sweetalert2/dist/sweetalert2.min.css"rel="stylesheet" type="text/css"/>
-    <script src="resources/sweetalert2/dist/sweetalert2.all.min.js" type="text/javascript"></script>
-
+    <script src="resources/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="resources/sweetalert2/dist/sweetalert2.min.css">
 
     <!-- Flexslider -->
     <link href="./resources/FlexSlider/flexslider.css" type="text/css" rel="stylesheet">
 
     <!-- custom javascript -->
     <script src="js/script.js" type="text/javascript"></script>
-   
+
     <script type="text/javascript">
         /// some script
 
         // jquery ready start
         $(document).ready(function() {
             // jQuery code
-
+            
         });
         // jquery end
     </script>

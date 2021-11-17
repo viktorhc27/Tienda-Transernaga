@@ -231,7 +231,7 @@ $lista_roles = $roles->leer();
                 var direccion_full = direccion + ", " + departamento + ", " + block + ", N° " + numero;
                 var sexo = $("#sexo").val()
                 var rol = $("#rol").val()
-               
+
 
                 if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && departamento != "" && block != "" && numero != "" && sexo != "" && rol != "") {
 
@@ -300,6 +300,46 @@ $lista_roles = $roles->leer();
 
                 }
             })
+            //valida correo
+            $("#correo").blur(function() {
+                var correo = $("#correo").val();
+
+                if (correo != "") {
+                    if (correo.indexOf('@', 0) == -1 || correo.indexOf('.', 0) == -1) {
+                        $('#correo').removeClass('is-valid');
+                        $('#correo').addClass('is-invalid');
+
+                    } else {
+                        datos = {
+                            "correo": correo
+                        };
+
+                        $.ajax({
+                            url: '../../../controllers/employeesControllers.php?accion=verificar',
+                            type: 'POST',
+                            data: datos,
+
+                        }).done(function(respuesta) {
+                            console.log(JSON.stringify(respuesta));
+                            if (respuesta.datos === "existe") {
+                                $('#correo').removeClass('is-valid');
+                                $('#correo').addClass('is-invalid');
+                                console.log("correo ocupado")
+                            }
+                            if (respuesta.datos === "no existe") {
+                                $('#correo').removeClass('is-invalid');
+                                $('#correo').addClass('is-valid');
+                                console.log("correo no ocupado")
+                            }
+                        })
+
+                    }
+
+                } else {
+                    $('#correo').removeClass('is-valid');
+                    $('#correo').addClass('is-invalid');
+                }
+            });
 
             $("#nombre").blur(function() {
                 var nombre = $("#nombre").val();

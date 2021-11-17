@@ -70,14 +70,8 @@ switch ($accion) {
         $usuarios->__set('us_correo', $_REQUEST['correo']);
         $usuarios->__set('us_password', $password_hash);
         $usuarios->__set('us_telefono', $_REQUEST['telefono']);
-
-        $direccion = $_REQUEST['direccion'];
-        $departamento = $_REQUEST['departamento'];
-        $block = $_REQUEST['block'];
-        $numero = $_REQUEST['numero'];
-
-        $direccion_full = $direccion . ", " . $departamento . ", " . $block . ", N° " . $numero;
-        $usuarios->__set('us_direccion', $direccion_full);
+     
+        $usuarios->__set('us_direccion', $_REQUEST['direccion']);
         $usuarios->__set('us_sexo', $_REQUEST['sexo']);
         $usuarios->__set('roles_ro_id', $_REQUEST['rol']);
         $usuarios->__set('create_time', date("Y-m-d H:i:s"));
@@ -100,4 +94,39 @@ switch ($accion) {
         
         
         break;
+        case 'verificar':
+            $employees = new Usuarios();
+            $employees->__set('us_correo',$_REQUEST['correo']);
+            $res = $employees->verificar_correo();
+            header('Content-Type:apllication/json');
+            if ($res == true) {
+                $datos = array(
+                    'datos' => 'existe'
+                );
+            } else {
+                $datos = array(
+                    'datos' => 'no existe'
+                );
+            }
+            echo json_encode($datos, JSON_FORCE_OBJECT);
+    
+            break;
+    
+            /* case 'verificar_modificar':
+                $employees = new Employees();
+                $employees->setEm_correo($_REQUEST['correo']);
+                $res = $employees->verificar_correo();
+                header('Content-Type:apllication/json');
+                if ($res == true) {
+                    $datos = array(
+                        'datos' => 'existe'
+                    );
+                } else {
+                    $datos = array(
+                        'datos' => 'no existe'
+                    );
+                }
+                echo json_encode($datos, JSON_FORCE_OBJECT);
+        
+                break; */
 }

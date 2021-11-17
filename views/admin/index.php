@@ -22,6 +22,10 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
         <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
         <link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
 
+        <script src="../../resources/sweetalert2/dist/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="../../resources/sweetalert2/dist/sweetalert2.min.css">
+
+
         <!-- Font awesome 5 -->
         <link href="../../resources/fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
 
