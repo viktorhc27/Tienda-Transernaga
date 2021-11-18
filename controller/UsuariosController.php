@@ -99,9 +99,9 @@ switch ($accion) {
         $employees->__set('us_correo', $_REQUEST['correo']);
         $res = $employees->verificar_correo();
         header('Content-Type:apllication/json');
-        if ($res == true) {
+        if ($res == 1) {
             $datos = array(
-                'datos' => 'existe'
+                'datos' => "existe",
             );
         } else {
             $datos = array(

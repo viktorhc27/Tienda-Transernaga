@@ -93,17 +93,32 @@ echo "</pre>"; */
 						<div class="form-group col-md flex-grow-0">
 							<label>Cantidad</label>
 							<div class="input-group mb-3 input-spinner">
-								<select class="form-control" name="cantidad">
-									<?php
-									for ($i = 1; $i <= $lista['pro_stock']; $i++) {
-									?>
-										<option value="<?= $i ?>"><?= $i ?></option>
 
-									<?php
-									}
-									?>
+								<?php
 
-								</select>
+								if ($lista['pro_stock'] > 0) {
+								?>
+									<select class="form-control" name="cantidad">
+										<?php
+										for ($i = 1; $i <= $lista['pro_stock']; $i++) {
+										?>
+											<option value="<?= $i ?>"><?= $i ?></option>
+
+										<?php
+										}
+										?>
+
+									</select>
+
+								<?php
+								} else {
+									echo "<label style='color:red;'>No HAY STOCK</label>";
+
+								}
+
+
+								?>
+
 								<!-- 	<input type="text" id="contador" class="form-control" value="1"> -->
 
 							</div>
@@ -111,18 +126,11 @@ echo "</pre>"; */
 					</div>
 					<br>
 					<input type="hidden" name="id_producto" id="id_producto" value="<?= $lista['pro_id'] ?>">
-
-
 					<button class="btn  btn-outline-warning"> <span class="text">Agregar al Carro</span> <i class="fas fa-shopping-cart"></i> </button>
 				</form>
 			</article>
-
-
-
-
 		</main> <!-- col.// -->
 		<div>
-			
 
 			<model-viewer class="w-screen" src="./resources/images/modelos/33/cama.glb" camera-controls auto-rotate ar>
 

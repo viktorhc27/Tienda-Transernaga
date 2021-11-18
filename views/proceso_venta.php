@@ -121,7 +121,7 @@ $impuestos = 18;
                 <header class="mb-4">
                     <h4 class="card-title">Direccion de entrega</h4>
                 </header>
-                <form method="post" action="controller/PagosController.php?accion=agregar">
+                <form method="post" action="controller/PagosController.php?accion=no_registrado">
                     <div class="form-row">
                         <div class="col form-group">
                             <label>Nombre</label>
@@ -240,7 +240,6 @@ $impuestos = 18;
 
                     $pro = $productos->buscar($c['id_producto']);
                 ?>
-
                     <tr>
                         <td scope="row">#</th>
                         <td scope="row"><img width="90px" src="./resources/images/productos/<?= $pro['pro_id'] ?>/<?= $pro['pro_img'] ?>"></th>

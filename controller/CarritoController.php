@@ -17,7 +17,6 @@ switch ($accion) {
 
         );
 
-
         echo "<script>";
         echo "location.href='../index.php?param=cart'";
         echo "</script>";

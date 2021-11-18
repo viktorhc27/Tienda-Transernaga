@@ -216,8 +216,24 @@ class Usuarios
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM usuario WHERE us_correo = :correo");
+            $sql = $con->prepare("SELECT * FROM usuarios WHERE us_correo = :correo");
             $sql->bindParam(':correo', $this->us_correo);
+            $sql->execute();
+            if ($sql->rowCount() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function verificar_usuario($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM usuario WHERE id = $id");
+           
             $sql->execute();
             if ($sql->rowCount() == 1) {
                 return true;

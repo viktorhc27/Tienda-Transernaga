@@ -123,4 +123,17 @@ class Ventas
             return $e->getMessage();
         }
     }
+    public function cambiar_estado($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("UPDATE estados_id from ventas WHERE ven_id = :id");
+            $sql->bindParam(':id', $id);
+            $sql->execute();
+            $res = $sql->fetch();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }

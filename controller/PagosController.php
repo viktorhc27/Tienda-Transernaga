@@ -8,7 +8,7 @@ require_once '../Model/Productos.php';
 $accion = $_REQUEST['accion'];
 
 switch ($accion) {
-    case 'agregar':
+    case 'no_registrado':
         session_start();
 
         $usuarios = new Usuarios();
@@ -31,41 +31,47 @@ switch ($accion) {
         $usuarios->__set('create_time', date("Y-m-d H:i:s"));
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
         $usuarios->__set('roles_ro_id', 1);
-        $number = mt_Rand(1000000000, 9999999999);
-        $res = $usuarios->agregar();
-        $codigo = "TR" . strtoupper(uniqid());
-        $tipo_armado = $_REQUEST['tipo_armado'];
-        $hora = date("Y-m-d H:i:s");
+        $id_user = $usuarios->agregar();
 
-        foreach ($_SESSION['cart'] as $i) :
-            $data_product = $productos->buscar($i['id_producto']);
+        $verificar = $usuarios->buscar($id_user);
+        if ($verificar == 1) {
+            $codigo = "TR" . strtoupper(uniqid());
+            $tipo_armado = $_REQUEST['tipo_armado'];
+            $hora = date("Y-m-d H:i:s");
 
-            $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
-            $ventas->__set('usuarios_id', $res);
-            $ventas->__set('productos_pro_id', $i['id_producto']);
-            $ventas->__set('ven_id', $number);
-            $ventas->__set('ven_codigo', $codigo);
-            $ventas->__set('ven_total', $calculo);
-            $ventas->__set('tipo_armado', $tipo_armado);
-            $ventas->__set('ven_cantidad', $i['cantidad']);
-            $ventas->__set('create_time', $hora);
-            $ventas->__set('update_time', $hora);
-            $r = $ventas->agregar();
+            foreach ($_SESSION['cart'] as $i) :
+                $data_product = $productos->buscar($i['id_producto']);
 
-            if ($r == 1) {
-                echo "<script type='text/javascript'>";
-                echo " window.location.href = '../views/boleta.php?id_us=$res&cod=$codigo&arm=$tipo_armado'";
-                echo "</script>";
-            } else {
-                
-                echo "<br>";
-            }
+                $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
+                $ventas->__set('usuarios_id', $id_user);
+                $ventas->__set('productos_pro_id', $i['id_producto']);
+                $ventas->__set('ven_id', $codigo);
+                $ventas->__set('ven_codigo', $codigo);
+                $ventas->__set('ven_total', $calculo);
+                $ventas->__set('tipo_armado', $tipo_armado);
+                $ventas->__set('ven_cantidad', $i['cantidad']);
+                $ventas->__set('create_time', $hora);
+                $ventas->__set('update_time', $hora);
+                $r = $ventas->agregar();
+                $v = $productos->vendido($i['cantidad'], $i['id_producto']);
 
+                if ($r == 1) {
+                    if ($v == true) {
+                        header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us='.$id_user.'&cod='.$codigo.'&arm='.$tipo_armado.'');
+                        header('Location:http://localhost/tienda-transernaga/index.php?param=inicio');
+                        /* echo "<script type='text/javascript'>";
+                        echo " window.location.href = '../views/boleta.php?id_us=$id_user&cod=$codigo&arm=$tipo_armado'";
+                        echo "</script>"; */
+                    } else {
+                        echo "error en la compra falta de stock";
+                    }
+                } else {
+    
+                    echo "<br>";
+                }
 
-        endforeach;
-
-
-
+            endforeach;
+        }
 
         /* if ($res == 1) {
             array para convertir a JSON
@@ -80,53 +86,54 @@ switch ($accion) {
         }
        */
         break;
-        case 'registrado':
-            session_start();
-    
-            $usuarios = new Usuarios();
-            $ventas = new Ventas();
-            $productos = new Productos();
-    
+    case 'registrado':
+        session_start();
+        $usuarios = new Usuarios();
+        $ventas = new Ventas();
+        $productos = new Productos();
+        $id = $_REQUEST['id'];
+        $codigo = "TR" . strtoupper(uniqid());
+        $tipo_armado = $_REQUEST['tipo_armado'];
+        $hora = date("Y-m-d H:i:s");
 
-            $id= $_REQUEST['id'];
+        foreach ($_SESSION['cart'] as $i) :
+            $data_product = $productos->buscar($i['id_producto']);
 
-            $codigo = "TR" . strtoupper(uniqid());
-            $tipo_armado = $_REQUEST['tipo_armado'];
-            $hora = date("Y-m-d H:i:s");
-            $number = mt_Rand(1000000000, 9999999999); // better than Rand()
-            foreach ($_SESSION['cart'] as $i) :
-                $data_product = $productos->buscar($i['id_producto']);
-    
-                $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
-                $ventas->__set('usuarios_id', $id);
-                $ventas->__set('productos_pro_id', $i['id_producto']);
-                $ventas->__set('ven_id', $codigo);
-                $ventas->__set('ven_codigo', $codigo);
-                $ventas->__set('ven_total', $calculo);
-                $ventas->__set('tipo_armado', $tipo_armado);
-                $ventas->__set('ven_cantidad', $i['cantidad']);
-                $ventas->__set('create_time', $hora);
-                $ventas->__set('update_time', $hora);
-                $ventas->__set('estados_id',1);
-                $r = $ventas->agregar();
-    
-                if ($r == 1) {
-                  
-                    echo "<script type='text/javascript'>";
-                    echo " window.location.href = '../views/boleta.php?id_us=$id&cod=$codigo&arm=$tipo_armado'";
-                    echo "</script>";
+            $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
+            $ventas->__set('usuarios_id', $id);
+            $ventas->__set('productos_pro_id', $i['id_producto']);
+            $ventas->__set('ven_id', $codigo);
+            $ventas->__set('ven_codigo', $codigo);
+            $ventas->__set('ven_total', $calculo);
+            $ventas->__set('tipo_armado', $tipo_armado);
+            $ventas->__set('ven_cantidad', $i['cantidad']);
+            $ventas->__set('create_time', $hora);
+            $ventas->__set('update_time', $hora);
+            $ventas->__set('estados_id', 1);
+            $r = $ventas->agregar();
+            $v = $productos->vendido($i['cantidad'], $i['id_producto']);
+
+            if ($r == 1) {
+                if ($v == true) {
+                    header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us='.$id_user.'&cod='.$codigo.'&arm='.$tipo_armado.'');
+                    /* echo "<script type='text/javascript'>";
+                    echo " window.location.href = '../views/boleta.php?id_us=$id_user&cod=$codigo&arm=$tipo_armado'";
+                    echo "</script>"; */
                 } else {
-                   
-                    echo "<br>";
+                    echo "error en la compra falta de stock";
                 }
-    
-    
-            endforeach;
-    
-    
-    
-    
-            /* if ($res == 1) {
+            } else {
+
+                echo "<br>";
+            }
+
+
+        endforeach;
+
+
+
+
+        /* if ($res == 1) {
                 array para convertir a JSON
                  $datos = array(
                     'estado' => 'agregado'
@@ -138,5 +145,5 @@ switch ($accion) {
                 ); 
             }
            */
-            break;
+        break;
 }

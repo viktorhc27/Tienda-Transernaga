@@ -20,7 +20,7 @@ if (empty($_REQUEST["param"])) {
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="resources/js/jquery-2.0.0.min.js" type="text/javascript"></script>
 
     <!-- Bootstrap4 files-->
     <script src="resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -48,7 +48,7 @@ if (empty($_REQUEST["param"])) {
         // jquery ready start
         $(document).ready(function() {
             // jQuery code
-            
+
         });
         // jquery end
     </script>
@@ -135,6 +135,12 @@ if (empty($_REQUEST["param"])) {
                             </li>
                         </ul>
                         <div class="widgets-wrap d-none d-md-block">
+                            <a href="?param=pedidos" class="widget-header">
+                                <div class="icon">
+                                    <i class="icon-sm rounded-circle border fas fa-store"></i>
+
+                                </div>
+                            </a>
 
                             <a href="?param=cart" class="widget-header">
                                 <div class="icon">
@@ -219,9 +225,60 @@ if (empty($_REQUEST["param"])) {
 
                                 <?php
                                 }
-                            } else {
+                                if ($_SESSION['user']['role'] == "3" || $_SESSION['user']['role'] == 3) { ?>
+                                    <div class="widget-header dropdown">
+                                        <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
+                                            <div class="icontext">
+                                                <div class="icon">
+                                                    <i class="icon-sm rounded-circle border fa fa-user"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <small class="text-muted">Nombre</small>
+                                                    <div><?= $_SESSION['user']['nombre'] ?> </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
+                                            <a class="dropdown-item" href="#">Mi Cuenta</a>
+                                            <a class="dropdown-item" href="?param=ensamblador">Ensamblador</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
+                                        </div>
 
-                                ?>
+                                    </div>
+
+
+
+
+                                <?php
+
+
+                                }
+                                if ($_SESSION['user']['role'] == "4" || $_SESSION['user']['role'] == 4) { ?> <div class="widget-header dropdown">
+                                        <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
+                                            <div class="icontext">
+                                                <div class="icon">
+                                                    <i class="icon-sm rounded-circle border fa fa-user"></i>
+                                                </div>
+                                                <div class="text">
+                                                    <small class="text-muted">Nombre</small>
+                                                    <div><?= $_SESSION['user']['nombre'] ?> </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
+                                            <a class="dropdown-item" href="#">Mi Cuenta</a>
+                                            <a class="dropdown-item" href="?param=administrador">Repartidor</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
+                                        </div>
+
+                                    </div><?php
+
+                                        }
+                                    } else {
+
+                                            ?>
                                 <div class="widget-header dropdown">
                                     <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
                                         <div class="icontext">
@@ -255,7 +312,8 @@ if (empty($_REQUEST["param"])) {
 
 
                             <?php
-                            }
+                                    }
+
                             ?>
 
 
@@ -308,7 +366,7 @@ if (empty($_REQUEST["param"])) {
             <script type="text/javascript">
                 window.location.href = "./views/admin/index.php?param=inicio";
             </script>
-    <?php
+        <?php
             break;
         case "cart":
             include_once './views/cart.php';
@@ -317,6 +375,11 @@ if (empty($_REQUEST["param"])) {
         case "ve":
             include_once './views/proceso_venta.php';
             break;
+        case "ensamblador": ?>
+            <script type="text/javascript">
+                window.location.href = "./views/ensamblador/index.php?param=inicio";
+            </script>
+    <?php
     }
 
     ?>

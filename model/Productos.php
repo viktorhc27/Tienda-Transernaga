@@ -141,13 +141,29 @@ class Productos
             return $e->getMessage();
         }
     }
+    public function verificar_productos($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM productos WHERE pro_id = $id");
 
-    public function buscar_palabras($nombre,$empieza, $por_pagina)
+            $sql->execute();
+            if ($sql->rowCount() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+    public function buscar_palabras($nombre, $empieza, $por_pagina)
     {
         try {
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("SELECT * FROM productos WHERE pro_nombre LIKE :nombre LIMIT $empieza, $por_pagina");
-            $keyword = "%".$nombre."%";
+            $keyword = "%" . $nombre . "%";
             $sql->bindParam(':nombre', $keyword);
             $sql->execute();
             $res = $sql->fetchall();
@@ -183,7 +199,7 @@ class Productos
         }
     }
 
-    public function listar_categorias($cat,$empieza, $por_pagina)
+    public function listar_categorias($cat, $empieza, $por_pagina)
     {
         try {
             $con = (new Conexion())->Conectar();
@@ -191,6 +207,30 @@ class Productos
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function vendido($cantidad, $id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("UPDATE productos SET pro_stock = pro_stock - $cantidad WHERE pro_id = $id");
+            $sql->execute();
+            if ($sql->rowCount() == 1) {
+                $sql = $con->prepare("SELECT pro_stock FROM productos  WHERE pro_id = $id");
+                $sql->execute();
+                $res = $sql->fetch();
+                if ($res['pro_stock'] >= 0) {
+                    return true;
+                } else {
+                    $sql = $con->prepare("UPDATE productos SET pro_stock = pro_stock + $cantidad WHERE pro_id = $id");
+                    $sql->execute();
+                    return false;
+                }
+            } else {
+                return false;
+            }
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }
