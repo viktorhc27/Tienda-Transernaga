@@ -135,7 +135,7 @@ if (empty($_REQUEST["param"])) {
                             </li>
                         </ul>
                         <div class="widgets-wrap d-none d-md-block">
-                            <a href="?param=pedidos" class="widget-header">
+                            <a href="?param=mispedidos" class="widget-header">
                                 <div class="icon">
                                     <i class="icon-sm rounded-circle border fas fa-store"></i>
 
@@ -374,6 +374,9 @@ if (empty($_REQUEST["param"])) {
 
         case "ve":
             include_once './views/proceso_venta.php';
+            break;
+        case "mispedidos":
+            include_once './views/mispedidos.php';
             break;
         case "ensamblador": ?>
             <script type="text/javascript">

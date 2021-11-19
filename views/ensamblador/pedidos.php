@@ -95,16 +95,25 @@ $lista_ventas = $ventas->leer();
                                             </td>
 
                                             <td>
-                                                <div class="dropdown">
-                                                    <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Opciones
-                                                    </a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                        <button class="dropdown-item" type="button">Confirmar</button>
-                                                        <!--  <button class="dropdown-item" type="button">Ver</button>
-                                                        <button class="dropdown-item" type="button">Desabilitar</button> -->
-                                                    </div>
-                                                </div>
+                                                <?php if ($s['estados_id'] < 5) { ?>
+                                                    <form method="post" action="../../controller/PedidosController.php?accion=cambiar_estado ">
+                                                        <div class="dropdown">
+                                                            <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Opciones
+                                                            </a>
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                                <input name="codigo" value="<?= $s['ven_codigo'] ?>" type="hidden" class="form-control">
+
+                                                                <button class="dropdown-item">Pasar al siguiente estado</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                <?php
+
+                                                } ?>
+
                                             </td>
                                         </tr>
                                     <?php

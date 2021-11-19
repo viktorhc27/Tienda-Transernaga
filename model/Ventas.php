@@ -84,6 +84,20 @@ class Ventas
             return $e->getMessage();
         }
     }
+    public function mis_pedidos($id)
+    {
+        try {
+
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas where usuario_id= $id");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 
     public function modificar()
     {
@@ -123,14 +137,13 @@ class Ventas
             return $e->getMessage();
         }
     }
-    public function cambiar_estado($id)
+    public function cambiar_estado()
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("UPDATE estados_id from ventas WHERE ven_id = :id");
-            $sql->bindParam(':id', $id);
-            $sql->execute();
-            $res = $sql->fetch();
+            $sql = $con->prepare("UPDATE ventas SET estados_id = estados_id + 1 WHERE ven_codigo = :codigo");
+            $sql->bindParam(":codigo", $this->ven_codigo);
+            $res = $sql->execute();
             return $res;
         } catch (PDOException $e) {
             return $e->getMessage();
