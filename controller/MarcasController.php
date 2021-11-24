@@ -21,7 +21,8 @@ switch ($accion) {
         move_uploaded_file($archivo_img, $ruta_img);
         $res = $marcas->agregar();
 
-        echo $p;
-        echo $res;
+       if($res = 1){
+        header("Location: http://localhost/tienda-transernaga/views/admin/index.php?param=marcas");
+       }
         break;
 }

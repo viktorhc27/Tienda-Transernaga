@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2021 a las 04:01:02
+-- Tiempo de generación: 24-11-2021 a las 17:52:08
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.14
 
@@ -54,9 +54,12 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`cat_id`, `cat_nombre`, `cat_estado`, `create_time`, `update_time`, `imagen`) VALUES
-(1, 'categoria1', 1, '2021-10-09 23:11:57', '2021-10-09 23:11:57', NULL),
-(2, 'categoria2', 1, '2021-11-08 21:18:40', '2021-11-08 21:18:40', NULL),
-(3, 'categoria 3', 1, '2021-11-16 17:47:08', '2021-11-16 17:47:08', NULL);
+(8, 'sofas', 1, '2021-11-19 19:14:26', '2021-11-24 18:06:31', 'sofas.jpg'),
+(9, 'mesas', 1, '2021-11-19 19:14:28', '2021-11-19 19:14:28', 'mesas.webp'),
+(10, 'camas', 1, '2021-11-19 19:14:30', '2021-11-19 19:14:30', 'camas.jpg'),
+(11, 'escritorios', 1, '2021-11-19 19:14:33', '2021-11-19 19:14:33', 'escritorios.webp'),
+(12, 'comodas', 1, '2021-11-19 19:14:36', '2021-11-19 19:14:36', 'comodas.jpg'),
+(13, 'Armarios', 1, '2021-11-19 19:15:30', '2021-11-19 19:15:30', 'armarios.jpg');
 
 -- --------------------------------------------------------
 
@@ -124,27 +127,25 @@ CREATE TABLE `imagen` (
 --
 
 INSERT INTO `imagen` (`img_id`, `ruta`, `create_time`, `update_time`, `nombre`) VALUES
-(1, '/resources/images/productos/37', '2021-11-16 17:51:18', '2021-11-16 17:51:18', '635779-0000-001.webp'),
-(22, '/resources/images/productos/33', '2021-10-11 00:02:57', '2021-10-11 00:02:57', '1.jpg'),
-(23, '/resources/images/productos/33', '2021-10-11 00:02:57', '2021-10-11 00:02:57', '2.jpg'),
-(24, '/resources/images/productos/33', '2021-10-11 00:02:57', '2021-10-11 00:02:57', '3.jpg'),
-(25, '/resources/images/productos/33', '2021-10-11 00:02:57', '2021-10-11 00:02:57', '4.jpg'),
-(26, '/resources/images/productos/34', '2021-10-11 07:03:36', '2021-10-11 07:03:36', '1.jpg'),
-(27, '/resources/images/productos/34', '2021-10-11 07:03:36', '2021-10-11 07:03:36', '2.jpg'),
-(28, '/resources/images/productos/34', '2021-10-11 07:03:36', '2021-10-11 07:03:36', '3.jpg'),
-(29, '/resources/images/productos/35', '2021-10-11 18:19:46', '2021-10-11 18:19:46', '2.jpg'),
-(30, '/resources/images/productos/35', '2021-10-11 18:19:46', '2021-10-11 18:19:46', '3.jpg'),
-(31, '/resources/images/productos/36', '2021-10-11 20:01:41', '2021-10-11 20:01:41', '3.jpg'),
-(32, '/resources/images/productos/36', '2021-10-11 20:01:41', '2021-10-11 20:01:41', '4.jpg'),
-(33, '/resources/images/productos/41', '2021-11-16 18:04:01', '2021-11-16 18:04:01', '635779-0000-001.webp'),
-(34, '/resources/images/productos/41', '2021-11-16 18:04:01', '2021-11-16 18:04:01', '635779-0000-002.webp'),
-(35, '/resources/images/productos/41', '2021-11-16 18:04:01', '2021-11-16 18:04:01', '635779-0000-003.webp'),
-(36, '/resources/images/productos/42', '2021-11-16 18:04:03', '2021-11-16 18:04:03', '635779-0000-001.webp'),
-(37, '/resources/images/productos/42', '2021-11-16 18:04:03', '2021-11-16 18:04:03', '635779-0000-002.webp'),
-(38, '/resources/images/productos/42', '2021-11-16 18:04:03', '2021-11-16 18:04:03', '635779-0000-003.webp'),
-(39, '/resources/images/productos/43', '2021-11-16 18:04:30', '2021-11-16 18:04:30', '635779-0000-001.webp'),
-(40, '/resources/images/productos/43', '2021-11-16 18:04:30', '2021-11-16 18:04:30', '635779-0000-002.webp'),
-(41, '/resources/images/productos/43', '2021-11-16 18:04:30', '2021-11-16 18:04:30', '635779-0000-003.webp');
+(1, '/resources/images/productos/3', '2021-11-19 19:21:27', '2021-11-19 19:21:27', 'closet 2 puertas tabaco 2.png'),
+(2, '/resources/images/productos/3', '2021-11-19 19:21:27', '2021-11-19 19:21:27', 'closet 2 puertas tabaco 3.png'),
+(3, '/resources/images/productos/3', '2021-11-19 19:21:27', '2021-11-19 19:21:27', 'closet 2 puertas tabaco.png'),
+(4, '/resources/images/productos/4', '2021-11-19 19:27:20', '2021-11-19 19:27:20', 'closet 3 puertas blanco natural 2.jpg'),
+(5, '/resources/images/productos/4', '2021-11-19 19:27:20', '2021-11-19 19:27:20', 'closet 3 puertas blanco natural.jpg'),
+(6, '/resources/images/productos/5', '2021-11-19 19:28:51', '2021-11-19 19:28:51', 'closet 6 puertas blanco natural 2.jpg'),
+(7, '/resources/images/productos/5', '2021-11-19 19:28:51', '2021-11-19 19:28:51', 'closet 6 puertas blanco natural 3.jpg'),
+(8, '/resources/images/productos/5', '2021-11-19 19:28:51', '2021-11-19 19:28:51', 'closet 6 puertas blanco natural.jpg'),
+(9, '/resources/images/productos/6', '2021-11-19 19:32:13', '2021-11-19 19:32:13', 'closet 6 puertas chocolate 2.jpg'),
+(10, '/resources/images/productos/6', '2021-11-19 19:32:13', '2021-11-19 19:32:13', 'closet 6 puertas chocolate 3.jpg'),
+(11, '/resources/images/productos/6', '2021-11-19 19:32:13', '2021-11-19 19:32:13', 'closet 6 puertas chocolate.jpg'),
+(12, '/resources/images/productos/7', '2021-11-19 19:41:09', '2021-11-19 19:41:09', '1.jpg'),
+(13, '/resources/images/productos/7', '2021-11-19 19:41:09', '2021-11-19 19:41:09', '2.png'),
+(14, '/resources/images/productos/8', '2021-11-19 19:44:00', '2021-11-19 19:44:00', 'comoda polux chocolate 2.jpg'),
+(15, '/resources/images/productos/8', '2021-11-19 19:44:00', '2021-11-19 19:44:00', 'comoda polux chocolate 3.jpg'),
+(16, '/resources/images/productos/8', '2021-11-19 19:44:00', '2021-11-19 19:44:00', 'comoda polux chocolate.jpg'),
+(17, '/resources/images/productos/9', '2021-11-19 19:50:17', '2021-11-19 19:50:17', 'comoda polux nogal 2.jpg'),
+(18, '/resources/images/productos/9', '2021-11-19 19:50:17', '2021-11-19 19:50:17', 'comoda polux nogal 3.jpg'),
+(19, '/resources/images/productos/9', '2021-11-19 19:50:17', '2021-11-19 19:50:17', 'comoda polux nogal.jpg');
 
 -- --------------------------------------------------------
 
@@ -165,7 +166,13 @@ CREATE TABLE `marcas` (
 --
 
 INSERT INTO `marcas` (`mar_id`, `mar_nombre`, `mar_imagen`, `create_time`, `update_time`) VALUES
-(1, 'marca', NULL, '2021-10-09 23:12:19', '2021-10-09 23:12:19');
+(1, 'akomoda', '', '2021-11-19 19:10:43', '2021-11-19 19:10:43'),
+(2, 'medular', '', '2021-11-19 19:12:38', '2021-11-19 19:12:38'),
+(3, 'sander', '', '2021-11-19 19:12:54', '2021-11-19 19:12:54'),
+(4, 'taf', '', '2021-11-19 19:12:59', '2021-11-19 19:12:59'),
+(5, 'sait', '', '2021-11-19 19:13:02', '2021-11-19 19:13:02'),
+(6, 'moldex', '', '2021-11-19 19:13:05', '2021-11-19 19:13:05'),
+(7, 'perca', '', '2021-11-19 19:13:18', '2021-11-19 19:13:18');
 
 -- --------------------------------------------------------
 
@@ -200,15 +207,13 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`pro_id`, `pro_codigo`, `pro_nombre`, `pro_precio_compra`, `pro_precio_venta`, `pro_modelo`, `pro_altura`, `pro_ancho`, `pro_profundidad`, `pro_descripcion`, `pro_peso`, `pro_stock`, `pro_img`, `pro_color`, `pro_estado`, `create_time`, `update_time`, `categorias_cat_id`, `marcas_mar_id`) VALUES
-(33, '213213', 'Mesa', 10000, 20000, 'cama.glb', '123', '231', '321', NULL, '21', 3, '1.jpg', '32', 127, '2021-10-19 14:56:21', '2021-10-19 14:56:26', 1, 1),
-(34, '123', 'sila', 324, 432, NULL, '234', '234', '234', NULL, '23', 324, NULL, '324', 127, '2021-10-11 07:03:36', '2021-10-11 07:03:36', 2, 1),
-(35, '3244', 'silla', 30000, 40000, NULL, '231', '321', '321', NULL, '32', 23, NULL, '32', 127, '2021-10-11 18:19:46', '2021-10-11 18:19:46', 1, 1),
-(36, '123', '213', 321, 231, NULL, '231', '312', '321', NULL, '321', 231, NULL, '321', 127, '2021-10-11 20:01:41', '2021-10-11 20:01:41', 1, 1),
-(39, '123', 'fefewf', 234, 234, NULL, '32', '432', '324', NULL, '23', 324, NULL, '34', NULL, '2021-11-16 18:02:40', '2021-11-16 18:02:40', 2, 1),
-(40, '123', 'fefewf', 234, 234, NULL, '32', '432', '324', NULL, '23', 324, NULL, '34', NULL, '2021-11-16 18:02:52', '2021-11-16 18:02:52', 2, 1),
-(41, '123', 'fefewf', 234, 234, NULL, '32', '432', '324', NULL, '23', 324, NULL, '34', NULL, '2021-11-16 18:04:01', '2021-11-16 18:04:01', 2, 1),
-(42, '123', 'fefewf', 234, 234, NULL, '32', '432', '324', NULL, '23', 324, NULL, '34', NULL, '2021-11-16 18:04:03', '2021-11-16 18:04:03', 2, 1),
-(43, '213', '231', 43, 43, NULL, '34', '213', '213', NULL, '231', 213, NULL, '213', NULL, '2021-11-16 18:04:30', '2021-11-16 18:04:30', 1, 1);
+(3, 'TR123432', 'closet 2 puertas', 100000, 150000, '', '200', '100', '40', NULL, '5', 5, 'closet 2 puertas tabaco 2.png', 'Cafe', 0, '2021-11-19 19:21:27', '2021-11-19 19:21:27', 13, 2),
+(4, 'TR21313', 'Closet 3 puertas', 120000, 135000, '', '200', '150', '100', NULL, '10', 8, 'closet 3 puertas blanco natural 2.jpg', 'crema', 0, '2021-11-19 19:27:20', '2021-11-19 19:27:20', 13, 4),
+(5, 'TR1233', 'closet 6 puertas', 200000, 230000, '', '', '', '', NULL, '50', 10, 'closet 6 puertas blanco natural 2.jpg', 'crema', 0, '2021-11-19 19:28:51', '2021-11-19 19:28:51', 13, 2),
+(6, 'TR34234', 'Closet 6 puertas', 230000, 250000, '', '120', '300', '120', NULL, '50', 8, 'closet 6 puertas chocolate 2.jpg', 'chocolate', 0, '2021-11-19 19:32:13', '2021-11-19 19:32:13', 12, 3),
+(7, 'TR234234', 'Closet belgica', 200000, 30000, '', '200', '300', '20', NULL, '80', 10, '1.jpg', 'Cafe', 0, '2021-11-19 19:41:09', '2021-11-19 19:41:09', 13, 5),
+(8, 'TR23132', 'Comoda 8 cajones', 220000, 280000, '', '150', '130', '100', NULL, '40', 8, 'comoda polux chocolate 2.jpg', 'chocolate', 0, '2021-11-19 19:44:00', '2021-11-19 19:44:00', 12, 2),
+(9, 'TR2243234', 'comoda nogal', 300000, 350000, '', '100', '140', '70', NULL, '70', 8, 'comoda polux nogal 2.jpg', 'cafe claro', 0, '2021-11-19 19:50:17', '2021-11-19 19:50:17', 12, 7);
 
 -- --------------------------------------------------------
 
@@ -237,27 +242,25 @@ CREATE TABLE `productos_has_imagen` (
 --
 
 INSERT INTO `productos_has_imagen` (`productos_pro_id`, `imagen_img_id`) VALUES
-(33, 22),
-(33, 23),
-(33, 24),
-(33, 25),
-(34, 26),
-(34, 27),
-(34, 28),
-(35, 29),
-(35, 30),
-(36, 31),
-(36, 32),
-(40, 0),
-(41, 33),
-(41, 34),
-(41, 35),
-(42, 36),
-(42, 37),
-(42, 38),
-(43, 39),
-(43, 40),
-(43, 41);
+(3, 1),
+(3, 2),
+(3, 3),
+(4, 4),
+(4, 5),
+(5, 6),
+(5, 7),
+(5, 8),
+(6, 9),
+(6, 10),
+(6, 11),
+(7, 12),
+(7, 13),
+(8, 14),
+(8, 15),
+(8, 16),
+(9, 17),
+(9, 18),
+(9, 19);
 
 -- --------------------------------------------------------
 
@@ -309,11 +312,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`us_id`, `us_nombre`, `us_apellApp`, `us_apellApm`, `us_telefono`, `us_correo`, `us_password`, `us_direccion`, `us_sexo`, `create_time`, `update_time`, `roles_ro_id`, `us_estado`) VALUES
-(1, 'victor', 'huanca', 'cusica', '123', 'victor@correo.cl', '$2y$10$zKsBAeVGIVpCLE.T1ARQfe73kTf0UHnOGnUu8vyeHUBZiG5n3NPhO', '123', 'hombre', '2021-10-04 18:52:07', '2021-10-04 18:52:07', 2, NULL),
-(2, 'usuario', '1', '2', '123', 'user@correo.cl', '$2y$10$B1hTFm9Z0PULFj7ynOv0Nu3zZ8z2BFUzjWix5v19hklCNWvfvbUM2', '213', 'hombre', '2021-10-06 00:47:18', '2021-10-06 00:47:18', 1, NULL),
-(143, 'pedro', 'fs', 'fsdf', '12', 'fs@correo.cl', '$2y$10$jM2upgS/n.s/3StdkJhSqey1ycxdx2cR3sRl.CHcsHZ1NNKCxi1P.', ', , , N° ', 'hombre', '2021-11-17 02:29:05', '2021-11-17 02:29:05', 4, NULL),
-(147, 'felipe', '213', '321', '123', '312', '$2y$10$8pPPy5VpNEOfp.oOwtpS9.9DYIwVlAvZYCQwaMSNqlUysigcnnf5.', ', , , N° ', 'hombre', '2021-11-17 02:36:14', '2021-11-17 02:36:14', 3, NULL),
-(161, 'carlos', '123', '123', '123', '312', '$2y$10$LoVTdUJfuuzYANp4Yq5LIuSFhBbM/4XNccOErsU21OicvcdntcYyq', '123, 123, 123, N° 123, , , N° ', 'hombre', '2021-11-17 06:45:23', '2021-11-17 06:45:23', 3, NULL);
+(1, 'Admin', 'admin', '2', '123', 'admin@correo.cl', '$2y$10$zKsBAeVGIVpCLE.T1ARQfe73kTf0UHnOGnUu8vyeHUBZiG5n3NPhO', '123', 'hombre', '2021-10-04 18:52:07', '2021-10-04 18:52:07', 2, NULL),
+(2, 'usuario', 'user', '2', '123', 'user@correo.cl', '$2y$10$B1hTFm9Z0PULFj7ynOv0Nu3zZ8z2BFUzjWix5v19hklCNWvfvbUM2', '213', 'hombre', '2021-10-06 00:47:18', '2021-10-06 00:47:18', 1, NULL),
+(173, 'ensablador', 'ensamblador', '2', '12', 'ensamblador@correo.cl', '$2y$10$Q5PgDzp3tsfcyBzQl8jkbOwyYQ7VzpNLB0tVnn7j/VcA9HwLKUKIK', '123, , , N° 123', 'hombre', '2021-11-18 23:08:45', '2021-11-18 23:08:45', 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -333,17 +334,6 @@ CREATE TABLE `ventas` (
   `ven_codigo` varchar(45) DEFAULT NULL,
   `estados_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `ventas`
---
-
-INSERT INTO `ventas` (`usuarios_us_id`, `productos_pro_id`, `venta_id`, `ven_total`, `ven_cantidad`, `create_time`, `update_time`, `tipo_armado`, `ven_codigo`, `estados_id`) VALUES
-(1, 33, 'TR6193C118B4EC8', 20000, 1, '2021-11-16 18:32:56', '2021-11-16 18:32:56', 'domicilio', 'TR6193C118B4EC8', 1),
-(1, 34, 'TR6193C52F242AF', 2160, 5, '2021-11-16 18:50:23', '2021-11-16 18:50:23', 'domicilio', 'TR6193C52F242AF', 1),
-(1, 35, 'TR6193C52F242AF', 280000, 7, '2021-11-16 18:50:23', '2021-11-16 18:50:23', 'domicilio', 'TR6193C52F242AF', 1),
-(1, 39, 'TR6193C52F242AF', 234, 1, '2021-11-16 18:50:23', '2021-11-16 18:50:23', 'domicilio', 'TR6193C52F242AF', 1),
-(1, 40, 'TR6193C52F242AF', 1872, 8, '2021-11-16 18:50:23', '2021-11-16 18:50:23', 'domicilio', 'TR6193C52F242AF', 1);
 
 --
 -- Índices para tablas volcadas
@@ -452,7 +442,7 @@ ALTER TABLE `armados_tipo`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `direcciones`
@@ -470,19 +460,19 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `marcas`
 --
 ALTER TABLE `marcas`
-  MODIFY `mar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -494,7 +484,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `us_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `us_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- Restricciones para tablas volcadas

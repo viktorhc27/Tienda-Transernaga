@@ -211,7 +211,7 @@ class Productos
             return $ex->getMessage();
         }
     }
-    public function vendido($cantidad, $id)
+    public function verificar_stock($cantidad, $id)
     {
         try {
             $con = (new Conexion())->Conectar();
@@ -231,6 +231,18 @@ class Productos
             } else {
                 return false;
             }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function devolver($cantidad, $id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("UPDATE productos SET pro_stock = pro_stock + $cantidad WHERE pro_id = $id");
+            $res=$sql->execute();
+            return $res;
+            
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }

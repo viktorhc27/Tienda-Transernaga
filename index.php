@@ -88,7 +88,8 @@ if (empty($_REQUEST["param"])) {
         <section class="border-bottom">
             <nav class="navbar navbar-main navbar-expand-lg navbar-light">
                 <div class="container">
-                    <a class="navbar-brand" href="#"><img src="resources/images/logo-muebles.png" class="logo"></a>
+
+                    <a class="navbar-brand" href="?param=inicio"><img src="resources/images/logo-muebles.png" class="logo"></a>
 
 
                     <a href="?param=cart" class="widget-header d-md-none">
@@ -119,17 +120,7 @@ if (empty($_REQUEST["param"])) {
                             <li class="nav-item">
                                 <a class="nav-link" href="?param=productos">Productos</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="?param=Categorias">Categorias</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Foods and Drink</a>
-                                    <a class="dropdown-item" href="#">Home interior</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Category 1</a>
-                                    <a class="dropdown-item" href="#">Category 2</a>
-                                    <a class="dropdown-item" href="#">Category 3</a>
-                                </div>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="#">About</a>
                             </li>
@@ -371,6 +362,9 @@ if (empty($_REQUEST["param"])) {
         case "cart":
             include_once './views/cart.php';
             break;
+            case "detalles":
+                include_once './views/detalles_pedidos.php';
+                break;
 
         case "ve":
             include_once './views/proceso_venta.php';
@@ -378,6 +372,10 @@ if (empty($_REQUEST["param"])) {
         case "mispedidos":
             include_once './views/mispedidos.php';
             break;
+
+            case "misdatos":
+                include_once './views/misdatos.php';
+                break;
         case "ensamblador": ?>
             <script type="text/javascript">
                 window.location.href = "./views/ensamblador/index.php?param=inicio";

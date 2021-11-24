@@ -63,7 +63,7 @@ $lista_ventas = $ventas->leer();
                                             <td><?= $codigo['pro_codigo'] ?></td>
 
                                             <td><?= $s['ven_cantidad'] ?></td>
-                                            <td><img width="240px" src="resources/images/productos/<?= $codigop['pro_id'] ?>/<?= $codigop['pro_img'] ?>"></td>
+                                            <td><img width="100px" src="../../resources/images/productos/<?= $codigo['pro_id'] ?>/<?= $codigo['pro_img'] ?>"></td>
                                             <td><?= $s['tipo_armado'] ?></td>
                                             <td><?= $s['create_time'] ?></td>
 
@@ -96,19 +96,26 @@ $lista_ventas = $ventas->leer();
 
                                             <td>
                                                 <?php if ($s['estados_id'] < 5) { ?>
-                                                    <form method="post" action="../../controller/PedidosController.php?accion=cambiar_estado ">
-                                                        <div class="dropdown">
-                                                            <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Opciones
-                                                            </a>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                                                    <div class="dropdown">
+                                                        <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Opciones
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                            <form method="post" action="../../controller/PedidosController.php?accion=cambiar_estado ">
                                                                 <input name="codigo" value="<?= $s['ven_codigo'] ?>" type="hidden" class="form-control">
 
                                                                 <button class="dropdown-item">Pasar al siguiente estado</button>
+                                                            </form>
+                                                            <form method="post" action="../../controller/PedidosController.php?accion=cancelar ">
+                                                                <input name="codigo" value="<?= $s['ven_codigo'] ?>" type="hidden" class="form-control">
 
-                                                            </div>
+                                                                <button class="dropdown-item">Cancelar</button>
+                                                            </form>
                                                         </div>
-                                                    </form>
+                                                    </div>
+
+
 
                                                 <?php
 

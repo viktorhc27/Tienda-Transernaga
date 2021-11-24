@@ -143,6 +143,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
             case "ventas":
                 include_once 'ventas.php';
                 break;
+            case "modificar_categorias":
+                include_once 'editar_categorias.php';
+                break;
         }
         ?>
 
@@ -159,7 +162,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
 
 
         </div>
-     
+
         <script type="text/javascript" src="../../resources/DataTables/datatables.min.js"></script>
         <script type="text/javascript" src="../../resources/DataTables/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
         <script>

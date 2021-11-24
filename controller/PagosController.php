@@ -45,7 +45,7 @@ switch ($accion) {
                 $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
                 $ventas->__set('usuarios_id', $id_user);
                 $ventas->__set('productos_pro_id', $i['id_producto']);
-                $ventas->__set('ven_id', $codigo);
+                $ventas->__set('venta_id', $codigo);
                 $ventas->__set('ven_codigo', $codigo);
                 $ventas->__set('ven_total', $calculo);
                 $ventas->__set('tipo_armado', $tipo_armado);
@@ -53,7 +53,7 @@ switch ($accion) {
                 $ventas->__set('create_time', $hora);
                 $ventas->__set('update_time', $hora);
                 $r = $ventas->agregar();
-                $v = $productos->vendido($i['cantidad'], $i['id_producto']);
+                /* $v = $productos->verificar_stock($i['cantidad'], $i['id_producto']); */
 
                 if ($r == 1) {
                     if ($v == true) {
@@ -102,7 +102,7 @@ switch ($accion) {
             $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
             $ventas->__set('usuarios_id', $id);
             $ventas->__set('productos_pro_id', $i['id_producto']);
-            $ventas->__set('ven_id', $codigo);
+            $ventas->__set('venta_id', $codigo);
             $ventas->__set('ven_codigo', $codigo);
             $ventas->__set('ven_total', $calculo);
             $ventas->__set('tipo_armado', $tipo_armado);
@@ -111,21 +111,15 @@ switch ($accion) {
             $ventas->__set('update_time', $hora);
             $ventas->__set('estados_id', 1);
             $r = $ventas->agregar();
-            $v = $productos->vendido($i['cantidad'], $i['id_producto']);
+            /* $v = $productos->verificar_stock($i['cantidad'], $i['id_producto']); */
 
             if ($r == 1) {
-                if ($v == true) {
+                /* if ($v) { */
                     header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us='.$id_user.'&cod='.$codigo.'&arm='.$tipo_armado.'');
-                    /* echo "<script type='text/javascript'>";
-                    echo " window.location.href = '../views/boleta.php?id_us=$id_user&cod=$codigo&arm=$tipo_armado'";
-                    echo "</script>"; */
-                } else {
+               /*  } else {
                     echo "error en la compra falta de stock";
-                }
-            } else {
-
-                echo "<br>";
-            }
+                } */
+            } 
 
 
         endforeach;

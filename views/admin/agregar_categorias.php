@@ -38,6 +38,7 @@ $listas_categorias = $categorias->listar();
                                         <th>id</th>
                                         <th>Nombre</th>
                                         <th>Estado</th>
+                                        <th>Imagen</th>
 
                                         <th>Acciones</th>
 
@@ -51,7 +52,14 @@ $listas_categorias = $categorias->listar();
 
                                             <td><?= $s['cat_id'] ?></td>
                                             <td><?= $s['cat_nombre'] ?></td>
-                                            <td><?= $s['cat_estado'] ?></td>
+                                            <td><?php
+                                                if ($s['cat_estado'] == '1') {
+                                                    echo "Habilitado";
+                                                }else{
+                                                    echo "desabilitado";
+                                                }
+                                                ?></td>
+                                                <td><img width="100px" src="../../resources/images/categorias/<?= $s['imagen'] ?>" ></td>
 
                                             <td>
                                                 <div class="dropdown">
@@ -59,7 +67,7 @@ $listas_categorias = $categorias->listar();
                                                         Acciones
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                        <button class="dropdown-item" type="button">Modificar</button>
+                                                        <a href="?param=modificar_categorias&id=<?=$s['cat_id']?>" class="dropdown-item" type="button">Modificar</a>
                                                         <button class="dropdown-item" type="button">Ver</button>
                                                         <button class="dropdown-item" type="button">Desabilitar</button>
                                                     </div>
@@ -116,7 +124,9 @@ $listas_categorias = $categorias->listar();
                                         <span class="custom-control-label"> Desabilitar </span>
                                     </label>
                                 </div> <!-- form-group end.// -->
-
+                                <div class="form-group">
+                                    <input name="imagen" type="file" class="form-control" accept="image/png,image/jpeg">
+                                </div> 
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block"> Agregar </button>

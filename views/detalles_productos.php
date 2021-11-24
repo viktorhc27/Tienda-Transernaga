@@ -132,7 +132,7 @@ echo "</pre>"; */
 		</main> <!-- col.// -->
 		<div>
 
-			<model-viewer class="w-screen" src="./resources/images/modelos/33/cama.glb" camera-controls auto-rotate ar>
+			<!-- <model-viewer class="w-screen" src="./resources/images/modelos/33/cama.glb" camera-controls auto-rotate ar>
 
 				<div class="progress-bar hide" slot="progress-bar">
 					<div class="update-bar"></div>
@@ -141,7 +141,7 @@ echo "</pre>"; */
 					Ver en tu Espacio
 				</button>
 
-			</model-viewer>
+			</model-viewer> -->
 		</div>
 	</div> <!-- row.// -->
 </div> <!-- card.// -->

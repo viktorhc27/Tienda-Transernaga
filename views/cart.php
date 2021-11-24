@@ -23,39 +23,37 @@ $productos = new Productos();
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <figure class="itemside">
-                                    <div class="aside"><img src="./resources/images/productos/<?= $pro['pro_id'] ?>/<?= $pro['pro_img'] ?>" class="border img-sm"></div>
+                                    <div class="aside">
+                                        <img src="./resources/images/productos/<?= $pro['pro_id'] ?>/<?= $pro['pro_img'] ?>" class="border img-sm">
+                                    </div>
                                     <figcaption class="info">
                                         <span class="text-muted">Mueble</span>
                                         <a href="#" class="title"><?= $pro['pro_nombre'] ?> </a>
                                     </figcaption>
                                 </figure>
-                            </div> <!-- col.// -->
+                            </div>
                             <div class="col">
-
                                 <div class="input-group input-spinner">
-                                    <input style="padding: 0.7rem 0.1rem;" type="number" id="quantity_617d6a895b026"class="form-control" step="1" min="0" max="<?=$pro['pro_stock']?>"  value="<?= $c['cantidad'] ?>" title="Cantidad" size="4" inputmode="numeric">
-                                   
-
-                                </div> <!-- input-group.// -->
-                            </div> <!-- col.// -->
+                                    <form method="post" action="./controller/CarritoController.php?accion=actualizar">
+                                        <input type="hidden" name="id" value="<?= $_SESSION['cart'][$c['id_producto']]['id_producto'] ?>">
+                                        <input style="padding: 0.7rem 0.1rem;" name="cantidad" type="number" id="quantity_617d6a895b026" class="form-control" step="1" min="0" max="<?= $pro['pro_stock'] + $c['cantidad'] ?>" value="<?= $c['cantidad'] ?>" title="Cantidad" size="4" inputmode="numeric">
+                                        <button class="btn btn-warning"><i class="fas fa-sync-alt"></i></button>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="col">
                                 <div class="price h5"> <?= $pro['pro_precio_venta'] * $c['cantidad'] ?> </div>
                             </div>
                             <div class="col flex-grow-0 text-right">
                                 <form action="./controller/CarritoController.php?accion=quitar" method="post">
+                                    <input type="hidden" class="form-control" name="cantidad" value="<?= $_SESSION['cart'][$pro['pro_id']]['cantidad']  ?>">
                                     <input type="hidden" class="form-control" name="id" value="<?= $pro['pro_id'] ?>">
                                     <button class="btn btn-light"> <i class="fa fa-times"></i> </button>
                                 </form>
 
                             </div>
-                        </div> <!-- row.// -->
-                    </article> <!-- card .// -->
-
-
-
-
-
-
+                        </div>
+                    </article>
                 <?php
                 endforeach;
             } else {
@@ -64,50 +62,35 @@ $productos = new Productos();
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             NO HAY PRODUCTOS
-                        </div> <!-- col.// -->
-
-
-
-                    </div> <!-- row.// -->
-                </article> <!-- card .// -->
+                        </div>
+                    </div>
+                </article>
             <?php
             }
 
             ?>
 
 
-        </main> <!-- col.// -->
+        </main>
 
         <aside class="col-md-3">
             <div class="card">
                 <div class="card-body">
-                    <button disabled="false" class="btn btn-warning btn-block"> Actualizar Carrito</button>
-
-                </div> <!-- card-body.// -->
-            </div> <!-- card.// -->
-
-            <div class="card">
-                <div class="card-body">
-
-                
-
                     <dl class="dlist-align">
                         <dt>Total:</dt>
                         <dd id="total" class="text-right text-dark"></dd>
                     </dl>
                     <hr>
                     <a href="?param=ve" class="btn btn-primary btn-block"> Pasar a Caja </a>
-
-                </div> <!-- card-body.// -->
-            </div> <!-- card.// -->
-        </aside> <!-- col.// -->
+                </div>
+            </div>
+        </aside>
     </div>
 </div>
 <script>
     const elementoasumar = Array.from(document.getElementsByClassName("price"));
     let suma = 0;
     elementoasumar.forEach(el => suma = suma + +el.innerText);
-
     document.getElementById("total").innerHTML = "$ " + suma;
     console.log(elementoasumar[1].innerText);
 </script>

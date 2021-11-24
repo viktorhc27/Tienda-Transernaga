@@ -1,7 +1,7 @@
 <?php
 class Ventas
 {
-    private  $tipo_armado, $ven_codigo, $usuarios_id, $productos_pro_id, $ven_id, $ven_total, $ven_cantidad, $create_time, $update_time, $estados_id;
+    private  $tipo_armado, $ven_codigo, $usuarios_id, $productos_pro_id, $venta_id, $ven_total, $ven_cantidad, $create_time, $update_time, $estados_id;
     //GET Y SET
 
     /**
@@ -53,7 +53,7 @@ class Ventas
                 . ":estados_id)");
             $sql->bindParam("usuarios_id", $this->usuarios_id);
             $sql->bindParam("productos_id", $this->productos_pro_id);
-            $sql->bindParam("ven_id", $this->ven_id);
+            $sql->bindParam("ven_id", $this->venta_id);
             $sql->bindParam("tipo_armado", $this->tipo_armado);
             $sql->bindParam("ven_total", $this->ven_total);
             $sql->bindParam("ven_codigo", $this->ven_codigo);
@@ -90,7 +90,7 @@ class Ventas
 
             $con = (new Conexion())->Conectar();
 
-            $sql = $con->prepare("SELECT * FROM ventas where usuario_id= $id");
+            $sql = $con->prepare("SELECT * FROM ventas where usuarios_us_id= $id");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
@@ -104,7 +104,7 @@ class Ventas
         try {
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("update ventas usuarios_id=:usuarios_id, productos_id= :productos_id, ven_total=:ven_total, ven_cantidad=:ven_cantidad, create_time=:create_time, update_time=:update_time set  WHERE ven_id = :id");
-            $sql->bindParam("ven_id", $this->ven_id);
+            $sql->bindParam("ven_id", $this->venta_id);
             $sql->bindparam("usuarios_id", $this->us_id);
             $sql->bindparam("productos_id", $this->productos_id);
             $sql->bindparam("ven_total", $this->ven_total);
@@ -128,10 +128,10 @@ class Ventas
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM ventas WHERE ven_id = :id");
+            $sql = $con->prepare("SELECT * FROM ventas WHERE venta_id = :id");
             $sql->bindParam(':id', $id);
             $sql->execute();
-            $res = $sql->fetch();
+            $res = $sql->fetchAll();
             return $res;
         } catch (PDOException $e) {
             return $e->getMessage();
@@ -149,4 +149,5 @@ class Ventas
             return $e->getMessage();
         }
     }
+    
 }

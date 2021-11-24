@@ -1,6 +1,6 @@
 <?php 
 Class Categorias {
-    private $cat_id, $cat_nombre, $cat_estado, $create_time, $update_time;
+    private $cat_id, $cat_nombre, $cat_estado, $create_time, $update_time, $imagen;
     
     public function __get($key){
         return $this->$key;
@@ -16,13 +16,13 @@ Class Categorias {
         try {
 
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("insert into categorias (cat_id, cat_nombre, cat_estado, create_time, update_time) values(:id,:nombre,:estado,:create_time,:update_time)");
+            $sql = $con->prepare("insert into categorias (cat_id, cat_nombre, cat_estado, create_time, update_time,imagen) values(:id,:nombre,:estado,:create_time,:update_time,:imagen)");
             $sql->bindParam(':id', $this->cat_id);
             $sql->bindParam(':nombre', $this->cat_nombre);
             $sql->bindParam(':estado', $this->cat_estado);
             $sql->bindParam(':create_time', $this->create_time);
             $sql->bindParam(':update_time', $this->update_time);
-
+            $sql->bindParam(':imagen', $this->imagen);
             $res = $sql->execute();
             return $res;
         } catch (PDOException $e) {
@@ -33,13 +33,12 @@ Class Categorias {
     public function modificar(){
         try{
             $con =(new Conexion())->Conectar();
-            $sql= $con->prepare("update productos set cat_id=:id, cat_nombre =:nombre, cat_estado=:estado, create_time=:create_time, update_time=:update_time  WHERE cat_id = :id");
-            
+            $sql= $con->prepare("update categorias set cat_nombre =:nombre, cat_estado=:estado, update_time=:update_time, imagen =:imagen WHERE cat_id = :id");
             $sql->bindParam(':id', $this->cat_id);
             $sql->bindParam(':nombre', $this->cat_nombre);
             $sql->bindParam(':estado', $this->cat_estado);
-            $sql->bindParam(':create_time', $this->create_time);
             $sql->bindParam(':update_time', $this->update_time);
+            $sql->bindParam(':imagen', $this->imagen);
 
             $res = $sql->execute();
             if ($sql->rowCount() == 1) {
@@ -96,5 +95,3 @@ Class Categorias {
 
 
 }
-
-?>
