@@ -1,13 +1,19 @@
 $('#btn-modificar').click(function (e) {
     e.preventDefault();
-    $id= $('#id').val();
+    $id = $('#id').val();
     $nombre = $('#nombre').val();
     $app = $('#app').val();
     $apm = $('#apm').val();
     $correo = $('#correo').val();
     $telefono = $('#telefono').val();
     $direccion = $('#direccion').val();
-    $rol = $('#rol').val();
+    $rol = $('#nuevo_rol').val();
+
+    if ($rol == "0") {
+        $rol = $('#rol').val();
+
+    }
+
 
     if ($nombre != "" && $app != "" && $apm != "" && $correo != "" && $telefono != "" && $direccion != "" && $rol != "") {
         datos = {

@@ -19,7 +19,7 @@ $marcas = $ma->listar();
                 </div>
                 <div id="mensaje"></div>
                 <div class="card-body">
-                    <form id="formuploadajax" method="post" action="../../controller/ProductosController.php?accion=agregar_producto" enctype="multipart/form-data">
+                    <form id="formulario" method="post" action="../../controller/ProductosController.php?accion=agregar_producto" enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label>Codigo</label>
@@ -56,40 +56,40 @@ $marcas = $ma->listar();
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Modelos</label>
-                                <input type="file" name="modelo" class="form-control-file" id="fichero">
-                                <p id="texto"> </p>
+                                <input type="file" name="modelo" class="form-control-file" id="modelo">
+
                             </div>
                             <div class="form-group col-md-6">
                                 <label>imagenes</label>
-                                <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
+                                <input type="file" class="form-control" id="archivo" name="archivo[]" multiple="" accept="image/png,image/jpeg,image/webp">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label>Peso</label>
-                                <input type="text" class="form-control" name="peso">
+                                <input id="peso" type="text" class="form-control" name="peso">
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Stock</label>
-                                <input type="text" class="form-control" name="stock">
+                                <input id="stock" name="stock" type="text" class="form-control" name="stock">
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Color</label>
-                                <input type="text" class="form-control" name="color">
+                                <input id="color" type="text" class="form-control" name="color">
                             </div>
                             <div class="form-group col-md-3">
                                 <label>estado</label>
-                                <select name="estado" class="form-control">
+                                <select id="estado" name="estado" class="form-control">
                                     <option value="">Seleccionar</option>
-                                    <option value="">Habilitado</option>
-                                    <option value="">Deshabilitado</option>
+                                    <option value="1">Habilitado</option>
+                                    <option value="0">Deshabilitado</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Categorias</label>
-                                <select class="form-control" name="categoria">
+                                <select id="categoria" name="categoria" class="form-control" name="categoria">
                                     <option>Seleccione</option>
                                     <?php foreach ($categoria as $cat) :
                                     ?>
@@ -101,9 +101,9 @@ $marcas = $ma->listar();
                             </div>
                             <div class=" form-group col-md-6">
                                 <label>Marcas</label>
-                                <select class="form-control" name="marcas">
+                                <select id="marcas" class="form-control" name="marcas">
 
-                                    <option>Seleccione</option>
+                                    <option value="">Seleccione</option>
                                     <?php foreach ($marcas as $m) :
                                     ?>
                                         <option value="<?= $m['0'] ?>"><?= $m['1'] ?></option>
@@ -122,3 +122,116 @@ $marcas = $ma->listar();
 </div>
 
 <!-- <script type="text/javascript" src="../../resources/js/validaciones/agregar_muebles.js"></script> -->
+<script>
+    $("#btn_guardar").click(function(e) {
+        e.preventDefault();
+        var formData = new FormData();
+        var codigo = $("#codigo").val();
+        var nombre = $("#nombre").val();
+        var precio_compra = $("#precio_compra").val();
+        var precio_venta = $("#precio_venta").val();
+        var altura = $("#altura").val();
+        var ancho = $("#ancho").val();
+        var profundidad = $("#profundidad").val();
+
+        var modelo = $("#modelo").prop("files");
+        var imagenes = $('#archivo').prop("files");
+
+        var peso = $("#peso").val();
+        var stock = $("#stock").val();
+        var color = $("#color").val();
+        var estado = $("#estado").val();
+        var categoria = $("#categoria").val();
+        var marcas = $("#marcas").val();
+
+
+        if (parseInt(precio_compra) < parseInt(precio_venta)) {
+
+            if (codigo != "" && nombre != "" && precio_compra != "" && precio_venta != "" && altura != "" && ancho != "" && profundidad != "" && peso != "" && color != "" && stock != "" && categoria != "" && marcas != "" && estado != "") {
+
+
+                if (modelo.length > 0 && imagenes.length > 0) {
+                    formData.append('codigo', codigo);
+                    formData.append('nombre', nombre);
+                    formData.append('precio_compra', precio_compra);
+                    formData.append('precio_venta', precio_venta);
+                    formData.append('altura', altura);
+                    formData.append('ancho', ancho);
+                    formData.append('profundidad', profundidad);
+                    formData.append('modelo', modelo);
+                    formData.append('peso', peso);
+                    formData.append('stock', stock);
+                    formData.append('color', color);
+                    formData.append('estado', estado);
+                    formData.append('categoria', categoria);
+                    formData.append('marcas', marcas);
+
+                    for (let i = 0; i < imagenes.length; i++) {
+                        formData.append('imagen[' + i + ']', imagenes[i])
+                    }
+                    console.log(formData.get("imagen[0]"));
+                    $.ajax({
+                        url: '../../controller/ProductosController.php?accion=agregar_producto', // point to server-side PHP script 
+                        data: formData,
+                        dataType: 'text', // what to expect back from the PHP script, if anything
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'post',
+                    }).done(function(respuesta) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Agregado',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                    });
+
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Debe subir los Archivos',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+
+
+
+
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Complete todos los campos',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+
+
+
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'El PRECIO VENTA tiene que ser mayor al PRECIO COMPRA ',
+                showConfirmButton: false,
+                timer: 3500
+            })
+        }
+
+
+
+
+
+
+
+    })
+    $("#codigo").blur(function() {
+        
+    })
+</script>

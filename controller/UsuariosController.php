@@ -13,25 +13,33 @@ switch ($accion) {
         $usuarios->__set('us_correo', $_REQUEST['correo']);
 
         $res = $usuarios->login();
-        print_r($res);
+        header('Content-Type:apllication/json');
+
         if (!empty($res)) {
+
             if (password_verify($_REQUEST['password'], $res['us_password'])) {
+                $datos = array(
+                    'estado' => 'ok'
+                );
 
                 $_SESSION['user'] = array(
                     'id' => $res['us_id'],
                     'nombre' => $res['us_nombre'],
                     'correo' => $res['us_correo'],
                     'role' => $res['roles_ro_id']
+
                 );
-                echo "<script type='text/javascript'>window.location.href = '../index.php';</script>";
             } else {
-                echo "<script type='text/javascript'>window.location.href = '../index.php?error=password';</script>";
+                $datos = array(
+                    'estado' => 'password incorrecta'
+                );
             }
         } else {
-
-            echo "<script type='text/javascript'>window.location.href = '../index.php?error=datos';</script>";
+            $datos = array(
+                'estado' => 'ingrese datos'
+            );
         }
-
+        echo json_encode($datos, JSON_FORCE_OBJECT);
 
 
         break;
@@ -40,9 +48,7 @@ switch ($accion) {
 
         $password_hash = password_hash($_REQUEST['password'], PASSWORD_BCRYPT);
         $usuarios = new Usuarios();
-
-
-
+        header('Content-Type:apllication/json');
         $usuarios->__set('us_id', 0);
         $usuarios->__set('us_nombre', $_REQUEST['nombre']);
         $usuarios->__set('us_apellApp', $_REQUEST['app']);
@@ -55,9 +61,18 @@ switch ($accion) {
         $usuarios->__set('roles_ro_id', 1);
         $usuarios->__set('create_time', date("Y-m-d H:i:s"));
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
-        $res = $usuarios->agregar();
+        $res = $usuarios->agregar_();
+        if ($res == 1) {
 
-        echo "<script type='text/javascript'>window.location.href = '../index.php';</script>";
+            $datos = array(
+                'estado' => "agregado"
+            );
+            echo json_encode($datos, JSON_FORCE_OBJECT);
+        }
+
+
+        /* 
+        echo "<script type='text/javascript'>window.location.href = '../index.php';</script>"; */
         break;
 
     case 'register_employees':
@@ -122,20 +137,49 @@ switch ($accion) {
         $usuarios->__set('us_telefono', $_REQUEST['telefono']);
         $usuarios->__set('us_direccion', $_REQUEST['direccion']);
         $usuarios->__set('us_correo', $_REQUEST['correo']);
-        $res =$usuarios->modificar();
 
-        echo $res;
-        header('Content-Type:apllication/json');
-        if ($res == true) {
-            $datos = array(
+        $rol = $_REQUEST['nuevo_rol'];
+        
+        if($rol== 0){
+            $usuarios->__set('roles_ro_id', $_REQUEST['rol']);
+
+        }else{
+            $usuarios->__set('roles_ro_id', $_REQUEST['nuevo_rol']);
+        }
+        $res = $usuarios->modificar();
+
+        
+        /* header('Content-Type:apllication/json'); */
+        if ($res == 1) {
+            /* $datos = array(
                 'datos' => 'modificado'
-            );
+            ); */
+            echo "<script type='text/javascript'>";
+            echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=registrar'";
+            echo "</script>";
         } else {
             $datos = array(
                 'datos' => 'error'
             );
         }
-        echo json_encode($datos, JSON_FORCE_OBJECT);
+        /* echo json_encode($datos, JSON_FORCE_OBJECT); */
+
+        break;
+
+    case 'cambiar_estado':
+        $usuarios = new Usuarios();
+        $id = $_REQUEST['id'];
+       
+
+        $res = $usuarios->cambiar_estado($id);
+        
+         /* if($res == 1){ */
+                echo "<script type='text/javascript'>";
+                echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=registrar'";
+                echo "</script>";   
+           /*  } */
+
+
 
         break;
 

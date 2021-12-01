@@ -7,14 +7,12 @@ $("#btnGuardar").click(function (e) {
     var password = $("#password").val();
     var telefono = $("#telefono").val();
     var direccion = $("#direccion").val();
-    var departamento = $("#departamento").val();
-    var block = $("#block").val();
     var numero = $("#numero").val();
-    var direccion_full = direccion + ", " + departamento + ", " + block + ", N° " + numero;
     var sexo = $("#sexo").val()
     var rol = $("#rol").val()
     var n = validar(correo);
-    console.log(n)
+    console.log("hola")
+    console.log("hola"+n)
     if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && numero != "" && sexo != "" && rol != "") {
         if (validar(correo)) {
             datos = {
@@ -24,12 +22,12 @@ $("#btnGuardar").click(function (e) {
                 "correo": correo,
                 "password": password,
                 "telefono": telefono,
-                "direccion": direccion_full,
+                "direccion": direccion,
                 "sexo": sexo,
                 "rol": rol,
 
             };
-            console.log(datos)
+            
 
             $.ajax({
                 url: '../../controller/UsuariosController.php?accion=register_employees',
@@ -104,8 +102,7 @@ function validar(correo) {
         }
     })
    
-        return true
-    
+        
 }
 $("#correo").blur(function () {
     var correo = $("#correo").val();

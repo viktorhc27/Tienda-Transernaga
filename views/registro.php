@@ -4,30 +4,30 @@
     <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
         <article class="card-body">
             <header class="mb-4">
-                <h4 class="card-title">Sign up</h4>
+                <h4 class="card-title">Registro</h4>
             </header>
             <form method="post" action="./controller/UsuariosController.php?accion=register_user">
                 <div class="form-row">
                     <div class="col form-group">
                         <label>Nombre</label>
-                        <input name="nombre"type="text" class="form-control" placeholder="">
+                        <input id="nom" name="nombre" type="text" class="form-control" placeholder="">
                     </div> <!-- form-group end.// -->
                     <div class="col form-group">
                         <label>Apellido Paterno</label>
-                        <input name="app" type="text" class="form-control" placeholder="">
+                        <input id="App" name="app" type="text" class="form-control" placeholder="">
                     </div> <!-- form-group end.// -->
                     <div class="col form-group">
                         <label>Apellido Materno</label>
-                        <input name="apm" type="text" class="form-control" placeholder="">
+                        <input id="Apm" name="apm" type="text" class="form-control" placeholder="">
                     </div> <!-- form-group end.// -->
                 </div> <!-- form-row end.// -->
                 <div class="form-group">
-                    <label>Email</label>
-                    <input name="correo" type="email" class="form-control" placeholder="">
+                    <label>Correo</label>
+                    <input id="email" type="text" name="correo" type="email" class="form-control">
                     <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
                 </div> <!-- form-group end.// -->
                 <div class="form-group">
-                    <label class="custom-control custom-radio custom-control-inline">
+                    <label id="sexo" class="custom-control custom-radio custom-control-inline">
                         <input class="custom-control-input" checked="" type="radio" name="sexo" value="hombre">
                         <span class="custom-control-label"> Masculino </span>
                     </label>
@@ -39,43 +39,322 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Telefono</label>
-                        <input name="telefono" type="text" class="form-control">
+                        <input id="tel" type="text" name="telefono" type="text" class="form-control">
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-6">
                         <label>Direccion</label>
-                        <input name="direccion" type="text" class="form-control">
+                        <input id="dir" name="direccion" type="text" class="form-control">
                     </div>
                 </div> <!-- form-row.// -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Contraseña</label>
-                        <input name="password" type="password" class="form-control" type="password">
+                        <input id="pass" name="password" type="password" class="form-control" type="password">
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-6">
                         <label>Repetir contraseña</label>
-                        <input class="form-control" type="password">
+                        <input id="r_pass" class="form-control" type="password">
                     </div> <!-- form-group end.// -->
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Register </button>
+                    <button id="btn-registrar" type="submit" class="btn btn-primary btn-block"> Registrar </button>
                 </div> <!-- form-group// -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" checked="">
                         <div class="custom-control-label"> I am agree with <a href="#">terms and contitions</a> </div>
                     </label>
-                </div> <!-- form-group end.// -->
+                </div> -->
+                <!-- form-group end.// -->
             </form>
         </article><!-- card-body.// -->
     </div> <!-- card .// -->
-    <p class="text-center mt-4">Have an account? <a href="?param=login">Log In</a></p>
+    <p class="text-center mt-4">¿Tienes Cuenta? <a href="?param=login">Log In</a></p>
     <br><br>
-    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
-
-
 </section>
+<script>
+    $("#btn-registrar").click(function(e) {
+        e.preventDefault();
+        var nombre = $("#nom").val();
+        var app = $("#App").val();
+        var apm = $("#Apm").val();
+        var correo = $("#email").val();
+        var password = $("#pass").val();
+        var telefono = $("#tel").val();
+        var direccion = $("#dir").val();
+        var sexo = $('input:radio[name=sexo]:checked').val()
+
+        var n = validar(correo);
+        console.log(n)
+        if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && sexo != "" ) {
+            if (validar(correo)) {
+                datos = {
+                    "nombre": nombre,
+                    "app": app,
+                    "apm": apm,
+                    "correo": correo,
+                    "password": password,
+                    "telefono": telefono,
+                    "direccion": direccion,
+                    "sexo": sexo,
 
 
- <!-- <div class="form-group col-md-6">
+                };
+                console.log(datos)
+
+                $.ajax({
+                    url: './controller/UsuariosController.php?accion=register_user',
+                    type: 'POST',
+                    data: datos,
+
+                }).done(function(respuesta) {
+
+
+                    if (respuesta.estado === "agregado") {
+
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Registrado con Exito',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                       
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000)
+                    }
+                })
+            } else {
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Correo ya registrado',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+
+        } else {
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Llene todos los campos',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+
+        }
+
+
+    })
+    //valida correo
+    function validar(correo) {
+        var r;
+        datos = {
+            "correo": correo
+        };
+
+        $.ajax({
+            url: './controller/UsuariosController.php?accion=verificar',
+            type: 'POST',
+            data: datos,
+
+        }).done(function(respuesta) {
+            if (respuesta.datos === "existe") {
+                r = false;
+
+            }
+            if (respuesta.datos === "no existe") {
+                r = true;
+
+            }
+        })
+
+        return true
+
+    }
+
+
+    $("#nombre").blur(function() {
+        var nombre = $("#nombre").val();
+        if (nombre.trim() != '') {
+            $('#nombre').removeClass('is-invalid');
+            $('#nombre').addClass('is-valid');
+        } else {
+            $('#nombre').removeClass('is-valid');
+            $('#nombre').addClass('is-invalid');
+        }
+
+    });
+
+    $("#email").blur(function() {
+
+        var correo = $("#email").val();
+        console.log("hola")
+        if (correo != "") {
+            if (correo.indexOf('@', 0) == -1 || correo.indexOf('.', 0) == -1) {
+                $('#email').removeClass('is-valid');
+                $('#email').addClass('is-invalid');
+                $("#alerta").text('correo no valido');
+
+
+            } else {
+                datos = {
+                    "correo": correo
+                };
+
+                $.ajax({
+                    url: './controller/UsuariosController.php?accion=verificar',
+                    type: 'POST',
+                    data: datos,
+
+                }).done(function(respuesta) {
+                    console.log(JSON.stringify(respuesta));
+                    if (respuesta.datos === "existe") {
+                        $('#email').removeClass('is-valid');
+                        $('#email').addClass('is-invalid');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: '¡Correo ya Registrado!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                    }
+                    if (respuesta.datos === "no existe") {
+                        $('#email').removeClass('is-invalid');
+                        $('#email').addClass('is-valid');
+                        $("#alerta").text('correo disponible');
+
+                    }
+                })
+
+            }
+
+        } else {
+            $('#correo').removeClass('is-valid');
+            $('#correo').addClass('is-invalid');
+        }
+    });
+
+    $("#password_retry").blur(function() {
+        var password = $('#password').val();
+        var password_retry = $("#password_retry").val();
+        if (password == password_retry) {
+
+            $('#password').removeClass('is-invalid');
+            $('#password').addClass('is-valid');
+
+            $('#password_retry').removeClass('is-invalid');
+            $('#password_retry').addClass('is-valid');
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Las contraseñas deben Coincidir ',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
+            $('#password_retry').removeClass('is-valid');
+            $('#password_retry').addClass('is-invalid');
+            $('#password').removeClass('is-valid');
+            $('#password').addClass('is-invalid');
+        }
+
+    });
+    $("#app").blur(function() {
+        var apellidos = $("#app").val();
+        if (apellidos.trim() != '') {
+            $('#app').removeClass('is-invalid');
+            $('#app').addClass('is-valid');
+        } else {
+            $('#app').removeClass('is-valid');
+            $('#app').addClass('is-invalid');
+        }
+
+    });
+    $("#apm").blur(function() {
+        var apellidos = $("#apm").val();
+        if (apellidos.trim() != '') {
+            $('#apm').removeClass('is-invalid');
+            $('#apm').addClass('is-valid');
+        } else {
+            $('#apm').removeClass('is-valid');
+            $('#apm').addClass('is-invalid');
+        }
+
+    });
+    $("#pass").blur(function() {
+        var dato = $("#pass").val();
+        if (dato.trim() != '') {
+            $('#pass').removeClass('is-invalid');
+            $('#pass').addClass('is-valid');
+        } else {
+            $('#pass').removeClass('is-valid');
+            $('#pass').addClass('is-invalid');
+        }
+
+    });
+    $("#telefono").blur(function() {
+        var dato = $("#telefono").val();
+        if (dato.trim() != '') {
+            $('#telefono').removeClass('is-invalid');
+            $('#telefono').addClass('is-valid');
+        } else {
+            $('#telefono').removeClass('is-valid');
+            $('#telefono').addClass('is-invalid');
+        }
+
+    });
+    $("#direccion").blur(function() {
+        var dato = $("#direccion").val();
+        if (dato.trim() != '') {
+            $('#direccion').removeClass('is-invalid');
+            $('#direccion').addClass('is-valid');
+        } else {
+            $('#direccion').removeClass('is-valid');
+            $('#direccion').addClass('is-invalid');
+        }
+
+    });
+    $("#r_pass").blur(function() {
+        console.log("d")
+        var password = $("#pass").val();
+        var retry_password = $("#r_pass").val();
+
+        if (password == retry_password) {
+            $('#pass').removeClass('is-invalid');
+            $('#pass').addClass('is-valid');
+            $('#r_pass').removeClass('is-invalid');
+            $('#r_pass').addClass('is-valid');
+        } else {
+            $('#pass').removeClass('is-valid');
+            $('#pass').addClass('is-invalid');
+            $('#r_pass').removeClass('is-valid');
+            $('#r_pass').addClass('is-invalid');
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Las Contraseñas deben ser iguales',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        if (password == '' && retry_password == '') {
+            $('#pass').removeClass('is-valid');
+            $('#pass').addClass('is-invalid');
+            $('#r_pass').removeClass('is-valid');
+            $('#r_pass').addClass('is-invalid');
+
+        }
+    });
+</script>
+
+<!-- <div class="form-group col-md-6">
                         <label>Country</label>
                         <select id="inputState" class="form-control">
                             <option> Choose...</option>
@@ -85,4 +364,5 @@
                             <option>India</option>
                             <option>Afganistan</option>
                         </select>
-                    </div> --> <!-- form-group end.// -->
+                    </div> -->
+<!-- form-group end.// -->

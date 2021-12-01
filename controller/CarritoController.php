@@ -9,7 +9,7 @@ switch ($accion) {
 
         $id_producto = $_REQUEST["id_producto"];
         $cantidad = $_REQUEST["cantidad"];
-
+        
         if (!empty($_SESSION["cart"])) {
 
             if (in_array($id_producto, $_SESSION["cart"][$id_producto])) {
@@ -17,6 +17,10 @@ switch ($accion) {
 
                     $_SESSION["cart"][$id_producto]["cantidad"] = $_SESSION["cart"][$id_producto]["cantidad"] + $cantidad;
                 }
+                header('Content-Type:apllication/json');
+                $datos = array(
+                    'estado' => 'agregado'
+                );
             } else {
                 if ($productos->verificar_stock($cantidad, $id_producto)) {
                     //no existe en el carrito
@@ -24,6 +28,10 @@ switch ($accion) {
                         'id_producto' => $id_producto,
                         'id_usuario' => '',
                         'cantidad' => $cantidad,
+                    );
+                    header('Content-Type:apllication/json');
+                    $datos = array(
+                        'estado' => 'agregado'
                     );
                 }
             }
@@ -34,11 +42,21 @@ switch ($accion) {
                     'id_usuario' => '',
                     'cantidad' => $cantidad,
                 );
+                header('Content-Type:apllication/json');
+                $datos = array(
+                    'estado' => 'agregado'
+                );
             }
         }
-        echo "<script>";
+        echo json_encode($datos, JSON_FORCE_OBJECT);
+        /* echo "<script>";
         echo "location.href='../index.php?param=cart'";
-        echo "</script>";
+        echo "</script>"; */
+
+
+
+
+
         break;
 
     case "quitar":

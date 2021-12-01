@@ -3,7 +3,7 @@ session_start();
 if (empty($_REQUEST["param"])) {
     $_REQUEST['param'] = "inicio";
 }
-//cacquitasdasda
+
 ?>
 
 <!DOCTYPE HTML>
@@ -38,9 +38,11 @@ if (empty($_REQUEST["param"])) {
 
     <!-- Flexslider -->
     <link href="./resources/FlexSlider/flexslider.css" type="text/css" rel="stylesheet">
+    <!-- owlcarousel -->
+    <link href="./resources/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" type="text/css" rel="stylesheet">
+    <link href="./resources/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css" type="text/css" rel="stylesheet">
 
-    <!-- custom javascript -->
-    <script src="js/script.js" type="text/javascript"></script>
+
 
     <script type="text/javascript">
         /// some script
@@ -85,6 +87,7 @@ if (empty($_REQUEST["param"])) {
             </div> <!-- container //  -->
             <!-- container .l.//  -->
         </nav>
+
         <section class="border-bottom">
             <nav class="navbar navbar-main navbar-expand-lg navbar-light">
                 <div class="container">
@@ -158,7 +161,7 @@ if (empty($_REQUEST["param"])) {
 
                             if (!empty($_SESSION['user'])) {
 
-                                if ($_SESSION['user']['role'] == "1" || $_SESSION['user']['role'] == 1) {
+                                if ($_SESSION['user']['role'] == 1) {
 
                             ?>
 
@@ -188,7 +191,7 @@ if (empty($_REQUEST["param"])) {
                                 <?php
                                     //administrador
                                 }
-                                if ($_SESSION['user']['role'] == "2" || $_SESSION['user']['role'] == 2) {
+                                if ($_SESSION['user']['role'] == 2) {
                                 ?>
 
                                     <div class="widget-header dropdown">
@@ -198,7 +201,7 @@ if (empty($_REQUEST["param"])) {
                                                     <i class="icon-sm rounded-circle border fa fa-user"></i>
                                                 </div>
                                                 <div class="text">
-                                                    <small class="text-muted">Nombre</small>
+                                                    <small class="text-muted">Hola</small>
                                                     <div><?= $_SESSION['user']['nombre'] ?> </div>
                                                 </div>
                                             </div>
@@ -216,7 +219,7 @@ if (empty($_REQUEST["param"])) {
 
                                 <?php
                                 }
-                                if ($_SESSION['user']['role'] == "3" || $_SESSION['user']['role'] == 3) { ?>
+                                if ($_SESSION['user']['role'] == 3) { ?>
                                     <div class="widget-header dropdown">
                                         <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
                                             <div class="icontext">
@@ -224,7 +227,7 @@ if (empty($_REQUEST["param"])) {
                                                     <i class="icon-sm rounded-circle border fa fa-user"></i>
                                                 </div>
                                                 <div class="text">
-                                                    <small class="text-muted">Nombre</small>
+                                                    <small class="text-muted">Hola</small>
                                                     <div><?= $_SESSION['user']['nombre'] ?> </div>
                                                 </div>
                                             </div>
@@ -252,7 +255,7 @@ if (empty($_REQUEST["param"])) {
                                                     <i class="icon-sm rounded-circle border fa fa-user"></i>
                                                 </div>
                                                 <div class="text">
-                                                    <small class="text-muted">Nombre</small>
+                                                    <small class="text-muted">Hola</small>
                                                     <div><?= $_SESSION['user']['nombre'] ?> </div>
                                                 </div>
                                             </div>
@@ -283,17 +286,17 @@ if (empty($_REQUEST["param"])) {
                                         </div>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-height" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-154px, 42px, 0px);">
-                                        <form method="post" action="./controller/UsuariosController.php?accion=login" class="px-4 py-3">
+                                        <div class="px-4 py-3">
                                             <div class="form-group">
                                                 <label>Email address</label>
-                                                <input name="correo" type="email" class="form-control" placeholder="email@example.com">
+                                                <input id="correo" type="email" class="form-control" placeholder="email@example.com">
                                             </div>
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input name="password" type="password" class="form-control" placeholder="Password">
+                                                <input id="password" type="password" class="form-control" placeholder="Password">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Entrar</button>
-                                        </form>
+                                            <button id="login" class="btn btn-primary btn-block"> Login </button>
+                                        </div>
                                         <hr class="dropdown-divider">
                                         <a class="dropdown-item" href="?param=register">¿Tienes cuenta? Inscribirse</a>
                                         <a class="dropdown-item" href="#">¿Se te olvidó tu contraseña?</a>
@@ -362,9 +365,9 @@ if (empty($_REQUEST["param"])) {
         case "cart":
             include_once './views/cart.php';
             break;
-            case "detalles":
-                include_once './views/detalles_pedidos.php';
-                break;
+        case "detalles":
+            include_once './views/detalles_pedidos.php';
+            break;
 
         case "ve":
             include_once './views/proceso_venta.php';
@@ -373,9 +376,9 @@ if (empty($_REQUEST["param"])) {
             include_once './views/mispedidos.php';
             break;
 
-            case "misdatos":
-                include_once './views/misdatos.php';
-                break;
+        case "misdatos":
+            include_once './views/misdatos.php';
+            break;
         case "ensamblador": ?>
             <script type="text/javascript">
                 window.location.href = "./views/ensamblador/index.php?param=inicio";
@@ -385,58 +388,32 @@ if (empty($_REQUEST["param"])) {
 
     ?>
 
-
+    
 
     <!-- ========================= FOOTER ========================= -->
     <footer class="section-footer border-top bg">
         <div class="container">
             <section class="footer-top  padding-y">
                 <div class="row">
-                    <aside class="col-md col-6">
-                        <h6 class="title">Brands</h6>
+                    <aside class="col-md col-6 text-center">
+                        <h6 class="title">Muebles Transernaga</h6>
                         <ul class="list-unstyled">
-                            <li> <a href="#">Adidas</a></li>
-                            <li> <a href="#">Puma</a></li>
-                            <li> <a href="#">Reebok</a></li>
-                            <li> <a href="#">Nike</a></li>
+                            <li> <a href="#">Calle, Arica</a></li>
+                            <li> <a href="#">+56 9 9842 9944</a></li>
+                            <li> <a href="#">contacto@mueblestransernaga.cl</a></li>
+                            
                         </ul>
                     </aside>
-                    <aside class="col-md col-6">
-                        <h6 class="title">Company</h6>
-                        <ul class="list-unstyled">
-                            <li> <a href="#">About us</a></li>
-                            <li> <a href="#">Career</a></li>
-                            <li> <a href="#">Find a store</a></li>
-                            <li> <a href="#">Rules and terms</a></li>
-                            <li> <a href="#">Sitemap</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-md col-6">
-                        <h6 class="title">Help</h6>
-                        <ul class="list-unstyled">
-                            <li> <a href="#">Contact us</a></li>
-                            <li> <a href="#">Money refund</a></li>
-                            <li> <a href="#">Order status</a></li>
-                            <li> <a href="#">Shipping info</a></li>
-                            <li> <a href="#">Open dispute</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-md col-6">
-                        <h6 class="title">Account</h6>
-                        <ul class="list-unstyled">
-                            <li> <a href="#"> User Login </a></li>
-                            <li> <a href="#"> User register </a></li>
-                            <li> <a href="#"> Account Setting </a></li>
-                            <li> <a href="#"> My Orders </a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-md">
+                    
+                    
+                    
+                    <aside class="col-md col-6 text-center">
                         <h6 class="title">Social</h6>
                         <ul class="list-unstyled">
                             <li><a href="#"> <i class="fab fa-facebook"></i> Facebook </a></li>
-                            <li><a href="#"> <i class="fab fa-twitter"></i> Twitter </a></li>
+                            
                             <li><a href="#"> <i class="fab fa-instagram"></i> Instagram </a></li>
-                            <li><a href="#"> <i class="fab fa-youtube"></i> Youtube </a></li>
+                            
                         </ul>
                     </aside>
                 </div> <!-- row.// -->
@@ -446,16 +423,12 @@ if (empty($_REQUEST["param"])) {
                 <div class="col-md-2">
                     <p class="text-muted"> &copy 2021 Muebles Transernaga </p>
                 </div>
-                <div class="col-md-8 text-md-center">
-                    <span class="px-2">info@pixsellz.io</span>
-                    <span class="px-2">+879-332-9375</span>
-                    <span class="px-2">Street name 123, Avanue abc</span>
-                </div>
-                <div class="col-md-2 text-md-right text-muted">
+               
+                <!-- <div class="col-md-2 text-md-right text-muted">
                     <i class="fab fa-lg fa-cc-visa"></i>
                     <i class="fab fa-lg fa-cc-paypal"></i>
                     <i class="fab fa-lg fa-cc-mastercard"></i>
-                </div>
+                </div> -->
             </section>
         </div><!-- //container -->
     </footer>
@@ -463,5 +436,28 @@ if (empty($_REQUEST["param"])) {
 
 </body>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="./resources/js/validaciones/login.js" type="text/javascript"></script>
+<!-- owl js -->
+<script src="./resources/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.js" type="text/javascript"></script>
+<script src="./resources/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js" type="text/javascript"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 5
+            }
+        }
+    })
+</script>
+
 
 </html>

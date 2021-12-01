@@ -66,11 +66,10 @@ class Roles{
         }
     }
 
-    public function buscar(){
+    public function buscar($id){
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM roles WHERE ro_id = :id");
-            $sql->bindParam(':id', $id);
+            $sql = $con->prepare("SELECT * FROM roles WHERE ro_id = $id");
             $sql->execute();
             $res = $sql->fetch();
             return $res;

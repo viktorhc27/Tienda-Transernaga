@@ -1,6 +1,7 @@
 <?php 
 session_start();
-session_destroy();
+unset($_SESSION['user']);
+/* session_destroy(); */
 
 echo "<script>";
 echo "location.href='../index.php';";

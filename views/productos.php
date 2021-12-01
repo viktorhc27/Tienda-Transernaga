@@ -162,7 +162,7 @@ $pag = (new Productos())->paginacion($empieza, $por_pagina);
 										<div class="fix-height">
 											<a href="?param=detalles_productos&id=<?= $p['pro_id'] ?>" class="title"><?= $p['pro_nombre'] ?></a>
 											<div class="price-wrap mt-2">
-												<span class="price">$<?= number_format($p['pro_precio_compra'], 0) ?></span>
+												<span class="price">$<?= number_format($p['pro_precio_venta'], 0) ?></span>
 												<!-- <del class="price-old">$1980</del> -->
 											</div> <!-- price-wrap.// -->
 										</div>

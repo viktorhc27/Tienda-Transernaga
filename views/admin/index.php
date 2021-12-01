@@ -16,7 +16,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
         <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
         <!-- jQuery -->
-        <script src="../../resources/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
         <!-- Bootstrap4 files-->
         <script src="../../resources/js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -87,8 +87,8 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                                     <a class="dropdown-item" href="?param=productos">Productos</a>
                                     <a class="dropdown-item" href="?param=categorias">Categorias</a>
                                     <a class="dropdown-item" href="?param=marcas">Marcas</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <!-- <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a> -->
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -145,6 +145,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                 break;
             case "modificar_categorias":
                 include_once 'editar_categorias.php';
+                break;
+            case "stock":
+                include_once 'stocks.php';
                 break;
         }
         ?>

@@ -202,7 +202,7 @@ class Usuarios
 
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM usuarios where us_correo = :correo");
+            $sql = $con->prepare("SELECT * FROM usuarios where us_correo = :correo and us_estado = 1");
             $sql->bindParam(':correo', $this->us_correo);
             $sql->execute();
             $res = $sql->fetch();
@@ -239,6 +239,26 @@ class Usuarios
                 return true;
             } else {
                 return false;
+            }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function cambiar_estado($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT us_estado from usuarios WHERE us_id = $id");
+            $sql->execute();
+            $res = $sql->fetch();
+            if ($res['us_estado'] == 1) {
+                $sql = $con->prepare("UPDATE usuarios SET us_estado = 0 WHERE us_id = $id");
+                $sql->execute();
+                return false;
+            } else {
+                $sql = $con->prepare("UPDATE usuarios SET us_estado = 1 WHERE us_id = $id");
+                $sql->execute();
+                return true;
             }
         } catch (PDOException $ex) {
             return $ex->getMessage();

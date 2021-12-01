@@ -21,8 +21,8 @@ switch ($accion) {
         $producto->__set('pro_altura',            $_REQUEST['altura']);
         $producto->__set('pro_ancho',             $_REQUEST['ancho']);
         $producto->__set('pro_profundidad',       $_REQUEST['profundidad']);
-        $producto->__set('pro_modelo',            $_FILES['modelo']['name']);
-        $producto->__set('pro_img',               $_FILES["archivo"]["name"][0]);
+        /*  $producto->__set('pro_modelo',            $_FILES['modelo']['name']);  */
+        $producto->__set('pro_img',               $_FILES["imagen"]["name"][0]);
         $producto->__set('pro_peso',              $_REQUEST['peso']);
         $producto->__set('pro_stock',             $_REQUEST['stock']);
         $producto->__set('pro_color',             $_REQUEST['color']);
@@ -32,22 +32,23 @@ switch ($accion) {
         $producto->__set('create_time',           date("Y-m-d H:i:s"));
         $producto->__set('update_time',           date("Y-m-d H:i:s"));
 
-        //modelo
+        /*   //modelo
         $archivo_modelo = $_FILES['modelo']['tmp_name']; // obtiene el archivo
         $ruta = "../resources/images/modelos";
         $ruta_modelo = $ruta . "/" . $producto->__get('pro_modelo'); //imagen/imagen.tipo    
-        move_uploaded_file($archivo_modelo, $ruta_modelo);
+        move_uploaded_file($archivo_modelo, $ruta_modelo); */
 
         $id_producto =  $producto->agregar();
 
         //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
-        foreach ($_FILES["archivo"]['tmp_name'] as $key => $tmp_name) {
+        foreach ($_FILES["imagen"]['tmp_name'] as $key => $tmp_name) {
             //Validamos que el archivo exista
-            if ($_FILES["archivo"]["name"][$key]) {
-                $filename = $_FILES["archivo"]["name"][$key]; //Obtenemos el nombre original del archivo
-                $source = $_FILES["archivo"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
+            if ($_FILES["imagen"]["name"][$key]) {
+                $filename = $_FILES["imagen"]["name"][$key]; //Obtenemos el nombre original del archivo
+                $source = $_FILES["imagen"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
 
                 $directorio = '../resources/images/productos/' . $id_producto; //Declaramos un  variable con la ruta donde guardaremos los archivos
+
 
                 //Validamos si la ruta de destino existe, en caso de no existir la creamos
                 if (!file_exists($directorio)) {
@@ -80,25 +81,45 @@ switch ($accion) {
             }
         }
 
-        /*  header('Content-Type:apllication/json'); */
+        header('Content-Type:apllication/json');
 
         $res = $producto->verificar_productos($id_producto);
 
         if ($res == 1) {
-            echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=productos';</script>";
-            /* $datos = array(
+            /*  echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=productos';</script>"; */
+            $datos = array(
                 'datos' => 'Agregado'
-            ); */
+            );
         } else {
-            /* $datos = array(
+            $datos = array(
                 'datos' => 'no Agregado'
+            );
+        }
+        echo json_encode($datos, JSON_FORCE_OBJECT);
+
+
+
+
+
+        break;
+
+    case 'cambiar_estado':
+
+        $id = $_REQUEST['id'];
+        $productos = new Productos();
+        $cambio = $productos->cambiar_estado($id);
+        echo $cambio;
+
+        /* header('Content-Type:apllication/json'); */
+        if ($cambio == 1) {
+            /* $datos = array(
+                'datos' => 'hecho'
             ); */
+
+             echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=productos';</script>";
+        }else{
+            echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=productos';</script>";
         }
         /* echo json_encode($datos, JSON_FORCE_OBJECT); */
-
-
-
-
-
         break;
 }

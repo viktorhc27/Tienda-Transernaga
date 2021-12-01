@@ -38,7 +38,7 @@ $listas_marcas = $marcas->listar();
 
                                         <th>Nombre</th>
                                         <th>Imagen</th>
-                                        
+
                                         <th>Acciones</th>
 
                                     </tr>
@@ -50,8 +50,10 @@ $listas_marcas = $marcas->listar();
                                     ?> <tr>
 
                                             <td><?= $s['mar_nombre'] ?></td>
-                                            <td><?= $s['mar_imagen'] ?></td>
-                                         
+                                            <td>
+                                                <img width="100px" src="../../resources/images/marcas/<?= $s['mar_imagen']?>">
+                                            </td>
+
                                             <td>
                                                 <div class="dropdown">
                                                     <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -60,7 +62,7 @@ $listas_marcas = $marcas->listar();
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                                         <button class="dropdown-item" type="button">Modificar</button>
                                                         <button class="dropdown-item" type="button">Ver</button>
-                                                        <button class="dropdown-item" type="button">Desabilitar</button>
+                                                        <!-- <button class="dropdown-item" type="button">Desabilitar</button> -->
                                                     </div>
                                                 </div>
                                             </td>
@@ -109,8 +111,8 @@ $listas_marcas = $marcas->listar();
                                     <label>Imagen</label>
                                     <input type="file" name="imagen" class="form-control">
                                 </div> <!-- form-group end.// -->
-                                
-                                
+
+
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block"> Agregar </button>
                                 </div> <!-- form-group// -->
@@ -128,7 +130,7 @@ $listas_marcas = $marcas->listar();
                     </div>
                     <!--/.col (right) -->
                 </div>
-               
+
                 <!-- /.row -->
             </div>
         </div>

@@ -2,12 +2,20 @@
 include_once './model/Ventas.php';
 include_once './model/Productos.php';
 include_once './model/conexion.php';
+include_once './model/Usuarios.php';
 $ventas = new Ventas();
 $productos = new Productos();
+$usuarios = new Usuarios();
+
 $id = $_REQUEST['id'];
 $pedidos = $ventas->buscar($id);
+$id_cliente= $pedidos['0']['0'];
 
+$usuarios->buscar($id_cliente);
 
+echo "<pre>";
+print_r($usuarios);
+echo "</pre>";
 ?>
 
 <section class="section-content padding-y bg">
@@ -37,7 +45,7 @@ $pedidos = $ventas->buscar($id);
                         <article class="card">
                             <div class="card-body row no-gutters">
                                 <div class="col">
-                                    <strong>Direccion de Entrega:</strong> <br>16:40, 12 nov 2018
+                                    <strong>Direccion de Entrega:</strong> <br><?=$usuarios['us_direccion']?></strong>
                                 </div>
                                 <div class="col">
                                     <strong>Numero:</strong> <br><i class="fa fa-phone"></i> +123467890

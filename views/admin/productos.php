@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once '../../model/Productos.php';
 $p = new Productos();
 
@@ -23,11 +23,9 @@ $productos = $p->leer();
                     <!-- general form elements -->
 
                     <div class="card card-default">
-                        <ul class="nav bg-white border">
-                            <li><a href="?param=agregar-muebles" type="button" class="btn btn-primary">Agregar Muebles</a></li>
-                            <!-- <li><a class="nav-link" href="">Menu item 2</a></li>
-                            <li><a class="nav-link" href="">Menu item 3</a></li>
-                            <li><a class="nav-link" href="">Menu item 4</a></li> -->
+                        <ul class="nav ">
+                            <li><a href="?param=agregar-muebles" type="button" class="btn btn-outline-primary">Agregar Muebles</a></li>
+                            <li><a href="?param=stock" type="button" class="btn btn-outline-success">Stocks</a></li>
                         </ul>
                     </div>
                     <!--/.col (right) -->
@@ -57,6 +55,7 @@ $productos = $p->leer();
                                         <th>Precio</th>
                                         <th>Stock</th>
                                         <th>Modelo</th>
+                                        <th>Imagen</th>
                                         <th>Categoria</th>
                                         <th>Marca</th>
                                         <th>Estado</th>
@@ -71,15 +70,23 @@ $productos = $p->leer();
                                     foreach ($productos as $p) :
                                     ?>
                                         <tr>
-                                            <td><?=$p['pro_id']?></td>
-                                            <td><?=$p['pro_codigo']?></td>
-                                            <td><?=$p['pro_nombre']?></td>
-                                            <td><?=$p['pro_precio_venta']?></td>
-                                            <td><?=$p['pro_stock']?></td>
-                                            <td><?=$p['pro_modelo']?></td>
-                                            <td><?=$p['categorias_cat_id']?></td>
-                                            <td><?=$p['marcas_mar_id']?></td>
-                                            <td><?=$p['pro_estado']?></td>
+                                            <td><?= $p['pro_id'] ?></td>
+                                            <td><?= $p['pro_codigo'] ?></td>
+                                            <td><?= $p['pro_nombre'] ?></td>
+                                            <td><?= $p['pro_precio_venta'] ?></td>
+                                            <td><?= $p['pro_stock'] ?></td>
+                                            <td><?= $p['pro_modelo'] ?></td>
+                                            <td><img width="50px" src="../../resources/images/productos/<?= $p['pro_id'] ?>/<?= $p['pro_img'] ?>"></td>
+                                            <td><?= $p['categorias_cat_id'] ?></td>
+                                            <td><?= $p['marcas_mar_id'] ?></td>
+                                            <td><?php
+                                                if ($p['pro_estado'] == 1) { ?>
+                                                    <span class="badge badge-success"> Habilitado </span>
+                                                <?php } else { ?>
+                                                    <span class="badge badge-danger"> desabilitado </span>
+                                                <?php }
+                                                ?>
+                                            </td>
                                             <td>
                                                 <div class="dropdown">
                                                     <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,8 +94,12 @@ $productos = $p->leer();
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                                         <button class="dropdown-item" type="button">Modificar</button>
-                                                        <a href="?param=ver_product&id=<?=$p['pro_id']?>" class="dropdown-item" type="button">Ver</a>
-                                                        <button class="dropdown-item" type="button">Deshabilitar</button>
+                                                        <a href="?param=ver_product&id=<?= $p['pro_id'] ?>" class="dropdown-item" type="button">Ver</a>
+                                                        <form method="post" action="../../controller/ProductosController.php?accion=cambiar_estado">
+                                                            <input type="hidden" id="id" name="id" value="<?= $p['pro_id'] ?>">
+                                                            <button id="estado" class="dropdown-item" >Cambiar Estado</button>
+                                                        </form>
+
                                                     </div>
                                                 </div>
                                             </td>
@@ -111,3 +122,5 @@ $productos = $p->leer();
 
             </div>
         </div>
+
+      <!-- <script type="text/javascript" src="../../resources/js/validaciones/cambiar_estado.js"></script> -->

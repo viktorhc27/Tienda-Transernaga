@@ -98,7 +98,7 @@ echo "</pre>"; */
 
 								if ($lista['pro_stock'] > 0) {
 								?>
-									<select class="form-control" name="cantidad">
+									<select id="cantidad" class="form-control" name="cantidad">
 										<?php
 										for ($i = 1; $i <= $lista['pro_stock']; $i++) {
 										?>
@@ -113,7 +113,6 @@ echo "</pre>"; */
 								<?php
 								} else {
 									echo "<label style='color:red;'>No HAY STOCK</label>";
-
 								}
 
 
@@ -125,28 +124,111 @@ echo "</pre>"; */
 						</div>
 					</div>
 					<br>
-					<input type="hidden" name="id_producto" id="id_producto" value="<?= $lista['pro_id'] ?>">
-					<button class="btn  btn-outline-warning"> <span class="text">Agregar al Carro</span> <i class="fas fa-shopping-cart"></i> </button>
+					<input type="hidden" id="id_producto" name="id_producto" id="id_producto" value="<?= $lista['pro_id'] ?>">
+					<button id="agregar" type="submit" class="btn btn-outline-warning"> <span class="text">Agregar al Carro</span> <i class="fas fa-shopping-cart"></i> </button>
 				</form>
 			</article>
 		</main> <!-- col.// -->
-		<div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<header class="section-heading">
+						<h3 class="section-title text-center">Modelo 3D</h3>
+					</header><!-- sect-heading -->
+					<model-viewer style="width: 100%; height: 500px;" class="w-screen" src="./resources/images/modelos/33/cama.glb" camera-controls auto-rotate ar>
 
-			<!-- <model-viewer class="w-screen" src="./resources/images/modelos/33/cama.glb" camera-controls auto-rotate ar>
+						<div class="progress-bar hide" slot="progress-bar">
+							<div class="update-bar"></div>
+						</div>
+						<button slot="ar-button" id="ar-button">
+							Ver en tu Espacio
+						</button>
 
-				<div class="progress-bar hide" slot="progress-bar">
-					<div class="update-bar"></div>
+					</model-viewer>
 				</div>
-				<button slot="ar-button" id="ar-button">
-					Ver en tu Espacio
-				</button>
 
-			</model-viewer> -->
+			</div>
+
+
 		</div>
 	</div> <!-- row.// -->
 </div> <!-- card.// -->
 <br>
 <script type="text/javascript">
+	$('#agregar').click(function(e) {
+		e.preventDefault();
+		var id_producto = $('#id_producto').val();
+		var cantidad = $('#cantidad').val();
+
+		datos = {
+			'id_producto': id_producto,
+			'cantidad': cantidad
+		};
+
+		$.ajax({
+			url: './controller/CarritoController.php?accion=agregar',
+			type: 'POST',
+			data: datos,
+		}).done(function(respuesta) {
+			if (respuesta.estado === "agregado") {
+				Swal.fire({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Agregado',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(function() {
+					location.reload();
+				}, 2000)
+
+
+
+			}
+		})
+
+
+	});
+
+
+	/* $("#btncarrito").click(function(e) {
+		e.preventDefault();
+		var id_productos = $("#id_productos").val();
+		var cantidad = $("#cantidad").val();
+
+		if (id_productos != "" && cantidad != "") {
+
+			datos = {
+				"id_productos": id_productos,
+				"cantidad": cantidad
+
+			}
+
+			$.ajax({
+				action: "./controller/CarritoController.php?accion=agregar",
+				type: "post",
+				data: datos,
+			}).done(function(respuesta) {
+				if (respuesta.datos === "agregado") {
+					Swal.fire({
+						position: 'top-end',
+						icon: 'success',
+						title: 'Agregado',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					setTimeout(function() {
+						location.reload(); 
+					}, 2000)
+				}
+			})
+		}
+	})
+
+ */
+
+
+
 	// Can also be used with $(document).ready()
 	$(window).load(function() {
 		$('.flexslider').flexslider({

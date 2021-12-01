@@ -190,7 +190,7 @@ class Productos
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM productos LIMIT $empieza, $por_pagina");
+            $sql = $con->prepare("SELECT * FROM productos WHERE pro_estado = 1 LIMIT $empieza, $por_pagina");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
@@ -203,7 +203,7 @@ class Productos
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM productos where categorias_cat_id = $cat LIMIT $empieza, $por_pagina");
+            $sql = $con->prepare("SELECT * FROM productos where categorias_cat_id = $cat AND pro_estado = 1 LIMIT $empieza, $por_pagina");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
@@ -240,9 +240,28 @@ class Productos
         try {
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("UPDATE productos SET pro_stock = pro_stock + $cantidad WHERE pro_id = $id");
-            $res=$sql->execute();
+            $res = $sql->execute();
             return $res;
-            
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function cambiar_estado($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT pro_estado from productos WHERE pro_id = $id");
+            $sql->execute();
+            $res = $sql->fetch();
+            if ($res['pro_estado'] == 1) {
+                $sql = $con->prepare("UPDATE productos SET pro_estado = 0 WHERE pro_id = $id");
+                $sql->execute();
+                return false;
+            } else {
+                $sql = $con->prepare("UPDATE productos SET pro_estado = 1 WHERE pro_id = $id");
+                $sql->execute();
+                return true;
+            }
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }
