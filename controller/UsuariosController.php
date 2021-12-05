@@ -1,5 +1,7 @@
 <?php
 require_once '../model/Usuarios.php';
+require_once '../model/Direcciones.php';
+require_once '../model/DireccionesUsuarios.php';
 require_once '../model/Conexion.php';
 
 $accion = $_REQUEST['accion'];
@@ -46,6 +48,9 @@ switch ($accion) {
 
     case 'register_user':
 
+        $direcciones = new Direcciones();
+        $direccionesUsuarios = new DireccionesUsuarios();
+
         $password_hash = password_hash($_REQUEST['password'], PASSWORD_BCRYPT);
         $usuarios = new Usuarios();
         header('Content-Type:apllication/json');
@@ -56,12 +61,28 @@ switch ($accion) {
         $usuarios->__set('us_correo', $_REQUEST['correo']);
         $usuarios->__set('us_password', $password_hash);
         $usuarios->__set('us_telefono', $_REQUEST['telefono']);
-        $usuarios->__set('us_direccion', $_REQUEST['direccion']);
+
+        /*  $usuarios->__set('us_direccion', $_REQUEST['direccion']); */
+
+
         $usuarios->__set('us_sexo', $_REQUEST['sexo']);
         $usuarios->__set('roles_ro_id', 1);
         $usuarios->__set('create_time', date("Y-m-d H:i:s"));
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
-        $res = $usuarios->agregar_();
+        $id_usuario = $usuarios->agregar();
+
+        $direcciones->__set("di_id", 0);
+        $direcciones->__set("di_nombre", $_REQUEST['direccion']);
+
+        $direcciones->__set("di_latitud", $_REQUEST['latitud']);
+        $direcciones->__set("di_longitud", $_REQUEST['longitud']);
+
+        $id_direcciones = $direcciones->agregar();
+
+        $direccionesUsuarios->__set("direcciones_di_id", $id_direcciones);
+        $direccionesUsuarios->__set("usuarios_us_id", $id_usuario);
+        $res =  $direccionesUsuarios->agregar();
+
         if ($res == 1) {
 
             $datos = array(
@@ -93,6 +114,7 @@ switch ($accion) {
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
         $res = $usuarios->agregar_();
 
+        echo $res;
 
         if ($res == 1) {
             //array para convertir a JSON
@@ -139,16 +161,15 @@ switch ($accion) {
         $usuarios->__set('us_correo', $_REQUEST['correo']);
 
         $rol = $_REQUEST['nuevo_rol'];
-        
-        if($rol== 0){
-            $usuarios->__set('roles_ro_id', $_REQUEST['rol']);
 
-        }else{
+        if ($rol == 0) {
+            $usuarios->__set('roles_ro_id', $_REQUEST['rol']);
+        } else {
             $usuarios->__set('roles_ro_id', $_REQUEST['nuevo_rol']);
         }
         $res = $usuarios->modificar();
 
-        
+
         /* header('Content-Type:apllication/json'); */
         if ($res == 1) {
             /* $datos = array(
@@ -169,15 +190,15 @@ switch ($accion) {
     case 'cambiar_estado':
         $usuarios = new Usuarios();
         $id = $_REQUEST['id'];
-       
+
 
         $res = $usuarios->cambiar_estado($id);
-        
-         /* if($res == 1){ */
-                echo "<script type='text/javascript'>";
-                echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=registrar'";
-                echo "</script>";   
-           /*  } */
+
+        /* if($res == 1){ */
+        echo "<script type='text/javascript'>";
+        echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=registrar'";
+        echo "</script>";
+        /*  } */
 
 
 

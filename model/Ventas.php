@@ -84,6 +84,34 @@ class Ventas
             return $e->getMessage();
         }
     }
+    public function leer_reparto()
+    {
+        try {
+
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas where estados_id = 4");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function ventas_pendientes()
+    {
+        try {
+
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas where estados_id = 1");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
     public function mis_pedidos($id)
     {
         try {
@@ -98,6 +126,7 @@ class Ventas
             return $e->getMessage();
         }
     }
+
 
     public function modificar()
     {
@@ -149,5 +178,60 @@ class Ventas
             return $e->getMessage();
         }
     }
-    
+    public function ventas_hoy($ayer)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("select * from ventas where create_time >= '$ayer'");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function buscar_x_fecha($fecha1, $fecha2)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * from ventas where create_time >= $fecha1 and create_time < $fecha2");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function Reportes_total($hoy)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare(" SELECT count(venta_id) AS cantidad_ventas,"
+                . "SUM(ven_total) AS total_ventas,"
+                . "(SELECT SUM(pro_precio_compra) FROM productos WHERE productos.pro_id = ventas.productos_pro_id )as costo_ventas,"
+                . "SUM(ven_total)-(SELECT SUM(pro_precio_compra) FROM productos WHERE productos.pro_id = ventas.productos_pro_id)"
+                . "as ganancias FROM ventas WHERE create_time >= '$hoy'");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function reporte_entre_fecha($inicio,$final)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare(" SELECT count(venta_id) AS cantidad_ventas,"
+                . "SUM(ven_total) AS total_ventas,"
+                . "(SELECT SUM(pro_precio_compra) FROM productos WHERE productos.pro_id = ventas.productos_pro_id )as costo_ventas,"
+                . "SUM(ven_total)-(SELECT SUM(pro_precio_compra) FROM productos WHERE productos.pro_id = ventas.productos_pro_id)"
+                . "as ganancias FROM ventas WHERE create_time BETWEEN '$inicio' AND '$final'");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }

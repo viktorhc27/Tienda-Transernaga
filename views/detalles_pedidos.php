@@ -13,9 +13,9 @@ $id_cliente= $pedidos['0']['0'];
 
 $usuarios->buscar($id_cliente);
 
-echo "<pre>";
+/* echo "<pre>";
 print_r($usuarios);
-echo "</pre>";
+echo "</pre>"; */
 ?>
 
 <section class="section-content padding-y bg">
@@ -45,17 +45,15 @@ echo "</pre>";
                         <article class="card">
                             <div class="card-body row no-gutters">
                                 <div class="col">
-                                    <strong>Direccion de Entrega:</strong> <br><?=$usuarios['us_direccion']?></strong>
+                                    <strong>Direccion de Entrega:</strong> <br></strong>
                                 </div>
                                 <div class="col">
-                                    <strong>Numero:</strong> <br><i class="fa fa-phone"></i> +123467890
+                                    <strong>Numero:</strong> <br><i class="fa fa-phone"></i> 
                                 </div>
                                 <div class="col">
-                                    <strong>Tipo de armado:</strong> <br> Picked by the courier
+                                    <strong>Tipo de armado:</strong> <br> 
                                 </div>
-                                <div class="col">
-                                    <strong>Boleta</strong> <br> Archivo
-                                </div>
+                               
                             </div>
                         </article>
 

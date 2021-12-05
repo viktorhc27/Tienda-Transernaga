@@ -87,11 +87,7 @@ $listas_categorias = $categorias->listar();
 
                         </div>
                         <!-- form start -->
-                        <div class="row">
-                            <div class="col-md-6">
-
-                            </div>
-                        </div>
+                        
                         <!-- /.card -->
                     </div>
                     <!--/.col (right) -->

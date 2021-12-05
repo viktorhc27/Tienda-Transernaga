@@ -4,7 +4,7 @@ require_once '../Model/conexion.php';
 require_once '../Model/Usuarios.php';
 require_once '../Model/Ventas.php';
 require_once '../Model/Productos.php';
-
+include_once "../model/Kardex.php";
 $accion = $_REQUEST['accion'];
 
 switch ($accion) {
@@ -14,6 +14,7 @@ switch ($accion) {
         $usuarios = new Usuarios();
         $ventas = new Ventas();
         $productos = new Productos();
+        $kardex = new Kardex();
 
         $usuarios->__set('id', 0);
         $usuarios->__set('us_nombre', $_REQUEST['nombre']);
@@ -53,11 +54,21 @@ switch ($accion) {
                 $ventas->__set('create_time', $hora);
                 $ventas->__set('update_time', $hora);
                 $r = $ventas->agregar();
-                /* $v = $productos->verificar_stock($i['cantidad'], $i['id_producto']); */
+
+                //Kardex
+
+                $kardex->__set('tipo', "SALIDA");
+                $kardex->__set('descripcion', 'Venta de producto');
+                $kardex->__set('unidades', $i['cantidad']);
+                $kardex->__set('fecha', date("Y-m-d H:i:s"));
+                $kardex->__set('pro_id', $i['id_producto']);
+
+                $registro_kar = $kardex->agregar();
+                echo $registro_kar;
 
                 if ($r == 1) {
                     if ($v == true) {
-                        header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us='.$id_user.'&cod='.$codigo.'&arm='.$tipo_armado.'');
+                        header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us=' . $id_user . '&cod=' . $codigo . '&arm=' . $tipo_armado . '');
                         header('Location:http://localhost/tienda-transernaga/index.php?param=inicio');
                         /* echo "<script type='text/javascript'>";
                         echo " window.location.href = '../views/boleta.php?id_us=$id_user&cod=$codigo&arm=$tipo_armado'";
@@ -66,7 +77,7 @@ switch ($accion) {
                         echo "error en la compra falta de stock";
                     }
                 } else {
-    
+
                     echo "<br>";
                 }
 
@@ -91,6 +102,8 @@ switch ($accion) {
         $usuarios = new Usuarios();
         $ventas = new Ventas();
         $productos = new Productos();
+        $kardex = new Kardex();
+
         $id = $_REQUEST['id'];
         $codigo = "TR" . strtoupper(uniqid());
         $tipo_armado = $_REQUEST['tipo_armado'];
@@ -111,15 +124,24 @@ switch ($accion) {
             $ventas->__set('update_time', $hora);
             $ventas->__set('estados_id', 1);
             $r = $ventas->agregar();
-            /* $v = $productos->verificar_stock($i['cantidad'], $i['id_producto']); */
+            $v = $productos->verificar_stock($i['cantidad'], $i['id_producto']);
+            //Kardex
 
+            /* $kardex->__set('tipo', "SALIDA");
+            $kardex->__set('descripcion', 'Venta de producto');
+            $kardex->__set('unidades', $i['cantidad']);
+            $kardex->__set('fecha', date("Y-m-d H:i:s"));
+            $kardex->__set('pro_id', $i['id_producto']);
+
+            $registro_kar = $kardex->agregar(); */
+            
             if ($r == 1) {
-                /* if ($v) { */
-                    header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us='.$id_user.'&cod='.$codigo.'&arm='.$tipo_armado.'');
-               /*  } else {
+                if ($v) {
+                header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us=' . $id_user . '&cod=' . $codigo . '&arm=' . $tipo_armado . '');
+                 } else {
                     echo "error en la compra falta de stock";
-                } */
-            } 
+                }
+            }
 
 
         endforeach;

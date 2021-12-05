@@ -262,7 +262,7 @@ if (empty($_REQUEST["param"])) {
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
                                             <a class="dropdown-item" href="#">Mi Cuenta</a>
-                                            <a class="dropdown-item" href="?param=administrador">Repartidor</a>
+                                            <a class="dropdown-item" href="?param=repartidor">Repartidor</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
                                         </div>
@@ -383,12 +383,22 @@ if (empty($_REQUEST["param"])) {
             <script type="text/javascript">
                 window.location.href = "./views/ensamblador/index.php?param=inicio";
             </script>
+
+
     <?php
+            break;
+            case "repartidor": ?>
+                <script type="text/javascript">
+                    window.location.href = "./views/repartidor/index.php?param=inicio";
+                </script>
+            <?php
+                break;
+
     }
 
     ?>
 
-    
+
 
     <!-- ========================= FOOTER ========================= -->
     <footer class="section-footer border-top bg">
@@ -401,19 +411,19 @@ if (empty($_REQUEST["param"])) {
                             <li> <a href="#">Calle, Arica</a></li>
                             <li> <a href="#">+56 9 9842 9944</a></li>
                             <li> <a href="#">contacto@mueblestransernaga.cl</a></li>
-                            
+
                         </ul>
                     </aside>
-                    
-                    
-                    
+
+
+
                     <aside class="col-md col-6 text-center">
                         <h6 class="title">Social</h6>
                         <ul class="list-unstyled">
                             <li><a href="#"> <i class="fab fa-facebook"></i> Facebook </a></li>
-                            
+
                             <li><a href="#"> <i class="fab fa-instagram"></i> Instagram </a></li>
-                            
+
                         </ul>
                     </aside>
                 </div> <!-- row.// -->
@@ -423,7 +433,7 @@ if (empty($_REQUEST["param"])) {
                 <div class="col-md-2">
                     <p class="text-muted"> &copy 2021 Muebles Transernaga </p>
                 </div>
-               
+
                 <!-- <div class="col-md-2 text-md-right text-muted">
                     <i class="fab fa-lg fa-cc-visa"></i>
                     <i class="fab fa-lg fa-cc-paypal"></i>

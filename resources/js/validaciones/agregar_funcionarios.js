@@ -10,11 +10,14 @@ $("#btnGuardar").click(function (e) {
     var numero = $("#numero").val();
     var sexo = $("#sexo").val()
     var rol = $("#rol").val()
-    var n = validar(correo);
-    console.log("hola")
-    console.log("hola"+n)
-    if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && numero != "" && sexo != "" && rol != "") {
-        if (validar(correo)) {
+    var alerta = $("#alert_correo").val();
+
+    console.log(alerta);
+
+    if (alerta == "correo disponible") {
+        if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && numero != "" && sexo != "" && rol != "") {
+
+           
             datos = {
                 "nombre": nombre,
                 "app": app,
@@ -27,7 +30,7 @@ $("#btnGuardar").click(function (e) {
                 "rol": rol,
 
             };
-            
+
 
             $.ajax({
                 url: '../../controller/UsuariosController.php?accion=register_employees',
@@ -38,7 +41,7 @@ $("#btnGuardar").click(function (e) {
 
 
                 if (respuesta.estado === "agregado") {
-
+                    alert("entro");
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -47,41 +50,42 @@ $("#btnGuardar").click(function (e) {
                         timer: 1500
                     })
 
-                    $('#modal-sm').modal('hide');
+                    $('#staticBackdrop').modal('hide');
                     setTimeout(function () {
                         location.reload();
                     }, 1000)
                 }
             })
+
+
         } else {
 
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
-                title: 'Correo ya registrado',
+                title: 'Llene todos los campos',
                 showConfirmButton: false,
                 timer: 1500
             })
-        }
 
+
+        }
     } else {
 
         Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: 'Llene todos los campos',
+            title: 'Correo ya registrado',
             showConfirmButton: false,
             timer: 1500
         })
-
-
     }
 
 
 })
 //valida correo
 function validar(correo) {
-    var r;
+
     datos = {
         "correo": correo
     };
@@ -93,20 +97,20 @@ function validar(correo) {
 
     }).done(function (respuesta) {
         if (respuesta.datos === "existe") {
-            r = false;
+            return false;
 
         }
         if (respuesta.datos === "no existe") {
-            r = true;
+            return true;
 
         }
     })
-   
-        
+
+
 }
 $("#correo").blur(function () {
     var correo = $("#correo").val();
-
+    $("#repuesta").val('');
     if (correo != "") {
         if (correo.indexOf('@', 0) == -1 || correo.indexOf('.', 0) == -1) {
             $('#correo').removeClass('is-valid');
@@ -131,12 +135,15 @@ $("#correo").blur(function () {
                     $('#correo').addClass('is-invalid');
                     $("#alerta").text('correo no disponible');
 
+                    $("#alerta").append("<input type='hidden' id='alert_correo' value='correo no disponible'>");
+
 
                 }
                 if (respuesta.datos === "no existe") {
                     $('#correo').removeClass('is-invalid');
                     $('#correo').addClass('is-valid');
                     $("#alerta").text('correo disponible');
+                    $("#alerta").append("<input type='hidden' id='alert_correo'  value='correo disponible'>");
 
                 }
             })

@@ -116,10 +116,27 @@ switch ($accion) {
                 'datos' => 'hecho'
             ); */
 
-             echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=productos';</script>";
-        }else{
+            echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=productos';</script>";
+        } else {
             echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=productos';</script>";
         }
         /* echo json_encode($datos, JSON_FORCE_OBJECT); */
+        break;
+    case "buscar":
+        $productos = new Productos();
+        $id = $_REQUEST['id'];
+        
+        $array_producto = $productos->buscar($id);
+        header('Content-Type:apllication/json');
+        if(!empty($array_producto)){
+            $datos = array(
+                'imagen' => $array_producto['12']
+            );
+        }
+        echo json_encode($datos, JSON_FORCE_OBJECT);
+       /*  echo "<pre>";
+        print_r($array_producto['12']);
+        echo "</pre>"; */
+
         break;
 }

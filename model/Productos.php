@@ -217,7 +217,8 @@ class Productos
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("UPDATE productos SET pro_stock = pro_stock - $cantidad WHERE pro_id = $id");
             $sql->execute();
-            if ($sql->rowCount() == 1) {
+            $res = $sql->rowCount();
+            if ($res == 1) {
                 $sql = $con->prepare("SELECT pro_stock FROM productos  WHERE pro_id = $id");
                 $sql->execute();
                 $res = $sql->fetch();
@@ -229,7 +230,7 @@ class Productos
                     return false;
                 }
             } else {
-                return false;
+                return $res;
             }
         } catch (PDOException $ex) {
             return $ex->getMessage();
@@ -262,6 +263,96 @@ class Productos
                 $sql->execute();
                 return true;
             }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function stock($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT pro_stock from productos WHERE pro_id = $id");
+            $sql->execute();
+            $res = $sql->fetch();
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function agregar_stock($id, $cantidad)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT pro_stock from productos WHERE pro_id = $id");
+            $sql->execute();
+            $res = $sql->fetch();
+            if ($res['pro_stock'] > 0) {
+                $sql = $con->prepare("UPDATE productos SET pro_stock = pro_stock + $cantidad WHERE pro_id = $id");
+                $r = $sql->execute();
+                return $r;
+            } else {
+                $sql = $con->prepare("UPDATE productos SET pro_stock = $cantidad WHERE pro_id = $id");
+                $r = $sql->execute();
+                return $r;
+            }
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function quitar($id, $cantidad)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("UPDATE productos SET pro_stock = pro_stock - $cantidad WHERE pro_id = $id");
+            $res = $sql->execute();
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+    public function reporte_inventario($orden)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            if ($orden == "1") {
+                $sql = $con->prepare("SELECT * FROM productos ORDER BY pro_nombre ASC");
+                $sql->execute();
+                $res = $sql->fetchAll();
+                return $res;
+            }
+            if ($orden == "2") {
+                $sql = $con->prepare("SELECT * FROM productos ORDER BY pro_nombre DESC");
+                $sql->execute();
+                $res = $sql->fetchAll();
+                return $res;
+            }
+            if ($orden == "3") {
+                $sql = $con->prepare("SELECT * FROM productos ORDER BY pro_stock ASC");
+                $sql->execute();
+                $res = $sql->fetchAll();
+                return $res;
+            }
+            if ($orden == "4") {
+                $sql = $con->prepare("SELECT * FROM productos ORDER BY pro_stock DESC");
+                $sql->execute();
+                $res = $sql->fetchAll();
+                return $res;
+            }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+    public function buscar_id($codigo)
+    {
+
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT pro_id FROM productos WHERE pro_codigo = '$codigo'");
+            $sql->execute();
+            $res = $sql->fetch();
+            return $res;
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }

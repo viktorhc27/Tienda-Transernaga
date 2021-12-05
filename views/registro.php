@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label>Correo</label>
                     <input id="email" type="text" name="correo" type="email" class="form-control">
-                    <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
+                    <small id="alerta" class="form-text text-muted"></small>
                 </div> <!-- form-group end.// -->
                 <div class="form-group">
                     <label id="sexo" class="custom-control custom-radio custom-control-inline">
@@ -36,16 +36,24 @@
                         <span class="custom-control-label"> Femenino </span>
                     </label>
                 </div> <!-- form-group end.// -->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Telefono</label>
-                        <input id="tel" type="text" name="telefono" type="text" class="form-control">
-                    </div> <!-- form-group end.// -->
-                    <div class="form-group col-md-6">
-                        <label>Direccion</label>
-                        <input id="dir" name="direccion" type="text" class="form-control">
-                    </div>
-                </div> <!-- form-row.// -->
+                <div class="form-group">
+
+                    <label>Telefono</label>
+                    <input id="tel" type="text" name="telefono" type="text" class="form-control">
+
+
+                </div>
+                <div class="buscador form-group">
+
+                    <label>Direccion</label>
+                    <input id="dir" name="direccion" type="text" class="form-control">
+
+
+
+
+                </div>
+                <div id="mapa-geocoder" class="form-group mapa">
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Contraseña</label>
@@ -72,6 +80,69 @@
     <br><br>
 </section>
 <script>
+    $(document).ready(function() {
+        $(window).on("load resize", function() {
+            var alturaBuscador = $(".buscador").outerHeight(true),
+                alturaVentana = $(window).height(),
+                alturaMapa = alturaVentana - alturaBuscador;
+
+            $("#mapa-geocoder").css("height", "200" + "px");
+        });
+    });
+
+    function localizar(elemento, direccion) {
+        var geocoder = new google.maps.Geocoder();
+
+        var map = new google.maps.Map(document.getElementById(elemento), {
+            zoom: 16,
+            scrollwheel: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        geocoder.geocode({
+            'address': direccion
+        }, function(results, status) {
+            if (status === 'OK') {
+                var resultados = results[0].geometry.location,
+                    resultados_lat = resultados.lat(),
+                    resultados_long = resultados.lng();
+                /* console.log(resultados_lat);
+                console.log(resultados_long); */
+
+                $(".buscador").append("<input type='hidden' id='latitud' value='" + resultados_lat + "'>");
+                $(".buscador").append("<input type='hidden' id='longitud' value='" + resultados_long + "'>");
+
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                var mensajeError = "";
+                if (status === "ZERO_RESULTS") {
+                    mensajeError = "No hubo resultados para la dirección ingresada.";
+                } else if (status === "OVER_QUERY_LIMIT" || status === "REQUEST_DENIED" || status === "UNKNOWN_ERROR") {
+                    mensajeError = "Error general del mapa.";
+                } else if (status === "INVALID_REQUEST") {
+                    mensajeError = "Error de la web. Contacte con Name Agency.";
+                }
+                alert(mensajeError);
+            }
+        });
+    }
+
+    $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCenp6Eupizf2ow5uX1NgMkZhMz-LtwOQQ", function() {
+        $("#dir").change(function() {
+            var dir = $("#dir").val();
+            var direccion = dir + ", Arica y Parinacota"
+
+            if (direccion !== "") {
+                localizar("mapa-geocoder", direccion);
+            }
+        });
+    });
+</script>
+<script>
     $("#btn-registrar").click(function(e) {
         e.preventDefault();
         var nombre = $("#nom").val();
@@ -82,11 +153,13 @@
         var telefono = $("#tel").val();
         var direccion = $("#dir").val();
         var sexo = $('input:radio[name=sexo]:checked').val()
+        var latitud = $('#latitud').val();
+        var longitud = $('#longitud').val();
+        var alerta = $("#alert_correo").val();
+        console.log(latitud, longitud);
+        if (alerta == "correo disponible") {
+            /* if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion&& sexo != "") { */
 
-        var n = validar(correo);
-        console.log(n)
-        if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && sexo != "" ) {
-            if (validar(correo)) {
                 datos = {
                     "nombre": nombre,
                     "app": app,
@@ -96,10 +169,9 @@
                     "telefono": telefono,
                     "direccion": direccion,
                     "sexo": sexo,
-
-
+                    "latitud": latitud,
+                    "longitud": longitud
                 };
-                console.log(datos)
 
                 $.ajax({
                     url: './controller/UsuariosController.php?accion=register_user',
@@ -110,44 +182,48 @@
 
 
                     if (respuesta.estado === "agregado") {
-
+                        alert("entro");
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Registrado con Exito',
+                            title: 'Agregado',
                             showConfirmButton: false,
                             timer: 1500
                         })
 
-                       
+                        $('#staticBackdrop').modal('hide');
                         setTimeout(function() {
                             location.reload();
                         }, 1000)
                     }
                 })
-            } else {
+
+
+            /* } else {
 
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Correo ya registrado',
+                    title: 'Llene todos los campos',
                     showConfirmButton: false,
                     timer: 1500
                 })
-            }
 
+
+            } */
         } else {
 
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
-                title: 'Llene todos los campos',
+                title: 'Correo ya registrado',
                 showConfirmButton: false,
                 timer: 1500
             })
-
-
         }
+
+
+
 
 
     })
@@ -217,19 +293,17 @@
                     if (respuesta.datos === "existe") {
                         $('#email').removeClass('is-valid');
                         $('#email').addClass('is-invalid');
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: '¡Correo ya Registrado!',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                        $("#alerta").text('correo no disponible');
+
+                        $("#alerta").append("<input type='hidden' id='alert_correo' value='correo no disponible'>");
+
 
                     }
                     if (respuesta.datos === "no existe") {
                         $('#email').removeClass('is-invalid');
                         $('#email').addClass('is-valid');
                         $("#alerta").text('correo disponible');
+                        $("#alerta").append("<input type='hidden' id='alert_correo'  value='correo disponible'>");
 
                     }
                 })

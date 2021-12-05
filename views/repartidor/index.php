@@ -1,6 +1,6 @@
 <?php include_once '../../model/Conexion.php';
 session_start();
-if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
+if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "4") {
 ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -74,53 +74,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                                 <a class="nav-link" href="?param=inicio">Inicio <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="?param=registrar">funcionarios</a>
+                                <a class="nav-link" href="?param=pedidos">Ver Pedidos</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Ventas
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="?param=ventas">Ventas totales</a>
-                                    <a class="dropdown-item" href="?param=ventas_hoy">Ventas de hoy</a>
-                                    <a class="dropdown-item" href="?param=ventas_pendientes">Ventas pendientes</a>
-
-
-                                    <!-- <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a> -->
-                                </div>
-                            </li>
-
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Servicios
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="?param=productos">Productos</a>
-                                    <a class="dropdown-item" href="?param=categorias">Categorias</a>
-                                    <a class="dropdown-item" href="?param=marcas">Marcas</a>
-                                    <!-- <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a> -->
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="?param=kardex">kardex</a>
-
-
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Reportes
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="?param=reportes_ventas">Reportes Ventas</a>
-                                    <a class="dropdown-item" href="?param=reportes_inventario">Reporte inventorio</a>
-                                    
-
-                                </div>
-                            </li>
-
+                            
                             <li class="nav-item">
                                 <a class="nav-link " href="../../index.php" tabindex="-1" aria-disabled="true">Tienda</a>
                             </li>
@@ -143,60 +99,13 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
          *          */
         //error_reporting(0);
         switch ($_REQUEST["param"]) {
-            case "marcas":
-                include_once 'agregar_marcas.php';
+            case "pedidos":
+                include_once 'pedidos.php';
                 break;
-            case "categorias":
-                include_once 'agregar_categorias.php';
+            case "direcciones":
+                include_once 'direcciones.php';
                 break;
-            case "registrar":
-                include_once 'agregar_funcionarios.php';
-                break;
-            case "inicio":
-                include_once 'panel.php';
-                break;
-            case "productos":
-                include_once 'productos.php';
-                break;
-            case "agregar-muebles":
-                include_once 'agregar_muebles.php';
-                break;
-            case "ver_product":
-                include_once 'ver_productos.php';
-                break;
-            case "editar_productos":
-                include_once 'editar_muebles.php';
-                break;
-            case "editar_funcionarios":
-                include_once 'editar_funcionarios.php';
-                break;
-            case "ventas":
-                include_once 'ventas.php';
-                break;
-            case "modificar_categorias":
-                include_once 'editar_categorias.php';
-                break;
-            case "stock":
-                include_once 'stocks.php';
-                break;
-            case "ventas_pendientes":
-                include_once 'ventas_pendientes.php';
-                break;
-            case "ventas_hoy":
-                include_once 'ventas_hoy.php';
-                break;
-            case "reportes_ventas":
-                include_once 'reportes_ventas.php';
-                break;
-            case "reportes_inventario":
-                include_once 'reportes_inventario.php';
-                break;
-            case "kardex":
-                include_once 'kardex.php';
-                break;
-            case "kardex_resultado":
-                include_once 'kardex_resultado.php';
-                break;
+           
         }
         ?>
 
