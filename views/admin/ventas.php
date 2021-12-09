@@ -6,7 +6,7 @@ include_once '../../model/Usuarios.php';
 $ventas = new Ventas();
 $usuarios = new Usuarios();
 
-$lista_ventas = $ventas->leer();
+$lista_ventas = $ventas->ventas();
 
 ?>
 <div class="container">
@@ -66,27 +66,31 @@ $lista_ventas = $ventas->leer();
 
                                             <!--1 esperando confirmacion 2 pedido confirmado 3 en preparacion 4 En reparto 5 recibido  6 solicitud de cancelacion, 7 cancelado-->
                                             <td> <?php
-                                                    if ($s['estados_id'] == 1) {
-                                                        echo "<i style='color: orange;' class='fas fa-concierge-bell'> Esperando confirmacion</i>";
-                                                    }
-                                                    if ($s['estados_id'] == 2) {
-                                                        echo "<i style='color: green;' class='fas fa-check-circle'> Confirmado</i>";
-                                                    }
-                                                    if ($s['estados_id'] == 3) {
-                                                        echo "<i style='color: chocolate;' class='fas fa-truck-loading'> En Preparación</i>";
-                                                    }
-                                                    if ($s['estados_id'] == 4) {
-                                                        echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
-                                                    }
-                                                    if ($s['estados_id'] == 5) {
-                                                        echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
-                                                    }
-                                                    if ($s['estados_id'] == 6) {
-                                                        echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
-                                                    }
-                                                    if ($s['estados_id'] == 7) {
-                                                        echo "<i style='color: red;' class='fas fa-check-circle'> Cancelado</i>";
-                                                    }  ?>
+                                                  
+                                                  if ($s['estados_id'] == 1) {
+                                                      echo "<i style='color: orange;' class='fas fa-concierge-bell'> Esperando confirmacion</i>";
+                                                  }
+                                                  if ($s['estados_id'] == 2) {
+                                                      echo "<i style='color: green;' class='fas fa-check-circle'> Confirmado</i>";
+                                                  }
+                                                  if ($s['estados_id'] == 3) {
+                                                      echo "<i style='color: chocolate;' class='fas fa-truck-loading'> En Preparación</i>";
+                                                  }
+                                                  if ($s['estados_id'] == 4) {
+                                                      echo "<i style='color: indigo;' class='fas fa-truck'> Preparado para Reparto</i>";
+                                                  }
+                                                  if ($s['estados_id'] == 5) {
+                                                      echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
+                                                  }
+                                                  if ($s['estados_id'] == 6) {
+                                                      echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
+                                                  }
+                                                  if ($s['estados_id'] == 7) {
+                                                      echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
+                                                  }
+                                                  if ($s['estados_id'] == 8) {
+                                                      echo "<i style='color: red;' class='fas fa-check-circle'> Cancelado</i>";
+                                                  }  ?>
 
 
                                             </td>

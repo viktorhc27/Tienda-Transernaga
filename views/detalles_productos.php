@@ -135,7 +135,7 @@ echo "</pre>"; */
 					<header class="section-heading">
 						<h3 class="section-title text-center">Modelo 3D</h3>
 					</header><!-- sect-heading -->
-					<model-viewer style="width: 100%; height: 500px;" class="w-screen" src="./resources/images/modelos/33/cama.glb" camera-controls auto-rotate ar>
+					<model-viewer style="width: 100%; height: 500px;" class="w-screen" src="./resources/images/modelos/<?= $lista['pro_modelo'] ?>" camera-controls auto-rotate ar>
 
 						<div class="progress-bar hide" slot="progress-bar">
 							<div class="update-bar"></div>

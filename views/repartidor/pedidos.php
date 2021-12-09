@@ -18,7 +18,7 @@ $lista_ventas = $ventas->leer_reparto();
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Pedidos</li>
+                <li class="breadcrumb-item active" aria-current="page">Pedidos en Reparto</li>
             </ol>
         </nav>
 
@@ -31,7 +31,7 @@ $lista_ventas = $ventas->leer_reparto();
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title ">Pedidos</h3>
+                            <h3 class="card-title ">Pedidos en Reparto</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -55,13 +55,13 @@ $lista_ventas = $ventas->leer_reparto();
                                 <tbody>
 
                                     <?php
-                                    
+
                                     foreach ($lista_ventas as $s) :
                                         $codigo = $productos->buscar($s['productos_pro_id']);
                                     ?> <tr>
 
                                             <td><?= $s['ven_codigo'] ?></td>
-                                            <td><?= $codigo['pro_codigo'] ?></td>
+                                            <td> <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/views/barcode.php?text=<?= $codigo['pro_codigo'] ?>&size=50&orientation=horizontal&codetype=Code39&print=true&sizefactor=1" /></td>
 
                                             <td><?= $s['ven_cantidad'] ?></td>
                                             <td><img width="100px" src="../../resources/images/productos/<?= $codigo['pro_id'] ?>/<?= $codigo['pro_img'] ?>"></td>
@@ -80,15 +80,18 @@ $lista_ventas = $ventas->leer_reparto();
                                                         echo "<i style='color: chocolate;' class='fas fa-truck-loading'> En Preparación</i>";
                                                     }
                                                     if ($s['estados_id'] == 4) {
-                                                        echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
+                                                        echo "<i style='color: indigo;' class='fas fa-truck'> Preparado para Reparto</i>";
                                                     }
                                                     if ($s['estados_id'] == 5) {
-                                                        echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
+                                                        echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
                                                     }
                                                     if ($s['estados_id'] == 6) {
-                                                        echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
+                                                        echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
                                                     }
                                                     if ($s['estados_id'] == 7) {
+                                                        echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
+                                                    }
+                                                    if ($s['estados_id'] == 8) {
                                                         echo "<i style='color: red;' class='fas fa-check-circle'> Cancelado</i>";
                                                     }  ?>
 
@@ -103,8 +106,12 @@ $lista_ventas = $ventas->leer_reparto();
                                                             Opciones
                                                         </a>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                            <button role="link" onclick="window.location='http://localhost/tienda-transernaga/views/repartidor/index.php?param=direcciones&id_pedidos=<?=$s['ven_codigo']?> &id_usuario=<?=$s['usuarios_us_id']?>'" class="dropdown-item">Ver direccion</button>
+                                                            <button role="link" onclick="window.location='http://localhost/tienda-transernaga/views/repartidor/index.php?param=direcciones&id_pedidos=<?= $s['ven_codigo'] ?> &id_usuario=<?= $s['usuarios_us_id'] ?>'" class="dropdown-item">Ver direccion</button>
 
+                                                            <form method="post" action="../../controller/PedidosController.php?accion=cambiar_estado_repartidor ">
+                                                                <input name="codigo" value="<?= $s['ven_codigo'] ?>" type="hidden" class="form-control">
+                                                                <button class="dropdown-item ">Cargar Pedido</button>
+                                                            </form>
                                                             <!-- <form method="post" action="../../controller/PedidosController.php?accion=cancelar ">
                                                                 <input name="codigo" value="<?= $s['ven_codigo'] ?>" type="hidden" class="form-control">
 

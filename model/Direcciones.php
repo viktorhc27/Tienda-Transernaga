@@ -54,10 +54,23 @@ class Direcciones
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT * FROM direcciones where usuarios_us_id = :id ");
+            $sql = $con->prepare("SELECT * FROM direcciones where di_id = :id ");
             $sql->bindParam(":id", $id);
             $sql->execute();
             $res = $sql->fetch();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function listar($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM direcciones where di_id = :id ");
+            $sql->bindParam(":id", $id);
+            $sql->execute();
+            $res = $sql->fetchAll();
             return $res;
         } catch (PDOException $e) {
             return $e->getMessage();

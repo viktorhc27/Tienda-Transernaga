@@ -94,12 +94,12 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "3") {
          * Recibe por Parametros
          * @param type $param recibe en nombre de las ventana para mostrar la vista selecionada
          * 
-         * 
+         * pedidos_pendientes
          *          */
         //error_reporting(0);
         switch ($_REQUEST["param"]) {
             case "inicio":
-                include_once 'pedidos.php';
+                include_once 'inicio.php';
                 break;
             case "pedidos":
                 include_once 'pedidos.php';
@@ -107,13 +107,15 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "3") {
             case "direccion":
                 include_once 'direccion.php';
                 break;
-           
+            case "pedidos_pendientes":
+                include_once 'pedidos_pendientes.php';
+                break;
         }
         ?>
 
         </section>
         </div>
-     
+
         <script type="text/javascript" src="../../resources/DataTables/datatables.min.js"></script>
         <script type="text/javascript" src="../../resources/DataTables/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
         <script>

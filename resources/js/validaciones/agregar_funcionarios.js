@@ -41,7 +41,7 @@ $("#btnGuardar").click(function (e) {
 
 
                 if (respuesta.estado === "agregado") {
-                    alert("entro");
+                   
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',

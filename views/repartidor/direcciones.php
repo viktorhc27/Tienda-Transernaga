@@ -4,7 +4,7 @@ include_once '../../model/Ventas.php';
 include_once '../../model/Usuarios.php';
 include_once '../../model/Productos.php';
 include_once '../../model/Direcciones.php';
-include_once '../../model/DireccionesUsuarios.php';
+
 
 $id = $_REQUEST['id_pedidos'];
 $id_usuario = $_REQUEST['id_usuario'];
@@ -13,11 +13,11 @@ $ventas = new Ventas();
 $usuarios = new Usuarios();
 $productos = new Productos();
 $direccion = new Direcciones();
-$direccion_usuarios = new DireccionesUsuarios();
 
-$pedido = $ventas->buscar($id);
+
+$venta = $ventas->listar($id);
 $datos_usuarios = $usuarios->buscar($id_usuario);
-$direccion_usuarios= $direccion_usuarios->buscar($id_usuario);
+$nombre_direccion = $direccion->buscar($venta[0]['direcciones_di_id']);
 
 ?>
 <style>
@@ -55,7 +55,7 @@ $direccion_usuarios= $direccion_usuarios->buscar($id_usuario);
                                 <table class="table table-hover">
                                     <tbody>
 
-                                        <?php foreach ($pedido as $p) :
+                                        <?php foreach ($venta as $p) :
                                             $var = $productos->buscar($p['productos_pro_id']);
                                         ?>
                                             <tr>
@@ -81,21 +81,27 @@ $direccion_usuarios= $direccion_usuarios->buscar($id_usuario);
                                                         echo "<i style='color: chocolate;' class='fas fa-truck-loading'> En Preparación</i>";
                                                     }
                                                     if ($p['estados_id'] == 4) {
-                                                        echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
+                                                        echo "<i style='color: indigo;' class='fas fa-truck'> Preparado para Reparto</i>";
                                                     }
                                                     if ($p['estados_id'] == 5) {
-                                                        echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
+                                                        echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
                                                     }
                                                     if ($p['estados_id'] == 6) {
-                                                        echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
+                                                        echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
                                                     }
                                                     if ($p['estados_id'] == 7) {
+                                                        echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
+                                                    }
+                                                    if ($p['estados_id'] == 8) {
                                                         echo "<i style='color: red;' class='fas fa-check-circle'> Cancelado</i>";
                                                     }  ?>
 
 
                                                 </td>
-                                                <td> <a href="?param=detalles&amp;id=TR61ABBF23C6CFA" class="btn btn-light"> Detalles </a> </td>
+                                                <td>
+                                                    <!-- <a href="?param=detalles&amp;id=TR61ABBF23C6CFA" class="btn btn-light"> Detalles </a> -->
+                                                   
+                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
 
@@ -129,14 +135,14 @@ $direccion_usuarios= $direccion_usuarios->buscar($id_usuario);
                                     <?= $datos_usuarios['1'] . " " . $datos_usuarios['2'] . " " . $datos_usuarios['3'] ?>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label style="color:chocolate;">Direccion</label>
+                                    <label style="color:chocolate;">Direccion del Pedido</label>
                                     <br>
-                                    <?= $datos_usuarios['us_direccion'] ?>
+                                    <?= $nombre_direccion['di_nombre'] ?>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label style="color:chocolate;">Telefono</label>
                                     <br>
-                                    <?= $datos_usuarios['1'] . " " . $datos_usuarios['2'] . " " . $datos_usuarios['3'] ?>
+                                    <?= $datos_usuarios['us_telefono'] ?>
                                 </div>
 
 
@@ -144,8 +150,8 @@ $direccion_usuarios= $direccion_usuarios->buscar($id_usuario);
 
 
                             <div class="row">
-                                <input type="hidden" id="lat" value="-18.481258">
-                                <input type="hidden" id="long" value="-70.294499">
+                                <input type="hidden" id="lat" value="<?= $nombre_direccion['di_latitud'] ?>">
+                                <input type="hidden" id="long" value="<?= $nombre_direccion['di_longitud'] ?>">
                                 <div id="map" class="col-md-12">
 
                                 </div>

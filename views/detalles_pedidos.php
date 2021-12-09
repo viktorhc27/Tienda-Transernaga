@@ -8,7 +8,7 @@ $productos = new Productos();
 $usuarios = new Usuarios();
 
 $id = $_REQUEST['id'];
-$pedidos = $ventas->buscar($id);
+$pedidos = $ventas->listar($id);
 $id_cliente= $pedidos['0']['0'];
 
 $usuarios->buscar($id_cliente);
@@ -45,13 +45,13 @@ echo "</pre>"; */
                         <article class="card">
                             <div class="card-body row no-gutters">
                                 <div class="col">
-                                    <strong>Direccion de Entrega:</strong> <br></strong>
+                                    <strong>Direccion de Entrega:</strong><br><?= $pedidos['0']['direcciones_di_id'] ?> </strong>
                                 </div>
                                 <div class="col">
-                                    <strong>Numero:</strong> <br><i class="fa fa-phone"></i> 
+                                    <strong>Numero:</strong> <br><i class="fa fa-phone"></i> <?php $var =$usuarios->buscar($pedidos['0']['usuarios_us_id'])  ?> <?=$var['us_telefono']?>
                                 </div>
                                 <div class="col">
-                                    <strong>Tipo de armado:</strong> <br> 
+                                    <strong>Tipo de armado:</strong> <br> Armado en <?= $pedidos['0']['tipo_armado'] ?> 
                                 </div>
                                
                             </div>
@@ -195,7 +195,8 @@ echo "</pre>"; */
 
                         </ul>
 
-                        <a href="http://localhost/tienda-transernaga/index.php?param=mispedidos" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Regresar</a>
+                        <!-- <a href="http://localhost/tienda-transernaga/index.php?param=mispedidos" class="btn btn-outline-danger"> <i class="fa fa-chevron-left"></i> Solicitar Canelacion</a> -->
+                        <!-- <a href="http://localhost/tienda-transernaga/index.php?param=mispedidos" class="btn btn-outline-danger"> <i class="fa fa-chevron-left"></i> Solicitar Canelacion</a> -->
                     </div> <!-- card-body.// -->
                 </article>
             </main>

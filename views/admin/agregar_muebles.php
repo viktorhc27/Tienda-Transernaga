@@ -23,7 +23,7 @@ $marcas = $ma->listar();
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label>Codigo</label>
-                                <input id="codigo" name="codigo" type="text" class="form-control" id="inputEmail4">
+                                <input id="codigo" name="codigo" type="number" class="form-control" id="inputEmail4">
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Nombre</label>
@@ -31,22 +31,22 @@ $marcas = $ma->listar();
                             </div>
                             <div class="form-group col-md-3">
                                 <label>precio compra</label>
-                                <input id="precio_compra" type="text" name="precio_compra" class="form-control">
+                                <input id="precio_compra" type="number" name="precio_compra" class="form-control">
                             </div>
                             <div class="form-group col-md-3">
                                 <label">precio venta</label>
-                                    <input id="precio_venta" type="text" name="precio_venta" class="form-control">
+                                    <input id="precio_venta" type="number" name="precio_venta" class="form-control">
                             </div>
                         </div>
                         <div class="form-row">
 
                             <div class="form-group col-md-4">
                                 <label>Altura</label>
-                                <input id="altura" type="text" name="altura" class="form-control">
+                                <input id="altura" type="number" name="altura" class="form-control">
                             </div>
                             <div class="form-group col-md-4">
                                 <label">Ancho</label>
-                                    <input id="ancho" type="text" name="ancho" class="form-control">
+                                    <input id="ancho" type="number" name="ancho" class="form-control">
                             </div>
                             <div class="form-group col-md-4">
                                 <label">profundidad</label>
@@ -61,23 +61,20 @@ $marcas = $ma->listar();
                             </div>
                             <div class="form-group col-md-6">
                                 <label>imagenes</label>
-                                <input type="file" class="form-control" id="archivo" name="archivo[]" multiple="" accept="image/png,image/jpeg,image/webp">
+                                <input type="file" class="form-control-file" id="archivo" name="archivo[]" multiple="" accept="image/png,image/jpeg,image/webp">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label>Peso</label>
-                                <input id="peso" type="text" class="form-control" name="peso">
+                                <input id="peso" type="number" class="form-control" name="peso">
                             </div>
-                            <div class="form-group col-md-3">
-                                <label>Stock</label>
-                                <input id="stock" name="stock" type="text" class="form-control" name="stock">
-                            </div>
+
                             <div class="form-group col-md-3">
                                 <label>Color</label>
                                 <input id="color" type="text" class="form-control" name="color">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label>estado</label>
                                 <select id="estado" name="estado" class="form-control">
                                     <option value="">Seleccionar</option>
@@ -85,9 +82,7 @@ $marcas = $ma->listar();
                                     <option value="0">Deshabilitado</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-2">
                                 <label>Categorias</label>
                                 <select id="categoria" name="categoria" class="form-control" name="categoria">
                                     <option>Seleccione</option>
@@ -99,7 +94,7 @@ $marcas = $ma->listar();
                                 </select>
 
                             </div>
-                            <div class=" form-group col-md-6">
+                            <div class=" form-group col-md-2">
                                 <label>Marcas</label>
                                 <select id="marcas" class="form-control" name="marcas">
 
@@ -111,6 +106,10 @@ $marcas = $ma->listar();
                                     endforeach; ?>
                                 </select>
                             </div>
+                        </div>
+                        <div class="form-row">
+
+
                         </div>
 
                         <button id="btn_guardar" type="submit" class="btn btn-primary">Agregar</button>
@@ -147,7 +146,7 @@ $marcas = $ma->listar();
 
         if (parseInt(precio_compra) < parseInt(precio_venta)) {
 
-            if (codigo != "" && nombre != "" && precio_compra != "" && precio_venta != "" && altura != "" && ancho != "" && profundidad != "" && peso != "" && color != "" && stock != "" && categoria != "" && marcas != "" && estado != "") {
+            if (codigo != "" && nombre != "" && precio_compra != "" && precio_venta != "" && altura != "" && ancho != "" && profundidad != "" && peso != "" && color != "" && categoria != "" && marcas != "" && estado != "") {
 
 
                 if (modelo.length > 0 && imagenes.length > 0) {
@@ -169,7 +168,10 @@ $marcas = $ma->listar();
                     for (let i = 0; i < imagenes.length; i++) {
                         formData.append('imagen[' + i + ']', imagenes[i])
                     }
-                    console.log(formData.get("imagen[0]"));
+                    for (let i = 0; i < modelo.length; i++) {
+                        formData.append('modelo[' + i + ']', modelo[i])
+                    }
+                    console.log(formData.get("modelo[0]"));
                     $.ajax({
                         url: '../../controller/ProductosController.php?accion=agregar_producto', // point to server-side PHP script 
                         data: formData,
@@ -232,6 +234,6 @@ $marcas = $ma->listar();
 
     })
     $("#codigo").blur(function() {
-        
+
     })
 </script>

@@ -1,7 +1,7 @@
 <?php
 class Ventas
 {
-    private  $tipo_armado, $ven_codigo, $usuarios_id, $productos_pro_id, $venta_id, $ven_total, $ven_cantidad, $create_time, $update_time, $estados_id;
+    private  $tipo_armado, $ven_codigo, $usuarios_id, $productos_pro_id, $venta_id, $ven_total, $ven_cantidad, $create_time, $update_time, $estados_id, $id_direccion;
     //GET Y SET
 
     /**
@@ -38,7 +38,7 @@ class Ventas
                 . "ven_cantidad, "
                 . "create_time,"
                 . "update_time,"
-                . "estados_id"
+                . "estados_id, direcciones_di_id"
                 . ")"
                 . "values("
                 . ":usuarios_id, "
@@ -50,7 +50,7 @@ class Ventas
                 . ":ven_cantidad, "
                 . ":create_time, "
                 . ":update_time,"
-                . ":estados_id)");
+                . ":estados_id,:direcciones_di_id)");
             $sql->bindParam("usuarios_id", $this->usuarios_id);
             $sql->bindParam("productos_id", $this->productos_pro_id);
             $sql->bindParam("ven_id", $this->venta_id);
@@ -61,6 +61,7 @@ class Ventas
             $sql->bindParam("create_time", $this->create_time);
             $sql->bindParam("update_time", $this->update_time);
             $sql->bindParam("estados_id", $this->estados_id);
+            $sql->bindParam("direcciones_di_id", $this->direcciones_di_id);
 
 
             $res = $sql->execute();
@@ -69,7 +70,20 @@ class Ventas
             return $e->getMessage();
         }
     }
+    public function ventas()
+    {
+        try {
 
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas where estados_id <=6");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
     public function leer()
     {
         try {
@@ -84,13 +98,83 @@ class Ventas
             return $e->getMessage();
         }
     }
+    public function leer_pendientes()
+    {
+        try {
+
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas where estados_id <=3");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function _leer_repartos()
+    {
+        try {
+
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas where estados_id  =4");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function leer_repartos()
+    {
+        try {
+
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas where estados_id  >=4");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function leer_cargar()
+    {
+        try {
+
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas WHERE estados_id = 4");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function recibidos()
+    {
+        try {
+
+            $con = (new Conexion())->Conectar();
+
+            $sql = $con->prepare("SELECT * FROM ventas WHERE estados_id = 6");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
     public function leer_reparto()
     {
         try {
 
             $con = (new Conexion())->Conectar();
 
-            $sql = $con->prepare("SELECT * FROM ventas where estados_id = 4");
+            $sql = $con->prepare("SELECT * FROM ventas WHERE estados_id BETWEEN '5' AND '6'");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
@@ -132,7 +216,7 @@ class Ventas
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("update ventas usuarios_id=:usuarios_id, productos_id= :productos_id, ven_total=:ven_total, ven_cantidad=:ven_cantidad, create_time=:create_time, update_time=:update_time set  WHERE ven_id = :id");
+            $sql = $con->prepare("update ventas usuarios_id=:usuarios_id, productos_id= :productos_id, ven_total=:ven_total, ven_cantidad=:ven_cantidad, create_time=:create_time, update_time=:update_time , direcciones_di_id=:direcciones_di_id set  WHERE ven_id = :id");
             $sql->bindParam("ven_id", $this->venta_id);
             $sql->bindparam("usuarios_id", $this->us_id);
             $sql->bindparam("productos_id", $this->productos_id);
@@ -140,6 +224,7 @@ class Ventas
             $sql->bindparam("ven_cantidad", $this->ven_cantidad);
             $sql->bindparam("create_time", $this->create_time);
             $sql->bindparam("update_time", $this->update_time);
+            $sql->bindparam("direcciones_di_id", $this->direcciones_di_id);
 
             $res = $sql->execute();
             if ($sql->rowCount() == 1) {
@@ -153,7 +238,7 @@ class Ventas
         }
     }
 
-    public function buscar($id)
+    public function listar($id)
     {
         try {
             $con = (new Conexion())->Conectar();
@@ -210,7 +295,7 @@ class Ventas
                 . "SUM(ven_total) AS total_ventas,"
                 . "(SELECT SUM(pro_precio_compra) FROM productos WHERE productos.pro_id = ventas.productos_pro_id )as costo_ventas,"
                 . "SUM(ven_total)-(SELECT SUM(pro_precio_compra) FROM productos WHERE productos.pro_id = ventas.productos_pro_id)"
-                . "as ganancias FROM ventas WHERE create_time >= '$hoy'");
+                . "as ganancias FROM ventas WHERE create_time >= '$hoy' && estados_id <='6'");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
@@ -218,7 +303,7 @@ class Ventas
             return $e->getMessage();
         }
     }
-    public function reporte_entre_fecha($inicio,$final)
+    public function reporte_entre_fecha($inicio, $final)
     {
         try {
             $con = (new Conexion())->Conectar();

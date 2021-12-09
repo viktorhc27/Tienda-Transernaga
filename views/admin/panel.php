@@ -111,49 +111,49 @@ $productos = $productos->leer();
                         <!-- /.card-header -->
                         <!-- form start -->
                         <div class="card-body">
-                            
-                                    <table id="example1" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                
-                                                
-                                                <th>Nombre</th>
-                                                <th>Precio</th>
-                                                <th>Stock</th>
-                                          
-                                                <th>Estado</th>
+
+                            <table id="example1" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
 
 
-                                                
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                        <th>Stock</th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            foreach ($productos as $p) :
-                                            ?>
-                                                <tr>
-                                                    
-                                                   
-                                                    <td><?= $p['pro_nombre'] ?></td>
-                                                    <td><?= $p['pro_precio_venta'] ?></td>
-                                                    <td><?= $p['pro_stock'] ?></td>
-                                                    
-                                                   
-                                                    <td><?= $p['pro_estado'] ?></td>
-                                                   
-                                                </tr>
-
-                                            <?php
-                                            endforeach;
-                                            ?>
+                                        <th>Estado</th>
 
 
 
-                                        </tbody>
-                                    </table>
 
-                           
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($productos as $p) :
+                                    ?>
+                                        <tr>
+
+
+                                            <td><?= $p['pro_nombre'] ?></td>
+                                            <td><?= $p['pro_precio_venta'] ?></td>
+                                            <td><?= $p['pro_stock'] ?></td>
+
+
+                                            <td><?= $p['pro_estado'] ?></td>
+
+                                        </tr>
+
+                                    <?php
+                                    endforeach;
+                                    ?>
+
+
+
+                                </tbody>
+                            </table>
+
+
                         </div>
 
                         <!-- /.card -->
@@ -165,13 +165,81 @@ $productos = $productos->leer();
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title "></h3>
+                            <h3 class="card-title ">Funciones</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
+                                <section class="section-content padding-y bg">
+                                    <div class="container">
 
+                                        <!-- ============================ COMPONENT 1 ================================= -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a style="color: black;" href="?param=registrar">
+                                                    <article class="card card-body">
+                                                        <figure class="text-center">
+                                                            <span class="rounded-circle icon-md bg-success"><i class="fas fa-users white"></i></span>
+                                                            <figcaption class="pt-4">
+                                                                <h5 class="title">Funcionarios</h5>
+                                                                <!-- <p>Aqui se mostrara los pedidos que tienen que ser entregados </p> -->
+                                                            </figcaption>
+                                                        </figure> <!-- iconbox // -->
+                                                    </article> <!-- panel-lg.// -->
+                                                </a>
+                                            </div><!-- col // -->
+                                            <div class="col-md-6">
+                                                <a style="color: black;" href="?param=ventas">
+                                                    <article class="card card-body">
+                                                        <figure class="text-center">
+                                                            <span class="rounded-circle icon-md bg-primary"><i class="fas fa-shopping-bag white"></i></span>
+                                                            <figcaption class="pt-4">
+                                                                <h5 class="title">Ventas</h5>
+                                                                <!-- p>Aqui se mostrara los pedidos que tienen que ser entregados </p> -->
+                                                            </figcaption>
+                                                        </figure> <!-- iconbox // -->
+                                                    </article> <!-- panel-lg.// -->
+                                                </a>
+                                            </div><!-- col // -->
+                                            <div class="col-md-6">
+                                                <a style="color: black;" href="?param=reportes_ventas">
+                                                    <article class="card card-body">
+                                                        <figure class="text-center">
+                                                            <span class="rounded-circle icon-md bg-primary"><i class="fas fa-file-pdf white"></i></span>
+                                                            <figcaption class="pt-4">
+                                                                <h5 class="title">Reportes</h5>
+                                                                <!-- <p>Aqui se mostrara los pedidos que tienen que ser entregados </p> -->
+                                                            </figcaption>
+                                                        </figure> <!-- iconbox // -->
+                                                    </article> <!-- panel-lg.// -->
+                                                </a>
+                                            </div><!-- col // -->
+                                            
+                                            <div class="col-md-6">
+                                                <a style="color: black;" href="?param=productos">
+                                                    <article class="card card-body">
+                                                        <figure class="text-center">
+                                                            <span class="rounded-circle icon-md bg-danger"><i class="fa fa-concierge-bell white"></i></span>
+                                                            <figcaption class="pt-4">
+                                                                <h5 class="title">Servicios</h5>
+                                                                <!-- <p>Aqui se mostrara los pedidos ya entregados </p> -->
+                                                            </figcaption>
+                                                        </figure> <!-- iconbox // -->
+                                                    </article> <!-- panel-lg.// -->
+                                                </a>
+                                            </div> <!-- col // -->
+
+                                        </div>
+                                        <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+                                        <br>
+
+
+
+
+                                    </div> <!-- container .//  -->
+                                </section>
                             </div>
                         </div>
                         <!-- /.card -->

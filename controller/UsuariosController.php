@@ -69,6 +69,7 @@ switch ($accion) {
         $usuarios->__set('roles_ro_id', 1);
         $usuarios->__set('create_time', date("Y-m-d H:i:s"));
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
+        $usuarios->__set('us_estado', 1);
         $id_usuario = $usuarios->agregar();
 
         $direcciones->__set("di_id", 0);
@@ -114,7 +115,7 @@ switch ($accion) {
         $usuarios->__set('update_time', date("Y-m-d H:i:s"));
         $res = $usuarios->agregar_();
 
-        echo $res;
+
 
         if ($res == 1) {
             //array para convertir a JSON
@@ -221,4 +222,61 @@ switch ($accion) {
                 echo json_encode($datos, JSON_FORCE_OBJECT);
         
                 break; */
+
+    case 'agregar_direccion':
+        $direcciones = new Direcciones();
+        $direccionesUsuarios = new DireccionesUsuarios();
+
+        $direcciones->__set("di_id", 0);
+        $direcciones->__set("di_nombre", $_REQUEST['direccion']);
+
+        $direcciones->__set("di_latitud", $_REQUEST['latitud']);
+        $direcciones->__set("di_longitud", $_REQUEST['longitud']);
+
+        $id_direcciones = $direcciones->agregar();
+
+        $direccionesUsuarios->__set("direcciones_di_id", $id_direcciones);
+        $direccionesUsuarios->__set("usuarios_us_id", $_REQUEST['id']);
+        $res =  $direccionesUsuarios->agregar();
+
+        /* header('Content-Type:apllication/json'); */
+        if ($res == 1) {
+            /* $datos = array(
+                'datos' => 'modificado'
+            ); */
+            echo "<script type='text/javascript'>";
+            echo "window.location.href = 'http://localhost/tienda-transernaga/index.php?param=misdatos'";
+            echo "</script>";
+        } else {
+            $datos = array(
+                'datos' => 'error'
+            );
+        }
+        /* echo json_encode($datos, JSON_FORCE_OBJECT); */
+
+
+        break;
+    case 'eliminar_direccion':
+        
+        $direccionesUsuarios = new DireccionesUsuarios();
+        $id= $_REQUEST['di_id'];
+
+        $res =$direccionesUsuarios->eliminar($id);
+        /* header('Content-Type:apllication/json'); */
+        if ($res == 1) {
+            /* $datos = array(
+                    'datos' => 'modificado'
+                ); */
+            echo "<script type='text/javascript'>";
+            echo "window.location.href = 'http://localhost/tienda-transernaga/index.php?param=misdatos'";
+            echo "</script>";
+        } else {
+            $datos = array(
+                'datos' => 'error'
+            );
+        }
+        /* echo json_encode($datos, JSON_FORCE_OBJECT); */
+
+
+        break;
 }

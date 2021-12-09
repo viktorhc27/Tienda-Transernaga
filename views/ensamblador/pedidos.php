@@ -7,7 +7,7 @@ $ventas = new Ventas();
 $usuarios = new Usuarios();
 $productos = new Productos();
 
-$lista_ventas = $ventas->leer();
+$lista_ventas = $ventas->_leer_repartos();
 
 ?>
 <div class="container">
@@ -79,15 +79,18 @@ $lista_ventas = $ventas->leer();
                                                         echo "<i style='color: chocolate;' class='fas fa-truck-loading'> En Preparación</i>";
                                                     }
                                                     if ($s['estados_id'] == 4) {
-                                                        echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
+                                                        echo "<i style='color: indigo;' class='fas fa-truck'> Preparado para Reparto</i>";
                                                     }
                                                     if ($s['estados_id'] == 5) {
-                                                        echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
+                                                        echo "<i style='color: indigo;' class='fas fa-truck'> En reparto</i>";
                                                     }
                                                     if ($s['estados_id'] == 6) {
-                                                        echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
+                                                        echo "<i style='color: green;' class='fas fa-check-circle'> Recibido</i>";
                                                     }
                                                     if ($s['estados_id'] == 7) {
+                                                        echo "<i style='color: red;' class='fas fa-truck'> solicitud de cancelacion</i>";
+                                                    }
+                                                    if ($s['estados_id'] == 8) {
                                                         echo "<i style='color: red;' class='fas fa-check-circle'> Cancelado</i>";
                                                     }  ?>
 
@@ -95,7 +98,7 @@ $lista_ventas = $ventas->leer();
                                             </td>
 
                                             <td>
-                                                <?php if ($s['estados_id'] < 5) { ?>
+                                                <?php if ($s['estados_id'] < 4) { ?>
 
                                                     <div class="dropdown">
                                                         <a class=" dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

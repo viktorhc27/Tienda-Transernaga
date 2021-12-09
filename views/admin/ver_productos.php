@@ -38,7 +38,7 @@ $imagen = new Imagenes();
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    Codigo: <input type="text" class="form-control" value='C' disabled>
+                                    Codigo: <input type="text" class="form-control" value='<?= $productos['pro_codigo'] ?>' disabled>
                                     <br>
                                     Nombre de Producto:<input type="text" class="form-control" value='<?= $productos['pro_nombre'] ?>' disabled>
                                     <br>

@@ -76,7 +76,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "4") {
                             <li class="nav-item">
                                 <a class="nav-link" href="?param=pedidos">Ver Pedidos</a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link " href="../../index.php" tabindex="-1" aria-disabled="true">Tienda</a>
                             </li>
@@ -105,7 +105,15 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "4") {
             case "direcciones":
                 include_once 'direcciones.php';
                 break;
-           
+            case "inicio":
+                include_once 'panel.php';
+                break;
+            case "cargar":
+                include_once 'pedidos_cargar.php';
+                break;
+            case "recibidos":
+                include_once 'recibidos.php';
+                break;
         }
         ?>
 

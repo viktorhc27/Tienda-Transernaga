@@ -41,11 +41,11 @@ switch ($accion) {
 
 
         echo $registro_kar;
-        /* if ($res == 1 && $e == 1) {
+        if ($res == 1 && $e == 1) {
             echo "<script>";
             echo "location.href='../views/admin/index.php?param=stock'";
             echo "</script>";
-        } */
+        }
 
         break;
     case "quitar":

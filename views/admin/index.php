@@ -116,7 +116,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="?param=reportes_ventas">Reportes Ventas</a>
                                     <a class="dropdown-item" href="?param=reportes_inventario">Reporte inventorio</a>
-                                    
+
 
                                 </div>
                             </li>

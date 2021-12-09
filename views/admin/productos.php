@@ -71,7 +71,9 @@ $productos = $p->leer();
                                     ?>
                                         <tr>
                                             <td><?= $p['pro_id'] ?></td>
-                                            <td><?= $p['pro_codigo'] ?></td>
+                                            <td>
+                                                <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/views/barcode.php?text=<?= $p['pro_codigo'] ?>&size=50&orientation=horizontal&codetype=Code39&print=true&sizefactor=1" />
+                                            </td>
                                             <td><?= $p['pro_nombre'] ?></td>
                                             <td><?= $p['pro_precio_venta'] ?></td>
                                             <td><?= $p['pro_stock'] ?></td>
@@ -97,7 +99,7 @@ $productos = $p->leer();
                                                         <a href="?param=ver_product&id=<?= $p['pro_id'] ?>" class="dropdown-item" type="button">Ver</a>
                                                         <form method="post" action="../../controller/ProductosController.php?accion=cambiar_estado">
                                                             <input type="hidden" id="id" name="id" value="<?= $p['pro_id'] ?>">
-                                                            <button id="estado" class="dropdown-item" >Cambiar Estado</button>
+                                                            <button id="estado" class="dropdown-item">Cambiar Estado</button>
                                                         </form>
 
                                                     </div>
@@ -123,4 +125,4 @@ $productos = $p->leer();
             </div>
         </div>
 
-      <!-- <script type="text/javascript" src="../../resources/js/validaciones/cambiar_estado.js"></script> -->
+        <!-- <script type="text/javascript" src="../../resources/js/validaciones/cambiar_estado.js"></script> -->

@@ -124,9 +124,9 @@ if (empty($_REQUEST["param"])) {
                                 <a class="nav-link" href="?param=productos">Productos</a>
                             </li>
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="#">About</a>
-                            </li>
+                            </li> -->
                         </ul>
                         <div class="widgets-wrap d-none d-md-block">
                             <a href="?param=mispedidos" class="widget-header">

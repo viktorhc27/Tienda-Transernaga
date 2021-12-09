@@ -3,7 +3,8 @@
 include_once './model/Conexion.php';
 include_once './model/Productos.php';
 include_once './model/Usuarios.php';
-
+include_once './model/Direcciones.php';
+include_once './model/DireccionesUsuarios.php';
 $productos = new Productos();
 $usuarios = new Usuarios();
 
@@ -67,8 +68,25 @@ if (!empty($_SESSION['cart'])) { ?>
                                             </div> <!-- form-group end.// -->
                                             <div class="form-group col-md-6">
                                                 <label>Direccion</label>
-                                                <input type="text" name="direccion" class="form-control" value="<?= $us['us_direccion'] ?>" disabled>
-                                                <input type="hidden" name="direccion" class="form-control" value="<?= $us['us_direccion'] ?>">
+                                                <?php $direccion_user = new DireccionesUsuarios();
+                                                $dir_us = $direccion_user->listar($us['us_id']);
+
+                                                $direccion = new Direcciones();
+
+                                                ?>
+                                                <select id="rol" name="direccion" class="form-control">
+                                                    <?php foreach ($dir_us as $d) :
+
+                                                        $dire = $direccion->buscar($d['direcciones_di_id']);
+                                                    ?>
+
+                                                        <option value="<?= $d['direcciones_di_id'] ?>"><?= $dire['di_nombre'] ?></option>
+
+                                                    <?php endforeach; ?>
+
+                                                </select>
+                                                <!-- <input type="text" name="direccion" class="form-control" value="<?= $us['us_direccion'] ?>" disabled>
+                                                <input type="hidden" name="direccion" class="form-control" value="<?= $us['us_direccion'] ?>"> -->
                                             </div> <!-- form-group end.// -->
                                         </div> <!-- form-row.// -->
 
@@ -156,25 +174,24 @@ if (!empty($_SESSION['cart'])) { ?>
                                 <label>Telefono</label>
                                 <input name="telefono" id="telefono" type="text" class="form-control">
                             </div> <!-- form-group end.// -->
-                            <div class="form-group col-md-6">
+                            <!-- <div class="form-group col-md-6">
                                 <label>Direccion</label>
                                 <input name="direccion" id="direccion" type="text" class="form-control">
 
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Departamento</label>
-                                <input name="departamento" id="departamento" type="text" class="form-control">
+                            </div> -->
+
+
+                            
+                            <div class="buscador form-group col-md-12">
+
+                                <label>Direccion</label>
+                                <input id="direccion" name="direccion" type="text" class="form-control">
+                                <div id="mapa-geocoder" class="form-group mapa"></div>
+
+
 
                             </div>
-                            <div class="form-group col-md-6">
-                                <label>Block</label>
-                                <input name="block" id="block" type="text" class="form-control">
 
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Numero</label>
-                                <input name="numero" id="numero" type="text" class="form-control">
-                            </div>
                         </div> <!-- form-row.// -->
 
                 </article><!-- card-body.// -->
@@ -292,6 +309,69 @@ if (!empty($_SESSION['cart'])) { ?>
 
     </section>
     <script>
+        $(document).ready(function() {
+            $(window).on("load resize", function() {
+                var alturaBuscador = $(".buscador").outerHeight(true),
+                    alturaVentana = $(window).height(),
+                    alturaMapa = alturaVentana - alturaBuscador;
+
+                $("#mapa-geocoder").css("height", "300" + "px");
+            });
+        });
+
+        function localizar(elemento, direccion) {
+            var geocoder = new google.maps.Geocoder();
+
+            var map = new google.maps.Map(document.getElementById(elemento), {
+                zoom: 16,
+                scrollwheel: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            geocoder.geocode({
+                'address': direccion
+            }, function(results, status) {
+                if (status === 'OK') {
+                    var resultados = results[0].geometry.location,
+                        resultados_lat = resultados.lat(),
+                        resultados_long = resultados.lng();
+                    /* console.log(resultados_lat);
+                    console.log(resultados_long); */
+
+                    $(".buscador").append("<input type='hidden' name='latitud' id='latitud' value='" + resultados_lat + "'>");
+                    $(".buscador").append("<input type='hidden' name='longitud' id='longitud' value='" + resultados_long + "'>");
+
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    var mensajeError = "";
+                    if (status === "ZERO_RESULTS") {
+                        mensajeError = "No hubo resultados para la dirección ingresada.";
+                    } else if (status === "OVER_QUERY_LIMIT" || status === "REQUEST_DENIED" || status === "UNKNOWN_ERROR") {
+                        mensajeError = "Error general del mapa.";
+                    } else if (status === "INVALID_REQUEST") {
+                        mensajeError = "Error de la web. Contacte con Name Agency.";
+                    }
+                    alert(mensajeError);
+                }
+            });
+        }
+
+        $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCenp6Eupizf2ow5uX1NgMkZhMz-LtwOQQ", function() {
+            $("#direccion").change(function() {
+                var dir = $("#direccion").val();
+                var direccion = dir + ", Arica y Parinacota"
+
+                if (direccion !== "") {
+                    localizar("mapa-geocoder", direccion);
+                }
+            });
+        });
+    </script>
+    <script>
         var sum = 0;
         var table = document.getElementById("res");
         var ths = table.getElementsByTagName('th');
@@ -351,6 +431,7 @@ if (!empty($_SESSION['cart'])) { ?>
             return amount_parts.join('.');
         }
     </script>
+
 <?php
 } else {
     echo "<script type='text/javascript'>";
