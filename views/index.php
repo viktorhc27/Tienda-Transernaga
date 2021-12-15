@@ -152,13 +152,12 @@ $lista_cat = $categorias->listar();
 
                     <div class="shadow-sm card-banner">
                         <div class="p-4" style="width:75%">
-                            <a href="#""> <h5 class=" card-title"><?= $cat['cat_nombre'] ?></h5></a>
+                            <a href="http://localhost/tienda-transernaga/index.php?param=categorias&c=<?=$cat['cat_id']?>"> <h5 class=" card-title"><?= $cat['cat_nombre'] ?></h5></a>
 
                         </div>
                         <img src="resources/images/categorias/<?= $cat['imagen'] ?>" height="100" class="img-bg">
                     </div>
                     <br>
-                    <!-- ============================ COMPONENT ITEM BG  END .// =========================== -->
                 </div> <!-- col.// -->
 
 

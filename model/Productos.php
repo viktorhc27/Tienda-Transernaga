@@ -185,6 +185,33 @@ class Productos
             return $ex->getMessage();
         }
     }
+    public function leer_categorias($id)
+    {
+
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("select * from productos where categorias_cat_id = $id");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+    public function leer_assoc()
+    {
+
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM productos ORDER BY create_time DESC");
+            $sql->execute();
+            $res = $sql->fetchAll();
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
 
     public function paginacion($empieza, $por_pagina)
     {

@@ -63,7 +63,7 @@ class Marcas
         }
     }
 
-    public function buscar()
+    public function buscar($id)
     {
         try {
             $con = (new Conexion())->Conectar();

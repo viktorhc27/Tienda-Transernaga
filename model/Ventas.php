@@ -319,4 +319,28 @@ class Ventas
             return $e->getMessage();
         }
     }
+    public function grafico($fecha)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT COUNT(*) as valor FROM ventas WHERE create_time > '$fecha' and create_time < (SELECT DATE_ADD('$fecha', INTERVAL 1 DAY));");
+            $sql->execute();
+            $res = $sql->fetch();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function grafico_year($anho)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT COUNT(*) as valor FROM ventas WHERE create_time > '$anho' and create_time < (SELECT DATE_ADD('$anho', INTERVAL 1 year));");
+            $sql->execute();
+            $res = $sql->fetch();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }

@@ -5,6 +5,7 @@ $kardex = new Kardex();
 
 $kardex->__set('id', $_REQUEST['codigo']);
 $lista = $kardex->kardex();
+$ka = $kardex->lista_kardex();
 /* echo "<pre>";
 print_r($lista);
 echo "</pre>"; */
@@ -36,8 +37,6 @@ echo "</pre>"; */
                         <div class="card-body">
 
                             <table class="table table-striped table-bordered table-hover">
-                                <caption>Kardex del Producto</caption>
-
                                 <thead class="text-center">
                                     <tr>
                                         <th rowspan="2">#</th>
@@ -57,14 +56,65 @@ echo "</pre>"; */
                                 <tbody>
                                     <tr>
                                         <th></th>
-                                        <td><?= $lista['pro_stock'] ?></td>
-                                        <td><?= number_format($lista['pro_precio_compra']) ?></td>
-                                        <td><?= number_format($lista['costo_total']) ?></td>
-                                        <td><?= ($lista['unidades vendidas'] == "null")?"0":$lista['unidades vendidas'] ?></td>
-                                        <td><?= number_format($lista['costopor venta']) ?></td>
-                                        <td><?= number_format($lista['ganancia']) ?></td>
+                                        <td class="text-center"><?= $lista['pro_stock'] ?></td>
+                                        <td class="text-center"><?= number_format($lista['pro_precio_compra']) ?></td>
+                                        <td class="text-center"><?= number_format($lista['costo_total']) ?></td>
+                                        <td class="text-center"><?= ($lista['unidades vendidas'] == "") ? "0" : $lista['unidades vendidas'] ?></td>
+                                        
+                                        <td class="text-center"><?= number_format($lista['costopor venta']) ?></td>
+                                        <td class="text-center"><?= number_format($lista['ganancia']) ?></td>
                                     </tr>
 
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    <div class="card card-default">
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table class="table table-striped table-bordered table-hover">
+
+
+
+                                <thead class="text-center">
+
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Unidades</th>
+                                        <th>Descripcion</th>
+                                        <th>Tipo</th>
+                                        <th>Producto </th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <?php
+
+                                    if (!empty($ka)) {
+
+                                        foreach ($ka as $k) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $k['fecha'] ?></td>
+                                                <td class="text-center"><?= $k['unidades'] ?></td>
+                                                <td class="text-center"><?= $k['descripcion'] ?></td>
+                                                <td class="text-center"><?= $k['tipo'] ?></td>
+                                                <td class="text-center"><?= $k['pro_id'] ?></td>
+
+                                            </tr>
+                                        <?php endforeach;
+                                    } else { ?>
+                                        <tr>
+                                            <td colspan="6" class="text-center">No Hay Registro del Producto</td>
+
+
+                                        </tr>
+
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>

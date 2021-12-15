@@ -14,11 +14,14 @@ switch ($accion) {
             echo "window.location.href = '../views/admin/index.php?param=reportes_ventas'";
             echo "</script>";
         } else {
-            echo "Cargando...";
+
             if ($fecha_final > $fecha_inicial) {
                 /*  $reporte = $ventas->reporte_entre_fecha($fecha_final, $fecha_inicial); */
                 echo "<script type='text/javascript'>";
                 echo "window.location.href = '../views/admin/reportes/reporte_personalizado.php?fecha_inicio=$fecha_inicial&&fecha_final=$fecha_final'";
+                echo "</script>";
+                echo "<script type='text/javascript'>";
+                echo "window.location.href = '../views/admin/index.php'";
                 echo "</script>";
             } else {
                 /* $reporte = $ventas->reporte_entre_fecha($fecha_inicial, $fecha_final); */
@@ -36,19 +39,20 @@ switch ($accion) {
         $kardex = new Kardex();
         $productos = new Productos();
         $codigo = $_REQUEST['codigo'];
+        $codigo = str_replace(' ', '', $codigo);
         $id = $productos->buscar_id($codigo);
+        if (!empty($id)) {
+            echo "<script type='text/javascript'>";
+            echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=kardex_resultado&codigo=$id[0]'";
+            echo "</script>";
+        } else {
+            echo "<script type='text/javascript'>";
+            echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=kardex'";
+            echo "</script>";
+        }
 
 
 
-       /*  echo "<pre>";
-        print_r($id[0]);
-        echo "</pre>"; */
-        echo "<script type='text/javascript'>";
-        echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=kardex_resultado&codigo=$id[0]'";
-        echo "</script>";
-        /* echo "<script type='text/javascript'>";
-        echo "window.location.href = '../views/admin/kardex_resultados.php?codigo=$codigo'";
-        echo "</script>"; */
 
 
         break;

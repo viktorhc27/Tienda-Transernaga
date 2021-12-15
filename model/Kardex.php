@@ -41,16 +41,29 @@ class Kardex
         try {
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("SELECT pro_id,"
-            ."pro_stock,"
-            ."pro_precio_compra,"
-            ."pro_precio_compra * pro_stock as 'costo_total',"
-            ."(SELECT sum(ventas.ven_cantidad) FROM ventas WHERE ventas.productos_pro_id = :id )as 'unidades vendidas',"
-            ."pro_precio_venta as 'costopor venta',"
-            ."pro_precio_venta* (SELECT sum(ventas.ven_cantidad) FROM ventas WHERE ventas.productos_pro_id = :id ) as 'ganancia'"
-            .", pro_stock +(SELECT sum(ventas.ven_cantidad) FROM ventas WHERE ventas.productos_pro_id = :id) as 'unidad global' FROM productos WHERE pro_id = :id");
-            $sql->bindParam("id",$this->id);
+                . "pro_stock,"
+                . "pro_precio_compra,"
+                . "pro_precio_compra * pro_stock as 'costo_total',"
+                . "(SELECT sum(ventas.ven_cantidad) FROM ventas WHERE ventas.productos_pro_id = :id )as 'unidades vendidas',"
+                . "pro_precio_venta as 'costopor venta',"
+                . "pro_precio_venta* (SELECT sum(ventas.ven_cantidad) FROM ventas WHERE ventas.productos_pro_id = :id ) as 'ganancia'"
+                . ", pro_stock +(SELECT sum(ventas.ven_cantidad) FROM ventas WHERE ventas.productos_pro_id = :id) as 'unidad global' FROM productos WHERE pro_id = :id");
+            $sql->bindParam("id", $this->id);
             $sql->execute();
             $res = $sql->fetch();
+            return $res;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function lista_kardex()
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT kar_id, tipo,descripcion,unidades,date_format(fecha, '%d/%m/%Y  %h:%m') as fecha,pro_id FROM kardex where pro_id = :id");
+            $sql->bindParam("id", $this->id);
+            $sql->execute();
+            $res = $sql->fetchAll();
             return $res;
         } catch (PDOException $e) {
             return $e->getMessage();

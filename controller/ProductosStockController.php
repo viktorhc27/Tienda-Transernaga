@@ -24,7 +24,7 @@ switch ($accion) {
         $prostock->__set('update_time',           date("Y-m-d H:i:s"));
 
         //Kardex
-      
+
         $kardex->__set('tipo', "ENTRADA");
         $kardex->__set('descripcion', 'AGREGADO MEDIANTE REGISTRO');
         $kardex->__set('unidades', $_REQUEST['cantidad']);
@@ -50,7 +50,7 @@ switch ($accion) {
         break;
     case "quitar":
         session_start();
-
+        $kardex = new Kardex();
         $prostock = new ProductoStock();
         $producto = new Productos();
 
@@ -64,6 +64,17 @@ switch ($accion) {
         $negativo = "-" . $prostock->__get('cantidad');
 
         $e = $producto->verificar_stock($prostock->__get('cantidad'), $prostock->__get('productos_pro_id'));
+
+
+        //Kardex
+
+        $kardex->__set('tipo', "SALIDA");
+        $kardex->__set('descripcion', 'SALIDA POR SISTEMA ADM');
+        $kardex->__set('unidades', $_REQUEST['cantidad']);
+        $kardex->__set('fecha', date("Y-m-d H:i:s"));
+        $kardex->__set('pro_id', $_REQUEST['producto']);
+
+        $registro_kar = $kardex->agregar();
 
         echo $e;
         if ($e) {

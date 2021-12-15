@@ -57,7 +57,7 @@ ob_start();
         <hr>
         <div class="row">
             <div class="col-md-12 text-center">
-                <h1 class="h6">REPORTE DE INVENTARIO GENERAL (<?=$hoy?>)</h1>
+                <h1 class="h6">REPORTE DE INVENTARIO GENERAL (<?= $hoy ?>)</h1>
 
             </div>
 
@@ -79,11 +79,11 @@ ob_start();
                     <?php foreach ($lista as $inv) : ?>
                         <tr>
                             <td></td>
-                          
 
-                            <td><?=$inv['pro_codigo'] ?> </td>
-                            <td><?=$inv['pro_nombre'] ?></td>
-                            <td><?=$inv['pro_stock'] ?></td>
+
+                            <td><?= $inv['pro_codigo'] ?> </td>
+                            <td><?= $inv['pro_nombre'] ?></td>
+                            <td><?= $inv['pro_stock'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -114,8 +114,8 @@ $dompdf->setOptions($options);
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4');
 $dompdf->render();
-    /* $dompdf->stream("boleta".$numero.".pdf", array("Attachment" => true)) */;
-$dompdf->stream("archivo.pdf", array("Attachment" => false));
+$dompdf->stream("Reporte_inventario.pdf", array("Attachment" => true));
+/* $dompdf->stream("archivo.pdf", array("Attachment" => false)); */
 
 /* header('Location:http://localhost/tienda-transernaga/index.php?param=inicio'); */
 ?>

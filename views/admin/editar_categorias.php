@@ -27,12 +27,12 @@ $lista = $categorias->buscar($id);
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title ">Detalles de Productos</h3>
+                            <h3 class="card-title ">Modificar</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <div class="card-body">
-                            <form action="../../controller/CategoriasController.php?accion=modificar" method="post">
+                            <form action="../../controller/CategoriasController.php?accion=modificar" method="post" enctype="multipart/form-data" >
                                 <div class="row">
 
 
@@ -77,9 +77,10 @@ $lista = $categorias->buscar($id);
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Imagen</label>
-                                            <img src="../../resources/images/categorias/<?= $lista['cat_img'] ?>">
-                                            <input type="file" class="form-control" accept="image/png,image/jpeg">
+                                            <label>Imagen</label><br>
+                                            <input type="hidden" name="imagen"class="form-control" value="<?= $lista['imagen'] ?>">
+                                            <img width="80%" src="../../resources/images/categorias/<?= $lista['imagen'] ?>">
+                                            <input type="file" name="imagen_new" class="form-control" value="2" accept="image/png,image/jpeg">
                                         </div>
                                     </div>
                                 </div>

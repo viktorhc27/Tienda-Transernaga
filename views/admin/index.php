@@ -33,8 +33,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
         <link href="../../resources/css/ui.css" rel="stylesheet" type="text/css" />
         <link href="../../resources/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
-        <!-- custom javascript -->
-        <script src="js/script.js" type="text/javascript"></script>
+        <script src="../../resources/chart.js/dist/chart.js"></script>
 
         <!-- Flexslider -->
         <link href="../../resources/FlexSlider/flexslider.css" type="text/css" rel="stylesheet">

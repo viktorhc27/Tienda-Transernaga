@@ -15,6 +15,7 @@ if (empty($_REQUEST["param"])) {
     <meta http-equiv="cache-control" content="max-age=604800" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="https://muebleslagos.cl/wp-content/uploads/2018/02/cropped-logo-Horizontal-32x32.png" sizes="32x32">
+    
     <title>Transernaga</title>
 
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -42,8 +43,8 @@ if (empty($_REQUEST["param"])) {
     <link href="./resources/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" type="text/css" rel="stylesheet">
     <link href="./resources/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css" type="text/css" rel="stylesheet">
 
-
-
+   
+   
     <script type="text/javascript">
         /// some script
 
@@ -178,7 +179,7 @@ if (empty($_REQUEST["param"])) {
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
-                                            <a class="dropdown-item" href="#">Mi Cuenta</a>
+                                            <a class="dropdown-item" href="?param=misdatos">Mi Cuenta</a>
                                             <a class="dropdown-item" href="#">Usuarios</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
@@ -207,7 +208,7 @@ if (empty($_REQUEST["param"])) {
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
-                                            <a class="dropdown-item" href="#">Mi Cuenta</a>
+                                            <a class="dropdown-item" href="?param=misdatos">Mi Cuenta</a>
                                             <a class="dropdown-item" href="?param=administrador">Administrador</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
@@ -233,7 +234,7 @@ if (empty($_REQUEST["param"])) {
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
-                                            <a class="dropdown-item" href="#">Mi Cuenta</a>
+                                            <a class="dropdown-item" href="?param=misdatos">Mi Cuenta</a>
                                             <a class="dropdown-item" href="?param=ensamblador">Ensamblador</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
@@ -261,7 +262,7 @@ if (empty($_REQUEST["param"])) {
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right aria-labelledby=" navbarDropdown">
-                                            <a class="dropdown-item" href="#">Mi Cuenta</a>
+                                            <a class="dropdown-item" href="?param=misdatos">Mi Cuenta</a>
                                             <a class="dropdown-item" href="?param=repartidor">Repartidor</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
@@ -450,6 +451,7 @@ if (empty($_REQUEST["param"])) {
 <!-- owl js -->
 <script src="./resources/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.js" type="text/javascript"></script>
 <script src="./resources/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js" type="text/javascript"></script>
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
 <script>
     $('.owl-carousel').owlCarousel({
         loop: true,
@@ -468,6 +470,6 @@ if (empty($_REQUEST["param"])) {
         }
     })
 </script>
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.jss"></script> -->
 
 </html>

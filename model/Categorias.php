@@ -82,7 +82,7 @@ Class Categorias {
     public function buscar($id){
         try{
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("select * from categorias where  cat_id = :id");
+            $sql = $con->prepare("SELECT * from categorias WHERE cat_id = :id");
             $sql->bindparam(':id',$id);
             $sql->execute();
             $res= $sql->fetch();

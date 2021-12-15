@@ -69,11 +69,11 @@ switch ($accion) {
             $ventas->__set('direcciones_di_id', $id_direccion);
             $ventas->__set('estados_id', 1);
             $r = $ventas->agregar();
-            $v = $productos->verificar_stock($i['cantidad'], $i['id_producto']);
+            
             //Kardex
 
             $kardex->__set('tipo', "SALIDA");
-            $kardex->__set('descripcion', 'Venta de producto');
+            $kardex->__set('descripcion', 'VENTA');
             $kardex->__set('unidades', $i['cantidad']);
             $kardex->__set('fecha', date("Y-m-d H:i:s"));
             $kardex->__set('pro_id', $i['id_producto']);
@@ -82,15 +82,13 @@ switch ($accion) {
             echo $registro_kar;
 
             if ($r == 1) {
-                if ($v == true) {
+               
                     header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us=' . $id_user . '&cod=' . $codigo . '&arm=' . $tipo_armado . '');
                     
                     /* echo "<script type='text/javascript'>";
                         echo " window.location.href = '../views/boleta.php?id_us=$id_user&cod=$codigo&arm=$tipo_armado'";
                         echo "</script>"; */
-                } else {
-                    echo "error en la compra falta de stock";
-                }
+               
             } else {
 
                 echo "<br>";
@@ -142,24 +140,23 @@ switch ($accion) {
             $r = $ventas->agregar();
 
 
-            $v = $productos->verificar_stock($i['cantidad'], $i['id_producto']);
+            
 
             //Kardex
 
-            /* $kardex->__set('tipo', "SALIDA");
-            $kardex->__set('descripcion', 'Venta de producto');
+            $kardex->__set('tipo', "SALIDA");
+            $kardex->__set('descripcion', 'VENTA');
             $kardex->__set('unidades', $i['cantidad']);
             $kardex->__set('fecha', date("Y-m-d H:i:s"));
             $kardex->__set('pro_id', $i['id_producto']);
 
-            $registro_kar = $kardex->agregar(); */
+            $registro_kar = $kardex->agregar();
 
             if ($r == 1) {
-                if ($v) {
+               
                     header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us=' . $id_user . '&cod=' . $codigo . '&arm=' . $tipo_armado . '');
-                } else {
-                    echo "error en la compra falta de stock";
-                }
+                
+                
             }
 
 

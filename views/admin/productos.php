@@ -1,6 +1,10 @@
 <?php
 include_once '../../model/Productos.php';
+include_once '../../model/Categorias.php';
+include_once '../../model/Marcas.php';
 $p = new Productos();
+$m = new Marcas();
+$c = new Categorias();
 
 $productos = $p->leer();
 ?>
@@ -46,6 +50,7 @@ $productos = $p->leer();
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -68,6 +73,10 @@ $productos = $p->leer();
                                 <tbody>
                                     <?php
                                     foreach ($productos as $p) :
+                                      
+                                    $categoria_nombre= $c->buscar($p['categorias_cat_id']);
+                                    
+                                       $nombre_m=$m->buscar($p['marcas_mar_id']);
                                     ?>
                                         <tr>
                                             <td><?= $p['pro_id'] ?></td>
@@ -77,10 +86,20 @@ $productos = $p->leer();
                                             <td><?= $p['pro_nombre'] ?></td>
                                             <td><?= $p['pro_precio_venta'] ?></td>
                                             <td><?= $p['pro_stock'] ?></td>
-                                            <td><?= $p['pro_modelo'] ?></td>
+                                            <td>
+                                                <model-viewer style="width: 100%; height: 500px;" class="w-screen" src="../../resources/images/modelos/<?= $p['pro_id'] ?>/<?= $p['pro_modelo'] ?>" camera-controls auto-rotate ar>
+
+                                                    <div class="progress-bar hide" slot="progress-bar">
+                                                        <div class="update-bar"></div>
+                                                    </div>
+                                                </model-viewer>
+
+
+
+                                            </td>
                                             <td><img width="50px" src="../../resources/images/productos/<?= $p['pro_id'] ?>/<?= $p['pro_img'] ?>"></td>
-                                            <td><?= $p['categorias_cat_id'] ?></td>
-                                            <td><?= $p['marcas_mar_id'] ?></td>
+                                            <td><?=$categoria_nombre['cat_nombre']?></td>
+                                            <td><?= $nombre_m['mar_nombre'] ?></td>
                                             <td><?php
                                                 if ($p['pro_estado'] == 1) { ?>
                                                     <span class="badge badge-success"> Habilitado </span>

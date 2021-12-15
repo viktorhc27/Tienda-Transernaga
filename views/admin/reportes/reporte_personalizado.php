@@ -115,8 +115,7 @@ $dompdf->setOptions($options);
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4');
 $dompdf->render();
- /* $dompdf->stream("boleta".$numero.".pdf", array("Attachment" => true)) */; 
-$dompdf->stream("archivo.pdf", array("Attachment" => false)); 
+$dompdf->stream("Reporte.pdf", array("Attachment" => true));
 
 /* header('Location:http://localhost/tienda-transernaga/index.php?param=inicio'); */
 ?>

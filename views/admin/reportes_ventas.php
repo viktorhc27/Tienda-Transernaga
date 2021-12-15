@@ -20,38 +20,40 @@ $hoy = date("d-m-Y", mktime(0, 0, 0, date("m"), date("d"), date("Y")));
         <br>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 ">
                     <div class="card card-default">
                         <div class="card-header">
                             <h3 class="card-title ">Reportes Ventas</h3>
                         </div>
 
-                        <div class="card-body">
+                        <div class="card-body ">
                             <h3 class="text-center">Estadisticas de Ventas de hoy(<?= $hoy ?>)</h3>
                             <form method="post" action="./reportes/reporte_ventas.php">
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
 
-                                            <th>VENTAS REALIZADAS</th>
+                                                <th>VENTAS REALIZADAS</th>
 
-                                            <th>TOTAL EN VENTAS</th>
-                                            <th>COSTO DE VENTAS</th>
-                                            <th>GANANCIAS</th>
+                                                <th>TOTAL EN VENTAS</th>
+                                                <th>COSTO DE VENTAS</th>
+                                                <th>GANANCIAS</th>
 
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><?= $reporte["0"]["0"] ?></td>
-                                            <td><?= $reporte["0"]["1"] ?></td>
-                                            <td><?= $reporte["0"]["2"] ?></td>
-                                            <td><?= $reporte["0"]["3"] ?></td>
-                                        </tr>
-                                    </tbody>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><?= $reporte["0"]["0"] ?></td>
+                                                <td><?= $reporte["0"]["1"] ?></td>
+                                                <td><?= $reporte["0"]["2"] ?></td>
+                                                <td><?= $reporte["0"]["3"] ?></td>
+                                            </tr>
+                                        </tbody>
 
-                                </table>
+                                    </table>
+                                </div>
                                 <div class="text-center">
                                     <button class="btn btn-outline-success"><i class="fas fa-print"></i>|Imprimir</button>
                                 </div>

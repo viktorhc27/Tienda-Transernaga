@@ -3,15 +3,18 @@ include_once './model/Ventas.php';
 include_once './model/Productos.php';
 include_once './model/conexion.php';
 include_once './model/Usuarios.php';
+include_once './model/DireccionesUsuarios.php';
 $ventas = new Ventas();
 $productos = new Productos();
 $usuarios = new Usuarios();
+$direccionesUsuarios = new DireccionesUsuarios();
 
 $id = $_REQUEST['id'];
 $pedidos = $ventas->listar($id);
 $id_cliente= $pedidos['0']['0'];
 
 $usuarios->buscar($id_cliente);
+$dir= $direccionesUsuarios->direccion_usuarios($id_cliente);
 
 /* echo "<pre>";
 print_r($usuarios);
@@ -45,7 +48,7 @@ echo "</pre>"; */
                         <article class="card">
                             <div class="card-body row no-gutters">
                                 <div class="col">
-                                    <strong>Direccion de Entrega:</strong><br><?= $pedidos['0']['direcciones_di_id'] ?> </strong>
+                                    <strong>Direccion de Entrega:</strong><br><?= $dir[0]['di_nombre'] ?> </strong>
                                 </div>
                                 <div class="col">
                                     <strong>Numero:</strong> <br><i class="fa fa-phone"></i> <?php $var =$usuarios->buscar($pedidos['0']['usuarios_us_id'])  ?> <?=$var['us_telefono']?>
