@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2021 a las 17:32:25
+-- Tiempo de generación: 14-12-2021 a las 23:48:27
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 7.4.26
 
@@ -54,8 +54,8 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`cat_id`, `cat_nombre`, `cat_estado`, `create_time`, `update_time`, `imagen`) VALUES
-(8, 'sofas', 1, '2021-11-19 19:14:26', '2021-11-24 18:06:31', 'sofas.jpg'),
-(9, 'mesas2', 1, '2021-11-19 19:14:28', '2021-12-09 20:08:46', NULL),
+(8, 'sofas', 1, '2021-11-19 19:14:26', '2021-12-14 18:51:12', 'sofas.jpg'),
+(9, 'mesas', 1, '2021-11-19 19:14:28', '2021-12-14 19:11:32', 'mesas.webp'),
 (10, 'camas', 1, '2021-11-19 19:14:30', '2021-11-19 19:14:30', 'camas.jpg'),
 (11, 'escritorios', 1, '2021-11-19 19:14:33', '2021-11-19 19:14:33', 'escritorios.webp'),
 (12, 'comodas', 1, '2021-11-19 19:14:36', '2021-11-19 19:14:36', 'comodas.jpg'),
@@ -83,28 +83,6 @@ INSERT INTO `direcciones` (`di_id`, `di_nombre`, `di_numero`, `di_latitud`, `di_
 (4, 'calle', NULL, -18.479, -70.2925),
 (5, 'inacap', NULL, -18.4691, -70.3028),
 (6, 'estadio', NULL, NULL, NULL),
-(7, 'casa', NULL, -18.4717, -70.3051),
-(8, 'casa', NULL, -18.4717, -70.3051),
-(9, 'casa', NULL, -18.4717, -70.3051),
-(10, 'casa', NULL, -18.4717, -70.3051),
-(11, 'casa', NULL, -18.4717, -70.3051),
-(12, 'casa', NULL, -18.4717, -70.3051),
-(13, 'casa', NULL, -18.4717, -70.3051),
-(14, 'casa', NULL, -18.4717, -70.3051),
-(15, 'casa', NULL, -18.4717, -70.3051),
-(16, 'ewq', NULL, -18.4777, -70.3226),
-(17, 'ewq', NULL, -18.4777, -70.3226),
-(18, 'ewq', NULL, -18.4777, -70.3226),
-(19, 'ewq', NULL, -18.4777, -70.3226),
-(20, 'ewq', NULL, -18.4777, -70.3226),
-(21, 'ewq', NULL, -18.4777, -70.3226),
-(22, 'ewq', NULL, -18.4777, -70.3226),
-(23, 'ewq', NULL, -18.4777, -70.3226),
-(24, 'ewq', NULL, -18.4777, -70.3226),
-(25, 'ewq', NULL, -18.4777, -70.3226),
-(26, 'ewq', NULL, -18.4777, -70.3226),
-(27, 'ewq', NULL, -18.4777, -70.3226),
-(28, 'ewq', NULL, -18.4777, -70.3226),
 (29, 'ewq', NULL, -18.4777, -70.3226),
 (30, 'ewq', NULL, -18.4777, -70.3226),
 (31, 'ewq', NULL, -18.4777, -70.3226),
@@ -126,7 +104,11 @@ INSERT INTO `direcciones` (`di_id`, `di_nombre`, `di_numero`, `di_latitud`, `di_
 (47, 'ert', NULL, -18.4688, -70.2973),
 (48, 'ss', NULL, NULL, NULL),
 (49, 's', NULL, -18.594, -69.4785),
-(50, 'calle', NULL, -18.4805, -70.3158);
+(50, 'calle', NULL, -18.4805, -70.3158),
+(51, 'estadio', NULL, -18.4882, -70.2992),
+(52, 'inacap', NULL, -18.4691, -70.3028),
+(53, 'casa', NULL, -18.4717, -70.3051),
+(54, 'inacap', NULL, -18.4691, -70.3028);
 
 -- --------------------------------------------------------
 
@@ -150,7 +132,8 @@ INSERT INTO `direccion_usuarios` (`usuarios_us_id`, `direcciones_di_id`) VALUES
 (209, 13),
 (239, 43),
 (2, 12),
-(1, 50);
+(1, 50),
+(175, 51);
 
 -- --------------------------------------------------------
 
@@ -221,7 +204,9 @@ INSERT INTO `imagen` (`img_id`, `ruta`, `create_time`, `update_time`, `nombre`) 
 (67, '/resources/images/productos/45', '2021-12-07 15:07:30', '2021-12-07 15:07:30', 'Napr_normal.png'),
 (68, '/resources/images/productos/47', '2021-12-07 15:21:38', '2021-12-07 15:21:38', 'Napr_baseColor.png'),
 (69, '/resources/images/productos/48', '2021-12-07 15:26:37', '2021-12-07 15:26:37', 'Napr_baseColor.png'),
-(70, '/resources/images/productos/49', '2021-12-07 15:27:29', '2021-12-07 15:27:29', 'Napr_baseColor.png');
+(70, '/resources/images/productos/49', '2021-12-07 15:27:29', '2021-12-07 15:27:29', 'Napr_baseColor.png'),
+(71, '/resources/images/productos/50', '2021-12-12 18:51:08', '2021-12-12 18:51:08', 'foto.png'),
+(72, '/resources/images/productos/51', '2021-12-12 18:55:10', '2021-12-12 18:55:10', 'foto.png');
 
 -- --------------------------------------------------------
 
@@ -237,42 +222,6 @@ CREATE TABLE `kardex` (
   `fecha` timestamp NULL DEFAULT NULL,
   `pro_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `kardex`
---
-
-INSERT INTO `kardex` (`kar_id`, `tipo`, `descripcion`, `unidades`, `fecha`, `pro_id`) VALUES
-(1, 'ENTRADA', 'AGREGADO MEDIANTE REGISTRO', 2, '2021-12-03 03:00:00', 0),
-(2, 'ENTRADA', 'AGREGADO MEDIANTE REGISTRO', 2, '2021-12-03 03:00:00', 0),
-(3, 'ENTRADA', 'AGREGADO MEDIANTE REGISTRO', 2, '2021-12-03 03:00:00', 0),
-(4, 'ENTRADA', 'AGREGADO MEDIANTE REGISTRO', 22, '2021-12-03 03:00:00', 0),
-(5, 'SALIDA', 'Venta de producto', 4, '2021-12-03 03:00:00', 0),
-(6, 'SALIDA', 'Venta de producto', 1, '2021-12-04 19:18:59', 0),
-(7, 'SALIDA', 'Venta de producto', 9, '2021-12-04 23:36:45', 0),
-(8, 'SALIDA', 'Venta de producto', 2, '2021-12-04 23:36:45', 0),
-(9, 'SALIDA', 'Venta de producto', 9, '2021-12-04 23:37:21', 0),
-(10, 'SALIDA', 'Venta de producto', 2, '2021-12-04 23:37:21', 0),
-(11, 'SALIDA', 'Venta de producto', 9, '2021-12-04 23:37:22', 0),
-(12, 'SALIDA', 'Venta de producto', 2, '2021-12-04 23:37:22', 0),
-(13, 'SALIDA', 'Venta de producto', 9, '2021-12-04 23:37:22', 0),
-(14, 'SALIDA', 'Venta de producto', 2, '2021-12-04 23:37:22', 0),
-(15, 'ENTRADA', 'AGREGADO MEDIANTE REGISTRO', 200, '2021-12-05 13:41:28', 3),
-(16, 'ENTRADA', 'AGREGADO MEDIANTE REGISTRO', 250, '2021-12-05 13:42:09', 4),
-(17, 'ENTRADA', 'AGREGADO MEDIANTE REGISTRO', 10, '2021-12-05 13:42:19', 6),
-(18, 'ENTRADA', 'AGREGADO MEDIANTE REGISTRO', 100, '2021-12-05 13:44:30', 5),
-(19, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:23:59', 3),
-(20, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:24:00', 3),
-(21, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:24:01', 3),
-(22, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:24:37', 3),
-(23, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:24:45', 3),
-(24, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:25:00', 3),
-(25, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:25:24', 3),
-(26, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:26:46', 3),
-(27, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:28:11', 3),
-(28, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:28:42', 3),
-(29, 'SALIDA', 'Venta de producto', 1, '2021-12-07 23:29:05', 3),
-(30, 'SALIDA', 'Venta de producto', 2, '2021-12-08 14:26:07', 3);
 
 -- --------------------------------------------------------
 
@@ -329,10 +278,12 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`pro_id`, `pro_codigo`, `pro_nombre`, `pro_precio_compra`, `pro_precio_venta`, `pro_modelo`, `pro_altura`, `pro_ancho`, `pro_profundidad`, `pro_descripcion`, `pro_peso`, `pro_stock`, `pro_img`, `pro_color`, `pro_estado`, `create_time`, `update_time`, `categorias_cat_id`, `marcas_mar_id`) VALUES
-(3, 'TR123432', 'closet 2 puertas', 100000, 150000, '', '200', '100', '40', NULL, '5', 253, 'closet 2 puertas tabaco 2.png', 'Cafe', 1, '2021-11-19 19:21:27', '2021-11-19 19:21:27', 13, 2),
-(4, 'TR21313', 'Closet 3 puertas', 120000, 135000, '', '200', '150', '100', NULL, '10', 229, 'closet 3 puertas blanco natural 2.jpg', 'crema', 1, '2021-11-19 19:27:20', '2021-11-19 19:27:20', 13, 1),
-(5, 'TR1233', 'closet 6 puertas', 200000, 230000, '', '', '', '', NULL, '50', 88, 'closet 6 puertas blanco natural 2.jpg', 'crema', 1, '2021-11-19 19:28:51', '2021-11-19 19:28:51', 13, 2),
-(6, 'TR34234', 'Closet 6 puertas', 230000, 250000, '', '120', '300', '120', NULL, '50', 4, 'closet 6 puertas chocolate 2.jpg', 'chocolate', 1, '2021-11-19 19:32:13', '2021-11-19 19:32:13', 12, 2);
+(3, 'TR123432', 'closet 2 puertas', 100000, 150000, '', '200', '100', '40', NULL, '5', 0, 'closet 2 puertas tabaco 2.png', 'Cafe', 1, '2021-11-19 19:21:27', '2021-11-19 19:21:27', 13, 2),
+(4, 'TR21313', 'Closet 3 puertas', 120000, 135000, '', '200', '150', '100', NULL, '10', 0, 'closet 3 puertas blanco natural 2.jpg', 'crema', 1, '2021-11-19 19:27:20', '2021-11-19 19:27:20', 13, 1),
+(5, 'TR1233', 'closet 6 puertas', 200000, 230000, '', '', '', '', NULL, '50', 0, 'closet 6 puertas blanco natural 2.jpg', 'crema', 1, '2021-11-19 19:28:51', '2021-11-19 19:28:51', 13, 2),
+(6, 'TR34234', 'Closet 6 puertas', 230000, 250000, '', '120', '300', '120', NULL, '50', 0, 'closet 6 puertas chocolate 2.jpg', 'chocolate', 1, '2021-11-19 19:32:13', '2021-11-19 19:32:13', 12, 2),
+(50, 'TR22424', 'mesa', 30000, 40000, 'scene.gltf', '30', '23', '23', NULL, '324', 0, 'foto.png', 'blanco', 1, '2021-12-12 18:51:08', '2021-12-12 18:51:08', 9, 1),
+(51, 'TR234', 'preuba', 234, 32434, 'untitled.glb', '234', '234', '234', NULL, '234', 0, 'foto.png', 'blanco', 1, '2021-12-12 18:55:10', '2021-12-12 18:55:10', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -369,7 +320,9 @@ INSERT INTO `productos_has_imagen` (`productos_pro_id`, `imagen_img_id`) VALUES
 (5, 6),
 (5, 7),
 (5, 8),
-(6, 9);
+(6, 9),
+(50, 71),
+(51, 72);
 
 -- --------------------------------------------------------
 
@@ -421,33 +374,13 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`us_id`, `us_nombre`, `us_apellApp`, `us_apellApm`, `us_telefono`, `us_correo`, `us_password`, `us_direccion`, `us_sexo`, `create_time`, `update_time`, `roles_ro_id`, `us_estado`) VALUES
-(1, 'Admin', 'ap_admin', '2', '21344223', 'admin@correo.cl', '$2y$10$zKsBAeVGIVpCLE.T1ARQfe73kTf0UHnOGnUu8vyeHUBZiG5n3NPhO', 'calle2', 'hombre', '2021-10-04 18:52:07', '2021-10-04 18:52:07', 2, '1'),
+(1, 'Admin', 'ap_admin', 'ao', '21344223', 'admin@correo.cl', '$2y$10$zKsBAeVGIVpCLE.T1ARQfe73kTf0UHnOGnUu8vyeHUBZiG5n3NPhO', 'calle2', 'hombre', '2021-10-04 18:52:07', '2021-10-04 18:52:07', 2, '1'),
 (2, 'usuario', 'user', '2', '123', 'user@correo.cl', '$2y$10$B1hTFm9Z0PULFj7ynOv0Nu3zZ8z2BFUzjWix5v19hklCNWvfvbUM2', '213', 'hombre', '2021-10-06 00:47:18', '2021-10-06 00:47:18', 1, '1'),
 (173, 'ensablador', 'ensamblador', '2', '12', 'ensamblador@correo.cl', '$2y$10$Q5PgDzp3tsfcyBzQl8jkbOwyYQ7VzpNLB0tVnn7j/VcA9HwLKUKIK', '123, , , N° 123', 'hombre', '2021-11-18 23:08:45', '2021-11-18 23:08:45', 3, '1'),
 (174, 'admin3', 'apellido', 'as', '233213', 'admin2@correo.cl', '$2y$10$G9I9jqBFGibXecCrfzTy5ueglEftEUQDWbDGKG3h6RgJMZTSeFgvW', 'caz, undefined, undefined, N° 123', 'hombre', '2021-11-28 18:06:10', '2021-11-28 18:06:10', 2, '1'),
 (175, 'repartidor', 'repartidor', 'repartidor', '123', 'repartidor@correo.cl', '$2y$10$Gan2X/t1Rrvo9iWBvgIB6.eKb7jeKhDpXF1.PiHdBgbDuQMOHuva.', '1234', 'hombre', '2021-12-04 18:56:39', '2021-12-04 18:56:39', 4, '1'),
 (192, 'victor', 'huanca', 'cusicanqui', '1234', 'victor@correo.cl', '$2y$10$./DTtk6NXKOA2OXneHOJ3O9VVu5WBacqS0LAm9bmoC7x.ufC6chB2', NULL, 'hombre', '2021-12-05 12:28:48', '2021-12-05 12:28:48', 1, '1'),
-(219, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:22:56', '2021-12-07 23:22:56', 1, NULL),
-(220, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:22:57', '2021-12-07 23:22:57', 1, NULL),
-(221, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:23:19', '2021-12-07 23:23:19', 1, NULL),
-(222, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:23:20', '2021-12-07 23:23:20', 1, NULL),
-(223, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:23:34', '2021-12-07 23:23:34', 1, NULL),
-(224, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:23:34', '2021-12-07 23:23:34', 1, NULL),
-(225, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:23:35', '2021-12-07 23:23:35', 1, NULL),
-(226, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:23:35', '2021-12-07 23:23:35', 1, NULL),
-(227, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:23:35', '2021-12-07 23:23:35', 1, NULL),
-(228, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:23:59', '2021-12-07 23:23:59', 1, NULL),
-(229, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:24:00', '2021-12-07 23:24:00', 1, NULL),
-(230, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:24:01', '2021-12-07 23:24:01', 1, NULL),
-(231, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:24:37', '2021-12-07 23:24:37', 1, NULL),
-(232, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:24:45', '2021-12-07 23:24:45', 1, NULL),
-(233, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:25:00', '2021-12-07 23:25:00', 1, NULL),
-(234, 'pab', 'wqe', 'qwe', '123', 'qweq@corre.cd', NULL, 'ewq', 'hombre', '2021-12-07 23:25:24', '2021-12-07 23:25:24', 1, NULL),
-(235, 'pepe', '213', '213', '123', 'pepe@correo.l', NULL, 'w', 'hombre', '2021-12-07 23:26:46', '2021-12-07 23:26:46', 1, NULL),
-(236, 'pepe', '213', '213', '123', 'pepe@correo.l', NULL, 'w', 'hombre', '2021-12-07 23:28:11', '2021-12-07 23:28:11', 1, NULL),
-(237, 'wdwa', '123', '213', '123', 'e21e@correo.cl', NULL, 'd', 'hombre', '2021-12-07 23:28:42', '2021-12-07 23:28:42', 1, NULL),
-(238, 'wdwa', '123', '213', '123', 'e21e@correo.cl', NULL, 'ds', 'hombre', '2021-12-07 23:29:05', '2021-12-07 23:29:05', 1, NULL),
-(239, 'comprador', 'qwe', 'qwe', '123123', 'comprador@correo.cl', NULL, 'casa', 'mujer', '2021-12-08 14:26:07', '2021-12-08 14:26:07', 1, NULL);
+(241, 'pepe', 'w', 'w', '123', 'pepe@correo.cl', NULL, 'casa', 'hombre', '2021-12-14 18:39:02', '2021-12-14 18:39:02', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -464,17 +397,6 @@ CREATE TABLE `usuarios_stock` (
   `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `usuarios_stock`
---
-
-INSERT INTO `usuarios_stock` (`prostock_id`, `productos_pro_id`, `usuarios_us_id`, `documento`, `cantidad`, `create_time`, `update_time`) VALUES
-(1, 3, 1, 'archivo (2).pdf', 200, '2021-12-05 13:41:28', '2021-12-05 13:41:28'),
-(2, 4, 1, 'archivo (2).pdf', 250, '2021-12-05 13:42:09', '2021-12-05 13:42:09'),
-(3, 6, 1, 'archivo (2).pdf', 10, '2021-12-05 13:42:19', '2021-12-05 13:42:19'),
-(4, 4, 1, '-', -21, '2021-12-05 13:42:28', '2021-12-05 13:42:28'),
-(5, 5, 1, '1.txt', 100, '2021-12-05 13:44:30', '2021-12-05 13:44:30');
 
 -- --------------------------------------------------------
 
@@ -495,29 +417,6 @@ CREATE TABLE `ventas` (
   `estados_id` int(11) NOT NULL,
   `direcciones_di_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `ventas`
---
-
-INSERT INTO `ventas` (`usuarios_us_id`, `productos_pro_id`, `venta_id`, `ven_total`, `ven_cantidad`, `create_time`, `update_time`, `tipo_armado`, `ven_codigo`, `estados_id`, `direcciones_di_id`) VALUES
-(2, 3, 'TR61B0C187724B6', 150000, 1, '2021-12-08 14:30:31', '2021-12-08 14:30:31', 'domicilio', 'TR61B0C187724B6', 1, 12),
-(192, 3, 'TR61ACBD05D116E', 300000, 2, '2021-12-05 13:22:13', '2021-12-05 13:22:13', 'domicilio', 'TR61ACBD05D116E', 5, 4),
-(192, 3, 'TR61ACBD2CD7DE5', 300000, 2, '2021-12-05 13:22:52', '2021-12-05 13:22:52', 'domicilio', 'TR61ACBD2CD7DE5', 8, 4),
-(192, 3, 'TR61ACBD5136B77', 300000, 2, '2021-12-05 13:23:29', '2021-12-05 13:23:29', 'domicilio', 'TR61ACBD5136B77', 5, 4),
-(192, 3, 'TR61ACBD5216BC6', 300000, 2, '2021-12-05 13:23:30', '2021-12-05 13:23:30', 'domicilio', 'TR61ACBD5216BC6', 5, 4),
-(192, 3, 'TR61ACBD786A078', 150000, 1, '2021-12-05 13:24:08', '2021-12-05 13:24:08', 'domicilio', 'TR61ACBD786A078', 5, 5),
-(192, 3, 'TR61ACBDAABC926', 150000, 1, '2021-12-05 13:24:58', '2021-12-05 13:24:58', 'domicilio', 'TR61ACBDAABC926', 6, 4),
-(192, 3, 'TR61ACBDD8CFFB4', 150000, 1, '2021-12-05 13:25:44', '2021-12-05 13:25:44', 'domicilio', 'TR61ACBDD8CFFB4', 8, 4),
-(192, 3, 'TR61ACC268797C9', 1800000, 12, '2021-12-05 13:45:12', '2021-12-05 13:45:12', 'empresa', 'TR61ACC268797C9', 8, 4),
-(192, 5, 'TR61ACC268797C9', 1380000, 6, '2021-12-05 13:45:12', '2021-12-05 13:45:12', 'empresa', 'TR61ACC268797C9', 8, 4),
-(192, 6, 'TR61ACC268797C9', 1500000, 6, '2021-12-05 13:45:12', '2021-12-05 13:45:12', 'empresa', 'TR61ACC268797C9', 8, 4),
-(234, 3, 'TR61AFED64E41AF', 150000, 1, '2021-12-07 23:25:24', '2021-12-07 23:25:24', 'domicilio', 'TR61AFED64E41AF', 5, 38),
-(235, 3, 'TR61AFEDB695F3C', 150000, 1, '2021-12-07 23:26:46', '2021-12-07 23:26:46', 'domicilio', 'TR61AFEDB695F3C', 5, 39),
-(236, 3, 'TR61AFEE0B8BBE5', 150000, 1, '2021-12-07 23:28:11', '2021-12-07 23:28:11', 'domicilio', 'TR61AFEE0B8BBE5', 5, 40),
-(237, 3, 'TR61AFEE2A819F1', 150000, 1, '2021-12-07 23:28:42', '2021-12-07 23:28:42', 'domicilio', 'TR61AFEE2A819F1', 4, 41),
-(238, 3, 'TR61AFEE418585B', 150000, 1, '2021-12-07 23:29:05', '2021-12-07 23:29:05', 'domicilio', 'TR61AFEE418585B', 4, 42),
-(239, 3, 'TR61B0C07F68E43', 300000, 2, '2021-12-08 14:26:07', '2021-12-08 14:26:07', 'domicilio', 'TR61B0C07F68E43', 1, 43);
 
 --
 -- Índices para tablas volcadas
@@ -642,7 +541,7 @@ ALTER TABLE `armados_tipo`
 -- AUTO_INCREMENT de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `di_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `di_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -654,13 +553,13 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `kardex`
 --
 ALTER TABLE `kardex`
-  MODIFY `kar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `kar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `marcas`
@@ -672,7 +571,7 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -684,19 +583,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `us_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+  MODIFY `us_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_stock`
 --
 ALTER TABLE `usuarios_stock`
-  MODIFY `prostock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `prostock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `usuarios_us_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+  MODIFY `usuarios_us_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
 
 --
 -- Restricciones para tablas volcadas
