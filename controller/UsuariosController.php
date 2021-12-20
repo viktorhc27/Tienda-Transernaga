@@ -279,4 +279,35 @@ switch ($accion) {
 
 
         break;
+    
+    case "modificar_MisDatos":
+        $usuarios = new Usuarios();
+        $usuarios->__set('us_id', $_REQUEST['id']);
+        $usuarios->__set('us_nombre', $_REQUEST['nombre']);
+        $usuarios->__set('us_apellApp', $_REQUEST['app']);
+        $usuarios->__set('us_apellApm', $_REQUEST['apm']);
+        $usuarios->__set('us_correo', $_REQUEST['correo']);
+        $usuarios->__set('us_telefono', $_REQUEST['telefono']);
+
+        
+        $res = $usuarios->modificarMisDatos();
+
+
+        /* header('Content-Type:apllication/json'); */
+        if ($res == 1) {
+            /* $datos = array(
+                'datos' => 'modificado'
+            ); */
+            echo "<script type='text/javascript'>";
+            echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=registrar'";
+            echo "</script>";
+        } else {
+            $datos = array(
+                'datos' => 'error'
+            );
+        }
+        /* echo json_encode($datos, JSON_FORCE_OBJECT); */
+
+        break;
+        
 }

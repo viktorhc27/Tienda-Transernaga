@@ -1,3 +1,4 @@
+<link href="../resources/css/botonVerEnTuEspacio.css" rel="stylesheet" type="text/css"/>
 <section class="section-intro padding-y-sm">
     <div class="container">
 
@@ -15,11 +16,11 @@
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControlsNoTouching" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
+                <span class="sr-only">Anterior</span>
             </a>
             <a class="carousel-control-next" href="#carouselExampleControlsNoTouching" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+                <span class="sr-only">Siguiente</span>
             </a>
         </div>
 

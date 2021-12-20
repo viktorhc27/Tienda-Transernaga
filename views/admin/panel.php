@@ -87,7 +87,7 @@ $c = new Categorias();
                 <div class="col-md-12">
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title ">Funciones</h3>
+                            <h3 class="card-title ">Administración</h3>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -100,7 +100,7 @@ $c = new Categorias();
                                                         <figure class="text-center">
                                                             <span class="rounded-circle icon-md bg-success"><i class="fas fa-users white"></i></span>
                                                             <figcaption class="pt-4">
-                                                                <h5 class="title">Funcionarios</h5>
+                                                                <h5 class="title">Usuarios</h5>
                                                             </figcaption>
                                                         </figure>
                                                     </article>
@@ -137,6 +137,19 @@ $c = new Categorias();
                                                             <span class="rounded-circle icon-md bg-danger"><i class="fa fa-concierge-bell white"></i></span>
                                                             <figcaption class="pt-4">
                                                                 <h5 class="title">Servicios</h5>
+
+                                                            </figcaption>
+                                                        </figure>
+                                                    </article>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a style="color: white;" href="?param=kardex">
+                                                    <article class="card card-body">
+                                                        <figure class="text-center">
+                                                            <span class="rounded-circle icon-md bg-success"><i class="fas fa-search"></i></span>
+                                                            <figcaption class="pt-4">
+                                                                <h5 class="title" style="color: black">Kardex</h5>
 
                                                             </figcaption>
                                                         </figure>

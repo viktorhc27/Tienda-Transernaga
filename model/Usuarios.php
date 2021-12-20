@@ -157,6 +157,36 @@ class Usuarios
             return $e->getMessage();
         }
     }
+    
+    public function modificarMisDatos()
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("update usuarios set "
+                . " us_nombre=:nombre,"
+                . " us_apellApp=:app,"
+                . " us_apellapm=:apm,"
+                . " us_telefono=:telefono , "
+                . " us_correo=:correo WHERE us_id = :id");
+
+            $sql->bindparam("id", $this->us_id);
+            $sql->bindparam("nombre", $this->us_nombre);
+            $sql->bindparam("app", $this->us_apellApp);
+            $sql->bindparam("apm", $this->us_apellApm);
+            $sql->bindparam("telefono", $this->us_telefono);
+            $sql->bindparam("correo", $this->us_correo);
+
+            $res = $sql->execute();
+            if ($sql->rowCount() == 1) {
+
+                return $res;
+            } else {
+                return $res;
+            }
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 
     public function buscar($id)
     {
@@ -184,11 +214,12 @@ class Usuarios
             return $ex->getMessage();
         }
     }
+    
     public function listar_funcionarios()
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("select * from usuarios where roles_ro_id >= 2 ");
+            $sql = $con->prepare("select * from usuarios where roles_ro_id >= 1 ");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;

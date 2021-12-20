@@ -384,4 +384,22 @@ class Productos
             return $ex->getMessage();
         }
     }
+    
+    public function verificar_codigo($codigo)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * FROM productos WHERE pro_codigo like :codigo");
+            $keyword = "%" . $codigo . "%";
+            $sql->bindParam(':codigo', $keyword);
+            $sql->execute();
+            if ($sql->rowCount() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
 }

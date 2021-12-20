@@ -1,8 +1,5 @@
 <?php
 include_once '../../model/Usuarios.php';
-include_once '../../model/Roles.php';
-$roles = new Roles();
-$lista_roles = $roles->leer();
 
 $us = new Usuarios();
 $id = $_REQUEST['id'];
@@ -30,11 +27,11 @@ $us = $us->buscar($id);
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title ">Detalles de Usuario</h3>
+                            <h3 class="card-title ">Actualizar Datos Personales</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="../../controller/UsuariosController.php?accion=modificar">
+                        <form method="post" action="../../controller/UsuariosController.php?accion=modificar_MisDatos">
                             <div class="card-body">
 
                                 <div class="row">
@@ -74,39 +71,6 @@ $us = $us->buscar($id);
                                             <input id="telefono" value="<?= $us['us_telefono'] ?>" name="telefono" type="text" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Direccion</label>
-                                            <input id="direccion" value="<?= $us['us_direccion'] ?>" name="direccion" type="" type="text" class="form-control">
-
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Rol</label>
-                                            <?php $buscar_rol = $roles->buscar($us['roles_ro_id']); ?>
-
-                                            <input value="<?= $us['roles_ro_id'] ?>" name="rol" type="hidden" class="form-control">
-                                            <input id="rol" value="<?= $buscar_rol['rol_nombre'] ?>" type="text" class="form-control" disabled>
-                                            <br>
-                                            <label>Si quiere cambiarle el rol Seleccione el siguiente</label>
-                                            <select id="nuevo_rol" name="nuevo_rol" class="form-control">
-                                                <option value="0">Cambiar Rol</option>
-                                                <?php
-
-                                                foreach ($lista_roles as $r) :
-                                                ?>
-
-                                                    <option value="<?= $r['ro_id'] ?>"><?= $r['rol_nombre'] ?></option>
-
-                                                <?php
-                                                endforeach;
-
-                                                ?>
-
-                                            </select>
-
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                             <!-- /.card -->

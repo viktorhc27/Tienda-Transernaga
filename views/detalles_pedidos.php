@@ -42,7 +42,7 @@ echo "</pre>"; */
             </aside>
             <main class="col-md-9">
                 <article class="card">
-                    <header class="card-header"> My Orders / Tracking </header>
+                    <header class="card-header"> Mis Ordenes / Seguimiento </header>
                     <div class="card-body">
                         <h6>Order ID: <?= $pedidos['0']['2'] ?></h6>
                         <article class="card">

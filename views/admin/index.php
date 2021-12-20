@@ -14,7 +14,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
         <title>Transernaga</title>
 
         <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-
+        <link href="../../resources/css/botonVerEnTuEspacio.css" rel="stylesheet" type="text/css"/>
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
@@ -73,7 +73,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                                 <a class="nav-link" href="?param=inicio">Inicio <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="?param=registrar">funcionarios</a>
+                                <a class="nav-link" href="?param=registrar">Usuarios</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -104,7 +104,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="?param=kardex">kardex</a>
+                                <a class="nav-link" href="?param=kardex">Kardex</a>
 
 
                             </li>

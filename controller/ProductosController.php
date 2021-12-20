@@ -160,4 +160,22 @@ switch ($accion) {
         echo "</pre>"; */
 
         break;
+    
+    case 'verificar':
+        $productos = new productos();
+        $codigo = $_REQUEST['codigo'];
+        $res = $productos->verificar_codigo($codigo);
+        header('Content-Type:apllication/json');
+        if ($res == 1) {
+            $datos = array(
+                'datos' => "existe",
+            );
+        } else {
+            $datos = array(
+                'datos' => 'no existe'
+            );
+        }
+        echo json_encode($datos, JSON_FORCE_OBJECT);
+
+        break;
 }

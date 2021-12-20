@@ -24,6 +24,7 @@ $marcas = $ma->listar();
                             <div class="form-group col-md-3">
                                 <label>Codigo</label>
                                 <input id="codigo" name="codigo" type="number" class="form-control" id="inputEmail4">
+                                <small id="alerta" class="form-text text-muted"></small>
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Nombre</label>
@@ -132,70 +133,77 @@ $marcas = $ma->listar();
         var altura = $("#altura").val();
         var ancho = $("#ancho").val();
         var profundidad = $("#profundidad").val();
-
         var modelo = $("#modelo").prop("files");
         var imagenes = $('#archivo').prop("files");
-
         var peso = $("#peso").val();
         var stock = $("#stock").val();
         var color = $("#color").val();
         var estado = $("#estado").val();
         var categoria = $("#categoria").val();
         var marcas = $("#marcas").val();
+        var alerta = $("#alert_correo").val();
+        if (alerta == "Codigo disponible") {
+            if (parseInt(precio_compra) < parseInt(precio_venta)) {
 
+                if (codigo != "" && nombre != "" && precio_compra != "" && precio_venta != "" && altura != "" && ancho != "" && profundidad != "" && peso != "" && color != "" && categoria != "" && marcas != "" && estado != "") {
 
-        if (parseInt(precio_compra) < parseInt(precio_venta)) {
+                    if (modelo.length > 0 && imagenes.length > 0) {
+                        formData.append('codigo', codigo);
+                        formData.append('nombre', nombre);
+                        formData.append('precio_compra', precio_compra);
+                        formData.append('precio_venta', precio_venta);
+                        formData.append('altura', altura);
+                        formData.append('ancho', ancho);
+                        formData.append('profundidad', profundidad);
+                        formData.append('modelo', modelo);
+                        formData.append('peso', peso);
+                        formData.append('stock', stock);
+                        formData.append('color', color);
+                        formData.append('estado', estado);
+                        formData.append('categoria', categoria);
+                        formData.append('marcas', marcas);
 
-            if (codigo != "" && nombre != "" && precio_compra != "" && precio_venta != "" && altura != "" && ancho != "" && profundidad != "" && peso != "" && color != "" && categoria != "" && marcas != "" && estado != "") {
+                        for (let i = 0; i < imagenes.length; i++) {
+                            formData.append('imagen[' + i + ']', imagenes[i])
+                        }
+                        for (let i = 0; i < modelo.length; i++) {
+                            formData.append('modelo[' + i + ']', modelo[i])
+                        }
+                        console.log(formData.get("modelo[0]"));
+                        $.ajax({
+                            url: '../../controller/ProductosController.php?accion=agregar_producto', // point to server-side PHP script 
+                            data: formData,
+                            dataType: 'text', // what to expect back from the PHP script, if anything
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            type: 'post',
+                        }).done(function(respuesta) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Agregado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
 
+                        });
 
-                if (modelo.length > 0 && imagenes.length > 0) {
-                    formData.append('codigo', codigo);
-                    formData.append('nombre', nombre);
-                    formData.append('precio_compra', precio_compra);
-                    formData.append('precio_venta', precio_venta);
-                    formData.append('altura', altura);
-                    formData.append('ancho', ancho);
-                    formData.append('profundidad', profundidad);
-                    formData.append('modelo', modelo);
-                    formData.append('peso', peso);
-                    formData.append('stock', stock);
-                    formData.append('color', color);
-                    formData.append('estado', estado);
-                    formData.append('categoria', categoria);
-                    formData.append('marcas', marcas);
-
-                    for (let i = 0; i < imagenes.length; i++) {
-                        formData.append('imagen[' + i + ']', imagenes[i])
-                    }
-                    for (let i = 0; i < modelo.length; i++) {
-                        formData.append('modelo[' + i + ']', modelo[i])
-                    }
-                    console.log(formData.get("modelo[0]"));
-                    $.ajax({
-                        url: '../../controller/ProductosController.php?accion=agregar_producto', // point to server-side PHP script 
-                        data: formData,
-                        dataType: 'text', // what to expect back from the PHP script, if anything
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        type: 'post',
-                    }).done(function(respuesta) {
+                    } else {
                         Swal.fire({
                             position: 'top-end',
-                            icon: 'success',
-                            title: 'Agregado',
+                            icon: 'error',
+                            title: 'Debe subir los Archivos',
                             showConfirmButton: false,
                             timer: 1500
                         })
-
-                    });
+                    }
 
                 } else {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Debe subir los Archivos',
+                        title: 'Complete todos los campos',
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -203,37 +211,61 @@ $marcas = $ma->listar();
 
 
 
-
             } else {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Complete todos los campos',
+                    title: 'El PRECIO VENTA tiene que ser mayor al PRECIO COMPRA ',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 3500
                 })
             }
 
-
-
         } else {
+
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
-                title: 'El PRECIO VENTA tiene que ser mayor al PRECIO COMPRA ',
+                title: 'Codigo no disponible',
                 showConfirmButton: false,
-                timer: 3500
+                timer: 1500
             })
         }
-
-
-
-
-
-
-
     })
     $("#codigo").blur(function() {
+        var codigo = $("#codigo").val();
+        $("#repuesta").val('');
+        if (codigo != "") {
 
-    })
+            datos = {
+                "codigo": codigo,
+            };
+
+            $.ajax({
+                url: '../../controller/ProductosController.php?accion=verificar',
+                type: 'POST',
+                data: datos,
+
+            }).done(function(respuesta) {
+                console.log(JSON.stringify(respuesta));
+                if (respuesta.datos === "existe") {
+                    $('#codigo').removeClass('is-valid');
+                    $('#codigo').addClass('is-invalid');
+                    $("#alerta").text('Codigo no disponible');
+                    $("#alerta").append("<input type='hidden' id='alert_correo' value='Codigo no disponible'>");
+
+                }
+                if (respuesta.datos === "no existe") {
+                    $('#codigo').removeClass('is-invalid');
+                    $('#codigo').addClass('is-valid');
+                    $("#alerta").text('Codigo disponible');
+                    $("#alerta").append("<input type='hidden' id='alert_correo'  value='Codigo disponible'>");
+                }
+            })
+
+        } else {
+            $('#codigo').removeClass('is-valid');
+            $('#codigo').addClass('is-invalid');
+        }
+    });
 </script>

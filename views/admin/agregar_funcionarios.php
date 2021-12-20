@@ -15,13 +15,13 @@ $lista_roles = $roles->leer();
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Funcionarios</li>
+                <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
             </ol>
         </nav><br>
         <div class="cotainer-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <button data-toggle="modal" data-target="#staticBackdrop" type="button" class="btn btn-outline-primary">Registrar Funcionario</button>
+                    <button data-toggle="modal" data-target="#staticBackdrop" type="button" class="btn btn-outline-primary">Registrar Usuario</button>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@ $lista_roles = $roles->leer();
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title ">Lista de Funcionarios</h3>
+                            <h3 class="card-title ">Lista de Usuarios</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -68,9 +68,12 @@ $lista_roles = $roles->leer();
 
                                             <td>
 
-                                                <?php if ($s['roles_ro_id'] == 2) { ?>
-                                                    <span class="badge badge-primary"> Administrador</span>
-
+                                                
+                                                <?php if ($s['roles_ro_id'] == 1) { ?>
+                                                    <span class="badge badge-primary"> Cliente</span>
+                                                <?php }
+                                                if ($s['roles_ro_id'] == 2) { ?>
+                                                    <span class="badge badge-danger"> Administrador</span>
                                                 <?php }
                                                 if ($s['roles_ro_id'] == 3) { ?>
                                                     <span class="badge badge-danger"> Ensamblador</span>
@@ -99,7 +102,7 @@ $lista_roles = $roles->leer();
                                                         <button class="dropdown-item" type="button">Ver</button>
                                                         <form method="post" action="../../controller/UsuariosController.php?accion=cambiar_estado">
                                                         <input type="hidden" id="id" name="id" value="<?= $s['us_id'] ?>">
-                                                            <button class="dropdown-item">Cambiar_estado</button>
+                                                            <button class="dropdown-item">Cambiar Estado</button>
                                                         </form>
 
                                                     </div>
@@ -140,7 +143,7 @@ $lista_roles = $roles->leer();
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Registrar Funcionarios</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Registrar Usuario</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -174,7 +177,7 @@ $lista_roles = $roles->leer();
                         <div class="form-group">
                             <label for="">Sexo</label>
                             <select id="sexo" class="form-control">
-                                <option value="">Select</option>
+                                <option value="">Seleccionar</option>
                                 <option value="hombre">Hombre</option>
                                 <option value="mujer">Mujer</option>
                             </select>
@@ -191,7 +194,7 @@ $lista_roles = $roles->leer();
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label>Numero</label>
+                                <label>Número</label>
                                 <input id="numero" name="numero" id="numero" type="text" class="form-control">
                             </div>
 
@@ -202,7 +205,7 @@ $lista_roles = $roles->leer();
                                 <input id="password" name="password" type="password" class="form-control" type="password">
                             </div> <!-- form-group end.// -->
                             <div class="form-group col-md-6">
-                                <label>Repetir contraseña</label>
+                                <label>Repetir Contraseña</label>
                                 <input id="password_retry" class="form-control" type="password">
                             </div> <!-- form-group end.// -->
                         </div>
@@ -210,7 +213,7 @@ $lista_roles = $roles->leer();
                         <div class="form-group ">
                             <label>Rol</label>
                             <select id="rol" name="rol" class="form-control">
-                                <option>Seleccione...</option>
+                                <option>Seleccionar</option>
                                 <?php
 
                                 foreach ($lista_roles as $r) :
@@ -232,7 +235,7 @@ $lista_roles = $roles->leer();
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button id="btnGuardar" type="submit" class="btn btn-primary "> Registrar </button>
                     </div>
                 </div>

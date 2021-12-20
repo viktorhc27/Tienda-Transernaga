@@ -17,7 +17,8 @@ if (empty($_REQUEST["param"])) {
     <link rel="icon" href="https://muebleslagos.cl/wp-content/uploads/2018/02/cropped-logo-Horizontal-32x32.png" sizes="32x32">
     
     <title>Transernaga</title>
-
+    
+    <link href="resources/css/botonVerEnTuEspacio.css" rel="stylesheet" type="text/css"/>
     <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
     <!-- jQuery -->
@@ -64,7 +65,7 @@ if (empty($_REQUEST["param"])) {
     <header class="section-header">
         <nav style="background-color: #9a7200; " class="navbar navbar-black p-0 navbar-expand border-bottom">
             <div class="container">
-                <ul class="navbar-nav mr-auto">
+<!--                <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> USD </a>
                         <ul class="dropdown-menu small">
@@ -84,7 +85,7 @@ if (empty($_REQUEST["param"])) {
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a href="#" class="nav-link"> <i class="fa fa-comment"></i> Customer care </a></li>
-                </ul>
+                </ul>-->
             </div> <!-- container //  -->
             <!-- container .l.//  -->
         </nav>
@@ -94,8 +95,7 @@ if (empty($_REQUEST["param"])) {
                 <div class="container">
 
                     <a class="navbar-brand" href="?param=inicio"><img src="resources/images/logo-muebles.png" class="logo"></a>
-
-
+                    
                     <a href="?param=cart" class="widget-header d-md-none">
                         <div class="icon">
                             <i class="icon-sm rounded-circle border fa fa-shopping-cart"></i>
@@ -182,7 +182,7 @@ if (empty($_REQUEST["param"])) {
                                             <a class="dropdown-item" href="?param=misdatos">Mi Cuenta</a>
                                             <a class="dropdown-item" href="#">Usuarios</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
+                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesión</a>
                                         </div>
 
                                     </div>
@@ -211,7 +211,7 @@ if (empty($_REQUEST["param"])) {
                                             <a class="dropdown-item" href="?param=misdatos">Mi Cuenta</a>
                                             <a class="dropdown-item" href="?param=administrador">Administrador</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
+                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesión</a>
                                         </div>
 
                                     </div>
@@ -237,7 +237,7 @@ if (empty($_REQUEST["param"])) {
                                             <a class="dropdown-item" href="?param=misdatos">Mi Cuenta</a>
                                             <a class="dropdown-item" href="?param=ensamblador">Ensamblador</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
+                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesión</a>
                                         </div>
 
                                     </div>
@@ -265,7 +265,7 @@ if (empty($_REQUEST["param"])) {
                                             <a class="dropdown-item" href="?param=misdatos">Mi Cuenta</a>
                                             <a class="dropdown-item" href="?param=repartidor">Repartidor</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesion</a>
+                                            <a class="dropdown-item" href="./views/logout.php">Cerrar Sesión</a>
                                         </div>
 
                                     </div><?php
@@ -281,7 +281,7 @@ if (empty($_REQUEST["param"])) {
                                                 <i class="icon-sm rounded-circle border fa fa-user"></i>
                                             </div>
                                             <div class="text">
-                                                <small class="text-muted">iniciar sesión</small>
+                                                <small class="text-muted">Iniciar Sesión</small>
                                                 <div>Mi cuenta <i class="fa fa-caret-down"></i> </div>
                                             </div>
                                         </div>
@@ -289,17 +289,17 @@ if (empty($_REQUEST["param"])) {
                                     <div class="dropdown-menu dropdown-menu-height" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-154px, 42px, 0px);">
                                         <div class="px-4 py-3">
                                             <div class="form-group">
-                                                <label>Email address</label>
+                                                <label>Ingresar Correo</label>
                                                 <input id="correo" type="email" class="form-control" placeholder="email@example.com">
                                             </div>
                                             <div class="form-group">
-                                                <label>Password</label>
+                                                <label>Constraseña</label>
                                                 <input id="password" type="password" class="form-control" placeholder="Password">
                                             </div>
-                                            <button id="login" class="btn btn-primary btn-block"> Login </button>
+                                            <button id="login" class="btn btn-primary btn-block"> Ingresar </button>
                                         </div>
                                         <hr class="dropdown-divider">
-                                        <a class="dropdown-item" href="?param=register">¿Tienes cuenta? Inscribirse</a>
+                                        <a class="dropdown-item" href="?param=register">¿Tienes cuenta? Registrate</a>
                                         <a class="dropdown-item" href="#">¿Se te olvidó tu contraseña?</a>
                                     </div> <!--  dropdown-menu .// -->
                                 </div>
