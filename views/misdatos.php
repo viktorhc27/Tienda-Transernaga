@@ -108,27 +108,27 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
 
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder=""><label><?= $datos['us_nombre'] ?></label></input>
+                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="" value="<?= $datos['us_nombre'] ?>"></input>
                     <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
                 </div> <!-- form-group end.// -->
                 <div class="form-group">
                     <label>Apellido Paterno</label>
-                    <input id="app" name="app" type="text" class="form-control" placeholder=""><label><?= $datos['us_apellApp'] ?></label></input>
+                    <input id="app" name="app" type="text" class="form-control" placeholder="" value="<?= $datos['us_apellApp'] ?>"></input>
                 </div> <!-- form-group end.// -->
                 <div class="form-group">
                     <label>Apellido Materno</label>
-                    <input id="apm" name="apm" type="text" class="form-control" placeholder=""><label><?= $datos['us_apellApm'] ?></label></input>
+                    <input id="apm" name="apm" type="text" class="form-control" placeholder="" value="<?= $datos['us_apellApm'] ?>"></input>
                 </div> <!-- form-group end.// -->
                 <div class="form-group">
                     <label>Email</label>
-                    <input id="correo" name="correo" type="email" class="form-control" placeholder=""><label><?= $datos['us_correo'] ?></label></input>
+                    <input id="correo" name="correo" type="email" class="form-control" placeholder="" value="<?= $datos['us_correo'] ?>"></input>
 
                     <small id="alerta" class="form-text text-muted"></small>
                 </div> <!-- form-group end.// -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Teléfono</label>
-                        <input id="telefono" name="telefono" type="text" class="form-control"><label><?= $datos['us_telefono'] ?></label></input>
+                        <input id="telefono" name="telefono" type="text" class="form-control" value="<?= $datos['us_telefono'] ?>"></input>
                     </div> <!-- form-group end.// -->
                 </div> <!-- form-row.// -->
                 <div class="form-group">
