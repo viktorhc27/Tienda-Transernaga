@@ -150,30 +150,34 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
 <!--Modal para modificar contraseña-->
 <div class="modal fade" id="actualizarPasswordModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="actualizarPasswordModal" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="actualizarPasswordModal">Cambiar Contraseña</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Contraseña</label>
-                        <input id="password" name="password" type="password" class="form-control" type="password">
-                    </div> <!-- form-group end.// -->
-                    <div class="form-group col-md-6">
-                        <label>Repetir Contraseña</label>
-                        <input id="password_retry" class="form-control" type="password">
-                    </div> <!-- form-group end.// -->
+        <form action="./controller/UsuariosController.php?accion=cambiar_pass" method="post" enctype="multipart/form">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="actualizarPasswordModal">Cambiar Contraseña</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input id="id" name="id" type="hidden" class="form-control" placeholder="" value="<?= $datos['us_id'] ?>"></input>
+                            <label>Contraseña</label>
+                            <input id="password" name="password" type="password" class="form-control" type="password">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Repetir Contraseña</label>
+                            <input id="password_retry" class="form-control" type="password">
+                            <small id="alert" class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button id="btnGuardar" class="btn btn-primary "> Actualizar </button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="btnGuardar" class="btn btn-primary "> Actualizar </button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -200,7 +204,7 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary">Agregar</button>
+                    <button id="change_pass" class="btn btn-primary">Agregar</button>
                 </div>
             </form>
 
@@ -212,6 +216,77 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
         $('#eliminar-form').setAttribute('action', './controller/UsuariosController.php?accion=eliminar_direccion');
     }
 </script> -->
+
+<script>
+    $("#change_pass").click(function(e) {
+        e.preventDefault();
+
+        var alerta = $("#alert").val();
+
+        if (alerta == "si") {
+            var id = $("#id").val();
+            var pass = $("#password").val();
+
+            datos = {
+                "pass": pass,
+                "id": id,
+            };
+
+
+            $.ajax({
+                url: './controller/UsuariosController.php?accion=cambiar_pass',
+                type: 'POST',
+                data: datos,
+
+            }).done(function(respuesta) {
+
+
+            })
+
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    });
+
+
+
+
+
+    $("#password_retry").blur(function() {
+        var password = $('#password').val();
+        var password_retry = $("#password_retry").val();
+        if (password == password_retry) {
+
+            $('#password').removeClass('is-invalid');
+            $('#password').addClass('is-valid');
+
+            $('#password_retry').removeClass('is-invalid');
+            $('#password_retry').addClass('is-valid');
+            /* $("#alert").text('si'); */
+            $("#alert").append("<input type='hidden' id='alert' value='si'>");
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Las contraseñas deben Coincidir ',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
+            $('#password_retry').removeClass('is-valid');
+            $('#password_retry').addClass('is-invalid');
+            $('#password').removeClass('is-valid');
+            $('#password').addClass('is-invalid');
+            /* $("#alert").text('no'); */
+            $("#alert").append("<input type='hidden' id='alert' value='no'>");
+        }
+
+    });
+</script>
 <script type="text/javascript" src="../../resources/js/validaciones/agregar_funcionarios.js"></script>
 <script>
     $(document).ready(function() {

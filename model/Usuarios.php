@@ -157,7 +157,7 @@ class Usuarios
             return $e->getMessage();
         }
     }
-    
+
     public function modificarMisDatos()
     {
         try {
@@ -175,6 +175,26 @@ class Usuarios
             $sql->bindparam("apm", $this->us_apellApm);
             $sql->bindparam("telefono", $this->us_telefono);
             $sql->bindparam("correo", $this->us_correo);
+
+            $res = $sql->execute();
+            if ($sql->rowCount() == 1) {
+
+                return $res;
+            } else {
+                return $res;
+            }
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    public function cambiar_pass()
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("update usuarios set us_password =:password WHERE us_id = :id");
+            $sql->bindparam("id", $this->us_id);
+            $sql->bindparam("password", $this->us_password);
+
 
             $res = $sql->execute();
             if ($sql->rowCount() == 1) {
@@ -214,7 +234,7 @@ class Usuarios
             return $ex->getMessage();
         }
     }
-    
+
     public function listar_funcionarios()
     {
         try {
@@ -264,7 +284,7 @@ class Usuarios
         try {
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("SELECT * FROM usuario WHERE id = $id");
-           
+
             $sql->execute();
             if ($sql->rowCount() == 1) {
                 return true;

@@ -257,11 +257,11 @@ switch ($accion) {
 
         break;
     case 'eliminar_direccion':
-        
-        $direccionesUsuarios = new DireccionesUsuarios();
-        $id= $_REQUEST['di_id'];
 
-        $res =$direccionesUsuarios->eliminar($id);
+        $direccionesUsuarios = new DireccionesUsuarios();
+        $id = $_REQUEST['di_id'];
+
+        $res = $direccionesUsuarios->eliminar($id);
         /* header('Content-Type:apllication/json'); */
         if ($res == 1) {
             /* $datos = array(
@@ -279,7 +279,7 @@ switch ($accion) {
 
 
         break;
-    
+
     case "modificar_MisDatos":
         $usuarios = new Usuarios();
         $usuarios->__set('us_id', $_REQUEST['id']);
@@ -289,7 +289,7 @@ switch ($accion) {
         $usuarios->__set('us_correo', $_REQUEST['correo']);
         $usuarios->__set('us_telefono', $_REQUEST['telefono']);
 
-        
+
         $res = $usuarios->modificarMisDatos();
 
 
@@ -309,5 +309,28 @@ switch ($accion) {
         /* echo json_encode($datos, JSON_FORCE_OBJECT); */
 
         break;
-        
+    case "cambiar_pass":
+        $usuarios = new Usuarios();
+        $usuarios->__set('us_id', $_REQUEST['id']);
+        $password_hash = password_hash($_REQUEST['password'], PASSWORD_BCRYPT);
+        $usuarios->__set('us_password', $password_hash);
+
+        $res = $usuarios->cambiar_pass();
+echo $res;
+        /* header('Content-Type:apllication/json'); */
+        if ($res == 1) {
+            /* $datos = array(
+                    'datos' => 'modificado'
+                ); */
+            echo "<script type='text/javascript'>";
+            echo "window.location.href = 'http://localhost/tienda-transernaga/index.php?param=misdatos'";
+            echo "</script>";
+        } else {
+            $datos = array(
+                'datos' => 'error'
+            );
+        }
+        /* echo json_encode($datos, JSON_FORCE_OBJECT); */
+
+        break;
 }
