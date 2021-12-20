@@ -31,20 +31,14 @@ $us = $us->buscar($id);
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="../../controller/UsuariosController.php?accion=modificar_MisDatos">
+                        <form method="post" action="./controller/UsuariosController.php?accion=modificar_MisDatos">
                             <div class="card-body">
-
                                 <div class="row">
-
-
                                     <div class="col-md-6">
-
-
-
                                         <div class="form-group">
                                             <label>id</label>
                                             <input id="id" value="<?= $us['us_id'] ?>" name="id" type="hidden" class="form-control" placeholder="">
-                                            <input  value="<?= $us['us_id'] ?>" type="text" class="form-control" placeholder="" disabled>
+                                            <input value="<?= $us['us_id'] ?>" type="text" class="form-control" placeholder="" disabled>
                                             <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
                                         </div>
                                         <div class="form-group">

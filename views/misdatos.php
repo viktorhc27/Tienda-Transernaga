@@ -31,7 +31,7 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
 
                     </header>
                     <div class="card-body ">
-                        <div class="row">                            
+                        <div class="row">
                             <div>
                                 <div class="card-body">
                                     <h5 class="card-title">Datos Personales</h5>
@@ -50,8 +50,8 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
                                 <div class="card-body">
                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#actualizarPasswordModal">Cambiar Contraseña</button>
                                 </div>
-                            </div>    
-                            <div class="col-md-6 container">    
+                            </div>
+                            <div class="col-md-6 container">
                                 <div class="card-body">
                                     <h5 class="card-title">Dirección(es)</h5>
                                     <table class="table table-striped">
@@ -67,10 +67,10 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
                                                 <tr>
                                                     <td><?= $dir['di_nombre'] ?></td>
                                                     <td>
-                                                        <form  method="post" action="./controller/UsuariosController.php?accion=eliminar_direccion">
+                                                        <form method="post" action="./controller/UsuariosController.php?accion=eliminar_direccion">
                                                             <input type="hidden" name="us_id" value="<?= $datos['us_id'] ?>">
                                                             <input type="hidden" name="di_id" value="<?= $dir['direcciones_di_id'] ?>">
-                                                            <button  class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                            <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -90,7 +90,7 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
         </article> <!-- order-group.// -->
         </main>
     </div> <!-- row.// -->
-</div>
+    </div>
 
 </section>
 <!-- Modal -->
@@ -104,73 +104,77 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <form method="post" action="./controller/UsuariosController.php?accion=modificar_MisDatos">
+                <div class="modal-body">
 
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="" value="<?= $datos['us_nombre'] ?>"></input>
-                    <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
-                </div> <!-- form-group end.// -->
-                <div class="form-group">
-                    <label>Apellido Paterno</label>
-                    <input id="app" name="app" type="text" class="form-control" placeholder="" value="<?= $datos['us_apellApp'] ?>"></input>
-                </div> <!-- form-group end.// -->
-                <div class="form-group">
-                    <label>Apellido Materno</label>
-                    <input id="apm" name="apm" type="text" class="form-control" placeholder="" value="<?= $datos['us_apellApm'] ?>"></input>
-                </div> <!-- form-group end.// -->
-                <div class="form-group">
-                    <label>Email</label>
-                    <input id="correo" name="correo" type="email" class="form-control" placeholder="" value="<?= $datos['us_correo'] ?>"></input>
-
-                    <small id="alerta" class="form-text text-muted"></small>
-                </div> <!-- form-group end.// -->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Teléfono</label>
-                        <input id="telefono" name="telefono" type="text" class="form-control" value="<?= $datos['us_telefono'] ?>"></input>
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input id="id" name="id" type="hidden" class="form-control" placeholder="" value="<?= $datos['us_id'] ?>"></input>
+                        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="" value="<?= $datos['us_nombre'] ?>"></input>
+                        <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
                     </div> <!-- form-group end.// -->
-                </div> <!-- form-row.// -->
-                <div class="form-group">
-                </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <label>Apellido Paterno</label>
+                        <input id="app" name="app" type="text" class="form-control" placeholder="" value="<?= $datos['us_apellApp'] ?>"></input>
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group">
+                        <label>Apellido Materno</label>
+                        <input id="apm" name="apm" type="text" class="form-control" placeholder="" value="<?= $datos['us_apellApm'] ?>"></input>
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input id="correo" name="correo" type="email" class="form-control" placeholder="" value="<?= $datos['us_correo'] ?>"></input>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="btnGuardar" type="submit" class="btn btn-primary "> Actualizar </button>
-            </div>
+                        <small id="alerta" class="form-text text-muted"></small>
+                    </div> <!-- form-group end.// -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Teléfono</label>
+                            <input id="telefono" name="telefono" type="text" class="form-control" value="<?= $datos['us_telefono'] ?>"></input>
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+                    <div class="form-group">
+                    </div> <!-- form-group// -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button id="btnGuardar" class="btn btn-primary "> Actualizar </button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
 
 <!--Modal para modificar contraseña-->
 <div class="modal fade" id="actualizarPasswordModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="actualizarPasswordModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="actualizarPasswordModal">Cambiar Contraseña</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Contraseña</label>
-                                <input id="password" name="password" type="password" class="form-control" type="password">
-                            </div> <!-- form-group end.// -->
-                            <div class="form-group col-md-6">
-                                <label>Repetir Contraseña</label>
-                                <input id="password_retry" class="form-control" type="password">
-                            </div> <!-- form-group end.// -->
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button id="btnGuardar" type="submit" class="btn btn-primary "> Actualizar </button>
-                    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="actualizarPasswordModal">Cambiar Contraseña</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Contraseña</label>
+                        <input id="password" name="password" type="password" class="form-control" type="password">
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group col-md-6">
+                        <label>Repetir Contraseña</label>
+                        <input id="password_retry" class="form-control" type="password">
+                    </div> <!-- form-group end.// -->
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="btnGuardar" class="btn btn-primary "> Actualizar </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -210,11 +214,11 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
 </script> -->
 <script type="text/javascript" src="../../resources/js/validaciones/agregar_funcionarios.js"></script>
 <script>
-    $(document).ready(function () {
-        $(window).on("load resize", function () {
+    $(document).ready(function() {
+        $(window).on("load resize", function() {
             var alturaBuscador = $(".buscador").outerHeight(true),
-                    alturaVentana = $(window).height(),
-                    alturaMapa = alturaVentana - alturaBuscador;
+                alturaVentana = $(window).height(),
+                alturaMapa = alturaVentana - alturaBuscador;
 
             $("#mapa-geocoder").css("height", "500" + "px");
 
@@ -232,11 +236,11 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
 
         geocoder.geocode({
             'address': direccion
-        }, function (results, status) {
+        }, function(results, status) {
             if (status === 'OK') {
                 var resultados = results[0].geometry.location,
-                        resultados_lat = resultados.lat(),
-                        resultados_long = resultados.lng();
+                    resultados_lat = resultados.lat(),
+                    resultados_long = resultados.lng();
                 /* console.log(resultados_lat);
                  console.log(resultados_long); */
 
@@ -262,8 +266,8 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
         });
     }
 
-    $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCenp6Eupizf2ow5uX1NgMkZhMz-LtwOQQ", function () {
-        $("#dir").change(function () {
+    $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCenp6Eupizf2ow5uX1NgMkZhMz-LtwOQQ", function() {
+        $("#dir").change(function() {
             var dir = $("#dir").val();
             var direccion = dir + ", Arica y Parinacota"
 

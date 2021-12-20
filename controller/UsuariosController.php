@@ -299,7 +299,7 @@ switch ($accion) {
                 'datos' => 'modificado'
             ); */
             echo "<script type='text/javascript'>";
-            echo "window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=registrar'";
+            echo "window.location.href = 'http://localhost/tienda-transernaga/index.php?param=misdatos'";
             echo "</script>";
         } else {
             $datos = array(
