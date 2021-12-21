@@ -203,6 +203,7 @@ $lista_roles = $roles->leer();
                             <div class="form-group col-md-6">
                                 <label>Contraseña</label>
                                 <input id="password" name="password" type="password" class="form-control" type="password">
+                                <div id="pass" class="form-text text-muted"></div>
                             </div> <!-- form-group end.// -->
                             <div class="form-group col-md-6">
                                 <label>Repetir Contraseña</label>
@@ -213,7 +214,7 @@ $lista_roles = $roles->leer();
                         <div class="form-group ">
                             <label>Rol</label>
                             <select id="rol" name="rol" class="form-control">
-                                <option>Seleccionar</option>
+                                <option value="">Seleccionar</option>
                                 <?php
 
                                 foreach ($lista_roles as $r) :

@@ -11,13 +11,14 @@ $("#btnGuardar").click(function (e) {
     var sexo = $("#sexo").val()
     var rol = $("#rol").val()
     var alerta = $("#alert_correo").val();
+    var aler_pass = $("#aler_pass").val();
+    console.log(aler_pass);
 
-    console.log(alerta);
 
     if (alerta == "correo disponible") {
-        if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && numero != "" && sexo != "" && rol != "") {
+        if (nombre != "" && app != "" && apm != "" && correo != "" && password != "" && telefono != "" && direccion && numero != "" && sexo != "" && rol != "" && aler_pass == "bien") {
 
-           
+
             datos = {
                 "nombre": nombre,
                 "app": app,
@@ -41,7 +42,7 @@ $("#btnGuardar").click(function (e) {
 
 
                 if (respuesta.estado === "agregado") {
-                   
+
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -59,26 +60,108 @@ $("#btnGuardar").click(function (e) {
 
 
         } else {
+            if (nombre == "") {
+                $('#nombre').removeClass('is-valid');
+                $('#nombre').addClass('is-invalid');
+            }
+            if (app == "") {
+                $('#app').removeClass('is-valid');
+                $('#app').addClass('is-invalid');
+            }
+            if (apm == "") {
+                $('#apm').removeClass('is-valid');
+                $('#apm').addClass('is-invalid');
+            }
+            if (correo == "") {
+                $('#correo').removeClass('is-valid');
+                $('#correo').addClass('is-invalid');
+            }
+            if (password == "") {
+                $('#password').removeClass('is-valid');
+                $('#password').addClass('is-invalid');
+            }
+            if (telefono == "") {
+                $('#telefono').removeClass('is-valid');
+                $('#telefono').addClass('is-invalid');
+            }
+            if (direccion == "") {
+                $('#direccion').removeClass('is-valid');
+                $('#direccion').addClass('is-invalid');
+            }
+            if (numero == "") {
+                $('#numero').removeClass('is-valid');
+                $('#numero').addClass('is-invalid');
+            }
+            if (sexo == "") {
+                $('#sexo').removeClass('is-valid');
+                $('#sexo').addClass('is-invalid');
+            }
+            if (rol == "") {
+                $('#rol').removeClass('is-valid');
+                $('#rol').addClass('is-invalid');
+            }
 
-            Swal.fire({
+
+            /* Swal.fire({
                 position: 'top-end',
                 icon: 'error',
                 title: 'Llene todos los campos',
                 showConfirmButton: false,
                 timer: 1500
             })
-
+ */
 
         }
     } else {
+        if (nombre == "") {
+            $('#nombre').removeClass('is-valid');
+            $('#nombre').addClass('is-invalid');
+        }
+        if (app == "") {
+            $('#app').removeClass('is-valid');
+            $('#app').addClass('is-invalid');
+        }
+        if (apm == "") {
+            $('#apm').removeClass('is-valid');
+            $('#apm').addClass('is-invalid');
+        }
+        if (correo == "") {
+            $('#correo').removeClass('is-valid');
+            $('#correo').addClass('is-invalid');
+        }
+        if (password == "") {
+            $('#password').removeClass('is-valid');
+            $('#password').addClass('is-invalid');
+        }
+        if (telefono == "") {
+            $('#telefono').removeClass('is-valid');
+            $('#telefono').addClass('is-invalid');
+        }
+        if (direccion == "") {
+            $('#direccion').removeClass('is-valid');
+            $('#direccion').addClass('is-invalid');
+        }
+        if (numero == "") {
+            $('#numero').removeClass('is-valid');
+            $('#numero').addClass('is-invalid');
+        }
+        if (sexo == "") {
+            $('#sexo').removeClass('is-valid');
+            $('#sexo').addClass('is-invalid');
+        }
+        if (rol == "") {
+            $('#rol').removeClass('is-valid');
+            $('#rol').addClass('is-invalid');
+        }
 
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Correo ya registrado',
-            showConfirmButton: false,
-            timer: 1500
-        })
+
+        /*  Swal.fire({
+             position: 'top-end',
+             icon: 'error',
+             title: 'Correo ya registrado',
+             showConfirmButton: false,
+             timer: 1500
+         }) */
     }
 
 
@@ -136,7 +219,7 @@ $("#correo").blur(function () {
                     $("#alerta").text('correo no disponible');
 
                     $("#alerta").append("<input type='hidden' id='alert_correo' value='correo no disponible'>");
-
+                   
 
                 }
                 if (respuesta.datos === "no existe") {
@@ -144,7 +227,7 @@ $("#correo").blur(function () {
                     $('#correo').addClass('is-valid');
                     $("#alerta").text('correo disponible');
                     $("#alerta").append("<input type='hidden' id='alert_correo'  value='correo disponible'>");
-
+                  
                 }
             })
 
@@ -175,20 +258,21 @@ $("#password_retry").blur(function () {
 
         $('#password').removeClass('is-invalid');
         $('#password').addClass('is-valid');
-
         $('#password_retry').removeClass('is-invalid');
         $('#password_retry').addClass('is-valid');
+        $("#pass").html("<input type='hidden' id='aler_pass' value='bien'>");
     } else {
-        Swal.fire({
+       /*  Swal.fire({
             title: 'Error!',
             text: 'Las contraseñas deben Coincidir ',
             icon: 'error',
             confirmButtonText: 'OK'
-        })
+        }) */
         $('#password_retry').removeClass('is-valid');
         $('#password_retry').addClass('is-invalid');
         $('#password').removeClass('is-valid');
         $('#password').addClass('is-invalid');
+        $("#pass").html("<input type='hidden' id='aler_pass' value='mal'>");
     }
 
 });
@@ -255,6 +339,28 @@ $("#rol").blur(function () {
     } else {
         $('#rol').removeClass('is-valid');
         $('#rol').addClass('is-invalid');
+    }
+
+});
+$("#direccion").blur(function () {
+    var dato = $("#direccion").val();
+    if (dato.trim() != '') {
+        $('#direccion').removeClass('is-invalid');
+        $('#direccion').addClass('is-valid');
+    } else {
+        $('#direccion').removeClass('is-valid');
+        $('#direccion').addClass('is-invalid');
+    }
+
+});
+$("#numero").blur(function () {
+    var dato = $("#numero").val();
+    if (dato.trim() != '') {
+        $('#numero').removeClass('is-invalid');
+        $('#numero').addClass('is-valid');
+    } else {
+        $('#numero').removeClass('is-valid');
+        $('#numero').addClass('is-invalid');
     }
 
 });
