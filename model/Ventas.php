@@ -311,7 +311,7 @@ class Ventas
                 . "SUM(ven_total) AS total_ventas,"
                 . "(SELECT SUM(pro_precio_compra) FROM productos WHERE productos.pro_id = ventas.productos_pro_id )as costo_ventas,"
                 . "SUM(ven_total)-(SELECT SUM(pro_precio_compra) FROM productos WHERE productos.pro_id = ventas.productos_pro_id)"
-                . "as ganancias FROM ventas WHERE create_time BETWEEN '$inicio' AND '$final'");
+                . "as ganancias FROM ventas WHERE create_time BETWEEN '$inicio' AND (SELECT DATE_ADD('$final', INTERVAL 1 DAY))");
             $sql->execute();
             $res = $sql->fetchAll();
             return $res;
