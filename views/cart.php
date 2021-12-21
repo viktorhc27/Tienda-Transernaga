@@ -42,7 +42,9 @@ $productos = new Productos();
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="price h5"> <?= $pro['pro_precio_venta'] * $c['cantidad'] ?> </div>
+                               
+                                <div hidden class="price h5" >  <?= $pro['pro_precio_venta'] * $c['cantidad'] ?> </div>
+                                <div class="h5" > <?= number_format($pro['pro_precio_venta'] * $c['cantidad']) ?> </div>
                             </div>
                             <div class="col flex-grow-0 text-right">
                                 <form action="./controller/CarritoController.php?accion=quitar" method="post">
@@ -91,6 +93,6 @@ $productos = new Productos();
     const elementoasumar = Array.from(document.getElementsByClassName("price"));
     let suma = 0;
     elementoasumar.forEach(el => suma = suma + +el.innerText);
-    document.getElementById("total").innerHTML = "$ " + suma;
+    document.getElementById("total").innerHTML = "$ " + suma.toLocaleString("es-ES");
     console.log(elementoasumar[1].innerText);
 </script>

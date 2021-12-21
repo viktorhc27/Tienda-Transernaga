@@ -294,6 +294,26 @@ class Productos
             return $ex->getMessage();
         }
     }
+    public function categorias_productos($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT * from productos WHERE categorias_cat_id = $id");
+            $sql->execute();
+            $res = $sql->fetch();
+            if ($res['pro_estado'] == 1) {
+                $sql = $con->prepare("UPDATE * SET pro_estado = 0 WHERE categorias_cat_id = $id");
+                $sql->execute();
+                return false;
+            } else {
+                $sql = $con->prepare("UPDATE * SET pro_estado = 1 WHERE categorias_cat_id = $id");
+                $sql->execute();
+                return true;
+            }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
     public function stock($id)
     {
         try {
@@ -384,7 +404,7 @@ class Productos
             return $ex->getMessage();
         }
     }
-    
+
     public function verificar_codigo($codigo)
     {
         try {
@@ -398,6 +418,31 @@ class Productos
             } else {
                 return false;
             }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+
+    public function desactivar($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("UPDATE productos SET pro_estado = 0 WHERE categorias_cat_id = $id");
+            $res = $sql->execute();
+            return $res;
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
+
+    public function activar($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("UPDATE productos SET pro_estado = 1 WHERE categorias_cat_id = $id");
+            $res = $sql->execute();
+            return $res;
         } catch (PDOException $ex) {
             return $ex->getMessage();
         }

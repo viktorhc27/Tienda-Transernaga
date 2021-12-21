@@ -1,6 +1,7 @@
 <?php
 include_once '../model/Conexion.php';
 include_once '../model/Categorias.php';
+include_once '../model/Productos.php';
 $accion = $_REQUEST['accion'];
 
 switch ($accion) {
@@ -22,8 +23,8 @@ switch ($accion) {
             echo "error";
         }
         $res = $categorias->agregar();
-        /*   echo "<script type='text/javascript'>window.location.href = '../views/admin/index.php?param=categorias';</script>"; */
-        echo $res;
+        echo "<script type='text/javascript'>window.location.href = '../views/admin/index.php?param=categorias';</script>";
+
         break;
 
     case 'modificar':
@@ -40,9 +41,9 @@ switch ($accion) {
             $nombre = $_FILES['imagen_new']['tmp_name'];
             echo $nombre;
             $categorias->__set('imagen', $_FILES['imagen_new']['name']);
-            $archivo_modelo = $_FILES['imagen_new']['tmp_name']; 
+            $archivo_modelo = $_FILES['imagen_new']['tmp_name'];
             $ruta = "../resources/images/categorias";
-            $ruta_modelo = $ruta . "/" . $categorias->__get('imagen_new');   
+            $ruta_modelo = $ruta . "/" . $categorias->__get('imagen_new');
             if (move_uploaded_file($archivo_modelo, $ruta_modelo)) {
                 echo "agregado";
             } else {
@@ -54,11 +55,35 @@ switch ($accion) {
 
         $res = $categorias->modificar();
         echo $res;
-         if ($res == 1) {
+        if ($res == 1) {
             echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=categorias';</script>";
         } else {
         }
 
+
+        break;
+
+    case 'cambiar_estado':
+        $id = $_REQUEST['id'];
+        $categorias = new Categorias();
+        $productos = new Productos();
+
+        $res = $categorias->cambiar_estado($id);
+
+        $list = $categorias->buscar($id);
+
+        if ($list['cat_estado'] == 1) {
+            $productos->activar($id);
+        } else {
+            $productos->desactivar($id);
+        }
+     /*    print_r($list['cat_estado']); */
+
+         if ($res == 1) {
+            echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=categorias';</script>";
+        } else{
+            echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=categorias';</script>";
+        }
 
         break;
 }

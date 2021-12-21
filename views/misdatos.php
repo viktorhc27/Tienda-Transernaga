@@ -204,7 +204,7 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button id="change_pass" class="btn btn-primary">Agregar</button>
+                    <button  class="btn btn-primary">Agregar</button>
                 </div>
             </form>
 

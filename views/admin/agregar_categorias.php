@@ -53,13 +53,14 @@ $listas_categorias = $categorias->listar();
                                             <td><?= $s['cat_id'] ?></td>
                                             <td><?= $s['cat_nombre'] ?></td>
                                             <td><?php
-                                                if ($s['cat_estado'] == '1') {
-                                                    echo "Habilitado";
-                                                }else{
-                                                    echo "desabilitado";
-                                                }
-                                                ?></td>
-                                                <td><img width="100px" src="../../resources/images/categorias/<?= $s['imagen'] ?>" ></td>
+                                                if ($s['cat_estado'] == 1) { ?>
+                                                    <span class="badge badge-success"> Habilitado </span>
+                                                <?php } else { ?>
+                                                    <span class="badge badge-danger"> desabilitado </span>
+                                                <?php }
+                                                ?>
+                                            </td>
+                                            <td><img width="100px" src="../../resources/images/categorias/<?= $s['imagen'] ?>"></td>
 
                                             <td>
                                                 <div class="dropdown">
@@ -67,9 +68,13 @@ $listas_categorias = $categorias->listar();
                                                         Acciones
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                        <a href="?param=modificar_categorias&id=<?=$s['cat_id']?>" class="dropdown-item" type="button">Modificar</a>
+                                                        <a href="?param=modificar_categorias&id=<?= $s['cat_id'] ?>" class="dropdown-item" type="button">Modificar</a>
                                                         <button class="dropdown-item" type="button">Ver</button>
-                                                        <button class="dropdown-item" type="button">Desabilitar</button>
+                                                        <form method="post" action="../../controller/CategoriasController.php?accion=cambiar_estado">
+                                                            <input type="hidden" name="id" value="<?= $s['cat_id'] ?>">
+                                                            <button class="dropdown-item">Cambiar Estado</button>
+                                                        </form>
+
                                                     </div>
                                                 </div>
                                             </td>
@@ -87,7 +92,7 @@ $listas_categorias = $categorias->listar();
 
                         </div>
                         <!-- form start -->
-                        
+
                         <!-- /.card -->
                     </div>
                     <!--/.col (right) -->
@@ -122,7 +127,7 @@ $listas_categorias = $categorias->listar();
                                 </div> <!-- form-group end.// -->
                                 <div class="form-group">
                                     <input name="imagen" type="file" class="form-control" accept="image/png,image/jpeg">
-                                </div> 
+                                </div>
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block"> Agregar </button>

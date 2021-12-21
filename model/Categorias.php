@@ -1,12 +1,15 @@
-<?php 
-Class Categorias {
+<?php
+class Categorias
+{
     private $cat_id, $cat_nombre, $cat_estado, $create_time, $update_time, $imagen;
-    
-    public function __get($key){
+
+    public function __get($key)
+    {
         return $this->$key;
     }
 
-    public function __set($key, $value){
+    public function __set($key, $value)
+    {
         return $this->$key = $value;
     }
 
@@ -30,10 +33,11 @@ Class Categorias {
         }
     }
 
-    public function modificar(){
-        try{
-            $con =(new Conexion())->Conectar();
-            $sql= $con->prepare("update categorias set cat_nombre =:nombre, cat_estado=:estado, update_time=:update_time, imagen =:imagen WHERE cat_id = :id");
+    public function modificar()
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("update categorias set cat_nombre =:nombre, cat_estado=:estado, update_time=:update_time, imagen =:imagen WHERE cat_id = :id");
             $sql->bindParam(':id', $this->cat_id);
             $sql->bindParam(':nombre', $this->cat_nombre);
             $sql->bindParam(':estado', $this->cat_estado);
@@ -47,8 +51,7 @@ Class Categorias {
             } else {
                 return $res;
             }
-
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             return $e->getMessage();
         }
     }
@@ -79,19 +82,38 @@ Class Categorias {
             return $ex->getMessage();
         }
     }
-    public function buscar($id){
-        try{
+    public function buscar($id)
+    {
+        try {
             $con = (new Conexion())->Conectar();
             $sql = $con->prepare("SELECT * from categorias WHERE cat_id = :id");
-            $sql->bindparam(':id',$id);
+            $sql->bindparam(':id', $id);
             $sql->execute();
-            $res= $sql->fetch();
+            $res = $sql->fetch();
             return $res;
-        }catch (PDOException $ex){
+        } catch (PDOException $ex) {
             return $ex->getMessage();
         }
     }
 
-
-
+    public function cambiar_estado($id)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT cat_estado from categorias WHERE cat_id = $id");
+            $sql->execute();
+            $res = $sql->fetch();
+            if ($res['cat_estado'] == 1) {
+                $sql = $con->prepare("UPDATE categorias SET cat_estado = 0 WHERE cat_id = $id");
+                $sql->execute();
+                return false;
+            } else {
+                $sql = $con->prepare("UPDATE categorias SET cat_estado = 1 WHERE cat_id = $id");
+                $sql->execute();
+                return true;
+            }
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
 }
