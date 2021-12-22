@@ -12,6 +12,7 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="https://muebleslagos.cl/wp-content/uploads/2018/02/cropped-logo-Horizontal-32x32.png" sizes="32x32">
         <title>Transernaga</title>
+        
 
         <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="../../resources/css/botonVerEnTuEspacio.css" rel="stylesheet" type="text/css"/>
@@ -39,7 +40,8 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
         <link href="../../resources/FlexSlider/flexslider.css" type="text/css" rel="stylesheet">
         <!-- script Flexslider -->
         <script src="../../resources/FlexSlider/jquery.flexslider-min.js"></script>
-
+        <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <script type="text/javascript">
             /// some script
 

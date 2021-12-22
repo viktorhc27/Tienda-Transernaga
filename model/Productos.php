@@ -447,4 +447,21 @@ class Productos
             return $ex->getMessage();
         }
     }
+
+    public function autocompletar($titulo)
+    {
+        try {
+            $con = (new Conexion())->Conectar();
+            $sql = $con->prepare("SELECT pro_codigo FROM productos WHERE pro_codigo LIKE '%" . $titulo . "%' ORDER BY pro_codigo ASC LIMIT 7");
+            $sql->execute();
+
+            while ($res = $sql->fetch(PDO::FETCH_ASSOC)) {
+                $data[] = $res['pro_codigo'];
+            }
+
+            echo json_encode($data);
+        } catch (PDOException $ex) {
+            return $ex->getMessage();
+        }
+    }
 }

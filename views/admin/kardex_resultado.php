@@ -1,13 +1,16 @@
 <?php
 include_once '../../model/Conexion.php';
 include_once '../../model/Kardex.php';
+include_once '../../model/Productos.php';
 $kardex = new Kardex();
+$productos = new Productos();
 
 $kardex->__set('id', $_REQUEST['codigo']);
+$ed = $_REQUEST['codigo'];
 $lista = $kardex->kardex();
-$ka = $kardex->lista_kardex();
+$ka = $kardex->lista_kardex($ed);
 /* echo "<pre>";
-print_r($lista);
+print_r($ka);
 echo "</pre>"; */
 ?>
 <div class="container">
@@ -50,6 +53,7 @@ echo "</pre>"; */
                                         <th>Unidades vendidas</th>
                                         <th>Costo por venta </th>
                                         <th>Ganancia</th>
+                                        
                                     </tr>
                                 </thead>
 
@@ -60,7 +64,7 @@ echo "</pre>"; */
                                         <td class="text-center"><?= number_format($lista['pro_precio_compra']) ?></td>
                                         <td class="text-center"><?= number_format($lista['costo_total']) ?></td>
                                         <td class="text-center"><?= ($lista['unidades vendidas'] == "") ? "0" : $lista['unidades vendidas'] ?></td>
-                                        
+
                                         <td class="text-center"><?= number_format($lista['costopor venta']) ?></td>
                                         <td class="text-center"><?= number_format($lista['ganancia']) ?></td>
                                     </tr>
@@ -88,6 +92,7 @@ echo "</pre>"; */
                                         <th>Descripcion</th>
                                         <th>Tipo</th>
                                         <th>Producto </th>
+                                        <th>saldo </th>
 
                                     </tr>
                                 </thead>
@@ -97,13 +102,17 @@ echo "</pre>"; */
 
                                     if (!empty($ka)) {
 
-                                        foreach ($ka as $k) : ?>
+                                        foreach ($ka as $k) :
+                                            $prod= $productos->buscar($k['pro_id']);
+                                    ?>
+
                                             <tr>
                                                 <td class="text-center"><?= $k['fecha'] ?></td>
                                                 <td class="text-center"><?= $k['unidades'] ?></td>
                                                 <td class="text-center"><?= $k['descripcion'] ?></td>
                                                 <td class="text-center"><?= $k['tipo'] ?></td>
-                                                <td class="text-center"><?= $k['pro_id'] ?></td>
+                                                <td class="text-center"><?= $prod['pro_codigo'] ?></td>
+                                                <td class="text-center"><?= number_format($k['saldo']) ?></td>
 
                                             </tr>
                                         <?php endforeach;

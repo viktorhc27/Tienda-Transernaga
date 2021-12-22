@@ -56,11 +56,12 @@ class Kardex
             return $e->getMessage();
         }
     }
-    public function lista_kardex()
+    public function lista_kardex($id)
     {
         try {
             $con = (new Conexion())->Conectar();
-            $sql = $con->prepare("SELECT kar_id, tipo,descripcion,unidades,date_format(fecha, '%d/%m/%Y  %h:%m') as fecha,pro_id FROM kardex where pro_id = :id");
+            
+            $sql = $con->prepare("SELECT kar_id, tipo,descripcion,unidades,date_format(fecha, '%d/%m/%Y  %H:%m:%s') as fecha,pro_id, (SELECT kardex.unidades * productos.pro_precio_venta FROM productos WHERE productos.pro_id= '$id' )as saldo FROM kardex where pro_id = :id");
             $sql->bindParam("id", $this->id);
             $sql->execute();
             $res = $sql->fetchAll();

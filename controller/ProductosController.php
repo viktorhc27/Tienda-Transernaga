@@ -32,7 +32,7 @@ switch ($accion) {
         $producto->__set('create_time',           date("Y-m-d H:i:s"));
         $producto->__set('update_time',           date("Y-m-d H:i:s"));
 
-       
+
         $id_producto =  $producto->agregar();
         //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
         foreach ($_FILES["modelo"]['tmp_name'] as $key => $tmp_name) {
@@ -160,7 +160,7 @@ switch ($accion) {
         echo "</pre>"; */
 
         break;
-    
+
     case 'verificar':
         $productos = new productos();
         $codigo = $_REQUEST['codigo'];
@@ -177,5 +177,12 @@ switch ($accion) {
         }
         echo json_encode($datos, JSON_FORCE_OBJECT);
 
+        break;
+    case 'auto':
+
+        $productos = new Productos();
+
+        $titulo = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_STRING);
+        $productos->autocompletar($titulo);
         break;
 }
