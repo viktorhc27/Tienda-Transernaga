@@ -16,10 +16,10 @@ switch ($accion) {
 
 
         //producto stock
-        $prostock->__set('productos_pro_id',      $_REQUEST['producto']);
+        $prostock->__set('productos_pro_id',      $_REQUEST['id']);
         $prostock->__set('usuarios_us_id',           $_SESSION['user']['id']);
         $prostock->__set('cantidad',      $_REQUEST['cantidad']);
-        $prostock->__set('documento',            $_FILES['documento']['name']);
+        $prostock->__set('documento',            $_FILES['documento']['name'][0]);
         $prostock->__set('create_time',           date("Y-m-d H:i:s"));
         $prostock->__set('update_time',           date("Y-m-d H:i:s"));
 
@@ -29,12 +29,12 @@ switch ($accion) {
         $kardex->__set('descripcion', 'AGREGADO MEDIANTE REGISTRO');
         $kardex->__set('unidades', $_REQUEST['cantidad']);
         $kardex->__set('fecha', date("Y-m-d H:i:s"));
-        $kardex->__set('pro_id', $_REQUEST['producto']);
+        $kardex->__set('pro_id', $_REQUEST['id']);
 
         $registro_kar = $kardex->agregar();
-        $documento = $_FILES['documento']['tmp_name'];
+        $documento = $_FILES['documento']['tmp_name'][0];
         $ruta = "../resources/images/documento";
-        $ruta_doc = $ruta . "/" . $prostock->__get('documento');
+        $ruta_doc = $ruta . "/" . $_FILES['documento']['name'][0];
         move_uploaded_file($documento, $ruta_doc);
         $res = $prostock->agregar();
         $e = $producto->agregar_stock($prostock->__get('productos_pro_id'), $prostock->__get('cantidad'));
