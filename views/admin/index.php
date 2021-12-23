@@ -12,10 +12,10 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="https://muebleslagos.cl/wp-content/uploads/2018/02/cropped-logo-Horizontal-32x32.png" sizes="32x32">
         <title>Transernaga</title>
-        
+
 
         <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <link href="../../resources/css/botonVerEnTuEspacio.css" rel="stylesheet" type="text/css"/>
+        <link href="../../resources/css/botonVerEnTuEspacio.css" rel="stylesheet" type="text/css" />
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
@@ -176,6 +176,9 @@ if (!empty($_SESSION['user']) && $_SESSION['user']['role'] == "2") {
                 break;
             case "modificar_categorias":
                 include_once 'editar_categorias.php';
+                break;
+            case "modificar_marcas":
+                include_once 'editar_marcas.php';
                 break;
             case "stock":
                 include_once 'stocks.php';

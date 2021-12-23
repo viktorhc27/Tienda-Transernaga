@@ -51,7 +51,7 @@ $listas_marcas = $marcas->listar();
 
                                             <td><?= $s['mar_nombre'] ?></td>
                                             <td>
-                                                <img width="100px" src="../../resources/images/marcas/<?= $s['mar_imagen']?>">
+                                                <img width="100px" src="../../resources/images/marcas/<?= $s['mar_imagen'] ?>">
                                             </td>
 
                                             <td>
@@ -60,8 +60,8 @@ $listas_marcas = $marcas->listar();
                                                         Acciones
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                        <button class="dropdown-item" type="button">Modificar</button>
-                                                        <button class="dropdown-item" type="button">Ver</button>
+                                                        <a href="?param=modificar_marcas&id=<?= $s['mar_id'] ?>" class="dropdown-item" type="button">Modificar</a>
+                                                        <!-- <button class="dropdown-item" type="button">Ver</button> -->
                                                         <!-- <button class="dropdown-item" type="button">Desabilitar</button> -->
                                                     </div>
                                                 </div>
@@ -104,17 +104,17 @@ $listas_marcas = $marcas->listar();
 
                                 <div class="form-group">
                                     <label>Nombre</label>
-                                    <input name="nombre" type="text" class="form-control" placeholder="">
+                                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="">
                                     <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
                                 </div> <!-- form-group end.// -->
                                 <div class="form-group">
                                     <label>Imagen</label>
-                                    <input type="file" name="imagen" class="form-control">
+                                    <input id="imagen" type="file" name="imagen" class="form-control">
                                 </div> <!-- form-group end.// -->
 
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block"> Agregar </button>
+                                    <button id="btnAgregar" type="submit" class="btn btn-primary btn-block"> Agregar </button>
                                 </div> <!-- form-group// -->
 
                             </form>
@@ -134,3 +134,88 @@ $listas_marcas = $marcas->listar();
                 <!-- /.row -->
             </div>
         </div>
+        <script>
+            $("#btnAgregar").click(function(e) {
+                e.preventDefault();
+                var nombre = $("#nombre").val();
+                var estado = $('input:radio[name=estado]:checked').val();
+                var imagen = $('#imagen').prop("files");
+                console.log(imagen.length);
+                if (imagen.length > 0 && nombre != "") {
+                    var formData = new FormData();
+                    formData.append('nombre', nombre);
+
+                    formData.append('imagen', imagen);
+
+
+                    for (let i = 0; i < imagen.length; i++) {
+                        formData.append('imagen[' + i + ']', imagen[i])
+                    }
+                    $.ajax({
+                        url: '../../controller/MarcasController.php?accion=guardar', // point to server-side PHP script 
+                        data: formData,
+                        dataType: 'text', // what to expect back from the PHP script, if anything
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'post',
+                    }).done(function(respuesta) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Agregado',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000)
+
+                    });
+
+                }
+                if (nombre == "") {
+                    $('#nombre').removeClass('is-valid');
+                    $('#nombre').addClass('is-invalid');
+
+                }
+                if (imagen.length == 0) {
+                    $('#imagen').removeClass('is-valid');
+                    $('#imagen').addClass('is-invalid');
+                }
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'LLene todos los campos',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+
+            })
+
+            $("#nombre").blur(function() {
+                var dato = $("#nombre").val();
+                if (dato.trim() != '') {
+                    $('#nombre').removeClass('is-invalid');
+                    $('#nombre').addClass('is-valid');
+                } else {
+                    $('#nombre').removeClass('is-valid');
+                    $('#nombre').addClass('is-invalid');
+                }
+
+            });
+
+            $("#imagen").change(function() {
+                var dato = $('#imagen').prop("files");
+                if (dato.length > 0) {
+                    $('#imagen').removeClass('is-invalid');
+                    $('#imagen').addClass('is-valid');
+                } else {
+                    $('#imagen').removeClass('is-valid');
+                    $('#imagen').addClass('is-invalid');
+                }
+
+            });
+        </script>

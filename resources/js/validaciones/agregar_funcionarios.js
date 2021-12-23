@@ -5,6 +5,7 @@ $("#btnGuardar").click(function (e) {
     var apm = $("#apm").val();
     var correo = $("#correo").val();
     var password = $("#password").val();
+    var password_retry = $("#password_retry").val();
     var telefono = $("#telefono").val();
     var direccion = $("#direccion").val();
     var numero = $("#numero").val();
@@ -80,6 +81,10 @@ $("#btnGuardar").click(function (e) {
                 $('#password').removeClass('is-valid');
                 $('#password').addClass('is-invalid');
             }
+            if (password_retry == "") {
+                $('#password_retry').removeClass('is-valid');
+                $('#password_retry').addClass('is-invalid');
+            }
             if (telefono == "") {
                 $('#telefono').removeClass('is-valid');
                 $('#telefono').addClass('is-invalid');
@@ -132,6 +137,10 @@ $("#btnGuardar").click(function (e) {
         if (password == "") {
             $('#password').removeClass('is-valid');
             $('#password').addClass('is-invalid');
+        }
+        if (password_retry == "") {
+            $('#password_retry').removeClass('is-valid');
+            $('#password_retry').addClass('is-invalid');
         }
         if (telefono == "") {
             $('#telefono').removeClass('is-valid');
@@ -219,7 +228,7 @@ $("#correo").blur(function () {
                     $("#alerta").text('correo no disponible');
 
                     $("#alerta").append("<input type='hidden' id='alert_correo' value='correo no disponible'>");
-                   
+
 
                 }
                 if (respuesta.datos === "no existe") {
@@ -227,7 +236,7 @@ $("#correo").blur(function () {
                     $('#correo').addClass('is-valid');
                     $("#alerta").text('correo disponible');
                     $("#alerta").append("<input type='hidden' id='alert_correo'  value='correo disponible'>");
-                  
+
                 }
             })
 
@@ -254,25 +263,34 @@ $("#nombre").blur(function () {
 $("#password_retry").blur(function () {
     var password = $('#password').val();
     var password_retry = $("#password_retry").val();
-    if (password == password_retry) {
-
-        $('#password').removeClass('is-invalid');
-        $('#password').addClass('is-valid');
-        $('#password_retry').removeClass('is-invalid');
-        $('#password_retry').addClass('is-valid');
-        $("#pass").html("<input type='hidden' id='aler_pass' value='bien'>");
-    } else {
-       /*  Swal.fire({
-            title: 'Error!',
-            text: 'Las contraseñas deben Coincidir ',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        }) */
+    if (password == "" && password_retry == "") {
         $('#password_retry').removeClass('is-valid');
         $('#password_retry').addClass('is-invalid');
         $('#password').removeClass('is-valid');
         $('#password').addClass('is-invalid');
         $("#pass").html("<input type='hidden' id='aler_pass' value='mal'>");
+    } else {
+        if (password == password_retry) {
+
+            $('#password').removeClass('is-invalid');
+            $('#password').addClass('is-valid');
+            $('#password_retry').removeClass('is-invalid');
+            $('#password_retry').addClass('is-valid');
+            $("#pass").html("<input type='hidden' id='aler_pass' value='bien'>");
+        } else {
+            /*  Swal.fire({
+                 title: 'Error!',
+                 text: 'Las contraseñas deben Coincidir ',
+                 icon: 'error',
+                 confirmButtonText: 'OK'
+             }) */
+            $('#password_retry').removeClass('is-valid');
+            $('#password_retry').addClass('is-invalid');
+            $('#password').removeClass('is-valid');
+            $('#password').addClass('is-invalid');
+            $("#pass").html("<input type='hidden' id='aler_pass' value='mal'>");
+        }
+
     }
 
 });

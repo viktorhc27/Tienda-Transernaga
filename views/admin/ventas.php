@@ -1,10 +1,12 @@
 <?php
 include_once '../../model/Ventas.php';
 include_once '../../model/Usuarios.php';
+include_once '../../model/Productos.php';
 
 
 $ventas = new Ventas();
 $usuarios = new Usuarios();
+$productos = new Productos();
 
 $lista_ventas = $ventas->ventas();
 
@@ -54,12 +56,12 @@ $lista_ventas = $ventas->ventas();
 
                                     <?php
                                     foreach ($lista_ventas as $s) :
-                                        
+                                        $pro = $productos->buscar($s['productos_pro_id']);
                                     ?> <tr>
 
                                             <td><?= $s['ven_codigo'] ?></td>
                                          
-                                            <td><?= $s['productos_pro_id'] ?></td>
+                                            <td><?= $pro['pro_codigo'] ?></td>
                                             <td><?= $s['ven_cantidad'] ?></td>
                                             <td><?= $s['tipo_armado'] ?></td>
                                             <td><?= $s['create_time'] ?></td>

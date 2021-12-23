@@ -80,11 +80,11 @@ ob_start();
 
                     <tr>
                         <td></td>
-                        <td><?= $dato_reporte[0]['cantidad_ventas'] ?></td>
+                        <td><?= $dato_reporte['cantidad_ventas'] ?></td>
 
-                        <td>$ <?= number_format($dato_reporte[0]['total_ventas'], 0)  ?> </td>
-                        <td>$ <?= number_format($dato_reporte[0]['2'], 0)   ?></td>
-                        <td>$ <?= number_format( $dato_reporte[0]['ganancias'], 0)  ?></td>
+                        <td>$ <?= number_format($dato_reporte['total_ventas'], 0)  ?> </td>
+                        <td>$ <?= number_format($dato_reporte['2'], 0)   ?></td>
+                        <td>$ <?= number_format( $dato_reporte['ganancias'], 0)  ?></td>
                     </tr>
 
                     </tbody>
@@ -115,7 +115,7 @@ $dompdf->setOptions($options);
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4');
 $dompdf->render();
-$dompdf->stream("Reporte.pdf", array("Attachment" => true));
+$dompdf->stream("Reporte.pdf", array("Attachment" => false));
 
 /* header('Location:http://localhost/tienda-transernaga/index.php?param=inicio'); */
 ?>

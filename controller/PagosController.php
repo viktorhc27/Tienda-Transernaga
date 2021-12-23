@@ -69,7 +69,7 @@ switch ($accion) {
             $ventas->__set('direcciones_di_id', $id_direccion);
             $ventas->__set('estados_id', 1);
             $r = $ventas->agregar();
-            
+
             //Kardex
 
             $kardex->__set('tipo', "SALIDA");
@@ -82,13 +82,12 @@ switch ($accion) {
             echo $registro_kar;
 
             if ($r == 1) {
-               
-                    header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us=' . $id_user . '&cod=' . $codigo . '&arm=' . $tipo_armado . '');
-                    
-                    /* echo "<script type='text/javascript'>";
+
+                header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us=' . $id_user . '&cod=' . $codigo . '&arm=' . $tipo_armado . '');
+
+                /* echo "<script type='text/javascript'>";
                         echo " window.location.href = '../views/boleta.php?id_us=$id_user&cod=$codigo&arm=$tipo_armado'";
                         echo "</script>"; */
-               
             } else {
 
                 echo "<br>";
@@ -111,71 +110,108 @@ switch ($accion) {
        */
         break;
     case 'registrado':
+
         session_start();
         $usuarios = new Usuarios();
         $ventas = new Ventas();
         $productos = new Productos();
         $kardex = new Kardex();
+        $direcciones = new Direcciones();
+        $direccionesusuarios = new DireccionesUsuarios();
 
         $id = $_REQUEST['id'];
         $codigo = "TR" . strtoupper(uniqid());
         $tipo_armado = $_REQUEST['tipo_armado'];
+        $latitud = $_REQUEST['latitud'];
+        $longitud = $_REQUEST['longitud'];
         $hora = date("Y-m-d H:i:s");
+        if ($latitud != "" && $longitud != "") {
 
-        foreach ($_SESSION['cart'] as $i) :
-            $data_product = $productos->buscar($i['id_producto']);
-
-            $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
-            $ventas->__set('usuarios_id', $id);
-            $ventas->__set('productos_pro_id', $i['id_producto']);
-            $ventas->__set('venta_id', $codigo);
-            $ventas->__set('ven_codigo', $codigo);
-            $ventas->__set('ven_total', $calculo);
-            $ventas->__set('tipo_armado', $tipo_armado);
-            $ventas->__set('ven_cantidad', $i['cantidad']);
-            $ventas->__set('create_time', $hora);
-            $ventas->__set('update_time', $hora);
-            $ventas->__set('estados_id', 1);
-            $ventas->__set('direcciones_di_id', $_REQUEST['direccion']);
-            $r = $ventas->agregar();
-
+            $direcciones->__set('di_nombre', $_REQUEST['direccion']);
+            $direcciones->__set('di_latitud', $_REQUEST['latitud']);
+            $direcciones->__set('di_longitud', $_REQUEST['longitud']);
+            $id_direccion = $direcciones->agregar();
 
             
 
-            //Kardex
+            $direccionesusuarios->__set("direcciones_di_id", $id_direccion);
+            $direccionesusuarios->__set("usuarios_us_id", $_SESSION['user']['id']);
+            $di=$direccionesusuarios->agregar();
+            
 
-            $kardex->__set('tipo', "SALIDA");
-            $kardex->__set('descripcion', 'VENTA');
-            $kardex->__set('unidades', $i['cantidad']);
-            $kardex->__set('fecha', date("Y-m-d H:i:s"));
-            $kardex->__set('pro_id', $i['id_producto']);
 
-            $registro_kar = $kardex->agregar();
+            foreach ($_SESSION['cart'] as $i) :
+                $data_product = $productos->buscar($i['id_producto']);
 
-            if ($r == 1) {
-               
+                $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
+                $ventas->__set('usuarios_id', $id);
+                $ventas->__set('productos_pro_id', $i['id_producto']);
+                $ventas->__set('venta_id', $codigo);
+                $ventas->__set('ven_codigo', $codigo);
+                $ventas->__set('ven_total', $calculo);
+                $ventas->__set('tipo_armado', $tipo_armado);
+                $ventas->__set('ven_cantidad', $i['cantidad']);
+                $ventas->__set('create_time', $hora);
+                $ventas->__set('update_time', $hora);
+                $ventas->__set('estados_id', 1);
+                $ventas->__set('direcciones_di_id', $id_direccion);
+                $r = $ventas->agregar();
+
+
+                //Kardex
+
+                $kardex->__set('tipo', "SALIDA");
+                $kardex->__set('descripcion', 'VENTA');
+                $kardex->__set('unidades', $i['cantidad']);
+                $kardex->__set('fecha', date("Y-m-d H:i:s"));
+                $kardex->__set('pro_id', $i['id_producto']);
+
+                $registro_kar = $kardex->agregar();
+
+                if ($r == 1) {
+
                     header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us=' . $id_user . '&cod=' . $codigo . '&arm=' . $tipo_armado . '');
-                
-                
-            }
+                }
 
 
-        endforeach;
+            endforeach;
+        } else {
+            foreach ($_SESSION['cart'] as $i) :
+                $data_product = $productos->buscar($i['id_producto']);
+
+                $calculo = $data_product['pro_precio_venta'] * $i['cantidad'];
+                $ventas->__set('usuarios_id', $id);
+                $ventas->__set('productos_pro_id', $i['id_producto']);
+                $ventas->__set('venta_id', $codigo);
+                $ventas->__set('ven_codigo', $codigo);
+                $ventas->__set('ven_total', $calculo);
+                $ventas->__set('tipo_armado', $tipo_armado);
+                $ventas->__set('ven_cantidad', $i['cantidad']);
+                $ventas->__set('create_time', $hora);
+                $ventas->__set('update_time', $hora);
+                $ventas->__set('estados_id', 1);
+                $ventas->__set('direcciones_di_id', $_REQUEST['direccion']);
+                $r = $ventas->agregar();
 
 
+                //Kardex
+
+                $kardex->__set('tipo', "SALIDA");
+                $kardex->__set('descripcion', 'VENTA');
+                $kardex->__set('unidades', $i['cantidad']);
+                $kardex->__set('fecha', date("Y-m-d H:i:s"));
+                $kardex->__set('pro_id', $i['id_producto']);
+
+                $registro_kar = $kardex->agregar();
+
+                if ($r == 1) {
+
+                    header('Location:http://localhost/Tienda-transernaga/views/boleta.php?id_us=' . $id_user . '&cod=' . $codigo . '&arm=' . $tipo_armado . '');
+                }
 
 
-        /* if ($res == 1) {
-                array para convertir a JSON
-                 $datos = array(
-                    'estado' => 'agregado'
-                ); *
-                echo "agregado";
-            } else {
-                $datos = array(
-                    'estado' => 'error'
-                ); 
-            }
-           */
+            endforeach;
+        }
+
         break;
 }

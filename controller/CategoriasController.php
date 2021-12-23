@@ -6,24 +6,31 @@ $accion = $_REQUEST['accion'];
 
 switch ($accion) {
     case 'guardar':
+
         $categorias = new Categorias();
         $categorias->__set('cat_id', 0);
         $categorias->__set('cat_nombre', $_REQUEST['nombre']);
         $categorias->__set('cat_estado', $_REQUEST['estado']);
         $categorias->__set('create_time', date("Y-m-d H:i:s"));
         $categorias->__set('update_time', date("Y-m-d H:i:s"));
-        $categorias->__set('imagen', $_FILES['imagen']['name']);
+        $categorias->__set('imagen', $_FILES['imagen']['name'][0]);
 
-        $archivo_modelo = $_FILES['imagen']['tmp_name']; // obtiene el archivo
+        $archivo_modelo = $_FILES['imagen']['tmp_name'][0]; // obtiene el archivo
         $ruta = "../resources/images/categorias";
         $ruta_modelo = $ruta . "/" . $categorias->__get('imagen'); //imagen/imagen.tipo    
         if (move_uploaded_file($archivo_modelo, $ruta_modelo)) {
-            echo "agregado";
+            $res = $categorias->agregar();
+            header('Content-Type:apllication/json');
+            if ($res == 1) {
+                $datos = array(
+                    'datos' => 'hecho'
+                );
+            }
+            echo json_encode($datos, JSON_FORCE_OBJECT);
         } else {
             echo "error";
         }
-        $res = $categorias->agregar();
-        echo "<script type='text/javascript'>window.location.href = '../views/admin/index.php?param=categorias';</script>";
+
 
         break;
 
@@ -77,11 +84,11 @@ switch ($accion) {
         } else {
             $productos->desactivar($id);
         }
-     /*    print_r($list['cat_estado']); */
+        /*    print_r($list['cat_estado']); */
 
-         if ($res == 1) {
+        if ($res) {
             echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=categorias';</script>";
-        } else{
+        } else {
             echo "<script type='text/javascript'>window.location.href = 'http://localhost/tienda-transernaga/views/admin/index.php?param=categorias';</script>";
         }
 

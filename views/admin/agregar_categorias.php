@@ -69,7 +69,10 @@ $listas_categorias = $categorias->listar();
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                                         <a href="?param=modificar_categorias&id=<?= $s['cat_id'] ?>" class="dropdown-item" type="button">Modificar</a>
-                                                        <button class="dropdown-item" type="button">Ver</button>
+                                                        <!-- <button class="dropdown-item" type="button">Ver</button> -->
+
+
+
                                                         <form method="post" action="../../controller/CategoriasController.php?accion=cambiar_estado">
                                                             <input type="hidden" name="id" value="<?= $s['cat_id'] ?>">
                                                             <button class="dropdown-item">Cambiar Estado</button>
@@ -112,9 +115,9 @@ $listas_categorias = $categorias->listar();
 
                                 <div class="form-group">
                                     <label>Nombre</label>
-                                    <input name="nombre" type="text" class="form-control" placeholder="">
-                                    <!-- <small class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small> -->
-                                </div> <!-- form-group end.// -->
+                                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="">
+
+                                </div>
                                 <div class="form-group">
                                     <label class="custom-control custom-radio custom-control-inline">
                                         <input class="custom-control-input" checked="" type="radio" name="estado" value="1">
@@ -124,29 +127,109 @@ $listas_categorias = $categorias->listar();
                                         <input class="custom-control-input" type="radio" name="estado" value="0">
                                         <span class="custom-control-label"> Desabilitar </span>
                                     </label>
-                                </div> <!-- form-group end.// -->
+                                </div>
                                 <div class="form-group">
-                                    <input name="imagen" type="file" class="form-control" accept="image/png,image/jpeg">
+                                    <input id="imagen" name="imagen" type="file" class="form-control" accept="image/png,image/jpeg">
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block"> Agregar </button>
-                                </div> <!-- form-group// -->
+                                    <button id="btnAgregar" type="submit" class="btn btn-primary btn-block"> Agregar </button>
+                                </div>
 
                             </form>
 
 
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <div class="row">
 
-                        </div>
-                        <!-- /.card -->
+
                     </div>
-                    <!--/.col (right) -->
+
                 </div>
 
-                <!-- /.row -->
             </div>
         </div>
+        <script>
+            $("#btnAgregar").click(function(e) {
+                e.preventDefault();
+                var nombre = $("#nombre").val();
+                var estado = $('input:radio[name=estado]:checked').val();
+                var imagen = $('#imagen').prop("files");
+                console.log(imagen.length);
+                if (imagen.length > 0 && nombre != "" && estado != "") {
+                    var formData = new FormData();
+                    formData.append('nombre', nombre);
+                    formData.append('estado', estado);
+                    formData.append('imagen', imagen);
+
+
+                    for (let i = 0; i < imagen.length; i++) {
+                        formData.append('imagen[' + i + ']', imagen[i])
+                    }
+                    $.ajax({
+                        url: '../../controller/CategoriasController.php?accion=guardar', // point to server-side PHP script 
+                        data: formData,
+                        dataType: 'text', // what to expect back from the PHP script, if anything
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        type: 'post',
+                    }).done(function(respuesta) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Agregado',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000)
+
+                    });
+
+                }
+                if (nombre == "") {
+                    $('#nombre').removeClass('is-valid');
+                    $('#nombre').addClass('is-invalid');
+
+                }
+                if (imagen.length == 0) {
+                    $('#imagen').removeClass('is-valid');
+                    $('#imagen').addClass('is-invalid');
+                }
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'LLene todos los campos',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
+
+            })
+
+            $("#nombre").blur(function() {
+                var dato = $("#nombre").val();
+                if (dato.trim() != '') {
+                    $('#nombre').removeClass('is-invalid');
+                    $('#nombre').addClass('is-valid');
+                } else {
+                    $('#nombre').removeClass('is-valid');
+                    $('#nombre').addClass('is-invalid');
+                }
+
+            });
+
+            $("#imagen").change(function() {
+                var dato = $('#imagen').prop("files");
+                if (dato.length > 0) {
+                    $('#imagen').removeClass('is-invalid');
+                    $('#imagen').addClass('is-valid');
+                } else {
+                    $('#imagen').removeClass('is-valid');
+                    $('#imagen').addClass('is-invalid');
+                }
+
+            });
+        </script>

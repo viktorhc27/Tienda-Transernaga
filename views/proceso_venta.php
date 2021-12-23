@@ -40,7 +40,7 @@ if (!empty($_SESSION['cart'])) { ?>
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title mb-4">Perfil de Entrega</h4>
-                                    <form method="post" action="controller/PagosController.php?accion=registrado">
+                                    <form id="form_venta" method="post" action="controller/PagosController.php?accion=registrado">
                                         <div class="form-group">
                                             <i style="font-size:80px" class="far fa-user "></i>
                                         </div>
@@ -48,7 +48,7 @@ if (!empty($_SESSION['cart'])) { ?>
                                             <div class="col form-group">
                                                 <label>Nombre</label>
                                                 <input type="text" name="nombre" class="form-control" value="<?= $us['us_nombre'] ?>" disabled>
-                                                <input type="hidden" name="id" class="form-control" value="<?= $us['us_id'] ?>">
+                                                <input id="id" type="hidden" name="id" class="form-control" value="<?= $us['us_id'] ?>">
                                             </div> <!-- form-group end.// -->
                                             <div class="col form-group">
                                                 <label>Apellidos</label>
@@ -71,22 +71,35 @@ if (!empty($_SESSION['cart'])) { ?>
                                                 <?php $direccion_user = new DireccionesUsuarios();
                                                 $dir_us = $direccion_user->listar($us['us_id']);
 
-                                                $direccion = new Direcciones();
+                                                /* echo sizeof($dir_us); */
+                                                if (sizeof($dir_us) == 0) { ?>
+                                                    <div class="buscador">
+                                                        <input id="direccion" name="direccion" type="text" class="form-control">
+                                                        <div id="mapa-geocoder" class="form-group mapa"></div>
+
+                                                    </div>
+
+
+
+                                                <?php
+                                                } else {
+                                                    $direccion = new Direcciones();
+                                                ?> <select id="direccion" name="direccion" class="form-control">
+                                                        <?php foreach ($dir_us as $d) :
+
+                                                            $dire = $direccion->buscar($d['direcciones_di_id']);
+                                                        ?>
+
+                                                            <option value="<?= $d['direcciones_di_id'] ?>"><?= $dire['di_nombre'] ?></option>
+
+                                                        <?php endforeach; ?>
+
+                                                    </select>
+                                                <?php
+                                                }
+
 
                                                 ?>
-                                                <select id="rol" name="direccion" class="form-control">
-                                                    <?php foreach ($dir_us as $d) :
-
-                                                        $dire = $direccion->buscar($d['direcciones_di_id']);
-                                                    ?>
-
-                                                        <option value="<?= $d['direcciones_di_id'] ?>"><?= $dire['di_nombre'] ?></option>
-
-                                                    <?php endforeach; ?>
-
-                                                </select>
-                                                <!-- <input type="text" name="direccion" class="form-control" value="<?= $us['us_direccion'] ?>" disabled>
-                                                <input type="hidden" name="direccion" class="form-control" value="<?= $us['us_direccion'] ?>"> -->
                                             </div> <!-- form-group end.// -->
                                         </div> <!-- form-row.// -->
 
@@ -128,7 +141,7 @@ if (!empty($_SESSION['cart'])) { ?>
 
 
                         </div> <!-- card-body.// -->
-                        <button class="btn btn-warning btn-block"> Pagar</a>
+                        <button id="us_pagar" class="btn btn-warning btn-block"> Pagar</a>
                             </form>
                     </article>
                 </div> <!-- card .// -->
@@ -181,7 +194,7 @@ if (!empty($_SESSION['cart'])) { ?>
                             </div> -->
 
 
-                            
+
                             <div class="buscador form-group col-md-12">
 
                                 <label>Direccion</label>
@@ -309,6 +322,26 @@ if (!empty($_SESSION['cart'])) { ?>
 
     </section>
     <script>
+        $("#us_pagar").click(function(e) {
+            e.preventDefault();
+            var tipo_armado = $('input:radio[name=tipo_armado]:checked').val();
+            var id = $("#id").val();
+            var direccion = $("#direccion").val();
+
+            if (direccion != "") {
+                $("#form_venta").submit();
+
+            } else {
+                alert("ingrese Direccion");
+            }
+
+
+
+        })
+
+
+
+
         $(document).ready(function() {
             $(window).on("load resize", function() {
                 var alturaBuscador = $(".buscador").outerHeight(true),
@@ -338,8 +371,8 @@ if (!empty($_SESSION['cart'])) { ?>
                     /* console.log(resultados_lat);
                     console.log(resultados_long); */
 
-                    $(".buscador").append("<input type='hidden' name='latitud' id='latitud' value='" + resultados_lat + "'>");
-                    $(".buscador").append("<input type='hidden' name='longitud' id='longitud' value='" + resultados_long + "'>");
+                    $(".buscador").append("<input type='text' name='latitud' id='latitud' value='" + resultados_lat + "'>");
+                    $(".buscador").append("<input type='text' name='longitud' id='longitud' value='" + resultados_long + "'>");
 
                     map.setCenter(results[0].geometry.location);
                     var marker = new google.maps.Marker({
@@ -392,11 +425,6 @@ if (!empty($_SESSION['cart'])) { ?>
         var stotal = sum + n_armado;
         var impuesto = sum * (impuestos / 100)
         var total = stotal + impuesto;
-        console.log(sum);
-        console.log(impuesto);
-        console.log(stotal);
-        console.log(total);
-
 
         var totalBalance = document.createTextNode('$  ' + total);
 

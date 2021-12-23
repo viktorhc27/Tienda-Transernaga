@@ -57,8 +57,6 @@
                 </div>
                 <!--/.col (right) -->
             </div>
-
-
             <!-- /.row -->
         </div>
 </div>

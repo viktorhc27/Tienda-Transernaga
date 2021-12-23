@@ -340,7 +340,7 @@ $direccion = $direcciones->direccion_usuarios($datos['us_id']);
             }
         });
     }
-
+//1
     $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCenp6Eupizf2ow5uX1NgMkZhMz-LtwOQQ", function() {
         $("#dir").change(function() {
             var dir = $("#dir").val();

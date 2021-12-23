@@ -44,7 +44,7 @@ ob_start();
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/tienda-transernaga/resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <meta charset="UTF-8">
 
-    <title>Boleta</title>
+    <title>Ticket_de_Venta</title>
 </head>
 <style>
     @page {
@@ -190,7 +190,8 @@ $dompdf->setOptions($options);
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4');
 $dompdf->render();
-$dompdf->stream("Ticket_de_venta".$numero.".pdf", array("Attachment" => true));
+
+$dompdf->stream("Ticket_de_venta".$numero.".pdf", array("Attachment" => false));
 /* $dompdf->stream("archivo.pdf", array("Attachment" => false));  */
 unset( $_SESSION["cart"] ); 
 header('Location:http://localhost/tienda-transernaga/index.php?param=inicio');

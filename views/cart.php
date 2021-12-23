@@ -94,5 +94,5 @@ $productos = new Productos();
     let suma = 0;
     elementoasumar.forEach(el => suma = suma + +el.innerText);
     document.getElementById("total").innerHTML = "$ " + suma.toLocaleString("es-ES");
-    console.log(elementoasumar[1].innerText);
+    /* console.log(elementoasumar); */
 </script>

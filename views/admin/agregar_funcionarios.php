@@ -46,7 +46,7 @@ $lista_roles = $roles->leer();
                                         <th>Nombre</th>
                                         <th>Telefono</th>
                                         <th>Correo</th>
-                                        <th>Direccion</th>
+                                        <!-- <th>Direccion</th> -->
                                         <th>Genero</th>
                                         <th>Rol</th>
                                         <th>Estado</th>
@@ -63,7 +63,7 @@ $lista_roles = $roles->leer();
                                             <td><?= $s['us_nombre'] ?></td>
                                             <td><?= $s['us_telefono'] ?></td>
                                             <td><?= $s['us_correo'] ?></td>
-                                            <td><?= $s['us_direccion'] ?></td>
+                                           <!--  <td><?= $s['us_direccion'] ?></td> -->
                                             <td><?= $s['us_sexo'] ?></td>
 
                                             <td>

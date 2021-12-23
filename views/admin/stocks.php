@@ -276,7 +276,7 @@ $prostock = $prostock->leer();
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Debe subir el Archivos',
+                    title: 'Debe subir el Archivo',
                     showConfirmButton: false,
                     timer: 1500
                 })
